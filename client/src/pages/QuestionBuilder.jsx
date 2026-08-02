@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import QuestionTable from "../components/QuestionTable";
 import QuestionForm from "../components/QuestionForm";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 function QuestionBuilder() {
 
@@ -37,6 +39,33 @@ function QuestionBuilder() {
     }
 
   };
+
+  const handleDownloadPDF = () => {
+
+  const doc = new jsPDF();
+
+  doc.setFontSize(18);
+  doc.text(title || "Question Paper", 14, 15);
+
+  doc.setFontSize(12);
+  doc.text(`Subject: ${subject}`, 14, 25);
+  doc.text(`Semester: ${semester}`, 14, 32);
+
+  autoTable(doc, {
+    startY: 40,
+    head: [["No", "Question", "Marks", "CO", "BL", "PI"]],
+    body: questions.map((q, index) => [
+      index + 1,
+      q.questionText,
+      q.marks,
+      q.co || "-",
+      q.bloomLevel || "-",
+      q.pi || "-"
+    ])
+  });
+
+  doc.save("QuestionPaper.pdf");
+};
 
   return (
     <div className="p-6">
@@ -81,6 +110,13 @@ function QuestionBuilder() {
         className="bg-green-600 text-white px-4 py-2 rounded mt-4"
       >
         Save Question Paper
+      </button>
+
+      <button
+        onClick={handleDownloadPDF}
+        className="bg-red-600 text-white px-4 py-2 rounded mt-4 ml-3"
+      >
+        Download PDF
       </button>
 
     </div>
