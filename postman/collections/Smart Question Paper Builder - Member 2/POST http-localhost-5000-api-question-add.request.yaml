@@ -1,0 +1,19 @@
+$kind: http-request
+name: POST http://localhost:5000/api/question/add
+description: ""
+url: http://localhost:5000/api/question/create-paper
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"title\": \"Data Structures Internal Exam\",\r
+
+    \  \"subject\": \"Data Structures\",\r
+
+    \  \"semester\": \"5\",\r
+
+    \  \"department\": \"CSE\"\r
+
+    }"
+order: 4428724711525335

@@ -1,0 +1,25 @@
+$kind: http-request
+name: http://localhost:5000/api/question/add
+description: ""
+url: http://localhost:5000/api/question/add
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"questionPaperId\": \"6a6f39c005477feefe115021\",\r
+
+    \  \"questionNumber\": 1,\r
+
+    \  \"questionText\": \"Explain Stack Data Structure\",\r
+
+    \  \"marks\": 10,\r
+
+    \  \"co\": \"\",\r
+
+    \  \"bloomLevel\": \"\",\r
+
+    \  \"pi\": \"\"\r
+
+    }"
+order: 4474247172263945
