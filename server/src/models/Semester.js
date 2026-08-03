@@ -1,32 +1,35 @@
 import mongoose from "mongoose";
 
+
 const semesterSchema = new mongoose.Schema(
-  {
+
+{
+
     name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
 
-    number: {
-      type: Number,
-      required: true,
-    },
+        type: String,
 
-    department: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Department",
-      required: true,
-    },
-  },
-  {
-    timestamps: true,
-  }
+        required: true,
+
+        unique: true,
+
+        trim: true
+
+    }
+
+},
+
+{
+    timestamps:true
+}
+
 );
+
 
 const Semester = mongoose.model(
-  "Semester",
-  semesterSchema
+    "Semester",
+    semesterSchema
 );
+
 
 export default Semester;
