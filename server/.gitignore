@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.*
+
+# Build
+dist/
+dist-ssr/
+build/
+
+# Uploads
+uploads/
+server/uploads/
+client/uploads/
+
+# Generated files
+reports/
+charts/
+
+# Vercel
+.vercel/
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Other
+*.local
+*.tmp
+*.temp
