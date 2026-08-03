@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "node src/server.js",
     "dev": "nodemon src/server.js"
   },
+=======
+    "dev": "nodemon src/server.js",
+    "seed": "node src/seed/subjectSeed.js"
+},
+>>>>>>> 5d0e7be91737ee1719d8014ba06e945fbbb74205
   "keywords": [],
   "author": "",
   "license": "ISC",

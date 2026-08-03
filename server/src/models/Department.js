@@ -1,30 +1,32 @@
 import mongoose from "mongoose";
 
+
 const departmentSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
+
+{
+    name:{
+        type:String,
+        default:"Information Technology"
     },
 
-    code: {
-      type: String,
-      required: true,
-      unique: true,
-      uppercase: true,
-      trim: true,
-    },
-  },
-  {
-    timestamps: true,
-  }
+    code:{
+        type:String,
+        default:"IT"
+    }
+
+},
+
+{
+    timestamps:true
+}
+
 );
+
 
 const Department = mongoose.model(
-  "Department",
-  departmentSchema
+    "Department",
+    departmentSchema
 );
+
 
 export default Department;
