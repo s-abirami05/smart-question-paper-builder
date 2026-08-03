@@ -14,10 +14,12 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
-app.use("/api/semesters", semesterRoutes);
 app.use("/api/course-outcomes", courseOutcomeRoutes);
 
 app.use("/api/departments", departmentRoutes);
+
+
+app.use("/api/semesters", semesterRoutes);
 app.use("/api/subjects", subjectRoutes);
 app.use("/api/syllabus", syllabusRoutes);
 
