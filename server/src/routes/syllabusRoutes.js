@@ -1,34 +1,26 @@
 import express from "express";
 
+import upload from "../middleware/upload.js";
+
 import {
-  uploadSyllabus,
-  getSyllabus,
+    uploadSyllabus,
+    getSyllabus
 } from "../controllers/syllabusController.js";
-
-import protect from "../middleware/authMiddleware.js";
-
-import upload from "../config/multer.js";
 
 
 const router = express.Router();
 
 
-// Upload Syllabus PDF
-
 router.post(
-  "/upload",
-  protect,
-  upload.single("syllabus"),
-  uploadSyllabus
+    "/upload",
+    upload.single("syllabus"),
+    uploadSyllabus
 );
 
 
-// Get Syllabus
-
 router.get(
-  "/",
-  protect,
-  getSyllabus
+    "/subject/:subjectId",
+    getSyllabus
 );
 
 

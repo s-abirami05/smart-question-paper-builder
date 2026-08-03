@@ -1,319 +1,283 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { getSemesters } from "../../services/semesterService";
 
 function Subject() {
 
-  const [name, setName] = useState("");
-  const [code, setCode] = useState("");
-  const [credits, setCredits] = useState("");
 
-  const [department, setDepartment] = useState("");
-  const [semester, setSemester] = useState("");
+    const [semester, setSemester] = useState("");
 
-  const [departments, setDepartments] = useState([]);
-  const [semesters, setSemesters] = useState([]);
-  const [subjects, setSubjects] = useState([]);
+    const [subjects, setSubjects] = useState([]);
 
 
-  const token = localStorage.getItem("token");
 
 
-  // Get Departments
-
-  const fetchDepartments = async()=>{
-
-    const response = await axios.get(
-      "http://localhost:5000/api/departments",
-      {
-        headers:{
-          Authorization:`Bearer ${token}`
+    const semesters = [
+        {
+            id: "6a6ce75b8c8bd8daccda9050",
+            name: "Semester 1"
+        },
+        {
+            id: "SEM2",
+            name: "Semester 2"
+        },
+        {
+            id: "SEM3",
+            name: "Semester 3"
+        },
+        {
+            id: "SEM4",
+            name: "Semester 4"
+        },
+        {
+            id: "SEM5",
+            name: "Semester 5"
+        },
+        {
+            id: "SEM6",
+            name: "Semester 6"
+        },
+        {
+            id: "SEM7",
+            name: "Semester 7"
+        },
+        {
+            id: "SEM8",
+            name: "Semester 8"
         }
-      }
-    );
-
-    setDepartments(response.data);
-
-  };
+    ];
 
 
 
-  // Get Semesters
 
-  const fetchSemesters = async()=>{
 
-    const response = await axios.get(
-      "http://localhost:5000/api/semesters",
-      {
-        headers:{
-          Authorization:`Bearer ${token}`
+    const getSubjects = async(id)=>{
+
+
+        try{
+
+
+            const response = await axios.get(
+                `http://localhost:5000/api/subjects/semester/${id}`
+            );
+
+
+            setSubjects(response.data);
+
+
+
         }
-      }
-    );
+        catch(error){
 
-    setSemesters(response.data);
+            console.log(error);
 
-  };
-
-
-
-  // Get Subjects
-
-  const fetchSubjects = async()=>{
-
-    const response = await axios.get(
-      "http://localhost:5000/api/subjects",
-      {
-        headers:{
-          Authorization:`Bearer ${token}`
         }
-      }
-    );
 
 
-    setSubjects(response.data);
-
-  };
+    };
 
 
 
-  useEffect(()=>{
-
-    fetchDepartments();
-    fetchSemesters();
-    fetchSubjects();
-
-  },[]);
 
 
 
-  // Add Subject
+    const handleSemesterChange = (e)=>{
 
-  const handleSubmit = async(e)=>{
 
-    e.preventDefault();
+        const id = e.target.value;
 
+
+        setSemester(id);
+
+
+        if(id){
+
+            getSubjects(id);
+
+        }
+        else{
+
+            setSubjects([]);
+
+        }
+
+
+    };
+
+
+
+
+    const loadSemesters = async()=>{
 
     try{
 
-      const response = await axios.post(
+        const data = await getSemesters();
 
-        "http://localhost:5000/api/subjects",
-
-        {
-          name,
-          code,
-          credits,
-          department,
-          semester
-        },
-
-        {
-          headers:{
-            Authorization:`Bearer ${token}`
-          }
-        }
-
-      );
-
-
-      alert(response.data.message);
-
-
-      setName("");
-      setCode("");
-      setCredits("");
-      setDepartment("");
-      setSemester("");
-
-
-      fetchSubjects();
-
+        setSemesters(data);
 
     }
     catch(error){
 
-      alert(
-        error.response?.data?.message ||
-        "Failed"
-      );
+        console.log(error);
 
     }
 
-  };
+};
 
 
 
-  return(
-
-    <div className="min-h-screen bg-gray-100 p-10">
-
-      <div className="bg-white p-6 rounded shadow">
-
-
-        <h2 className="text-2xl font-bold mb-5">
-          Subject Management
-        </h2>
-
-
-        <form onSubmit={handleSubmit}>
-
-
-          <input
-          className="border p-2 mr-2"
-          placeholder="Subject Name"
-          value={name}
-          onChange={(e)=>setName(e.target.value)}
-          />
 
 
 
-          <input
-          className="border p-2 mr-2"
-          placeholder="Subject Code"
-          value={code}
-          onChange={(e)=>setCode(e.target.value)}
-          />
+    return (
+
+        <div className="min-h-screen bg-gray-100 p-10">
+
+
+            <h1 className="text-4xl font-bold text-center mb-10">
+
+                Subject Management
+
+            </h1>
 
 
 
-          <input
-          className="border p-2 mr-2"
-          placeholder="Credits"
-          value={credits}
-          onChange={(e)=>setCredits(e.target.value)}
-          />
+
+            <div className="max-w-xl mx-auto bg-white p-8 rounded-xl shadow">
 
 
 
-          <select
-          className="border p-2 mr-2"
-          value={department}
-          onChange={(e)=>setDepartment(e.target.value)}
-          >
+                <label className="font-semibold">
 
-            <option>
-              Select Department
-            </option>
+                    Department
 
-            {
-              departments.map((dept)=>(
+                </label>
 
-                <option
-                key={dept._id}
-                value={dept._id}
+
+                <input
+
+                    value="Information Technology"
+
+                    disabled
+
+                    className="w-full border p-3 rounded mt-2 mb-5 bg-gray-200"
+
+                />
+
+
+
+
+
+                <label className="font-semibold">
+
+                    Select Semester
+
+                </label>
+
+
+
+                <select
+
+                    value={semester}
+
+                    onChange={handleSemesterChange}
+
+                    className="w-full border p-3 rounded mt-2"
+
                 >
 
-                {dept.name}
-
-                </option>
-
-              ))
-            }
-
-          </select>
+                    <option value="">
+                        Select Semester
+                    </option>
 
 
+                    {
+                        semesters.map((sem)=>(
 
-          <select
-          className="border p-2 mr-2"
-          value={semester}
-          onChange={(e)=>setSemester(e.target.value)}
-          >
+                            <option 
+                                key={sem.id}
+                                value={sem.id}
+                            >
 
-            <option>
-              Select Semester
-            </option>
+                                {sem.name}
 
+                            </option>
 
-            {
-              semesters.map((sem)=>(
-
-                <option
-                key={sem._id}
-                value={sem._id}
-                >
-
-                {sem.name}
-
-                </option>
-
-              ))
-            }
+                        ))
+                    }
 
 
-          </select>
+                </select>
 
-
-
-          <button
-          className="bg-blue-600 text-white px-5 py-2 rounded"
-          >
-
-          Add Subject
-
-          </button>
-
-
-        </form>
-
-
-
-        <hr className="my-6"/>
-
-
-
-        <h3 className="text-xl font-semibold">
-          Subject List
-        </h3>
-
-
-
-        {
-          subjects.map((sub)=>(
-
-            <div
-            key={sub._id}
-            className="border p-3 mt-3"
-            >
-
-              <p>
-                {sub.name}
-              </p>
-
-              <p>
-                Code: {sub.code}
-              </p>
-
-              <p>
-                Credits: {sub.credits}
-              </p>
-
-              <p>
-                Department:
-                {" "}
-                {sub.department?.name}
-              </p>
-
-              <p>
-                Semester:
-                {" "}
-                {sub.semester?.name}
-              </p>
 
 
             </div>
 
-          ))
-        }
 
 
-      </div>
 
 
-    </div>
 
-  );
+            <div className="max-w-xl mx-auto mt-10">
+
+
+                <h2 className="text-2xl font-bold mb-5">
+
+                    Subjects
+
+                </h2>
+
+
+
+                {
+                    subjects.map((sub)=>(
+
+
+                        <div
+
+                            key={sub._id}
+
+                            className="bg-white p-5 rounded shadow mb-3"
+
+                        >
+
+                            <h3 className="text-xl font-bold">
+
+                                {sub.name}
+
+                            </h3>
+
+
+                            <p>
+
+                                Code : {sub.code}
+
+                            </p>
+
+
+                            <p>
+
+                                Credits : {sub.credits}
+
+                            </p>
+
+
+                        </div>
+
+
+                    ))
+                }
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+    );
 
 }
 
