@@ -1,9 +1,9 @@
 import loadRule from "../utils/loadRules.js";
 import { findBestMatch } from "./keywordEngine.js";
 
-const coRules = loadRule("coRules.json").rules;
-const bloomRules = loadRule("bloomRules.json").rules;
-const piRules = loadRule("piRules.json").rules;
+const coRules = loadRule("coRules.json");
+const bloomRules = loadRule("bloomRules.json");
+const piRules = loadRule("piRules.json");
 
 function predictQuestion(question) {
   const co = findBestMatch(question, coRules, "co");

@@ -1,72 +1,20 @@
 {
-  "PI1": {
-    "name": "Engineering Knowledge",
-    "keywords": [
-      "define",
-      "identify",
-      "list",
-      "describe",
-      "explain",
-      "basic",
-      "concept",
-      "principle",
-      "theory"
-    ]
-  },
-
-  "PI2": {
-    "name": "Problem Analysis",
-    "keywords": [
-      "analyze",
-      "analyse",
-      "compare",
-      "differentiate",
-      "investigate",
-      "classify",
-      "evaluate",
-      "reason"
-    ]
-  },
-
-  "PI3": {
-    "name": "Design / Development of Solutions",
-    "keywords": [
-      "design",
-      "develop",
-      "construct",
-      "build",
-      "implement",
-      "propose",
-      "create",
-      "model"
-    ]
-  },
-
-  "PI4": {
-    "name": "Investigation of Problems",
-    "keywords": [
-      "experiment",
-      "test",
-      "simulate",
-      "measure",
-      "observe",
-      "verify",
-      "validation",
-      "result"
-    ]
-  },
-
-  "PI5": {
-    "name": "Modern Tool Usage",
-    "keywords": [
-      "software",
-      "tool",
-      "matlab",
-      "python",
-      "simulation",
-      "cad",
-      "automation",
-      "technology"
-    ]
-  }
+  "PI1.1": [
+    "define","list","identify","state","recall","remember","recognize"
+  ],
+  "PI1.2": [
+    "explain","describe","discuss","illustrate","classify","summarize"
+  ],
+  "PI2.1": [
+    "calculate","solve","apply","implement","use","execute","demonstrate"
+  ],
+  "PI2.2": [
+    "analyze","compare","differentiate","distinguish","examine","investigate"
+  ],
+  "PI3.1": [
+    "design","develop","construct","create","formulate","plan","propose"
+  ],
+  "PI3.2": [
+    "evaluate","justify","recommend","criticize","validate","assess","optimize"
+  ]
 }

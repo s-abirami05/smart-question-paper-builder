@@ -71,8 +71,12 @@ const subjectData = [
         credits: 4,
         semester: "Semester 2"
     },
+<<<<<<< HEAD
 
 
+=======
+    
+>>>>>>> 94faacadaa7da0ee10c39109a0d0bb902cd24045
     {
         name: "Physics for Information Science",
         code: "PH3256",

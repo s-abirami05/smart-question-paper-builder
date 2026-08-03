@@ -9,7 +9,6 @@ import {
 import protect from "../middleware/authMiddleware.js";
 
 const router = express.Router();
-
 router.post("/predict", protect, predict);
 
 router.post("/suggest", protect, suggest);

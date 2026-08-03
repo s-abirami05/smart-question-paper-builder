@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +11,10 @@ import {
   FaBook
 } from "react-icons/fa";
 
+=======
+import { useNavigate } from "react-router-dom";
+
+>>>>>>> 94faacadaa7da0ee10c39109a0d0bb902cd24045
 
 function Dashboard() {
 
@@ -17,6 +22,7 @@ function Dashboard() {
   const navigate = useNavigate();
 
 
+<<<<<<< HEAD
   const [departments, setDepartments] = useState([]);
   const [semesters, setSemesters] = useState([]);
   const [subjects, setSubjects] = useState([]);
@@ -75,10 +81,70 @@ function Dashboard() {
 
 
 
+=======
+
+  return (
+
+    <div className="min-h-screen bg-gray-100 p-10">
+
+
+      <h1 className="text-4xl font-bold text-center mb-10">
+        Dashboard
+      </h1>
+
+
+
+      <div className="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
+
+
+
+        <button
+
+          onClick={() => navigate("/department")}
+
+          className="bg-blue-600 text-white p-6 rounded-lg text-xl font-semibold hover:bg-blue-700"
+
+        >
+
+          Department
+
+        </button>
 
 
 
 
+        <button
+
+          onClick={() => navigate("/semester")}
+
+          className="bg-green-600 text-white p-6 rounded-lg text-xl font-semibold hover:bg-green-700"
+
+        >
+
+          Semester
+
+        </button>
+
+
+
+
+        <button
+
+          onClick={() => navigate("/subject")}
+
+          className="bg-purple-600 text-white p-6 rounded-lg text-xl font-semibold hover:bg-purple-700"
+
+        >
+
+          Subject
+
+        </button>
+>>>>>>> 94faacadaa7da0ee10c39109a0d0bb902cd24045
+
+
+
+
+<<<<<<< HEAD
   const fetchSemesters = async () => {
 
     try {
@@ -704,6 +770,28 @@ Create Question Paper
 
 );
 
+=======
+        <button
+
+          onClick={() => navigate("/question-builder")}
+
+          className="bg-orange-600 text-white p-6 rounded-lg text-xl font-semibold hover:bg-orange-700"
+
+        >
+
+          Create Question Paper Builder
+
+        </button>
+
+
+
+      </div>
+
+
+    </div>
+
+  );
+>>>>>>> 94faacadaa7da0ee10c39109a0d0bb902cd24045
 
 }
 
