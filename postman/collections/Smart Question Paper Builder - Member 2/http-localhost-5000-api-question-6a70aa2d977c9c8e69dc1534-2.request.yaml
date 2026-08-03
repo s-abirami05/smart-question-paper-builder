@@ -1,0 +1,9 @@
+$kind: http-request
+name: http://localhost:5000/api/question/6a70aa2d977c9c8e69dc1534
+description: ""
+url: http://localhost:5000/api/question/6a70aa2d977c9c8e69dc1534
+method: DELETE
+body:
+  type: json
+  content: ""
+order: 4503593188002448

@@ -14,6 +14,8 @@ import CourseOutcome from "./pages/CourseOutcome/CourseOutcome";
 
 import Syllabus from "./pages/Syllabus/Syllabus";
 
+import QuestionBuilder from "./pages/QuestionBuilder";
+
 
 
 
@@ -85,6 +87,15 @@ function App() {
           </ProtectedRoute>
         }
       />
+
+      <Route
+  path="/question-builder"
+  element={
+    <ProtectedRoute>
+      <QuestionBuilder />
+    </ProtectedRoute>
+  }
+/>
 
 
     </Routes>

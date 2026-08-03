@@ -10,13 +10,13 @@ import {
 const router = express.Router();
 
 // Create Question Paper
-router.post("/create-paper", createPaper);
+router.post("/", createPaper);
 
 // Add Question
 router.post("/add", addQuestion);
 
 // Get Questions
-router.get("/:questionPaperId", getQuestions);
+router.get("/", getQuestions);
 
 // Update Question
 router.put("/:id", updateQuestion);

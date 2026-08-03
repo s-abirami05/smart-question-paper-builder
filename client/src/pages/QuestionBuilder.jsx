@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import QuestionTable from "../components/QuestionTable";
 import QuestionForm from "../components/QuestionForm";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { generatePDF } from "../utils/generatePDF";
+
 
 function QuestionBuilder() {
 
@@ -11,6 +13,29 @@ function QuestionBuilder() {
   const [subject, setSubject] = useState("");
   const [semester, setSemester] = useState("");
   const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+  fetchQuestions();
+}, []);
+
+
+const fetchQuestions = async () => {
+
+  try {
+
+    const res = await axios.get(
+      "http://localhost:5000/api/question"
+    );
+
+    setQuestions(res.data.data);
+
+  } catch(error){
+
+    console.log(error);
+
+  }
+
+};
 
   const handleSavePaper = async () => {
 
@@ -26,7 +51,8 @@ function QuestionBuilder() {
         }
       );
 
-      alert("Question Paper Saved Successfully!");
+    alert("Question Paper Saved Successfully!");
+fetchQuestions();
 
       console.log(response.data);
 
@@ -98,12 +124,17 @@ function QuestionBuilder() {
         onChange={(e) => setSemester(e.target.value)}
       />
 
-      <QuestionForm setQuestions={setQuestions} />
+
+       <QuestionForm
+         questions={questions}
+         setQuestions={setQuestions}
+       />
 
       <QuestionTable
         questions={questions}
         setQuestions={setQuestions}
       />
+
 
       <button
         onClick={handleSavePaper}
@@ -113,11 +144,22 @@ function QuestionBuilder() {
       </button>
 
       <button
-        onClick={handleDownloadPDF}
-        className="bg-red-600 text-white px-4 py-2 rounded mt-4 ml-3"
-      >
-        Download PDF
-      </button>
+
+onClick={() =>
+  generatePDF(
+    title,
+    subject,
+    semester,
+    questions
+  )
+}
+
+className="bg-red-600 text-white px-4 py-2 rounded mt-3"
+
+>
+Download PDF
+</button>
+
 
     </div>
   );

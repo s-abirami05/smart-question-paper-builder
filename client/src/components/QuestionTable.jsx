@@ -1,15 +1,83 @@
 import React from "react";
+import { deleteQuestion as deleteQuestionAPI, updateQuestion } from "../services/questionAPI";
 
 function QuestionTable({ questions, setQuestions }) {
 
 
-  const deleteQuestion = (index) => {
+const deleteQuestion = async (index) => {
+
+  try {
+
+    console.log("Selected Question:", questions[index]);
+
+    const id = questions[index]._id;
+
+    console.log("Question ID:", id);
+
+    if(!id){
+      alert("Question ID missing");
+      return;
+    }
+
+    await deleteQuestionAPI(id);
 
     const updatedQuestions = questions.filter(
       (_, i) => i !== index
     );
 
     setQuestions(updatedQuestions);
+
+  } catch(error){
+
+    console.log(error);
+
+  }
+
+};
+
+
+  const editQuestion = (index) => {
+
+    const updatedText = prompt(
+      "Edit Question",
+      questions[index].questionText
+    );
+
+
+    if(updatedText){
+
+      const updatedQuestions = [...questions];
+
+      const editQuestion = async(index)=>{
+
+ const updatedText = prompt(
+ "Edit Question",
+ questions[index].questionText
+ );
+
+
+ if(updatedText){
+
+   const id = questions[index]._id;
+
+
+   await updateQuestion(id,{
+     questionText: updatedText
+   });
+
+
+   const updatedQuestions=[...questions];
+
+   updatedQuestions[index].questionText = updatedText;
+
+   setQuestions(updatedQuestions);
+
+ }
+
+};
+      setQuestions(updatedQuestions);
+
+    }
 
   };
 
@@ -24,33 +92,19 @@ function QuestionTable({ questions, setQuestions }) {
 
           <tr className="bg-gray-100">
 
-            <th className="border p-2">
-              No
-            </th>
+            <th className="border p-2">No</th>
 
-            <th className="border p-2">
-              Question
-            </th>
+            <th className="border p-2">Question</th>
 
-            <th className="border p-2">
-              Marks
-            </th>
+            <th className="border p-2">Marks</th>
 
-            <th className="border p-2">
-              CO
-            </th>
+            <th className="border p-2">CO</th>
 
-            <th className="border p-2">
-              Bloom's Level
-            </th>
+            <th className="border p-2">Bloom Level</th>
 
-            <th className="border p-2">
-              PI
-            </th>
+            <th className="border p-2">PI</th>
 
-            <th className="border p-2">
-              Action
-            </th>
+            <th className="border p-2">Action</th>
 
           </tr>
 
@@ -59,82 +113,73 @@ function QuestionTable({ questions, setQuestions }) {
 
         <tbody>
 
+        {
+          questions.map((q,index)=>(
 
-          {
-            questions.length === 0 ? (
+           <tr key={q._id || index}>
 
-              <tr>
+              <td className="border p-2 text-center">
+                {index+1}
+              </td>
 
-                <td 
-                  colSpan="7"
-                  className="border p-3 text-center"
+
+              <td className="border p-2">
+                {q.questionText}
+              </td>
+
+
+              <td className="border p-2 text-center">
+                {q.marks}
+              </td>
+
+
+              <td className="border p-2">
+                {q.co || "-"}
+              </td>
+
+
+              <td className="border p-2">
+                {q.bloomLevel || "-"}
+              </td>
+
+
+              <td className="border p-2">
+                {q.pi || "-"}
+              </td>
+
+
+              <td className="border p-2">
+
+
+                <button
+
+                onClick={()=>editQuestion(index)}
+
+                className="bg-yellow-500 text-white px-3 py-1 rounded mr-2"
+
                 >
-                  No Questions Added
-                </td>
-
-              </tr>
-
-            ) : (
-
-              questions.map((q,index)=>(
-
-                <tr key={index}>
+                  Edit
+                </button>
 
 
-                  <td className="border p-2 text-center">
-                    {index + 1}
-                  </td>
+                <button
+
+                onClick={()=>deleteQuestion(index)}
+
+                className="bg-red-500 text-white px-3 py-1 rounded"
+
+                >
+                  Delete
+                </button>
 
 
-                  <td className="border p-2">
-                    {q.questionText}
-                  </td>
+              </td>
 
 
-                  <td className="border p-2 text-center">
-                    {q.marks}
-                  </td>
+            </tr>
 
-
-                  <td className="border p-2 text-center">
-                    {q.co || "-"}
-                  </td>
-
-
-                  <td className="border p-2 text-center">
-                    {q.bloomLevel || "-"}
-                  </td>
-
-
-                  <td className="border p-2 text-center">
-                    {q.pi || "-"}
-                  </td>
-
-
-                  <td className="border p-2 text-center">
-
-
-                    <button
-
-                      onClick={() => deleteQuestion(index)}
-
-                      className="bg-red-500 text-white px-3 py-1 rounded"
-
-                    >
-                      Delete
-                    </button>
-
-
-                  </td>
-
-
-                </tr>
-
-              ))
-
-            )
-          }
-
+          ))
+        }
 
         </tbody>
 
