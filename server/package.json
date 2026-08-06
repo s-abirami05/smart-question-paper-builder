@@ -1,22 +1,18 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-<<<<<<< HEAD
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
-  },
-=======
     "dev": "nodemon src/server.js",
     "seed": "node src/seed/subjectSeed.js"
-},
->>>>>>> 5d0e7be91737ee1719d8014ba06e945fbbb74205
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "compromise": "^14.16.0",
@@ -29,6 +25,7 @@
     "mongoose": "^9.9.0",
     "multer": "^2.2.0",
     "natural": "^8.1.1",
+    "nodemailer": "^9.0.4",
     "uuid": "^14.0.1"
   },
   "devDependencies": {
