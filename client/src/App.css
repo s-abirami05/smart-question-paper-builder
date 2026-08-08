@@ -182,3 +182,14 @@
     border-right-color: var(--border);
   }
 }
+@media print {
+  /* Browser-ன் Default Header/Footer-ஐ முற்றிலும் நீக்க */
+  @page {
+    margin: 0 !important;
+  }
+
+  body {
+    margin: 0 !important;
+    padding: 15mm 10mm !important; /* Content ஓரமா போகாம இருக்க */
+  }
+}
