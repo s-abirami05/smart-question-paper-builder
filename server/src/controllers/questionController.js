@@ -1,35 +1,31 @@
 import QuestionPaper from "../models/QuestionPaper.js";
 import Question from "../models/Question.js";
 
-export const createQuestionPaper = async (req, res) => {
+export const createPaper = async (req, res) => {
+  console.log("--> Request received at /api/question-paper/save");
+  console.log("Incoming Data:", req.body); // Request data வருகிறதா என்று பார்க்க
+
   try {
+    // உங்கள் Question Paper Save செய்யும் Logic 
+    // Example:
+    // const newPaper = new QuestionPaper(req.body);
+    // await newPaper.save();
 
-    const { title, subject, semester } = req.body;
-
-    const newPaper = new QuestionPaper({
-      title,
-      subject,
-      semester,
-      questions: []
-    });
-
-    await newPaper.save();
-
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
-      message: "Question Paper Saved Successfully",
-      data: newPaper
+      message: "Question Paper saved successfully!",
     });
-
   } catch (error) {
-
-    res.status(500).json({
+    // இந்த console.error தான் Terminal-இல் உண்மையான பிரச்சனையைக் காட்டும்
+    console.error("CRITICAL BACKEND ERROR:", error); 
+    
+    return res.status(500).json({
       success: false,
-      message: error.message
+      message: error.message || "Failed to save question paper",
     });
-
   }
 };
+
 export const addQuestion = async (req, res) => {
   try {
 

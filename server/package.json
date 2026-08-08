@@ -25,12 +25,12 @@
     "mongoose": "^9.9.0",
     "multer": "^2.2.0",
     "natural": "^8.1.1",
-<<<<<<< HEAD
+
     "nodemailer": "^9.0.4",
-=======
+
     "pdf-poppler": "^0.2.3",
     "tesseract.js": "^7.0.0",
->>>>>>> origin/member2-question-builder
+
     "uuid": "^14.0.1"
   },
   "devDependencies": {
