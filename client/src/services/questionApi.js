@@ -4,18 +4,18 @@ const API = axios.create({
   baseURL: "http://localhost:5000/api/question"
 });
 
+// Get Questions
+export const getQuestions = () => API.get("/");
 
-export const getQuestions = (id) =>
-  API.get(`/${id}`);
+// Add Question
+export const addQuestion = (data) => API.post("/", data);
 
+// Update Question
+export const updateQuestion = (id, data) =>
+  API.put(`/${id}`, data);
 
-export const addQuestion = (data) =>
-  API.post("/add", data);
-
-
-export const updateQuestion = (id,data) =>
-  API.put(`/${id}`,data);
-
-
+// Delete Question
 export const deleteQuestion = (id) =>
   API.delete(`/${id}`);
+
+export default API;

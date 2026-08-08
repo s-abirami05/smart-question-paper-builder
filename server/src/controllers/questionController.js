@@ -104,6 +104,13 @@ export const updateQuestion = async (req, res) => {
       }
     );
 
+    if (!updatedQuestion) {
+  return res.status(404).json({
+    success: false,
+    message: "Question not found"
+  });
+}
+
     res.status(200).json({
       success: true,
       message: "Question Updated Successfully",

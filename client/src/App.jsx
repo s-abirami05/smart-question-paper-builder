@@ -3,20 +3,92 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing/Landing";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import ForgotPasswordSuccess from "./pages/ForgotPasswordSuccess";
+
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Department from "./pages/Department/Department";
+
+import Semester from "./pages/Semester/Semester";
+
+import Subject from "./pages/Subject/Subject";
+
+import CourseOutcome from "./pages/CourseOutcome/CourseOutcome";
+
+import Syllabus from "./pages/Syllabus/Syllabus";
+
+
+
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/forgot-password-success" element={<ForgotPasswordSuccess />} />
-      </Routes>
-    </Router>
+
+    <Routes>
+
+      {/* Public Routes */}
+
+      <Route
+        path="/"
+        element={<Login />}
+      />
+
+
+      <Route
+        path="/register"
+        element={<Register />}
+      />
+
+
+      {/* Protected Routes */}
+
+      <Route
+        path="/department"
+        element={
+          <ProtectedRoute>
+            <Department />
+          </ProtectedRoute>
+        }
+      />
+
+
+      <Route
+        path="/semester"
+        element={
+          <ProtectedRoute>
+            <Semester />
+          </ProtectedRoute>
+        }
+      />
+
+
+      <Route
+        path="/subject"
+        element={
+          <ProtectedRoute>
+            <Subject />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/course-outcome"
+        element={
+          <ProtectedRoute>
+            <CourseOutcome />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/syllabus"
+        element={
+          <ProtectedRoute>
+            <Syllabus />
+          </ProtectedRoute>
+        }
+      />
+
+
+    </Routes>
+
   );
 }
 
