@@ -1,36 +1,47 @@
 import express from "express";
-import {
-  addQuestion,
-  getQuestions,
-  updateQuestion,
-  deleteQuestion,
-  createPaper
-} from "../controllers/questionController.js";
-
-// Question Model Import (உங்கள் Model Path-க்கு ஏற்ப இதைச் சரிபார்க்கவும்)
-// Example: File பெயர் QuestionPaper.js ஆக இருந்தால்
 import QuestionPaper from "../models/QuestionPaper.js";
 
 const router = express.Router();
 
-// ==========================================
-// 1. Saved Question Paper Routes (Frontend-க்காக)
-// ==========================================
-
-// Save New Paper
-router.post("/save", createPaper);
-
-// Get All Saved Papers List
-router.get("/list", async (req, res) => {
+// 1. Save New Paper
+router.post("/save", async (req, res) => {
   try {
-    const papers = await QuestionPaper.find({}, "collegeName examName subjectCode subjectName date");
-    res.status(200).json(papers);
+    const newPaper = new QuestionPaper(req.body);
+    const savedPaper = await newPaper.save();
+    res.status(201).json({
+      success: true,
+      message: "Question Paper Saved Successfully",
+      data: savedPaper,
+    });
   } catch (err) {
-    res.status(500).json({ success: false, message: "Failed to fetch papers list", error: err.message });
+    console.error("Error saving Question Paper:", err);
+    res.status(500).json({
+      success: false,
+      message: "Failed to save paper",
+      error: err.message,
+    });
   }
 });
 
-// Get Single Paper by ID (For Editing)
+// 2. Get All Saved Papers List
+router.get("/list", async (req, res) => {
+  try {
+    const papers = await QuestionPaper.find(
+      {},
+      "collegeName examName subjectCode subjectName date createdAt"
+    ).sort({ createdAt: -1 });
+    res.status(200).json(papers);
+  } catch (err) {
+    console.error("Error fetching list:", err);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch papers list",
+      error: err.message,
+    });
+  }
+});
+
+// 3. Get Single Paper by ID (For Edit / View)
 router.get("/:id", async (req, res) => {
   try {
     const paper = await QuestionPaper.findById(req.params.id);
@@ -39,44 +50,58 @@ router.get("/:id", async (req, res) => {
     }
     res.status(200).json(paper);
   } catch (err) {
-    res.status(500).json({ success: false, message: "Failed to fetch paper detail", error: err.message });
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch paper detail",
+      error: err.message,
+    });
   }
 });
 
-// Update Existing Paper by ID
+// 4. Update Existing Paper by ID
 router.put("/update/:id", async (req, res) => {
   try {
     const updatedPaper = await QuestionPaper.findByIdAndUpdate(
-      req.params.id, 
-      req.body, 
+      req.params.id,
+      req.body,
       { new: true }
     );
     if (!updatedPaper) {
       return res.status(404).json({ success: false, message: "Paper not found to update" });
     }
-    res.status(200).json({ success: true, message: "Question Paper Updated Successfully", data: updatedPaper });
+    res.status(200).json({
+      success: true,
+      message: "Question Paper Updated Successfully",
+      data: updatedPaper,
+    });
   } catch (err) {
-    res.status(500).json({ success: false, message: "Failed to update paper", error: err.message });
+    res.status(500).json({
+      success: false,
+      message: "Failed to update paper",
+      error: err.message,
+    });
   }
 });
 
-// ==========================================
-// 2. Existing Controller Routes (உங்களின் பழைய Routes)
-// ==========================================
-
-// Create Question Paper
-router.post("/", createPaper);
-
-// Add Question
-router.post("/add", addQuestion);
-
-// Get Questions
-router.get("/", getQuestions);
-
-// Update Question
-router.put("/:id", updateQuestion);
-
-// Delete Question
-router.delete("/:id", deleteQuestion);
+// 5. Delete Paper by ID 🗑️ (Frontend URL-க்கு ஏற்ப /delete/:id என மாற்றப்பட்டுள்ளது)
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    const deletedPaper = await QuestionPaper.findByIdAndDelete(req.params.id);
+    if (!deletedPaper) {
+      return res.status(404).json({ success: false, message: "Paper not found to delete" });
+    }
+    res.status(200).json({
+      success: true,
+      message: "Question Paper Deleted Successfully",
+    });
+  } catch (err) {
+    console.error("Error deleting paper:", err);
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete paper",
+      error: err.message,
+    });
+  }
+});
 
 export default router;
