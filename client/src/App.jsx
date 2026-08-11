@@ -13,6 +13,8 @@ import CourseOutcome from "./pages/CourseOutcome/CourseOutcome";
 import Syllabus from "./pages/Syllabus/Syllabus";
 import QuestionPaperBuilder from "./pages/QuestionPaperBuilder/QuestionPaperBuilder";
 
+import DiagramEditor from "./components/DiagramEditor";
+
 function App() {
   return (
     <Router>
@@ -73,6 +75,17 @@ function App() {
             </ProtectedRoute>
           }
         />
+        {/* Diagram Editor */}
+<Route
+  path="/diagram-editor"
+  element={
+    <ProtectedRoute>
+      <DiagramEditor />
+    </ProtectedRoute>
+  }
+/>
+          
+        
 
         {/* எதேனும் தவறான /dashboard போன்ற URL வந்தால் நேரடி Auto Redirect */}
         <Route path="/dashboard" element={<Navigate to="/question-paper-builder" replace />} />

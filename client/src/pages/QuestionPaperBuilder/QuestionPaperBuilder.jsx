@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import DiagramEditor from "../../components/DiagramEditor"; // உங்கள் DiagramEditor component path
 
 const autoDetectCOBLPI = (text) => {
   const lower = text.toLowerCase().trim();
@@ -80,6 +81,10 @@ export default function QuestionPaperBuilder() {
   const [savedPapersList, setSavedPapersList] = useState([]);
   const [showListModal, setShowListModal] = useState(false);
 
+  // DIAGRAM MODAL STATES
+  const [showDiagramEditor, setShowDiagramEditor] = useState(false);
+  const [diagramTarget, setDiagramTarget] = useState(null); // { qIdx, optionKey, sIdx }
+
   const [header, setHeader] = useState({
     collegeName: "A.V.C. College Of Engineering , Mannampandal",
     examName: "I CIA TEST",
@@ -129,9 +134,10 @@ export default function QuestionPaperBuilder() {
         co: "",
         bl: "",
         pi: "",
+        diagram: null,
         subQuestions: [
-          { label: "i)", question: "", marks: "6", co: "", bl: "", pi: "" },
-          { label: "ii)", question: "", marks: "7", co: "", bl: "", pi: "" },
+          { label: "i)", question: "", marks: "6", co: "", bl: "", pi: "", diagram: null },
+          { label: "ii)", question: "", marks: "7", co: "", bl: "", pi: "", diagram: null },
         ],
       },
       optionB: {
@@ -140,9 +146,10 @@ export default function QuestionPaperBuilder() {
         co: "",
         bl: "",
         pi: "",
+        diagram: null,
         subQuestions: [
-          { label: "i)", question: "", marks: "6", co: "", bl: "", pi: "" },
-          { label: "ii)", question: "", marks: "7", co: "", bl: "", pi: "" },
+          { label: "i)", question: "", marks: "6", co: "", bl: "", pi: "", diagram: null },
+          { label: "ii)", question: "", marks: "7", co: "", bl: "", pi: "", diagram: null },
         ],
       },
     }))
@@ -314,8 +321,48 @@ export default function QuestionPaperBuilder() {
     const targetOpt = optionKey === "A" ? updated[qIndex].optionA : updated[qIndex].optionB;
     const labels = ["i)", "ii)", "iii)", "iv)"];
     const nextLabel = labels[targetOpt.subQuestions.length] || `${targetOpt.subQuestions.length + 1})`;
-    targetOpt.subQuestions.push({ label: nextLabel, question: "", marks: "5", co: "", bl: "", pi: "" });
+    targetOpt.subQuestions.push({ label: nextLabel, question: "", marks: "5", co: "", bl: "", pi: "", diagram: null });
     setPartB(updated);
+  };
+
+  /* DIAGRAM SAVE HANDLER */
+  const handleDiagramSave = (diagramData) => {
+    if (!diagramTarget) return;
+    const { qIdx, optionKey, sIdx } = diagramTarget;
+    const updated = [...partB];
+    const targetOpt = optionKey === "A" ? updated[qIdx].optionA : updated[qIdx].optionB;
+
+    if (sIdx !== null && sIdx !== undefined) {
+      targetOpt.subQuestions[sIdx].diagram = diagramData;
+    } else {
+      targetOpt.diagram = diagramData;
+    }
+
+    setPartB(updated);
+    setShowDiagramEditor(false);
+  };
+
+  /* DIAGRAM RENDER HELPER IN TABLE CELL */
+  const renderDiagramPreview = (diagram) => {
+    if (!diagram || (!diagram.boxes?.length && !diagram.arrows?.length && !diagram.texts?.length)) return null;
+    return (
+      <div style={{ marginTop: "8px", padding: "6px", border: "1px dashed #a0aec0", borderRadius: "4px", backgroundColor: "#f7fafc", display: "inline-block" }}>
+        <svg width="220" height="120" style={{ border: "1px solid #cbd5e0", background: "#fff" }}>
+          {diagram.boxes?.map((b, i) => (
+            <g key={i}>
+              <rect x={b.x / 3} y={b.y / 3} width={(b.w || 80) / 3} height={(b.h || 40) / 3} fill="#edf2f7" stroke="#2b6cb0" strokeWidth="1.5" />
+              <text x={(b.x + (b.w || 80) / 2) / 3} y={(b.y + (b.h || 40) / 2 + 4) / 3} fontSize="9" textAnchor="middle" fill="#2d3748">{b.text}</text>
+            </g>
+          ))}
+          {diagram.arrows?.map((a, i) => (
+            <line key={i} x1={a.x1 / 3} y1={a.y1 / 3} x2={a.x2 / 3} y2={a.y2 / 3} stroke="#e53e3e" strokeWidth="1.5" markerEnd="url(#arrow)" />
+          ))}
+          {diagram.texts?.map((t, i) => (
+            <text key={i} x={t.x / 3} y={t.y / 3} fontSize="10" fill="#2d3748">{t.text}</text>
+          ))}
+        </svg>
+      </div>
+    );
   };
 
   /* Part C Logic */
@@ -362,10 +409,21 @@ export default function QuestionPaperBuilder() {
   return (
     <div style={{ padding: "24px", fontFamily: "Segoe UI, Roboto, sans-serif", backgroundColor: "#f4f6f9", minHeight: "100vh", color: "#333" }}>
       
-      {/* Light Border & Page Break Styles for Print */}
       <style>{`
         .light-table, .light-table th, .light-table td {
           border: 1px solid #cbd5e0 !important;
+        }
+        .btn-diagram {
+          display: inline-flex !important;
+          align-items: center !important;
+          white-space: nowrap !important;
+          padding: 2px 6px !important;
+          font-size: 11px !important;
+          border-radius: 4px !important;
+          border: 1px solid #cbd5e0 !important;
+          background: #edf2f7 !important;
+          cursor: pointer !important;
+          margin-left: 6px !important;
         }
         @media print {
           .no-print { display: none !important; }
@@ -397,15 +455,9 @@ export default function QuestionPaperBuilder() {
         <h3 style={{ marginBottom: "15px", fontSize: "16px" }}>1. Header Details</h3>
         
         <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "20px" }}>
-          
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Exam Name:</label>
-            <select 
-              style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} 
-              name="examName" 
-              value={header.examName} 
-              onChange={handleHeaderChange}
-            >
+            <select style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} name="examName" value={header.examName} onChange={handleHeaderChange}>
               <option value="I CIA TEST">I CIA TEST</option>
               <option value="II CIA TEST">II CIA TEST</option>
               <option value="MODEL TEST">MODEL TEST</option>
@@ -517,6 +569,34 @@ export default function QuestionPaperBuilder() {
         </div>
       )}
 
+      {/* DIAGRAM EDITOR MODAL */}
+      {showDiagramEditor && (
+        <div className="no-print" style={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", background: "rgba(0,0,0,0.6)", display: "flex", justifyContent: "center", alignItems: "center", zIndex: 2000, overflowY: "auto", padding: "20px", boxSizing: "border-box" }}>
+          <div style={{ background: "#fff", width: "900px", maxWidth: "95%", maxHeight: "95vh", overflowY: "auto", borderRadius: "10px", padding: "20px", position: "relative" }}>
+            <button
+              type="button"
+              onClick={() => setShowDiagramEditor(false)}
+              style={{ position: "absolute", top: "10px", right: "10px", background: "#e53e3e", color: "#fff", border: "none", borderRadius: "5px", padding: "6px 10px", cursor: "pointer", fontWeight: "bold", zIndex: 10 }}
+            >
+              ✕ Close
+            </button>
+
+            <DiagramEditor
+              onSave={handleDiagramSave}
+              initialData={
+                diagramTarget
+                  ? (
+                      diagramTarget.sIdx !== null && diagramTarget.sIdx !== undefined
+                        ? partB[diagramTarget.qIdx][diagramTarget.optionKey === "A" ? "optionA" : "optionB"].subQuestions[diagramTarget.sIdx]?.diagram
+                        : partB[diagramTarget.qIdx][diagramTarget.optionKey === "A" ? "optionA" : "optionB"]?.diagram
+                    )
+                  : null
+              }
+            />
+          </div>
+        </div>
+      )}
+
       {/* PRINTABLE QUESTION PAPER SHEET */}
       <div id="paper-sheet" style={{ background: "#ffffff", padding: "40px", border: "1px solid #d2d6dc", maxWidth: "850px", margin: "0 auto", borderRadius: "4px" }}>
         
@@ -533,7 +613,6 @@ export default function QuestionPaperBuilder() {
             </div>
           </div>
 
-          {/* Header Title */}
           <div style={{ textAlign: "center", textTransform: "uppercase", fontWeight: "bold", fontSize: "13px", lineHeight: "1.4" }}>
             <div>{header.collegeName}</div>
             <div>{header.examName} - {header.examMonth} {header.examYear}</div>
@@ -543,15 +622,7 @@ export default function QuestionPaperBuilder() {
             <div style={{ fontSize: "11px", fontWeight: "normal" }}>(Regulation {header.regulation})</div>
           </div>
 
-          <div style={{ 
-            marginTop: "15px", 
-            marginBottom: "12px", 
-            fontSize: "12px", 
-            display: "flex", 
-            justifyContent: "space-between", 
-            alignItems: "flex-start",
-            width: "100%" 
-          }}>
+          <div style={{ marginTop: "15px", marginBottom: "12px", fontSize: "12px", display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%" }}>
             <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "2px 8px", lineHeight: "1.8" }}>
               <span style={{ fontWeight: "bold" }}>Duration:</span>
               <span>{header.duration}</span>
@@ -614,7 +685,7 @@ export default function QuestionPaperBuilder() {
         {/* PAGE BREAK TO PAGE 2 FOR PART B */}
         <div className="page-break" style={{ marginTop: "20px" }}></div>
 
-        {/* PART B (Add Button Removed, Editable Marks, Blue Colored Option Buttons) */}
+        {/* PART B */}
         <div style={{ marginBottom: "20px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "5px" }}>
             <div style={{ fontWeight: "bold", fontSize: "12px" }}>PART – B (5 x 13 = 65 Marks)</div>
@@ -634,7 +705,7 @@ export default function QuestionPaperBuilder() {
             <tbody>
               {partB.map((qItem, qIdx) => (
                 <React.Fragment key={qIdx}>
-                  {/* Option A Configuration Row */}
+                  {/* Option A Config Row */}
                   <tr className="no-print" style={{ background: "#edf2f7" }}>
                     <td colSpan="6" style={{ padding: "4px 8px", fontSize: "11px" }}>
                       <b>Q{qItem.qNo} Option A Type:</b>{" "}
@@ -645,6 +716,7 @@ export default function QuestionPaperBuilder() {
                     </td>
                   </tr>
 
+                  {/* Option A Display */}
                   {qItem.typeA === "single" ? (
                     <tr>
                       <td align="center" style={{ padding: "6px" }}><b>{qItem.qNo}. a)</b></td>
@@ -657,7 +729,18 @@ export default function QuestionPaperBuilder() {
                             onChange={(e) => handlePartBSingleChange(qIdx, "A", "question", e.target.value)}
                             placeholder={`Enter Question ${qItem.qNo}. a)`}
                           />
+                          <button
+                            type="button"
+                            className="no-print btn-diagram"
+                            onClick={() => {
+                              setDiagramTarget({ qIdx, optionKey: "A", sIdx: null });
+                              setShowDiagramEditor(true);
+                            }}
+                          >
+                            {qItem.optionA.diagram ? "✏️ Edit Diagram" : "+ Diagram"}
+                          </button>
                         </div>
+                        {renderDiagramPreview(qItem.optionA.diagram)}
                       </td>
                       <td align="center" style={{ padding: "6px" }}>
                         (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={qItem.optionA.marks} onChange={(e) => handlePartBSingleChange(qIdx, "A", "marks", e.target.value)} />)
@@ -679,8 +762,19 @@ export default function QuestionPaperBuilder() {
                               onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "question", e.target.value)}
                               placeholder={`Enter Sub-question ${sub.label}`}
                             />
-                            <button className="no-print" onClick={() => deletePartBSub(qIdx, "A", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Sub-Question">🗑️</button>
+                            <button
+                              type="button"
+                              className="no-print btn-diagram"
+                              onClick={() => {
+                                setDiagramTarget({ qIdx, optionKey: "A", sIdx });
+                                setShowDiagramEditor(true);
+                              }}
+                            >
+                              {sub.diagram ? "✏️ Edit Diagram" : "+ Diagram"}
+                            </button>
+                            <button className="no-print" onClick={() => deletePartBSub(qIdx, "A", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer", marginLeft: "4px" }} title="Delete Sub-Question">🗑️</button>
                           </div>
+                          {renderDiagramPreview(sub.diagram)}
                         </td>
                         <td align="center" style={{ padding: "6px" }}>
                           (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "marks", e.target.value)} />)
@@ -697,7 +791,7 @@ export default function QuestionPaperBuilder() {
                     <td colSpan="6" align="center" style={{ fontWeight: "bold", padding: "4px" }}>OR</td>
                   </tr>
 
-                  {/* Option B Configuration Row */}
+                  {/* Option B Config Row */}
                   <tr className="no-print" style={{ background: "#edf2f7" }}>
                     <td colSpan="6" style={{ padding: "4px 8px", fontSize: "11px" }}>
                       <b>Q{qItem.qNo} Option B Type:</b>{" "}
@@ -707,6 +801,7 @@ export default function QuestionPaperBuilder() {
                     </td>
                   </tr>
 
+                  {/* Option B Display */}
                   {qItem.typeB === "single" ? (
                     <tr>
                       <td align="center" style={{ padding: "6px" }}><b>b)</b></td>
@@ -719,7 +814,18 @@ export default function QuestionPaperBuilder() {
                             onChange={(e) => handlePartBSingleChange(qIdx, "B", "question", e.target.value)}
                             placeholder={`Enter Question ${qItem.qNo}. b)`}
                           />
+                          <button
+                            type="button"
+                            className="no-print btn-diagram"
+                            onClick={() => {
+                              setDiagramTarget({ qIdx, optionKey: "B", sIdx: null });
+                              setShowDiagramEditor(true);
+                            }}
+                          >
+                            {qItem.optionB.diagram ? "✏️ Edit Diagram" : "+ Diagram"}
+                          </button>
                         </div>
+                        {renderDiagramPreview(qItem.optionB.diagram)}
                       </td>
                       <td align="center" style={{ padding: "6px" }}>
                         (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={qItem.optionB.marks} onChange={(e) => handlePartBSingleChange(qIdx, "B", "marks", e.target.value)} />)
@@ -741,8 +847,19 @@ export default function QuestionPaperBuilder() {
                               onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "question", e.target.value)}
                               placeholder={`Enter Sub-question ${sub.label}`}
                             />
-                            <button className="no-print" onClick={() => deletePartBSub(qIdx, "B", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Sub-Question">🗑️</button>
+                            <button
+                              type="button"
+                              className="no-print btn-diagram"
+                              onClick={() => {
+                                setDiagramTarget({ qIdx, optionKey: "B", sIdx });
+                                setShowDiagramEditor(true);
+                              }}
+                            >
+                              {sub.diagram ? "✏️ Edit Diagram" : "+ Diagram"}
+                            </button>
+                            <button className="no-print" onClick={() => deletePartBSub(qIdx, "B", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer", marginLeft: "4px" }} title="Delete Sub-Question">🗑️</button>
                           </div>
+                          {renderDiagramPreview(sub.diagram)}
                         </td>
                         <td align="center" style={{ padding: "6px" }}>
                           (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "marks", e.target.value)} />)
