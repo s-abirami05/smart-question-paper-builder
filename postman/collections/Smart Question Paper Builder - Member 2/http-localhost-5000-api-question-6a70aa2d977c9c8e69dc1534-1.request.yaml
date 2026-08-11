@@ -1,0 +1,15 @@
+$kind: http-request
+name: http://localhost:5000/api/question/6a70aa2d977c9c8e69dc1534
+description: ""
+url: http://localhost:5000/api/question/6a70aa2d977c9c8e69dc1534
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"questionText\": \"Explain Stack, Queue and their applications.\",\r
+
+    \  \"marks\": 15\r
+
+    }"
+order: 4503532465642078
