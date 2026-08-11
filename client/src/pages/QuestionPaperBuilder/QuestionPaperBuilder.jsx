@@ -82,10 +82,11 @@ export default function QuestionPaperBuilder() {
 
   const [header, setHeader] = useState({
     collegeName: "A.V.C. College Of Engineering , Mannampandal",
-    examName: "I CIA",
-    examMonth: "AUG",
+    examName: "I CIA TEST",
+    examMonth: "August",
     examYear: "2026",
     branch: "B.TECH - INFORMATION TECHNOLOGY",
+    section: "A",
     semester: "V",
     subjectCode: "CS3591",
     subjectName: "Computer Networks",
@@ -173,19 +174,20 @@ export default function QuestionPaperBuilder() {
       setSubjectList(currentSemSubjects);
 
       setHeader({
-        collegeName: paper.collegeName,
-        examName: paper.examName,
-        examMonth: paper.examMonth,
-        examYear: paper.examYear,
-        branch: paper.branch,
-        semester: paper.semester,
-        subjectCode: paper.subjectCode,
-        subjectName: paper.subjectName,
-        regulation: paper.regulation,
-        duration: paper.duration,
-        date: paper.date,
-        time: paper.time,
-        maxMarks: paper.maxMarks,
+        collegeName: paper.collegeName || "A.V.C. College Of Engineering , Mannampandal",
+        examName: paper.examName || "I CIA TEST",
+        examMonth: paper.examMonth || "August",
+        examYear: paper.examYear || "2026",
+        branch: paper.branch || "B.TECH - INFORMATION TECHNOLOGY",
+        section: paper.section || "A",
+        semester: paper.semester || "V",
+        subjectCode: paper.subjectCode || "",
+        subjectName: paper.subjectName || "",
+        regulation: paper.regulation || "2021",
+        duration: paper.duration || "Three Hours",
+        date: paper.date || "",
+        time: paper.time || "9:30 AM - 12:30 PM",
+        maxMarks: paper.maxMarks || "100",
       });
       if (paper.partA) setPartA(paper.partA);
       if (paper.partB) setPartB(paper.partB);
@@ -237,6 +239,7 @@ export default function QuestionPaperBuilder() {
     });
   };
 
+  /* Part A Logic */
   const handlePartAChange = (index, value) => {
     const updated = [...partA];
     updated[index].question = value;
@@ -254,14 +257,12 @@ export default function QuestionPaperBuilder() {
   };
 
   const deletePartAQuestion = (index) => {
-    const updated = [...partA];
-    updated[index].question = "";
-    updated[index].co = "";
-    updated[index].bl = "";
-    updated[index].pi = "";
-    setPartA(updated);
+    const updated = partA.filter((_, i) => i !== index);
+    const renumbered = updated.map((q, i) => ({ ...q, qNo: (i + 1).toString() }));
+    setPartA(renumbered);
   };
 
+  /* Part B Logic */
   const togglePartBType = (qIndex, optionKey, type) => {
     const updated = [...partB];
     if (optionKey === "A") updated[qIndex].typeA = type;
@@ -282,14 +283,10 @@ export default function QuestionPaperBuilder() {
     setPartB(updated);
   };
 
-  const deletePartBSingle = (qIndex, optionKey) => {
-    const updated = [...partB];
-    const targetOpt = optionKey === "A" ? updated[qIndex].optionA : updated[qIndex].optionB;
-    targetOpt.question = "";
-    targetOpt.co = "";
-    targetOpt.bl = "";
-    targetOpt.pi = "";
-    setPartB(updated);
+  const deletePartBQuestion = (qIndex) => {
+    const updated = partB.filter((_, i) => i !== qIndex);
+    const renumbered = updated.map((q, i) => ({ ...q, qNo: (11 + i).toString() }));
+    setPartB(renumbered);
   };
 
   const handlePartBSubChange = (qIndex, optionKey, subIndex, field, value) => {
@@ -308,10 +305,7 @@ export default function QuestionPaperBuilder() {
   const deletePartBSub = (qIndex, optionKey, subIndex) => {
     const updated = [...partB];
     const targetOpt = optionKey === "A" ? updated[qIndex].optionA : updated[qIndex].optionB;
-    targetOpt.subQuestions[subIndex].question = "";
-    targetOpt.subQuestions[subIndex].co = "";
-    targetOpt.subQuestions[subIndex].bl = "";
-    targetOpt.subQuestions[subIndex].pi = "";
+    targetOpt.subQuestions = targetOpt.subQuestions.filter((_, idx) => idx !== subIndex);
     setPartB(updated);
   };
 
@@ -324,6 +318,7 @@ export default function QuestionPaperBuilder() {
     setPartB(updated);
   };
 
+  /* Part C Logic */
   const handlePartCChange = (optionKey, field, value) => {
     const targetOpt = optionKey === "A" ? partC.optionA : partC.optionB;
     const updatedOpt = { ...targetOpt, [field]: value };
@@ -367,13 +362,20 @@ export default function QuestionPaperBuilder() {
   return (
     <div style={{ padding: "24px", fontFamily: "Segoe UI, Roboto, sans-serif", backgroundColor: "#f4f6f9", minHeight: "100vh", color: "#333" }}>
       
-      {/* Dynamic CSS Injector for Print Rules */}
+      {/* Light Border & Page Break Styles for Print */}
       <style>{`
+        .light-table, .light-table th, .light-table td {
+          border: 1px solid #cbd5e0 !important;
+        }
         @media print {
           .no-print { display: none !important; }
           body { background: #fff !important; padding: 0 !important; }
           #paper-sheet { border: none !important; box-shadow: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
           input { border: none !important; background: transparent !important; }
+          .page-break { page-break-after: always; display: block; }
+          .light-table, .light-table th, .light-table td {
+            border: 1px solid #718096 !important;
+          }
         }
       `}</style>
 
@@ -395,11 +397,18 @@ export default function QuestionPaperBuilder() {
         <h3 style={{ marginBottom: "15px", fontSize: "16px" }}>1. Header Details</h3>
         
         <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "20px" }}>
+          
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Exam Name:</label>
-            <select style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} name="examName" value={header.examName} onChange={handleHeaderChange}>
-              <option value="I CIA">I CIA</option>
-              <option value="II CIA">II CIA</option>
+            <select 
+              style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} 
+              name="examName" 
+              value={header.examName} 
+              onChange={handleHeaderChange}
+            >
+              <option value="I CIA TEST">I CIA TEST</option>
+              <option value="II CIA TEST">II CIA TEST</option>
+              <option value="MODEL TEST">MODEL TEST</option>
             </select>
           </div>
 
@@ -407,7 +416,7 @@ export default function QuestionPaperBuilder() {
             <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Month & Year:</label>
             <div style={{ display: "flex", gap: "10px" }}>
               <select style={{ flex: 1, padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} name="examMonth" value={header.examMonth} onChange={handleHeaderChange}>
-                {["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"].map((m) => (
+                {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((m) => (
                   <option key={m} value={m}>{m}</option>
                 ))}
               </select>
@@ -415,6 +424,21 @@ export default function QuestionPaperBuilder() {
                 {["2024", "2025", "2026", "2027", "2028", "2029", "2030"].map((y) => (
                   <option key={y} value={y}>{y}</option>
                 ))}
+              </select>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", gap: "10px" }}>
+            <div style={{ flex: 2, display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Branch / Department:</label>
+              <input style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} type="text" name="branch" value={header.branch} onChange={handleHeaderChange} />
+            </div>
+            
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Section:</label>
+              <select style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} name="section" value={header.section} onChange={handleHeaderChange}>
+                <option value="A">Section A</option>
+                <option value="B">Section B</option>
               </select>
             </div>
           </div>
@@ -495,105 +519,116 @@ export default function QuestionPaperBuilder() {
 
       {/* PRINTABLE QUESTION PAPER SHEET */}
       <div id="paper-sheet" style={{ background: "#ffffff", padding: "40px", border: "1px solid #d2d6dc", maxWidth: "850px", margin: "0 auto", borderRadius: "4px" }}>
-        <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginBottom: "15px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-            <span style={{ fontWeight: "bold", fontSize: "12px" }}>Register No.</span>
-            <div style={{ display: "flex" }}>
-              {Array.from({ length: 12 }).map((_, i) => (
-                <div key={i} style={{ width: "16px", height: "20px", border: "1px solid #000", borderLeft: i !== 0 ? "none" : "1px solid #000" }}></div>
-              ))}
+        
+        {/* PAGE 1: HEADER & PART A */}
+        <div>
+          <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginBottom: "15px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+              <span style={{ fontWeight: "bold", fontSize: "12px" }}>Register No.</span>
+              <div style={{ display: "flex" }}>
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <div key={i} style={{ width: "16px", height: "20px", border: "1px solid #cbd5e0", borderLeft: i !== 0 ? "none" : "1px solid #cbd5e0" }}></div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div style={{ textAlign: "center", textTransform: "uppercase", fontWeight: "bold", fontSize: "13px", lineHeight: "1.4" }}>
-          <div>{header.collegeName}</div>
-          <div>{header.examName} EXAMINATION - {header.examMonth} {header.examYear}</div>
-          <div>{header.branch}</div>
-          <div>{header.semester}- SEMESTER</div>
-          <div>{header.subjectCode} - {header.subjectName}</div>
-          <div style={{ fontSize: "11px", fontWeight: "normal" }}>(Regulation {header.regulation})</div>
-        </div>
-
-        {/* PERFECT ALIGNED HEADER LAYOUT: Duration & Date on Left | Max. Marks & Time perfectly aligned on Right */}
-        <div style={{ 
-          marginTop: "15px", 
-          marginBottom: "12px", 
-          fontSize: "12px", 
-          display: "flex", 
-          justifyContent: "space-between", 
-          alignItems: "flex-start",
-          width: "100%" 
-        }}>
-          {/* Left Block */}
-          <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "2px 8px", lineHeight: "1.8" }}>
-            <span style={{ fontWeight: "bold" }}>Duration:</span>
-            <span>{header.duration}</span>
-            <span style={{ fontWeight: "bold" }}>Date:</span>
-            <span>{formatDateDDMMYYYY(header.date)}</span>
+          {/* Header Title */}
+          <div style={{ textAlign: "center", textTransform: "uppercase", fontWeight: "bold", fontSize: "13px", lineHeight: "1.4" }}>
+            <div>{header.collegeName}</div>
+            <div>{header.examName} - {header.examMonth} {header.examYear}</div>
+            <div>{header.branch} {header.section ? ` - SEC ${header.section}` : ''}</div>
+            <div>{header.semester}- SEMESTER</div>
+            <div>{header.subjectCode} - {header.subjectName}</div>
+            <div style={{ fontSize: "11px", fontWeight: "normal" }}>(Regulation {header.regulation})</div>
           </div>
 
-          {/* Right Block - Perfect straight alignment top-to-bottom */}
-          <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "2px 8px", lineHeight: "1.8" }}>
-            <span style={{ fontWeight: "bold" }}>Max. Marks:</span>
-            <span>{header.maxMarks}</span>
-            <span style={{ fontWeight: "bold" }}>Time:</span>
-            <span>{header.time}</span>
+          <div style={{ 
+            marginTop: "15px", 
+            marginBottom: "12px", 
+            fontSize: "12px", 
+            display: "flex", 
+            justifyContent: "space-between", 
+            alignItems: "flex-start",
+            width: "100%" 
+          }}>
+            <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "2px 8px", lineHeight: "1.8" }}>
+              <span style={{ fontWeight: "bold" }}>Duration:</span>
+              <span>{header.duration}</span>
+              <span style={{ fontWeight: "bold" }}>Date:</span>
+              <span>{formatDateDDMMYYYY(header.date)}</span>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "2px 8px", lineHeight: "1.8" }}>
+              <span style={{ fontWeight: "bold" }}>Max. Marks:</span>
+              <span>{header.maxMarks}</span>
+              <span style={{ fontWeight: "bold" }}>Time:</span>
+              <span>{header.time}</span>
+            </div>
           </div>
-        </div>
 
-        <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "10px" }}>Answer ALL Questions</div>
+          <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "10px" }}>Answer ALL Questions</div>
 
-        {/* PART A */}
-        <div style={{ marginBottom: "20px" }}>
-          <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "5px" }}>PART – A (10 x 2 = 20 Marks)</div>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
-            <thead>
-              <tr style={{ background: "#f7fafc" }}>
-                <th style={{ width: "35px", border: "1px solid #000", padding: "6px" }}>Q.No</th>
-                <th style={{ border: "1px solid #000", padding: "6px" }}>Questions</th>
-                <th style={{ width: "50px", border: "1px solid #000", padding: "6px" }}>CO</th>
-                <th style={{ width: "40px", border: "1px solid #000", padding: "6px" }}>BL</th>
-                <th style={{ width: "50px", border: "1px solid #000", padding: "6px" }}>PI</th>
-              </tr>
-            </thead>
-            <tbody>
-              {partA.map((q, idx) => (
-                <tr key={idx}>
-                  <td align="center" style={{ border: "1px solid #000", padding: "6px" }}><b>{q.qNo}.</b></td>
-                  <td style={{ border: "1px solid #000", padding: "6px" }}>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <input
-                        type="text"
-                        style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
-                        value={q.question}
-                        onChange={(e) => handlePartAChange(idx, e.target.value)}
-                        placeholder={`Enter Short Question ${idx + 1}`}
-                      />
-                      <button className="no-print" onClick={() => deletePartAQuestion(idx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Question">🗑️</button>
-                    </div>
-                  </td>
-                  <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={q.co} onChange={(e) => handlePartAMetaChange(idx, "co", e.target.value)} /></td>
-                  <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={q.bl} onChange={(e) => handlePartAMetaChange(idx, "bl", e.target.value)} /></td>
-                  <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={q.pi} onChange={(e) => handlePartAMetaChange(idx, "pi", e.target.value)} /></td>
+          {/* PART A */}
+          <div style={{ marginBottom: "20px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "5px" }}>
+              <div style={{ fontWeight: "bold", fontSize: "12px" }}>PART – A (10 x 2 = 20 Marks)</div>
+            </div>
+            
+            <table className="light-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
+              <thead>
+                <tr style={{ background: "#f7fafc" }}>
+                  <th style={{ width: "35px", padding: "6px" }}>Q.No</th>
+                  <th style={{ padding: "6px" }}>Questions</th>
+                  <th style={{ width: "50px", padding: "6px" }}>CO</th>
+                  <th style={{ width: "40px", padding: "6px" }}>BL</th>
+                  <th style={{ width: "50px", padding: "6px" }}>PI</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {partA.map((q, idx) => (
+                  <tr key={idx}>
+                    <td align="center" style={{ padding: "6px" }}><b>{q.qNo}.</b></td>
+                    <td style={{ padding: "6px" }}>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <input
+                          type="text"
+                          style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
+                          value={q.question}
+                          onChange={(e) => handlePartAChange(idx, e.target.value)}
+                          placeholder={`Enter Short Question ${idx + 1}`}
+                        />
+                        <button className="no-print" onClick={() => deletePartAQuestion(idx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Question">🗑️</button>
+                      </div>
+                    </td>
+                    <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={q.co} onChange={(e) => handlePartAMetaChange(idx, "co", e.target.value)} /></td>
+                    <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={q.bl} onChange={(e) => handlePartAMetaChange(idx, "bl", e.target.value)} /></td>
+                    <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={q.pi} onChange={(e) => handlePartAMetaChange(idx, "pi", e.target.value)} /></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {/* PART B */}
+        {/* PAGE BREAK TO PAGE 2 FOR PART B */}
+        <div className="page-break" style={{ marginTop: "20px" }}></div>
+
+        {/* PART B (Add Button Removed, Editable Marks, Blue Colored Option Buttons) */}
         <div style={{ marginBottom: "20px" }}>
-          <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "5px" }}>PART – B (5 x 13 = 65 Marks)</div>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "5px" }}>
+            <div style={{ fontWeight: "bold", fontSize: "12px" }}>PART – B (5 x 13 = 65 Marks)</div>
+          </div>
+
+          <table className="light-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
             <thead>
               <tr style={{ background: "#f7fafc" }}>
-                <th style={{ width: "60px", border: "1px solid #000", padding: "6px" }}>Q.No</th>
-                <th style={{ border: "1px solid #000", padding: "6px" }}>Questions</th>
-                <th style={{ width: "45px", border: "1px solid #000", padding: "6px" }}>Marks</th>
-                <th style={{ width: "50px", border: "1px solid #000", padding: "6px" }}>CO</th>
-                <th style={{ width: "40px", border: "1px solid #000", padding: "6px" }}>BL</th>
-                <th style={{ width: "50px", border: "1px solid #000", padding: "6px" }}>PI</th>
+                <th style={{ width: "60px", padding: "6px" }}>Q.No</th>
+                <th style={{ padding: "6px" }}>Questions</th>
+                <th style={{ width: "45px", padding: "6px" }}>Marks</th>
+                <th style={{ width: "50px", padding: "6px" }}>CO</th>
+                <th style={{ width: "40px", padding: "6px" }}>BL</th>
+                <th style={{ width: "50px", padding: "6px" }}>PI</th>
               </tr>
             </thead>
             <tbody>
@@ -601,18 +636,19 @@ export default function QuestionPaperBuilder() {
                 <React.Fragment key={qIdx}>
                   {/* Option A Configuration Row */}
                   <tr className="no-print" style={{ background: "#edf2f7" }}>
-                    <td colSpan="6" style={{ padding: "4px 8px", fontSize: "11px", border: "1px solid #000" }}>
+                    <td colSpan="6" style={{ padding: "4px 8px", fontSize: "11px" }}>
                       <b>Q{qItem.qNo} Option A Type:</b>{" "}
-                      <button style={{ padding: "2px 6px", fontSize: "11px", cursor: "pointer", fontWeight: qItem.typeA === "single" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "A", "single")}>Single Qn</button>{" "}
-                      <button style={{ padding: "2px 6px", fontSize: "11px", cursor: "pointer", fontWeight: qItem.typeA === "sub" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "A", "sub")}>Sub Qns (i, ii)</button>
-                      {qItem.typeA === "sub" && <button style={{ marginLeft: "10px", padding: "2px 6px", background: "#0bc5ea", color: "#fff", border: "none", borderRadius: "3px", cursor: "pointer" }} onClick={() => addSubQuestion(qIdx, "A")}>+ Add Sub Qn</button>}
+                      <button style={{ padding: "2px 6px", fontSize: "11px", color: "#3182ce", cursor: "pointer", fontWeight: qItem.typeA === "single" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "A", "single")}>Single Qn</button>{" "}
+                      <button style={{ padding: "2px 6px", fontSize: "11px", color: "#3182ce", cursor: "pointer", fontWeight: qItem.typeA === "sub" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "A", "sub")}>Sub Qns (i, ii)</button>
+                      {qItem.typeA === "sub" && <button style={{ marginLeft: "10px", padding: "2px 6px", background: "#38a169", color: "#fff", border: "none", borderRadius: "3px", cursor: "pointer", fontWeight: "600" }} onClick={() => addSubQuestion(qIdx, "A")}>+ Add Sub Qn</button>}
+                      <button onClick={() => deletePartBQuestion(qIdx)} style={{ float: "right", background: "#e53e3e", color: "#fff", border: "none", borderRadius: "3px", padding: "2px 6px", cursor: "pointer" }}>Delete Q{qItem.qNo}</button>
                     </td>
                   </tr>
 
                   {qItem.typeA === "single" ? (
                     <tr>
-                      <td align="center" style={{ border: "1px solid #000", padding: "6px" }}><b>{qItem.qNo}. a)</b></td>
-                      <td style={{ border: "1px solid #000", padding: "6px" }}>
+                      <td align="center" style={{ padding: "6px" }}><b>{qItem.qNo}. a)</b></td>
+                      <td style={{ padding: "6px" }}>
                         <div style={{ display: "flex", alignItems: "center" }}>
                           <input
                             type="text"
@@ -621,19 +657,20 @@ export default function QuestionPaperBuilder() {
                             onChange={(e) => handlePartBSingleChange(qIdx, "A", "question", e.target.value)}
                             placeholder={`Enter Question ${qItem.qNo}. a)`}
                           />
-                          <button className="no-print" onClick={() => deletePartBSingle(qIdx, "A")} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Question">🗑️</button>
                         </div>
                       </td>
-                      <td align="center" style={{ border: "1px solid #000", padding: "6px" }}>(13)</td>
-                      <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionA.co} onChange={(e) => handlePartBSingleChange(qIdx, "A", "co", e.target.value)} /></td>
-                      <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionA.bl} onChange={(e) => handlePartBSingleChange(qIdx, "A", "bl", e.target.value)} /></td>
-                      <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionA.pi} onChange={(e) => handlePartBSingleChange(qIdx, "A", "pi", e.target.value)} /></td>
+                      <td align="center" style={{ padding: "6px" }}>
+                        (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={qItem.optionA.marks} onChange={(e) => handlePartBSingleChange(qIdx, "A", "marks", e.target.value)} />)
+                      </td>
+                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionA.co} onChange={(e) => handlePartBSingleChange(qIdx, "A", "co", e.target.value)} /></td>
+                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionA.bl} onChange={(e) => handlePartBSingleChange(qIdx, "A", "bl", e.target.value)} /></td>
+                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionA.pi} onChange={(e) => handlePartBSingleChange(qIdx, "A", "pi", e.target.value)} /></td>
                     </tr>
                   ) : (
                     qItem.optionA.subQuestions.map((sub, sIdx) => (
                       <tr key={sIdx}>
-                        <td align="center" style={{ border: "1px solid #000", padding: "6px" }}><b>{sIdx === 0 ? `${qItem.qNo}. a) ${sub.label}` : `${sub.label}`}</b></td>
-                        <td style={{ border: "1px solid #000", padding: "6px" }}>
+                        <td align="center" style={{ padding: "6px" }}><b>{sIdx === 0 ? `${qItem.qNo}. a) ${sub.label}` : `${sub.label}`}</b></td>
+                        <td style={{ padding: "6px" }}>
                           <div style={{ display: "flex", alignItems: "center" }}>
                             <input
                               type="text"
@@ -645,35 +682,35 @@ export default function QuestionPaperBuilder() {
                             <button className="no-print" onClick={() => deletePartBSub(qIdx, "A", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Sub-Question">🗑️</button>
                           </div>
                         </td>
-                        <td align="center" style={{ border: "1px solid #000", padding: "6px" }}>
-                          <input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "marks", e.target.value)} />
+                        <td align="center" style={{ padding: "6px" }}>
+                          (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "marks", e.target.value)} />)
                         </td>
-                        <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.co} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "co", e.target.value)} /></td>
-                        <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.bl} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "bl", e.target.value)} /></td>
-                        <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.pi} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "pi", e.target.value)} /></td>
+                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.co} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "co", e.target.value)} /></td>
+                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.bl} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "bl", e.target.value)} /></td>
+                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.pi} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "pi", e.target.value)} /></td>
                       </tr>
                     ))
                   )}
 
                   {/* OR Row */}
                   <tr>
-                    <td colSpan="6" align="center" style={{ border: "1px solid #000", fontWeight: "bold", padding: "4px" }}>OR</td>
+                    <td colSpan="6" align="center" style={{ fontWeight: "bold", padding: "4px" }}>OR</td>
                   </tr>
 
                   {/* Option B Configuration Row */}
                   <tr className="no-print" style={{ background: "#edf2f7" }}>
-                    <td colSpan="6" style={{ padding: "4px 8px", fontSize: "11px", border: "1px solid #000" }}>
+                    <td colSpan="6" style={{ padding: "4px 8px", fontSize: "11px" }}>
                       <b>Q{qItem.qNo} Option B Type:</b>{" "}
-                      <button style={{ padding: "2px 6px", fontSize: "11px", cursor: "pointer", fontWeight: qItem.typeB === "single" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "B", "single")}>Single Qn</button>{" "}
-                      <button style={{ padding: "2px 6px", fontSize: "11px", cursor: "pointer", fontWeight: qItem.typeB === "sub" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "B", "sub")}>Sub Qns (i, ii)</button>
-                      {qItem.typeB === "sub" && <button style={{ marginLeft: "10px", padding: "2px 6px", background: "#0bc5ea", color: "#fff", border: "none", borderRadius: "3px", cursor: "pointer" }} onClick={() => addSubQuestion(qIdx, "B")}>+ Add Sub Qn</button>}
+                      <button style={{ padding: "2px 6px", fontSize: "11px", color: "#3182ce", cursor: "pointer", fontWeight: qItem.typeB === "single" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "B", "single")}>Single Qn</button>{" "}
+                      <button style={{ padding: "2px 6px", fontSize: "11px", color: "#3182ce", cursor: "pointer", fontWeight: qItem.typeB === "sub" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "B", "sub")}>Sub Qns (i, ii)</button>
+                      {qItem.typeB === "sub" && <button style={{ marginLeft: "10px", padding: "2px 6px", background: "#38a169", color: "#fff", border: "none", borderRadius: "3px", cursor: "pointer", fontWeight: "600" }} onClick={() => addSubQuestion(qIdx, "B")}>+ Add Sub Qn</button>}
                     </td>
                   </tr>
 
                   {qItem.typeB === "single" ? (
                     <tr>
-                      <td align="center" style={{ border: "1px solid #000", padding: "6px" }}><b>b)</b></td>
-                      <td style={{ border: "1px solid #000", padding: "6px" }}>
+                      <td align="center" style={{ padding: "6px" }}><b>b)</b></td>
+                      <td style={{ padding: "6px" }}>
                         <div style={{ display: "flex", alignItems: "center" }}>
                           <input
                             type="text"
@@ -682,19 +719,20 @@ export default function QuestionPaperBuilder() {
                             onChange={(e) => handlePartBSingleChange(qIdx, "B", "question", e.target.value)}
                             placeholder={`Enter Question ${qItem.qNo}. b)`}
                           />
-                          <button className="no-print" onClick={() => deletePartBSingle(qIdx, "B")} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Question">🗑️</button>
                         </div>
                       </td>
-                      <td align="center" style={{ border: "1px solid #000", padding: "6px" }}>(13)</td>
-                      <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionB.co} onChange={(e) => handlePartBSingleChange(qIdx, "B", "co", e.target.value)} /></td>
-                      <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionB.bl} onChange={(e) => handlePartBSingleChange(qIdx, "B", "bl", e.target.value)} /></td>
-                      <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionB.pi} onChange={(e) => handlePartBSingleChange(qIdx, "B", "pi", e.target.value)} /></td>
+                      <td align="center" style={{ padding: "6px" }}>
+                        (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={qItem.optionB.marks} onChange={(e) => handlePartBSingleChange(qIdx, "B", "marks", e.target.value)} />)
+                      </td>
+                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionB.co} onChange={(e) => handlePartBSingleChange(qIdx, "B", "co", e.target.value)} /></td>
+                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionB.bl} onChange={(e) => handlePartBSingleChange(qIdx, "B", "bl", e.target.value)} /></td>
+                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionB.pi} onChange={(e) => handlePartBSingleChange(qIdx, "B", "pi", e.target.value)} /></td>
                     </tr>
                   ) : (
                     qItem.optionB.subQuestions.map((sub, sIdx) => (
                       <tr key={sIdx}>
-                        <td align="center" style={{ border: "1px solid #000", padding: "6px" }}><b>{sIdx === 0 ? `b) ${sub.label}` : `${sub.label}`}</b></td>
-                        <td style={{ border: "1px solid #000", padding: "6px" }}>
+                        <td align="center" style={{ padding: "6px" }}><b>{sIdx === 0 ? `b) ${sub.label}` : `${sub.label}`}</b></td>
+                        <td style={{ padding: "6px" }}>
                           <div style={{ display: "flex", alignItems: "center" }}>
                             <input
                               type="text"
@@ -706,12 +744,12 @@ export default function QuestionPaperBuilder() {
                             <button className="no-print" onClick={() => deletePartBSub(qIdx, "B", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Sub-Question">🗑️</button>
                           </div>
                         </td>
-                        <td align="center" style={{ border: "1px solid #000", padding: "6px" }}>
-                          <input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "marks", e.target.value)} />
+                        <td align="center" style={{ padding: "6px" }}>
+                          (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "marks", e.target.value)} />)
                         </td>
-                        <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.co} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "co", e.target.value)} /></td>
-                        <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.bl} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "bl", e.target.value)} /></td>
-                        <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.pi} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "pi", e.target.value)} /></td>
+                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.co} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "co", e.target.value)} /></td>
+                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.bl} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "bl", e.target.value)} /></td>
+                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.pi} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "pi", e.target.value)} /></td>
                       </tr>
                     ))
                   )}
@@ -721,24 +759,27 @@ export default function QuestionPaperBuilder() {
           </table>
         </div>
 
+        {/* PAGE BREAK TO PAGE 3 FOR PART C */}
+        <div className="page-break" style={{ marginTop: "20px" }}></div>
+
         {/* PART C */}
         <div style={{ marginBottom: "20px" }}>
           <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "5px" }}>PART – C (1 x 15 = 15 Marks)</div>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
+          <table className="light-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
             <thead>
               <tr style={{ background: "#f7fafc" }}>
-                <th style={{ width: "60px", border: "1px solid #000", padding: "6px" }}>Q.No</th>
-                <th style={{ border: "1px solid #000", padding: "6px" }}>Questions</th>
-                <th style={{ width: "45px", border: "1px solid #000", padding: "6px" }}>Marks</th>
-                <th style={{ width: "50px", border: "1px solid #000", padding: "6px" }}>CO</th>
-                <th style={{ width: "40px", border: "1px solid #000", padding: "6px" }}>BL</th>
-                <th style={{ width: "50px", border: "1px solid #000", padding: "6px" }}>PI</th>
+                <th style={{ width: "60px", padding: "6px" }}>Q.No</th>
+                <th style={{ padding: "6px" }}>Questions</th>
+                <th style={{ width: "45px", padding: "6px" }}>Marks</th>
+                <th style={{ width: "50px", padding: "6px" }}>CO</th>
+                <th style={{ width: "40px", padding: "6px" }}>BL</th>
+                <th style={{ width: "50px", padding: "6px" }}>PI</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td align="center" style={{ border: "1px solid #000", padding: "6px" }}><b>{partC.qNo}. a)</b></td>
-                <td style={{ border: "1px solid #000", padding: "6px" }}>
+                <td align="center" style={{ padding: "6px" }}><b>{partC.qNo}. a)</b></td>
+                <td style={{ padding: "6px" }}>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <input
                       type="text"
@@ -750,17 +791,17 @@ export default function QuestionPaperBuilder() {
                     <button className="no-print" onClick={() => deletePartCQuestion("A")} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Question">🗑️</button>
                   </div>
                 </td>
-                <td align="center" style={{ border: "1px solid #000", padding: "6px" }}>(15)</td>
-                <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionA.co} onChange={(e) => handlePartCChange("A", "co", e.target.value)} /></td>
-                <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionA.bl} onChange={(e) => handlePartCChange("A", "bl", e.target.value)} /></td>
-                <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionA.pi} onChange={(e) => handlePartCChange("A", "pi", e.target.value)} /></td>
+                <td align="center" style={{ padding: "6px" }}>(15)</td>
+                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionA.co} onChange={(e) => handlePartCChange("A", "co", e.target.value)} /></td>
+                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionA.bl} onChange={(e) => handlePartCChange("A", "bl", e.target.value)} /></td>
+                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionA.pi} onChange={(e) => handlePartCChange("A", "pi", e.target.value)} /></td>
               </tr>
               <tr>
-                <td colSpan="6" align="center" style={{ border: "1px solid #000", fontWeight: "bold", padding: "4px" }}>OR</td>
+                <td colSpan="6" align="center" style={{ fontWeight: "bold", padding: "4px" }}>OR</td>
               </tr>
               <tr>
-                <td align="center" style={{ border: "1px solid #000", padding: "6px" }}><b>b)</b></td>
-                <td style={{ border: "1px solid #000", padding: "6px" }}>
+                <td align="center" style={{ padding: "6px" }}><b>b)</b></td>
+                <td style={{ padding: "6px" }}>
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <input
                       type="text"
@@ -772,10 +813,10 @@ export default function QuestionPaperBuilder() {
                     <button className="no-print" onClick={() => deletePartCQuestion("B")} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Question">🗑️</button>
                   </div>
                 </td>
-                <td align="center" style={{ border: "1px solid #000", padding: "6px" }}>(15)</td>
-                <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionB.co} onChange={(e) => handlePartCChange("B", "co", e.target.value)} /></td>
-                <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionB.bl} onChange={(e) => handlePartCChange("B", "bl", e.target.value)} /></td>
-                <td style={{ border: "1px solid #000", padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionB.pi} onChange={(e) => handlePartCChange("B", "pi", e.target.value)} /></td>
+                <td align="center" style={{ padding: "6px" }}>(15)</td>
+                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionB.co} onChange={(e) => handlePartCChange("B", "co", e.target.value)} /></td>
+                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionB.bl} onChange={(e) => handlePartCChange("B", "bl", e.target.value)} /></td>
+                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionB.pi} onChange={(e) => handlePartCChange("B", "pi", e.target.value)} /></td>
               </tr>
             </tbody>
           </table>
