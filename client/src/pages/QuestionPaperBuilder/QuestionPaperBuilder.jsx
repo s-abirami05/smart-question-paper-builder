@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import DiagramEditor from "../../components/DiagramEditor"; // உங்கள் DiagramEditor component path
+import DiagramEditor from "../../components/DiagramEditor"; // your DiagramEditor component path
 
 const autoDetectCOBLPI = (text) => {
   const lower = text.toLowerCase().trim();
@@ -83,26 +83,27 @@ export default function QuestionPaperBuilder() {
 
   // DIAGRAM MODAL STATES
   const [showDiagramEditor, setShowDiagramEditor] = useState(false);
-  const [diagramTarget, setDiagramTarget] = useState(null); // { qIdx, optionKey, sIdx }
+  const [diagramTarget, setDiagramTarget] = useState(null);
 
+  // EMPTY INITIAL HEADER STATE
   const [header, setHeader] = useState({
     collegeName: "A.V.C. College Of Engineering , Mannampandal",
-    examName: "I CIA TEST",
-    examMonth: "August",
-    examYear: "2026",
-    branch: "B.TECH - INFORMATION TECHNOLOGY",
-    section: "A",
-    semester: "V",
-    subjectCode: "CS3591",
-    subjectName: "Computer Networks",
+    examName: "",
+    examMonth: "",
+    examYear: "",
+    branch: "",
+    section: "",
+    semester: "",
+    subjectCode: "",
+    subjectName: "",
     regulation: "2021",
     duration: "Three Hours",
-    date: "2026-08-11",
-    time: "9:30 AM - 12:30 PM",
+    date: "",
+    time: "",
     maxMarks: "100",
   });
 
-  const [subjectList, setSubjectList] = useState(subjectsBySemester["V"]);
+  const [subjectList, setSubjectList] = useState([]);
 
   const formatDateDDMMYYYY = (rawDate) => {
     if (!rawDate) return "___";
@@ -113,53 +114,95 @@ export default function QuestionPaperBuilder() {
     return rawDate;
   };
 
+  // EMPTY PART A (1 to 10 Questions)
   const [partA, setPartA] = useState(
     Array.from({ length: 10 }, (_, i) => ({
       qNo: (i + 1).toString(),
       question: "",
+      marks: "( 2 )",
       co: "",
       bl: "",
       pi: "",
     }))
   );
 
-  const [partB, setPartB] = useState(
-    Array.from({ length: 5 }, (_, i) => ({
-      qNo: (11 + i).toString(),
-      typeA: "single",
-      typeB: "single",
-      optionA: {
-        question: "",
-        marks: "13",
-        co: "",
-        bl: "",
-        pi: "",
-        diagram: null,
-        subQuestions: [
-          { label: "i)", question: "", marks: "6", co: "", bl: "", pi: "", diagram: null },
-          { label: "ii)", question: "", marks: "7", co: "", bl: "", pi: "", diagram: null },
-        ],
-      },
-      optionB: {
-        question: "",
-        marks: "13",
-        co: "",
-        bl: "",
-        pi: "",
-        diagram: null,
-        subQuestions: [
-          { label: "i)", question: "", marks: "6", co: "", bl: "", pi: "", diagram: null },
-          { label: "ii)", question: "", marks: "7", co: "", bl: "", pi: "", diagram: null },
-        ],
-      },
-    }))
-  );
+  // FIXED PART B (11 to 15 Questions)
+  const createDefaultPartBQuestion = (qNum) => ({
+    qNo: qNum.toString(),
+    typeA: "single",
+    typeB: "single",
+    optionA: {
+      question: "",
+      marks: "( 13 )",
+      co: "",
+      bl: "",
+      pi: "",
+      diagram: null,
+      subQuestions: [
+        { label: "i)", question: "", marks: "( 6 )", co: "", bl: "", pi: "", diagram: null },
+        { label: "ii)", question: "", marks: "( 7 )", co: "", bl: "", pi: "", diagram: null },
+      ],
+    },
+    optionB: {
+      question: "",
+      marks: "( 13 )",
+      co: "",
+      bl: "",
+      pi: "",
+      diagram: null,
+      subQuestions: [
+        { label: "i)", question: "", marks: "( 6 )", co: "", bl: "", pi: "", diagram: null },
+        { label: "ii)", question: "", marks: "( 7 )", co: "", bl: "", pi: "", diagram: null },
+      ],
+    },
+  });
 
+  const [partB, setPartB] = useState([
+    createDefaultPartBQuestion(11),
+    createDefaultPartBQuestion(12),
+    createDefaultPartBQuestion(13),
+    createDefaultPartBQuestion(14),
+    createDefaultPartBQuestion(15),
+  ]);
+
+  // FIXED PART C (Q.No 16)
   const [partC, setPartC] = useState({
     qNo: "16",
-    optionA: { question: "", marks: "15", co: "", bl: "", pi: "" },
-    optionB: { question: "", marks: "15", co: "", bl: "", pi: "" },
+    typeA: "single",
+    typeB: "single",
+    optionA: {
+      question: "",
+      marks: "( 15 )",
+      co: "",
+      bl: "",
+      pi: "",
+      diagram: null,
+      subQuestions: [
+        { label: "i)", question: "", marks: "( 7 )", co: "", bl: "", pi: "", diagram: null },
+        { label: "ii)", question: "", marks: "( 8 )", co: "", bl: "", pi: "", diagram: null },
+      ],
+    },
+    optionB: {
+      question: "",
+      marks: "( 15 )",
+      co: "",
+      bl: "",
+      pi: "",
+      diagram: null,
+      subQuestions: [
+        { label: "i)", question: "", marks: "( 7 )", co: "", bl: "", pi: "", diagram: null },
+        { label: "ii)", question: "", marks: "( 8 )", co: "", bl: "", pi: "", diagram: null },
+      ],
+    },
   });
+
+  // PRINT HANDLER WITH AUTO REFRESH
+  const handlePrint = () => {
+    window.print();
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
+  };
 
   const fetchSavedPapers = async () => {
     try {
@@ -182,23 +225,23 @@ export default function QuestionPaperBuilder() {
 
       setHeader({
         collegeName: paper.collegeName || "A.V.C. College Of Engineering , Mannampandal",
-        examName: paper.examName || "I CIA TEST",
-        examMonth: paper.examMonth || "August",
-        examYear: paper.examYear || "2026",
-        branch: paper.branch || "B.TECH - INFORMATION TECHNOLOGY",
-        section: paper.section || "A",
-        semester: paper.semester || "V",
+        examName: paper.examName || "",
+        examMonth: paper.examMonth || "",
+        examYear: paper.examYear || "",
+        branch: paper.branch || "",
+        section: paper.section ?? "",
+        semester: paper.semester || "",
         subjectCode: paper.subjectCode || "",
         subjectName: paper.subjectName || "",
         regulation: paper.regulation || "2021",
         duration: paper.duration || "Three Hours",
         date: paper.date || "",
-        time: paper.time || "9:30 AM - 12:30 PM",
+        time: paper.time || "",
         maxMarks: paper.maxMarks || "100",
       });
       if (paper.partA) setPartA(paper.partA);
       if (paper.partB) setPartB(paper.partB);
-      if (paper.partC) setPartC(paper.partC);
+      if (paper.partC) setPartC({ ...partC, ...paper.partC });
       setShowListModal(false);
       alert("Paper Loaded Successfully for Editing!");
     } catch (err) {
@@ -224,12 +267,11 @@ export default function QuestionPaperBuilder() {
     if (name === "semester") {
       const newSubjects = subjectsBySemester[value] || [];
       setSubjectList(newSubjects);
-      const defaultSub = newSubjects.length > 0 ? newSubjects[0] : { code: "", name: "" };
       setHeader({
         ...header,
         semester: value,
-        subjectCode: defaultSub.code,
-        subjectName: defaultSub.name,
+        subjectCode: "",
+        subjectName: "",
       });
     } else {
       setHeader({ ...header, [name]: value });
@@ -263,12 +305,6 @@ export default function QuestionPaperBuilder() {
     setPartA(updated);
   };
 
-  const deletePartAQuestion = (index) => {
-    const updated = partA.filter((_, i) => i !== index);
-    const renumbered = updated.map((q, i) => ({ ...q, qNo: (i + 1).toString() }));
-    setPartA(renumbered);
-  };
-
   /* Part B Logic */
   const togglePartBType = (qIndex, optionKey, type) => {
     const updated = [...partB];
@@ -288,12 +324,6 @@ export default function QuestionPaperBuilder() {
       targetOpt.pi = detected.pi;
     }
     setPartB(updated);
-  };
-
-  const deletePartBQuestion = (qIndex) => {
-    const updated = partB.filter((_, i) => i !== qIndex);
-    const renumbered = updated.map((q, i) => ({ ...q, qNo: (11 + i).toString() }));
-    setPartB(renumbered);
   };
 
   const handlePartBSubChange = (qIndex, optionKey, subIndex, field, value) => {
@@ -321,24 +351,72 @@ export default function QuestionPaperBuilder() {
     const targetOpt = optionKey === "A" ? updated[qIndex].optionA : updated[qIndex].optionB;
     const labels = ["i)", "ii)", "iii)", "iv)"];
     const nextLabel = labels[targetOpt.subQuestions.length] || `${targetOpt.subQuestions.length + 1})`;
-    targetOpt.subQuestions.push({ label: nextLabel, question: "", marks: "5", co: "", bl: "", pi: "", diagram: null });
+    targetOpt.subQuestions.push({ label: nextLabel, question: "", marks: "( 5 )", co: "", bl: "", pi: "", diagram: null });
     setPartB(updated);
+  };
+
+  /* Part C Sub-Questions Logic */
+  const togglePartCType = (optionKey, type) => {
+    if (optionKey === "A") setPartC({ ...partC, typeA: type });
+    else setPartC({ ...partC, typeB: type });
+  };
+
+  const handlePartCSubChange = (optionKey, subIndex, field, value) => {
+    const targetOpt = optionKey === "A" ? { ...partC.optionA } : { ...partC.optionB };
+    const updatedSubs = [...targetOpt.subQuestions];
+    updatedSubs[subIndex] = { ...updatedSubs[subIndex], [field]: value };
+    if (field === "question") {
+      const detected = autoDetectCOBLPI(value);
+      updatedSubs[subIndex].co = detected.co;
+      updatedSubs[subIndex].bl = detected.bl;
+      updatedSubs[subIndex].pi = detected.pi;
+    }
+    targetOpt.subQuestions = updatedSubs;
+    if (optionKey === "A") setPartC({ ...partC, optionA: targetOpt });
+    else setPartC({ ...partC, optionB: targetOpt });
+  };
+
+  const addPartCSubQuestion = (optionKey) => {
+    const targetOpt = optionKey === "A" ? { ...partC.optionA } : { ...partC.optionB };
+    const labels = ["i)", "ii)", "iii)", "iv)"];
+    const nextLabel = labels[targetOpt.subQuestions.length] || `${targetOpt.subQuestions.length + 1})`;
+    const updatedSubs = [...targetOpt.subQuestions, { label: nextLabel, question: "", marks: "( 5 )", co: "", bl: "", pi: "", diagram: null }];
+    targetOpt.subQuestions = updatedSubs;
+    if (optionKey === "A") setPartC({ ...partC, optionA: targetOpt });
+    else setPartC({ ...partC, optionB: targetOpt });
+  };
+
+  const deletePartCSub = (optionKey, subIndex) => {
+    const targetOpt = optionKey === "A" ? { ...partC.optionA } : { ...partC.optionB };
+    targetOpt.subQuestions = targetOpt.subQuestions.filter((_, idx) => idx !== subIndex);
+    if (optionKey === "A") setPartC({ ...partC, optionA: targetOpt });
+    else setPartC({ ...partC, optionB: targetOpt });
   };
 
   /* DIAGRAM SAVE HANDLER */
   const handleDiagramSave = (diagramData) => {
     if (!diagramTarget) return;
-    const { qIdx, optionKey, sIdx } = diagramTarget;
-    const updated = [...partB];
-    const targetOpt = optionKey === "A" ? updated[qIdx].optionA : updated[qIdx].optionB;
+    const { section, qIdx, optionKey, sIdx } = diagramTarget;
 
-    if (sIdx !== null && sIdx !== undefined) {
-      targetOpt.subQuestions[sIdx].diagram = diagramData;
+    if (section === "partC") {
+      const targetOpt = optionKey === "A" ? { ...partC.optionA } : { ...partC.optionB };
+      if (sIdx !== null && sIdx !== undefined) {
+        targetOpt.subQuestions[sIdx].diagram = diagramData;
+      } else {
+        targetOpt.diagram = diagramData;
+      }
+      if (optionKey === "A") setPartC({ ...partC, optionA: targetOpt });
+      else setPartC({ ...partC, optionB: targetOpt });
     } else {
-      targetOpt.diagram = diagramData;
+      const updated = [...partB];
+      const targetOpt = optionKey === "A" ? updated[qIdx].optionA : updated[qIdx].optionB;
+      if (sIdx !== null && sIdx !== undefined) {
+        targetOpt.subQuestions[sIdx].diagram = diagramData;
+      } else {
+        targetOpt.diagram = diagramData;
+      }
+      setPartB(updated);
     }
-
-    setPartB(updated);
     setShowDiagramEditor(false);
   };
 
@@ -346,19 +424,19 @@ export default function QuestionPaperBuilder() {
   const renderDiagramPreview = (diagram) => {
     if (!diagram || (!diagram.boxes?.length && !diagram.arrows?.length && !diagram.texts?.length)) return null;
     return (
-      <div style={{ marginTop: "8px", padding: "6px", border: "1px dashed #a0aec0", borderRadius: "4px", backgroundColor: "#f7fafc", display: "inline-block" }}>
-        <svg width="220" height="120" style={{ border: "1px solid #cbd5e0", background: "#fff" }}>
+      <div style={{ marginTop: "6px", display: "block" }}>
+        <svg width="200" height="100" style={{ border: "none", background: "transparent" }}>
           {diagram.boxes?.map((b, i) => (
             <g key={i}>
-              <rect x={b.x / 3} y={b.y / 3} width={(b.w || 80) / 3} height={(b.h || 40) / 3} fill="#edf2f7" stroke="#2b6cb0" strokeWidth="1.5" />
-              <text x={(b.x + (b.w || 80) / 2) / 3} y={(b.y + (b.h || 40) / 2 + 4) / 3} fontSize="9" textAnchor="middle" fill="#2d3748">{b.text}</text>
+              <rect x={b.x / 3} y={b.y / 3} width={(b.w || 80) / 3} height={(b.h || 40) / 3} fill="#edf2f7" stroke="#000" strokeWidth="1" />
+              <text x={(b.x + (b.w || 80) / 2) / 3} y={(b.y + (b.h || 40) / 2 + 4) / 3} fontSize="8" textAnchor="middle" fill="#000">{b.text}</text>
             </g>
           ))}
           {diagram.arrows?.map((a, i) => (
-            <line key={i} x1={a.x1 / 3} y1={a.y1 / 3} x2={a.x2 / 3} y2={a.y2 / 3} stroke="#e53e3e" strokeWidth="1.5" markerEnd="url(#arrow)" />
+            <line key={i} x1={a.x1 / 3} y1={a.y1 / 3} x2={a.x2 / 3} y2={a.y2 / 3} stroke="#000" strokeWidth="1" />
           ))}
           {diagram.texts?.map((t, i) => (
-            <text key={i} x={t.x / 3} y={t.y / 3} fontSize="10" fill="#2d3748">{t.text}</text>
+            <text key={i} x={t.x / 3} y={t.y / 3} fontSize="9" fill="#000">{t.text}</text>
           ))}
         </svg>
       </div>
@@ -382,14 +460,6 @@ export default function QuestionPaperBuilder() {
     }
   };
 
-  const deletePartCQuestion = (optionKey) => {
-    if (optionKey === "A") {
-      setPartC({ ...partC, optionA: { ...partC.optionA, question: "", co: "", bl: "", pi: "" } });
-    } else {
-      setPartC({ ...partC, optionB: { ...partC.optionB, question: "", co: "", bl: "", pi: "" } });
-    }
-  };
-
   const saveOrUpdateQuestionPaper = async () => {
     try {
       const payload = { ...header, partA, partB, partC };
@@ -409,6 +479,7 @@ export default function QuestionPaperBuilder() {
   return (
     <div style={{ padding: "24px", fontFamily: "Segoe UI, Roboto, sans-serif", backgroundColor: "#f4f6f9", minHeight: "100vh", color: "#333" }}>
       
+      {/* EXACT 4-PAGE PRINT CSS STYLES */}
       <style>{`
         .light-table, .light-table th, .light-table td {
           border: 1px solid #cbd5e0 !important;
@@ -427,12 +498,18 @@ export default function QuestionPaperBuilder() {
         }
         @media print {
           .no-print { display: none !important; }
-          body { background: #fff !important; padding: 0 !important; }
+          body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
           #paper-sheet { border: none !important; box-shadow: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
           input { border: none !important; background: transparent !important; }
-          .page-break { page-break-after: always; display: block; }
+          
+          /* 4-PAGE BREAK CONTROL */
+          .page-1 { page-break-after: always; height: 98vh; }
+          .page-2 { page-break-after: always; height: 98vh; }
+          .page-3 { page-break-after: always; height: 98vh; }
+          .page-4 { page-break-after: avoid; height: auto; }
+
           .light-table, .light-table th, .light-table td {
-            border: 1px solid #718096 !important;
+            border: 1px solid #000 !important;
           }
         }
       `}</style>
@@ -458,6 +535,7 @@ export default function QuestionPaperBuilder() {
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Exam Name:</label>
             <select style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} name="examName" value={header.examName} onChange={handleHeaderChange}>
+              <option value="">-- Select Exam --</option>
               <option value="I CIA TEST">I CIA TEST</option>
               <option value="II CIA TEST">II CIA TEST</option>
               <option value="MODEL TEST">MODEL TEST</option>
@@ -468,11 +546,13 @@ export default function QuestionPaperBuilder() {
             <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Month & Year:</label>
             <div style={{ display: "flex", gap: "10px" }}>
               <select style={{ flex: 1, padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} name="examMonth" value={header.examMonth} onChange={handleHeaderChange}>
+                <option value="">-- Select Month --</option>
                 {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((m) => (
                   <option key={m} value={m}>{m}</option>
                 ))}
               </select>
               <select style={{ flex: 1, padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} name="examYear" value={header.examYear} onChange={handleHeaderChange}>
+                <option value="">-- Select Year --</option>
                 {["2024", "2025", "2026", "2027", "2028", "2029", "2030"].map((y) => (
                   <option key={y} value={y}>{y}</option>
                 ))}
@@ -483,14 +563,16 @@ export default function QuestionPaperBuilder() {
           <div style={{ display: "flex", gap: "10px" }}>
             <div style={{ flex: 2, display: "flex", flexDirection: "column", gap: "6px" }}>
               <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Branch / Department:</label>
-              <input style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} type="text" name="branch" value={header.branch} onChange={handleHeaderChange} />
+              <input style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} type="text" name="branch" value={header.branch} onChange={handleHeaderChange} placeholder="e.g. B.TECH - INFORMATION TECHNOLOGY" />
             </div>
             
             <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "6px" }}>
               <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Section:</label>
               <select style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} name="section" value={header.section} onChange={handleHeaderChange}>
+                <option value="">-- Select --</option>
                 <option value="A">Section A</option>
                 <option value="B">Section B</option>
+                <option value="">None</option>
               </select>
             </div>
           </div>
@@ -498,6 +580,7 @@ export default function QuestionPaperBuilder() {
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Semester:</label>
             <select style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} name="semester" value={header.semester} onChange={handleHeaderChange}>
+              <option value="">-- Select Semester --</option>
               {["I", "II", "III", "IV", "V", "VI", "VII", "VIII"].map((sem) => (
                 <option key={sem} value={sem}>{sem}</option>
               ))}
@@ -507,6 +590,7 @@ export default function QuestionPaperBuilder() {
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Subject Code & Name:</label>
             <select style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} value={header.subjectCode} onChange={handleSubjectChange}>
+              <option value="">-- Select Subject --</option>
               {subjectList.map((sub) => (
                 <option key={sub.code} value={sub.code}>
                   {sub.code} - {sub.name}
@@ -523,8 +607,9 @@ export default function QuestionPaperBuilder() {
           <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <label style={{ fontSize: "13px", fontWeight: "600", color: "#4a5568" }}>Exam Time:</label>
             <select style={{ padding: "10px", borderRadius: "6px", border: "1px solid #cbd5e0" }} name="time" value={header.time} onChange={handleHeaderChange}>
+              <option value="">-- Select Time --</option>
               <option value="9:30 AM - 12:30 PM">9:30 AM - 12:30 PM</option>
-              <option value="1:00 PM - 4:00 PM">1:00 PM - 4:00 PM</option>
+              <option value="1:30 PM - 4:30 PM">1:30 PM - 4:30 PM</option>
             </select>
           </div>
         </div>
@@ -533,8 +618,8 @@ export default function QuestionPaperBuilder() {
           <button style={{ flex: 1, padding: "10px", background: editingId ? "#dd6b20" : "#38a169", color: "#fff", border: "none", borderRadius: "6px", fontWeight: "600", cursor: "pointer" }} onClick={saveOrUpdateQuestionPaper}>
             {editingId ? "Update Question Paper" : "Save Question Paper"}
           </button>
-          <button style={{ flex: 1, padding: "10px", background: "#3182ce", color: "#fff", border: "none", borderRadius: "6px", fontWeight: "600", cursor: "pointer" }} onClick={() => window.print()}>
-            🖨️ Print / Save as PDF
+          <button style={{ flex: 1, padding: "10px", background: "#3182ce", color: "#fff", border: "none", borderRadius: "6px", fontWeight: "600", cursor: "pointer" }} onClick={handlePrint}>
+            🖨️ Print & Auto-Refresh
           </button>
         </div>
       </div>
@@ -586,9 +671,13 @@ export default function QuestionPaperBuilder() {
               initialData={
                 diagramTarget
                   ? (
-                      diagramTarget.sIdx !== null && diagramTarget.sIdx !== undefined
-                        ? partB[diagramTarget.qIdx][diagramTarget.optionKey === "A" ? "optionA" : "optionB"].subQuestions[diagramTarget.sIdx]?.diagram
-                        : partB[diagramTarget.qIdx][diagramTarget.optionKey === "A" ? "optionA" : "optionB"]?.diagram
+                      diagramTarget.section === "partC"
+                        ? (diagramTarget.sIdx !== null && diagramTarget.sIdx !== undefined
+                            ? partC[diagramTarget.optionKey === "A" ? "optionA" : "optionB"].subQuestions[diagramTarget.sIdx]?.diagram
+                            : partC[diagramTarget.optionKey === "A" ? "optionA" : "optionB"]?.diagram)
+                        : (diagramTarget.sIdx !== null && diagramTarget.sIdx !== undefined
+                            ? partB[diagramTarget.qIdx][diagramTarget.optionKey === "A" ? "optionA" : "optionB"].subQuestions[diagramTarget.sIdx]?.diagram
+                            : partB[diagramTarget.qIdx][diagramTarget.optionKey === "A" ? "optionA" : "optionB"]?.diagram)
                     )
                   : null
               }
@@ -600,8 +689,8 @@ export default function QuestionPaperBuilder() {
       {/* PRINTABLE QUESTION PAPER SHEET */}
       <div id="paper-sheet" style={{ background: "#ffffff", padding: "40px", border: "1px solid #d2d6dc", maxWidth: "850px", margin: "0 auto", borderRadius: "4px" }}>
         
-        {/* PAGE 1: HEADER & PART A */}
-        <div>
+        {/* PAGE 1: HEADER & PART A ONLY */}
+        <div className="page-1">
           <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginBottom: "15px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
               <span style={{ fontWeight: "bold", fontSize: "12px" }}>Register No.</span>
@@ -615,10 +704,10 @@ export default function QuestionPaperBuilder() {
 
           <div style={{ textAlign: "center", textTransform: "uppercase", fontWeight: "bold", fontSize: "13px", lineHeight: "1.4" }}>
             <div>{header.collegeName}</div>
-            <div>{header.examName} - {header.examMonth} {header.examYear}</div>
-            <div>{header.branch} {header.section ? ` - SEC ${header.section}` : ''}</div>
-            <div>{header.semester}- SEMESTER</div>
-            <div>{header.subjectCode} - {header.subjectName}</div>
+            <div>{header.examName || "________"} - {header.examMonth || "________"} {header.examYear || "____"}</div>
+            <div>{header.branch || "________________"}{header.section ? ` - SEC ${header.section}` : ''}</div>
+            <div>{header.semester || "____"}- SEMESTER</div>
+            <div>{header.subjectCode || "________"} - {header.subjectName || "________________"}</div>
             <div style={{ fontSize: "11px", fontWeight: "normal" }}>(Regulation {header.regulation})</div>
           </div>
 
@@ -634,16 +723,16 @@ export default function QuestionPaperBuilder() {
               <span style={{ fontWeight: "bold" }}>Max. Marks:</span>
               <span>{header.maxMarks}</span>
               <span style={{ fontWeight: "bold" }}>Time:</span>
-              <span>{header.time}</span>
+              <span>{header.time || "__________"}</span>
             </div>
           </div>
 
           <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "10px" }}>Answer ALL Questions</div>
 
-          {/* PART A */}
+          {/* PART A (10 QUESTIONS ONLY) */}
           <div style={{ marginBottom: "20px" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "5px" }}>
-              <div style={{ fontWeight: "bold", fontSize: "12px" }}>PART – A (10 x 2 = 20 Marks)</div>
+            <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "5px" }}>
+              PART – A ( 10 x 2 = 20 Marks )
             </div>
             
             <table className="light-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
@@ -651,9 +740,10 @@ export default function QuestionPaperBuilder() {
                 <tr style={{ background: "#f7fafc" }}>
                   <th style={{ width: "35px", padding: "6px" }}>Q.No</th>
                   <th style={{ padding: "6px" }}>Questions</th>
-                  <th style={{ width: "50px", padding: "6px" }}>CO</th>
-                  <th style={{ width: "40px", padding: "6px" }}>BL</th>
-                  <th style={{ width: "50px", padding: "6px" }}>PI</th>
+                  <th style={{ width: "45px", padding: "6px" }}>Marks</th>
+                  <th style={{ width: "45px", padding: "6px" }}>CO</th>
+                  <th style={{ width: "35px", padding: "6px" }}>BL</th>
+                  <th style={{ width: "45px", padding: "6px" }}>PI</th>
                 </tr>
               </thead>
               <tbody>
@@ -661,20 +751,18 @@ export default function QuestionPaperBuilder() {
                   <tr key={idx}>
                     <td align="center" style={{ padding: "6px" }}><b>{q.qNo}.</b></td>
                     <td style={{ padding: "6px" }}>
-                      <div style={{ display: "flex", alignItems: "center" }}>
-                        <input
-                          type="text"
-                          style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
-                          value={q.question}
-                          onChange={(e) => handlePartAChange(idx, e.target.value)}
-                          placeholder={`Enter Short Question ${idx + 1}`}
-                        />
-                        <button className="no-print" onClick={() => deletePartAQuestion(idx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Question">🗑️</button>
-                      </div>
+                      <input
+                        type="text"
+                        style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
+                        value={q.question}
+                        onChange={(e) => handlePartAChange(idx, e.target.value)}
+                        placeholder={`Enter Short Question ${idx + 1}`}
+                      />
                     </td>
-                    <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={q.co} onChange={(e) => handlePartAMetaChange(idx, "co", e.target.value)} /></td>
-                    <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={q.bl} onChange={(e) => handlePartAMetaChange(idx, "bl", e.target.value)} /></td>
-                    <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={q.pi} onChange={(e) => handlePartAMetaChange(idx, "pi", e.target.value)} /></td>
+                    <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.marks} onChange={(e) => handlePartAMetaChange(idx, "marks", e.target.value)} /></td>
+                    <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.co} onChange={(e) => handlePartAMetaChange(idx, "co", e.target.value)} /></td>
+                    <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.bl} onChange={(e) => handlePartAMetaChange(idx, "bl", e.target.value)} /></td>
+                    <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.pi} onChange={(e) => handlePartAMetaChange(idx, "pi", e.target.value)} /></td>
                   </tr>
                 ))}
               </tbody>
@@ -682,259 +770,416 @@ export default function QuestionPaperBuilder() {
           </div>
         </div>
 
-        {/* PAGE BREAK TO PAGE 2 FOR PART B */}
-        <div className="page-break" style={{ marginTop: "20px" }}></div>
-
-        {/* PART B */}
-        <div style={{ marginBottom: "20px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "5px" }}>
-            <div style={{ fontWeight: "bold", fontSize: "12px" }}>PART – B (5 x 13 = 65 Marks)</div>
+        {/* PAGE 2 & 3: PART B - CONSTANT 11 TO 15 */}
+        <div className="page-2">
+          <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "8px" }}>
+            PART – B ( 5 x 13 = 65 Marks )
           </div>
-
+          
           <table className="light-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
             <thead>
               <tr style={{ background: "#f7fafc" }}>
-                <th style={{ width: "60px", padding: "6px" }}>Q.No</th>
+                <th style={{ width: "35px", padding: "6px" }}>Q.No</th>
                 <th style={{ padding: "6px" }}>Questions</th>
                 <th style={{ width: "45px", padding: "6px" }}>Marks</th>
-                <th style={{ width: "50px", padding: "6px" }}>CO</th>
-                <th style={{ width: "40px", padding: "6px" }}>BL</th>
-                <th style={{ width: "50px", padding: "6px" }}>PI</th>
+                <th style={{ width: "45px", padding: "6px" }}>CO</th>
+                <th style={{ width: "35px", padding: "6px" }}>BL</th>
+                <th style={{ width: "45px", padding: "6px" }}>PI</th>
               </tr>
             </thead>
             <tbody>
-              {partB.map((qItem, qIdx) => (
-                <React.Fragment key={qIdx}>
-                  {/* Option A Config Row */}
-                  <tr className="no-print" style={{ background: "#edf2f7" }}>
-                    <td colSpan="6" style={{ padding: "4px 8px", fontSize: "11px" }}>
-                      <b>Q{qItem.qNo} Option A Type:</b>{" "}
-                      <button style={{ padding: "2px 6px", fontSize: "11px", color: "#3182ce", cursor: "pointer", fontWeight: qItem.typeA === "single" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "A", "single")}>Single Qn</button>{" "}
-                      <button style={{ padding: "2px 6px", fontSize: "11px", color: "#3182ce", cursor: "pointer", fontWeight: qItem.typeA === "sub" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "A", "sub")}>Sub Qns (i, ii)</button>
-                      {qItem.typeA === "sub" && <button style={{ marginLeft: "10px", padding: "2px 6px", background: "#38a169", color: "#fff", border: "none", borderRadius: "3px", cursor: "pointer", fontWeight: "600" }} onClick={() => addSubQuestion(qIdx, "A")}>+ Add Sub Qn</button>}
-                      <button onClick={() => deletePartBQuestion(qIdx)} style={{ float: "right", background: "#e53e3e", color: "#fff", border: "none", borderRadius: "3px", padding: "2px 6px", cursor: "pointer" }}>Delete Q{qItem.qNo}</button>
+              {partB.map((q, qIndex) => (
+                <React.Fragment key={qIndex}>
+                  {/* OPTION A */}
+                  <tr style={{ borderTop: "2px solid #cbd5e0" }}>
+                    <td align="center" rowSpan={q.typeA === "single" ? 1 : q.optionA.subQuestions.length + 1} style={{ padding: "6px", verticalAlign: "top" }}>
+                      <b>{q.qNo}.</b>
                     </td>
+                    <td style={{ padding: "6px" }}>
+                      <div className="no-print" style={{ marginBottom: "4px", fontSize: "10px", color: "#666" }}>
+                        <strong>Option A Type:</strong>
+                        <label style={{ marginLeft: "6px" }}><input type="radio" name={`typeA_${qIndex}`} checked={q.typeA === "single"} onChange={() => togglePartBType(qIndex, "A", "single")} /> Single</label>
+                        <label style={{ marginLeft: "6px" }}><input type="radio" name={`typeA_${qIndex}`} checked={q.typeA === "split"} onChange={() => togglePartBType(qIndex, "A", "split")} /> Sub-Questions</label>
+                      </div>
+
+                      {q.typeA === "single" ? (
+                        <div>
+                          <div style={{ display: "flex", alignItems: "center" }}>
+                            <span style={{ fontWeight: "bold", marginRight: "6px" }}>(a)</span>
+                            <input
+                              type="text"
+                              style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
+                              value={q.optionA.question}
+                              onChange={(e) => handlePartBSingleChange(qIndex, "A", "question", e.target.value)}
+                              placeholder={`Enter Question ${q.qNo} (a)`}
+                            />
+                            <button
+                              className="no-print btn-diagram"
+                              onClick={() => {
+                                setDiagramTarget({ section: "partB", qIdx: qIndex, optionKey: "A", sIdx: null });
+                                setShowDiagramEditor(true);
+                              }}
+                            >
+                              ✏️ Diagram
+                            </button>
+                          </div>
+                          {renderDiagramPreview(q.optionA.diagram)}
+                        </div>
+                      ) : (
+                        <div>
+                          <span style={{ fontWeight: "bold" }}>(a)</span>
+                          <button className="no-print" style={{ marginLeft: "10px", fontSize: "11px", padding: "1px 6px", cursor: "pointer" }} onClick={() => addSubQuestion(qIndex, "A")}>+ Add Sub Question</button>
+                        </div>
+                      )}
+                    </td>
+
+                    {q.typeA === "single" ? (
+                      <>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.optionA.marks} onChange={(e) => handlePartBSingleChange(qIndex, "A", "marks", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.optionA.co} onChange={(e) => handlePartBSingleChange(qIndex, "A", "co", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.optionA.bl} onChange={(e) => handlePartBSingleChange(qIndex, "A", "bl", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.optionA.pi} onChange={(e) => handlePartBSingleChange(qIndex, "A", "pi", e.target.value)} /></td>
+                      </>
+                    ) : (
+                      <td colSpan={4} style={{ background: "#fcfcfc" }}></td>
+                    )}
                   </tr>
 
-                  {/* Option A Display */}
-                  {qItem.typeA === "single" ? (
-                    <tr>
-                      <td align="center" style={{ padding: "6px" }}><b>{qItem.qNo}. a)</b></td>
-                      <td style={{ padding: "6px" }}>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <input
-                            type="text"
-                            style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
-                            value={qItem.optionA.question}
-                            onChange={(e) => handlePartBSingleChange(qIdx, "A", "question", e.target.value)}
-                            placeholder={`Enter Question ${qItem.qNo}. a)`}
-                          />
-                          <button
-                            type="button"
-                            className="no-print btn-diagram"
-                            onClick={() => {
-                              setDiagramTarget({ qIdx, optionKey: "A", sIdx: null });
-                              setShowDiagramEditor(true);
-                            }}
-                          >
-                            {qItem.optionA.diagram ? "✏️ Edit Diagram" : "+ Diagram"}
-                          </button>
-                        </div>
-                        {renderDiagramPreview(qItem.optionA.diagram)}
-                      </td>
-                      <td align="center" style={{ padding: "6px" }}>
-                        (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={qItem.optionA.marks} onChange={(e) => handlePartBSingleChange(qIdx, "A", "marks", e.target.value)} />)
-                      </td>
-                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionA.co} onChange={(e) => handlePartBSingleChange(qIdx, "A", "co", e.target.value)} /></td>
-                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionA.bl} onChange={(e) => handlePartBSingleChange(qIdx, "A", "bl", e.target.value)} /></td>
-                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionA.pi} onChange={(e) => handlePartBSingleChange(qIdx, "A", "pi", e.target.value)} /></td>
-                    </tr>
-                  ) : (
-                    qItem.optionA.subQuestions.map((sub, sIdx) => (
-                      <tr key={sIdx}>
-                        <td align="center" style={{ padding: "6px" }}><b>{sIdx === 0 ? `${qItem.qNo}. a) ${sub.label}` : `${sub.label}`}</b></td>
-                        <td style={{ padding: "6px" }}>
+                  {/* SUB QUESTIONS OPTION A */}
+                  {q.typeA === "split" &&
+                    q.optionA.subQuestions.map((sub, sIdx) => (
+                      <tr key={`A_sub_${sIdx}`}>
+                        <td style={{ padding: "6px", paddingLeft: "20px" }}>
                           <div style={{ display: "flex", alignItems: "center" }}>
+                            <span style={{ fontWeight: "bold", marginRight: "6px" }}>{sub.label}</span>
                             <input
                               type="text"
                               style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
                               value={sub.question}
-                              onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "question", e.target.value)}
-                              placeholder={`Enter Sub-question ${sub.label}`}
+                              onChange={(e) => handlePartBSubChange(qIndex, "A", sIdx, "question", e.target.value)}
+                              placeholder={`Enter Sub Question ${sub.label}`}
                             />
                             <button
-                              type="button"
                               className="no-print btn-diagram"
                               onClick={() => {
-                                setDiagramTarget({ qIdx, optionKey: "A", sIdx });
+                                setDiagramTarget({ section: "partB", qIdx: qIndex, optionKey: "A", sIdx });
                                 setShowDiagramEditor(true);
                               }}
                             >
-                              {sub.diagram ? "✏️ Edit Diagram" : "+ Diagram"}
+                              ✏️ Diagram
                             </button>
-                            <button className="no-print" onClick={() => deletePartBSub(qIdx, "A", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer", marginLeft: "4px" }} title="Delete Sub-Question">🗑️</button>
+                            <button className="no-print" onClick={() => deletePartBSub(qIndex, "A", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }}>🗑️</button>
                           </div>
                           {renderDiagramPreview(sub.diagram)}
                         </td>
-                        <td align="center" style={{ padding: "6px" }}>
-                          (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "marks", e.target.value)} />)
-                        </td>
-                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.co} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "co", e.target.value)} /></td>
-                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.bl} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "bl", e.target.value)} /></td>
-                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.pi} onChange={(e) => handlePartBSubChange(qIdx, "A", sIdx, "pi", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIndex, "A", sIdx, "marks", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.co} onChange={(e) => handlePartBSubChange(qIndex, "A", sIdx, "co", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.bl} onChange={(e) => handlePartBSubChange(qIndex, "A", sIdx, "bl", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.pi} onChange={(e) => handlePartBSubChange(qIndex, "A", sIdx, "pi", e.target.value)} /></td>
                       </tr>
-                    ))
-                  )}
+                    ))}
 
-                  {/* OR Row */}
+                  {/* OR ROW */}
                   <tr>
-                    <td colSpan="6" align="center" style={{ fontWeight: "bold", padding: "4px" }}>OR</td>
-                  </tr>
-
-                  {/* Option B Config Row */}
-                  <tr className="no-print" style={{ background: "#edf2f7" }}>
-                    <td colSpan="6" style={{ padding: "4px 8px", fontSize: "11px" }}>
-                      <b>Q{qItem.qNo} Option B Type:</b>{" "}
-                      <button style={{ padding: "2px 6px", fontSize: "11px", color: "#3182ce", cursor: "pointer", fontWeight: qItem.typeB === "single" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "B", "single")}>Single Qn</button>{" "}
-                      <button style={{ padding: "2px 6px", fontSize: "11px", color: "#3182ce", cursor: "pointer", fontWeight: qItem.typeB === "sub" ? "bold" : "normal" }} onClick={() => togglePartBType(qIdx, "B", "sub")}>Sub Qns (i, ii)</button>
-                      {qItem.typeB === "sub" && <button style={{ marginLeft: "10px", padding: "2px 6px", background: "#38a169", color: "#fff", border: "none", borderRadius: "3px", cursor: "pointer", fontWeight: "600" }} onClick={() => addSubQuestion(qIdx, "B")}>+ Add Sub Qn</button>}
+                    <td colSpan={6} align="center" style={{ fontWeight: "bold", background: "#f7fafc", padding: "4px" }}>
+                      OR
                     </td>
                   </tr>
 
-                  {/* Option B Display */}
-                  {qItem.typeB === "single" ? (
-                    <tr>
-                      <td align="center" style={{ padding: "6px" }}><b>b)</b></td>
-                      <td style={{ padding: "6px" }}>
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <input
-                            type="text"
-                            style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
-                            value={qItem.optionB.question}
-                            onChange={(e) => handlePartBSingleChange(qIdx, "B", "question", e.target.value)}
-                            placeholder={`Enter Question ${qItem.qNo}. b)`}
-                          />
-                          <button
-                            type="button"
-                            className="no-print btn-diagram"
-                            onClick={() => {
-                              setDiagramTarget({ qIdx, optionKey: "B", sIdx: null });
-                              setShowDiagramEditor(true);
-                            }}
-                          >
-                            {qItem.optionB.diagram ? "✏️ Edit Diagram" : "+ Diagram"}
-                          </button>
-                        </div>
-                        {renderDiagramPreview(qItem.optionB.diagram)}
-                      </td>
-                      <td align="center" style={{ padding: "6px" }}>
-                        (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={qItem.optionB.marks} onChange={(e) => handlePartBSingleChange(qIdx, "B", "marks", e.target.value)} />)
-                      </td>
-                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionB.co} onChange={(e) => handlePartBSingleChange(qIdx, "B", "co", e.target.value)} /></td>
-                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionB.bl} onChange={(e) => handlePartBSingleChange(qIdx, "B", "bl", e.target.value)} /></td>
-                      <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={qItem.optionB.pi} onChange={(e) => handlePartBSingleChange(qIdx, "B", "pi", e.target.value)} /></td>
-                    </tr>
-                  ) : (
-                    qItem.optionB.subQuestions.map((sub, sIdx) => (
-                      <tr key={sIdx}>
-                        <td align="center" style={{ padding: "6px" }}><b>{sIdx === 0 ? `b) ${sub.label}` : `${sub.label}`}</b></td>
-                        <td style={{ padding: "6px" }}>
+                  {/* OPTION B */}
+                  <tr>
+                    <td align="center" rowSpan={q.typeB === "single" ? 1 : q.optionB.subQuestions.length + 1} style={{ padding: "6px", verticalAlign: "top" }}>
+                    </td>
+                    <td style={{ padding: "6px" }}>
+                      <div className="no-print" style={{ marginBottom: "4px", fontSize: "10px", color: "#666" }}>
+                        <strong>Option B Type:</strong>
+                        <label style={{ marginLeft: "6px" }}><input type="radio" name={`typeB_${qIndex}`} checked={q.typeB === "single"} onChange={() => togglePartBType(qIndex, "B", "single")} /> Single</label>
+                        <label style={{ marginLeft: "6px" }}><input type="radio" name={`typeB_${qIndex}`} checked={q.typeB === "split"} onChange={() => togglePartBType(qIndex, "B", "split")} /> Sub-Questions</label>
+                      </div>
+
+                      {q.typeB === "single" ? (
+                        <div>
                           <div style={{ display: "flex", alignItems: "center" }}>
+                            <span style={{ fontWeight: "bold", marginRight: "6px" }}>(b)</span>
+                            <input
+                              type="text"
+                              style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
+                              value={q.optionB.question}
+                              onChange={(e) => handlePartBSingleChange(qIndex, "B", "question", e.target.value)}
+                              placeholder={`Enter Question ${q.qNo} (b)`}
+                            />
+                            <button
+                              className="no-print btn-diagram"
+                              onClick={() => {
+                                setDiagramTarget({ section: "partB", qIdx: qIndex, optionKey: "B", sIdx: null });
+                                setShowDiagramEditor(true);
+                              }}
+                            >
+                              ✏️ Diagram
+                            </button>
+                          </div>
+                          {renderDiagramPreview(q.optionB.diagram)}
+                        </div>
+                      ) : (
+                        <div>
+                          <span style={{ fontWeight: "bold" }}>(b)</span>
+                          <button className="no-print" style={{ marginLeft: "10px", fontSize: "11px", padding: "1px 6px", cursor: "pointer" }} onClick={() => addSubQuestion(qIndex, "B")}>+ Add Sub Question</button>
+                        </div>
+                      )}
+                    </td>
+
+                    {q.typeB === "single" ? (
+                      <>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.optionB.marks} onChange={(e) => handlePartBSingleChange(qIndex, "B", "marks", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.optionB.co} onChange={(e) => handlePartBSingleChange(qIndex, "B", "co", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.optionB.bl} onChange={(e) => handlePartBSingleChange(qIndex, "B", "bl", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.optionB.pi} onChange={(e) => handlePartBSingleChange(qIndex, "B", "pi", e.target.value)} /></td>
+                      </>
+                    ) : (
+                      <td colSpan={4} style={{ background: "#fcfcfc" }}></td>
+                    )}
+                  </tr>
+
+                  {/* SUB QUESTIONS OPTION B */}
+                  {q.typeB === "split" &&
+                    q.optionB.subQuestions.map((sub, sIdx) => (
+                      <tr key={`B_sub_${sIdx}`}>
+                        <td style={{ padding: "6px", paddingLeft: "20px" }}>
+                          <div style={{ display: "flex", alignItems: "center" }}>
+                            <span style={{ fontWeight: "bold", marginRight: "6px" }}>{sub.label}</span>
                             <input
                               type="text"
                               style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
                               value={sub.question}
-                              onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "question", e.target.value)}
-                              placeholder={`Enter Sub-question ${sub.label}`}
+                              onChange={(e) => handlePartBSubChange(qIndex, "B", sIdx, "question", e.target.value)}
+                              placeholder={`Enter Sub Question ${sub.label}`}
                             />
                             <button
-                              type="button"
                               className="no-print btn-diagram"
                               onClick={() => {
-                                setDiagramTarget({ qIdx, optionKey: "B", sIdx });
+                                setDiagramTarget({ section: "partB", qIdx: qIndex, optionKey: "B", sIdx });
                                 setShowDiagramEditor(true);
                               }}
                             >
-                              {sub.diagram ? "✏️ Edit Diagram" : "+ Diagram"}
+                              ✏️ Diagram
                             </button>
-                            <button className="no-print" onClick={() => deletePartBSub(qIdx, "B", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer", marginLeft: "4px" }} title="Delete Sub-Question">🗑️</button>
+                            <button className="no-print" onClick={() => deletePartBSub(qIndex, "B", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }}>🗑️</button>
                           </div>
                           {renderDiagramPreview(sub.diagram)}
                         </td>
-                        <td align="center" style={{ padding: "6px" }}>
-                          (<input style={{ width: "22px", border: "none", outline: "none", background: "transparent", textAlign: "center", fontSize: "12px" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "marks", e.target.value)} />)
-                        </td>
-                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.co} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "co", e.target.value)} /></td>
-                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.bl} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "bl", e.target.value)} /></td>
-                        <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={sub.pi} onChange={(e) => handlePartBSubChange(qIdx, "B", sIdx, "pi", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIndex, "B", sIdx, "marks", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.co} onChange={(e) => handlePartBSubChange(qIndex, "B", sIdx, "co", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.bl} onChange={(e) => handlePartBSubChange(qIndex, "B", sIdx, "bl", e.target.value)} /></td>
+                        <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.pi} onChange={(e) => handlePartBSubChange(qIndex, "B", sIdx, "pi", e.target.value)} /></td>
                       </tr>
-                    ))
-                  )}
+                    ))}
                 </React.Fragment>
               ))}
             </tbody>
           </table>
         </div>
 
-        {/* PAGE BREAK TO PAGE 3 FOR PART C */}
-        <div className="page-break" style={{ marginTop: "20px" }}></div>
-
-        {/* PART C */}
-        <div style={{ marginBottom: "20px" }}>
-          <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "5px" }}>PART – C (1 x 15 = 15 Marks)</div>
+        {/* PAGE 4: PART C ONLY */}
+        <div className="page-4" style={{ marginTop: "30px" }}>
+          <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "8px" }}>
+            PART – C ( 1 x 15 = 15 Marks )
+          </div>
+          
           <table className="light-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
             <thead>
               <tr style={{ background: "#f7fafc" }}>
-                <th style={{ width: "60px", padding: "6px" }}>Q.No</th>
+                <th style={{ width: "35px", padding: "6px" }}>Q.No</th>
                 <th style={{ padding: "6px" }}>Questions</th>
                 <th style={{ width: "45px", padding: "6px" }}>Marks</th>
-                <th style={{ width: "50px", padding: "6px" }}>CO</th>
-                <th style={{ width: "40px", padding: "6px" }}>BL</th>
-                <th style={{ width: "50px", padding: "6px" }}>PI</th>
+                <th style={{ width: "45px", padding: "6px" }}>CO</th>
+                <th style={{ width: "35px", padding: "6px" }}>BL</th>
+                <th style={{ width: "45px", padding: "6px" }}>PI</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td align="center" style={{ padding: "6px" }}><b>{partC.qNo}. a)</b></td>
-                <td style={{ padding: "6px" }}>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <input
-                      type="text"
-                      style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
-                      value={partC.optionA.question}
-                      onChange={(e) => handlePartCChange("A", "question", e.target.value)}
-                      placeholder="Enter Part C Question 16. a)"
-                    />
-                    <button className="no-print" onClick={() => deletePartCQuestion("A")} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Question">🗑️</button>
-                  </div>
+              {/* OPTION A */}
+              <tr style={{ borderTop: "2px solid #cbd5e0" }}>
+                <td align="center" rowSpan={partC.typeA === "single" ? 1 : partC.optionA.subQuestions.length + 1} style={{ padding: "6px", verticalAlign: "top" }}>
+                  <b>16.</b>
                 </td>
-                <td align="center" style={{ padding: "6px" }}>(15)</td>
-                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionA.co} onChange={(e) => handlePartCChange("A", "co", e.target.value)} /></td>
-                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionA.bl} onChange={(e) => handlePartCChange("A", "bl", e.target.value)} /></td>
-                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionA.pi} onChange={(e) => handlePartCChange("A", "pi", e.target.value)} /></td>
-              </tr>
-              <tr>
-                <td colSpan="6" align="center" style={{ fontWeight: "bold", padding: "4px" }}>OR</td>
-              </tr>
-              <tr>
-                <td align="center" style={{ padding: "6px" }}><b>b)</b></td>
                 <td style={{ padding: "6px" }}>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <input
-                      type="text"
-                      style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
-                      value={partC.optionB.question}
-                      onChange={(e) => handlePartCChange("B", "question", e.target.value)}
-                      placeholder="Enter Part C Question 16. b)"
-                    />
-                    <button className="no-print" onClick={() => deletePartCQuestion("B")} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }} title="Delete Question">🗑️</button>
+                  <div className="no-print" style={{ marginBottom: "4px", fontSize: "10px", color: "#666" }}>
+                    <strong>Option A Type:</strong>
+                    <label style={{ marginLeft: "6px" }}><input type="radio" name="typeA_partC" checked={partC.typeA === "single"} onChange={() => togglePartCType("A", "single")} /> Single</label>
+                    <label style={{ marginLeft: "6px" }}><input type="radio" name="typeA_partC" checked={partC.typeA === "split"} onChange={() => togglePartCType("A", "split")} /> Sub-Questions</label>
                   </div>
+
+                  {partC.typeA === "single" ? (
+                    <div>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <span style={{ fontWeight: "bold", marginRight: "6px" }}>(a)</span>
+                        <input
+                          type="text"
+                          style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
+                          value={partC.optionA.question}
+                          onChange={(e) => handlePartCChange("A", "question", e.target.value)}
+                          placeholder="Enter Part C Question 16 (a)"
+                        />
+                        <button
+                          className="no-print btn-diagram"
+                          onClick={() => {
+                            setDiagramTarget({ section: "partC", qIdx: 0, optionKey: "A", sIdx: null });
+                            setShowDiagramEditor(true);
+                          }}
+                        >
+                          ✏️ Diagram
+                        </button>
+                      </div>
+                      {renderDiagramPreview(partC.optionA.diagram)}
+                    </div>
+                  ) : (
+                    <div>
+                      <span style={{ fontWeight: "bold" }}>(a)</span>
+                      <button className="no-print" style={{ marginLeft: "10px", fontSize: "11px", padding: "1px 6px", cursor: "pointer" }} onClick={() => addPartCSubQuestion("A")}>+ Add Sub Question</button>
+                    </div>
+                  )}
                 </td>
-                <td align="center" style={{ padding: "6px" }}>(15)</td>
-                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionB.co} onChange={(e) => handlePartCChange("B", "co", e.target.value)} /></td>
-                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionB.bl} onChange={(e) => handlePartCChange("B", "bl", e.target.value)} /></td>
-                <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none" }} type="text" value={partC.optionB.pi} onChange={(e) => handlePartCChange("B", "pi", e.target.value)} /></td>
+
+                {partC.typeA === "single" ? (
+                  <>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={partC.optionA.marks} onChange={(e) => handlePartCChange("A", "marks", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={partC.optionA.co} onChange={(e) => handlePartCChange("A", "co", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={partC.optionA.bl} onChange={(e) => handlePartCChange("A", "bl", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={partC.optionA.pi} onChange={(e) => handlePartCChange("A", "pi", e.target.value)} /></td>
+                  </>
+                ) : (
+                  <td colSpan={4} style={{ background: "#fcfcfc" }}></td>
+                )}
               </tr>
+
+              {/* SUB QUESTIONS OPTION A */}
+              {partC.typeA === "split" &&
+                partC.optionA.subQuestions.map((sub, sIdx) => (
+                  <tr key={`C_A_sub_${sIdx}`}>
+                    <td style={{ padding: "6px", paddingLeft: "20px" }}>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <span style={{ fontWeight: "bold", marginRight: "6px" }}>{sub.label}</span>
+                        <input
+                          type="text"
+                          style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
+                          value={sub.question}
+                          onChange={(e) => handlePartCSubChange("A", sIdx, "question", e.target.value)}
+                          placeholder={`Enter Sub Question ${sub.label}`}
+                        />
+                        <button
+                          className="no-print btn-diagram"
+                          onClick={() => {
+                            setDiagramTarget({ section: "partC", qIdx: 0, optionKey: "A", sIdx });
+                            setShowDiagramEditor(true);
+                          }}
+                        >
+                          ✏️ Diagram
+                        </button>
+                        <button className="no-print" onClick={() => deletePartCSub("A", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }}>🗑️</button>
+                      </div>
+                      {renderDiagramPreview(sub.diagram)}
+                    </td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.marks} onChange={(e) => handlePartCSubChange("A", sIdx, "marks", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.co} onChange={(e) => handlePartCSubChange("A", sIdx, "co", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.bl} onChange={(e) => handlePartCSubChange("A", sIdx, "bl", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.pi} onChange={(e) => handlePartCSubChange("A", sIdx, "pi", e.target.value)} /></td>
+                  </tr>
+                ))}
+
+              {/* OR ROW */}
+              <tr>
+                <td colSpan={6} align="center" style={{ fontWeight: "bold", background: "#f7fafc", padding: "4px" }}>
+                  OR
+                </td>
+              </tr>
+
+              {/* OPTION B */}
+              <tr>
+                <td align="center" rowSpan={partC.typeB === "single" ? 1 : partC.optionB.subQuestions.length + 1} style={{ padding: "6px", verticalAlign: "top" }}>
+                </td>
+                <td style={{ padding: "6px" }}>
+                  <div className="no-print" style={{ marginBottom: "4px", fontSize: "10px", color: "#666" }}>
+                    <strong>Option B Type:</strong>
+                    <label style={{ marginLeft: "6px" }}><input type="radio" name="typeB_partC" checked={partC.typeB === "single"} onChange={() => togglePartCType("B", "single")} /> Single</label>
+                    <label style={{ marginLeft: "6px" }}><input type="radio" name="typeB_partC" checked={partC.typeB === "split"} onChange={() => togglePartCType("B", "split")} /> Sub-Questions</label>
+                  </div>
+
+                  {partC.typeB === "single" ? (
+                    <div>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <span style={{ fontWeight: "bold", marginRight: "6px" }}>(b)</span>
+                        <input
+                          type="text"
+                          style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
+                          value={partC.optionB.question}
+                          onChange={(e) => handlePartCChange("B", "question", e.target.value)}
+                          placeholder="Enter Part C Question 16 (b)"
+                        />
+                        <button
+                          className="no-print btn-diagram"
+                          onClick={() => {
+                            setDiagramTarget({ section: "partC", qIdx: 0, optionKey: "B", sIdx: null });
+                            setShowDiagramEditor(true);
+                          }}
+                        >
+                          ✏️ Diagram
+                        </button>
+                      </div>
+                      {renderDiagramPreview(partC.optionB.diagram)}
+                    </div>
+                  ) : (
+                    <div>
+                      <span style={{ fontWeight: "bold" }}>(b)</span>
+                      <button className="no-print" style={{ marginLeft: "10px", fontSize: "11px", padding: "1px 6px", cursor: "pointer" }} onClick={() => addPartCSubQuestion("B")}>+ Add Sub Question</button>
+                    </div>
+                  )}
+                </td>
+
+                {partC.typeB === "single" ? (
+                  <>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={partC.optionB.marks} onChange={(e) => handlePartCChange("B", "marks", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={partC.optionB.co} onChange={(e) => handlePartCChange("B", "co", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={partC.optionB.bl} onChange={(e) => handlePartCChange("B", "bl", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={partC.optionB.pi} onChange={(e) => handlePartCChange("B", "pi", e.target.value)} /></td>
+                  </>
+                ) : (
+                  <td colSpan={4} style={{ background: "#fcfcfc" }}></td>
+                )}
+              </tr>
+
+              {/* SUB QUESTIONS OPTION B */}
+              {partC.typeB === "split" &&
+                partC.optionB.subQuestions.map((sub, sIdx) => (
+                  <tr key={`C_B_sub_${sIdx}`}>
+                    <td style={{ padding: "6px", paddingLeft: "20px" }}>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <span style={{ fontWeight: "bold", marginRight: "6px" }}>{sub.label}</span>
+                        <input
+                          type="text"
+                          style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
+                          value={sub.question}
+                          onChange={(e) => handlePartCSubChange("B", sIdx, "question", e.target.value)}
+                          placeholder={`Enter Sub Question ${sub.label}`}
+                        />
+                        <button
+                          className="no-print btn-diagram"
+                          onClick={() => {
+                            setDiagramTarget({ section: "partC", qIdx: 0, optionKey: "B", sIdx });
+                            setShowDiagramEditor(true);
+                          }}
+                        >
+                          ✏️ Diagram
+                        </button>
+                        <button className="no-print" onClick={() => deletePartCSub("B", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }}>🗑️</button>
+                      </div>
+                      {renderDiagramPreview(sub.diagram)}
+                    </td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.marks} onChange={(e) => handlePartCSubChange("B", sIdx, "marks", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.co} onChange={(e) => handlePartCSubChange("B", sIdx, "co", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.bl} onChange={(e) => handlePartCSubChange("B", sIdx, "bl", e.target.value)} /></td>
+                    <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.pi} onChange={(e) => handlePartCSubChange("B", sIdx, "pi", e.target.value)} /></td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
