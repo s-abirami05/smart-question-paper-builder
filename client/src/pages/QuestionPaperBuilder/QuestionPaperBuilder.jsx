@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DiagramEditor from "../../components/DiagramEditor"; // your DiagramEditor component path
 
@@ -76,10 +76,65 @@ const subjectsBySemester = {
   "VIII": []
 };
 
+
+const SAVED_DIAGRAMS_KEY =
+  "questionPaperBuilder_diagrams";
+
+
 export default function QuestionPaperBuilder() {
   const [editingId, setEditingId] = useState(null);
   const [savedPapersList, setSavedPapersList] = useState([]);
   const [showListModal, setShowListModal] = useState(false);
+
+
+
+
+  
+const [savedDiagrams, setSavedDiagrams] =
+  useState([]);
+
+
+
+  const handleDeleteDiagram = (questionId, location = "diagram") => {
+  setQuestions(prev =>
+    prev.map(q => {
+      if (q.id !== questionId) return q;
+
+      if (location === "optionA") {
+        return {
+          ...q,
+          optionA: {
+            ...q.optionA,
+            diagram: null,
+          },
+        };
+      }
+
+      if (location === "optionB") {
+        return {
+          ...q,
+          optionB: {
+            ...q.optionB,
+            diagram: null,
+          },
+        };
+      }
+
+      return {
+        ...q,
+        diagram: null,
+      };
+    })
+  );
+};
+
+
+
+
+
+
+
+
 
   // DIAGRAM MODAL STATES
   const [showDiagramEditor, setShowDiagramEditor] = useState(false);
@@ -123,6 +178,7 @@ export default function QuestionPaperBuilder() {
       co: "",
       bl: "",
       pi: "",
+      diagram: null,
     }))
   );
 
@@ -239,7 +295,14 @@ export default function QuestionPaperBuilder() {
         time: paper.time || "",
         maxMarks: paper.maxMarks || "100",
       });
-      if (paper.partA) setPartA(paper.partA);
+      if (paper.partA) {
+        setPartA(
+          paper.partA.map((item) => ({
+            ...item,
+            diagram: item.diagram || null,
+          }))
+        );
+      }
       if (paper.partB) setPartB(paper.partB);
       if (paper.partC) setPartC({ ...partC, ...paper.partC });
       setShowListModal(false);
@@ -398,6 +461,17 @@ export default function QuestionPaperBuilder() {
     if (!diagramTarget) return;
     const { section, qIdx, optionKey, sIdx } = diagramTarget;
 
+    if (section === "partA") {
+      const updated = [...partA];
+      updated[qIdx] = {
+        ...updated[qIdx],
+        diagram: diagramData,
+      };
+      setPartA(updated);
+      setShowDiagramEditor(false);
+      return;
+    }
+
     if (section === "partC") {
       const targetOpt = optionKey === "A" ? { ...partC.optionA } : { ...partC.optionB };
       if (sIdx !== null && sIdx !== undefined) {
@@ -417,30 +491,225 @@ export default function QuestionPaperBuilder() {
       }
       setPartB(updated);
     }
+
+    setSavedDiagrams((prev) => [
+      ...prev.filter(
+        (item) =>
+          JSON.stringify(item.target) !==
+          JSON.stringify(diagramTarget)
+      ),
+      {
+        target: diagramTarget,
+        diagram: diagramData,
+      },
+    ]);
+
     setShowDiagramEditor(false);
   };
 
   /* DIAGRAM RENDER HELPER IN TABLE CELL */
-  const renderDiagramPreview = (diagram) => {
-    if (!diagram || (!diagram.boxes?.length && !diagram.arrows?.length && !diagram.texts?.length)) return null;
-    return (
-      <div style={{ marginTop: "6px", display: "block" }}>
-        <svg width="200" height="100" style={{ border: "none", background: "transparent" }}>
-          {diagram.boxes?.map((b, i) => (
-            <g key={i}>
-              <rect x={b.x / 3} y={b.y / 3} width={(b.w || 80) / 3} height={(b.h || 40) / 3} fill="#edf2f7" stroke="#000" strokeWidth="1" />
-              <text x={(b.x + (b.w || 80) / 2) / 3} y={(b.y + (b.h || 40) / 2 + 4) / 3} fontSize="8" textAnchor="middle" fill="#000">{b.text}</text>
-            </g>
-          ))}
-          {diagram.arrows?.map((a, i) => (
-            <line key={i} x1={a.x1 / 3} y1={a.y1 / 3} x2={a.x2 / 3} y2={a.y2 / 3} stroke="#000" strokeWidth="1" />
-          ))}
-          {diagram.texts?.map((t, i) => (
-            <text key={i} x={t.x / 3} y={t.y / 3} fontSize="9" fill="#000">{t.text}</text>
-          ))}
-        </svg>
-      </div>
-    );
+const renderDiagramPreview = (diagram, target = null) => {
+  if (!diagram) return null;
+
+  const handleDeletePreview = () => {
+    if (!target) return;
+
+    if (
+      window.confirm(
+        "Are you sure you want to delete this diagram?"
+      )
+    ) {
+      setDiagramTarget(target);
+      
+      // Directly delete the selected diagram
+      const { section, qIdx, optionKey, sIdx } = target;
+
+      if (section === "partA") {
+        const updated = [...partA];
+
+        if (updated[qIdx]) {
+          updated[qIdx] = {
+            ...updated[qIdx],
+            diagram: null,
+          };
+        }
+
+        setPartA(updated);
+      }
+
+      if (section === "partB") {
+        const updated = [...partB];
+
+        if (updated[qIdx]) {
+          const optionName =
+            optionKey === "A"
+              ? "optionA"
+              : "optionB";
+
+          const targetOpt = {
+            ...updated[qIdx][optionName],
+          };
+
+          if (
+            sIdx !== null &&
+            sIdx !== undefined
+          ) {
+            targetOpt.subQuestions = [
+              ...targetOpt.subQuestions,
+            ];
+
+            if (targetOpt.subQuestions[sIdx]) {
+              targetOpt.subQuestions[sIdx] = {
+                ...targetOpt.subQuestions[sIdx],
+                diagram: null,
+              };
+            }
+          } else {
+            targetOpt.diagram = null;
+          }
+
+          updated[qIdx] = {
+            ...updated[qIdx],
+            [optionName]: targetOpt,
+          };
+        }
+
+        setPartB(updated);
+      }
+
+      if (section === "partC") {
+        const targetOpt =
+          optionKey === "A"
+            ? { ...partC.optionA }
+            : { ...partC.optionB };
+
+        if (
+          sIdx !== null &&
+          sIdx !== undefined
+        ) {
+          targetOpt.subQuestions = [
+            ...targetOpt.subQuestions,
+          ];
+
+          if (targetOpt.subQuestions[sIdx]) {
+            targetOpt.subQuestions[sIdx] = {
+              ...targetOpt.subQuestions[sIdx],
+              diagram: null,
+            };
+          }
+        } else {
+          targetOpt.diagram = null;
+        }
+
+        if (optionKey === "A") {
+          setPartC({
+            ...partC,
+            optionA: targetOpt,
+          });
+        } else {
+          setPartC({
+            ...partC,
+            optionB: targetOpt,
+          });
+        }
+      }
+
+      setSavedDiagrams((prev) =>
+        prev.filter(
+          (item) =>
+            JSON.stringify(item.target) !==
+            JSON.stringify(target)
+        )
+      );
+
+      setDiagramTarget(null);
+    }
+  };
+
+  const handleEditPreview = () => {
+    if (!target) return;
+
+    setDiagramTarget(target);
+    setShowDiagramEditor(true);
+  };
+
+  return (
+    <div
+      style={{
+        marginTop: "6px",
+        display: "block",
+      }}
+    >
+      {/* DIAGRAM IMAGE ONLY */}
+      {diagram.imageDataUrl && (
+        <img
+          src={diagram.imageDataUrl}
+          alt={diagram.name || "Diagram"}
+          style={{
+            display: "block",
+            width: "200px",
+            height: "auto",
+            maxHeight: "120px",
+            objectFit: "contain",
+            border: "none",
+            background: "transparent",
+          }}
+        />
+      )}
+
+      {/* EDIT / DELETE - NOT PRINTED */}
+      {target && (
+        <div
+          className="no-print"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            marginTop: "5px",
+          }}
+        >
+          <button
+            type="button"
+            onClick={handleEditPreview}
+            style={{
+              padding: "3px 8px",
+              fontSize: "11px",
+              border: "1px solid #3182ce",
+              background: "#ebf8ff",
+              color: "#2b6cb0",
+              borderRadius: "4px",
+              cursor: "pointer",
+              fontWeight: 600,
+            }}
+          >
+            ✏️ Edit Diagram
+          </button>
+
+          <button
+            type="button"
+            onClick={handleDeletePreview}
+            style={{
+              padding: "3px 8px",
+              fontSize: "11px",
+              border: "1px solid #e53e3e",
+              background: "#fff5f5",
+              color: "#c53030",
+              borderRadius: "4px",
+              cursor: "pointer",
+              fontWeight: 600,
+            }}
+          >
+            🗑️ Delete
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+  const openDiagramEditor = (target) => {
+    setDiagramTarget(target);
+    setShowDiagramEditor(true);
   };
 
   /* Part C Logic */
@@ -496,22 +765,34 @@ export default function QuestionPaperBuilder() {
           cursor: pointer !important;
           margin-left: 6px !important;
         }
-        @media print {
-          .no-print { display: none !important; }
-          body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
-          #paper-sheet { border: none !important; box-shadow: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
-          input { border: none !important; background: transparent !important; }
-          
-          /* 4-PAGE BREAK CONTROL */
-          .page-1 { page-break-after: always; height: 98vh; }
-          .page-2 { page-break-after: always; height: 98vh; }
-          .page-3 { page-break-after: always; height: 98vh; }
-          .page-4 { page-break-after: avoid; height: auto; }
+      @media print {
+  /* Page margins-a normalize panna */
+  @page {
+    margin: 10mm;
+  }
 
-          .light-table, .light-table th, .light-table td {
-            border: 1px solid #000 !important;
-          }
-        }
+  .no-print { display: none !important; }
+  body { background: #fff !important; padding: 0 !important; margin: 0 !important; }
+  #paper-sheet { border: none !important; box-shadow: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+  input { border: none !important; background: transparent !important; }
+  
+  /* 4-PAGE BREAK CONTROL (FIXED) */
+  .page-1, .page-2, .page-3 { 
+    break-after: page;          /* Modern Browsers */
+    page-break-after: always;   /* Fallback */
+    height: auto !important;    /* 98vh-kku badhula auto */
+  }
+
+  .page-4 { 
+    break-after: avoid; 
+    page-break-after: avoid; 
+    height: auto !important; 
+  }
+
+  .light-table, .light-table th, .light-table td {
+    border: 1px solid #000 !important;
+  }
+}
       `}</style>
 
       {/* CONTROLS PANEL */}
@@ -671,13 +952,15 @@ export default function QuestionPaperBuilder() {
               initialData={
                 diagramTarget
                   ? (
-                      diagramTarget.section === "partC"
-                        ? (diagramTarget.sIdx !== null && diagramTarget.sIdx !== undefined
-                            ? partC[diagramTarget.optionKey === "A" ? "optionA" : "optionB"].subQuestions[diagramTarget.sIdx]?.diagram
-                            : partC[diagramTarget.optionKey === "A" ? "optionA" : "optionB"]?.diagram)
-                        : (diagramTarget.sIdx !== null && diagramTarget.sIdx !== undefined
-                            ? partB[diagramTarget.qIdx][diagramTarget.optionKey === "A" ? "optionA" : "optionB"].subQuestions[diagramTarget.sIdx]?.diagram
-                            : partB[diagramTarget.qIdx][diagramTarget.optionKey === "A" ? "optionA" : "optionB"]?.diagram)
+                      diagramTarget.section === "partA"
+                        ? partA[diagramTarget.qIdx]?.diagram
+                        : diagramTarget.section === "partC"
+                          ? (diagramTarget.sIdx !== null && diagramTarget.sIdx !== undefined
+                              ? partC[diagramTarget.optionKey === "A" ? "optionA" : "optionB"].subQuestions[diagramTarget.sIdx]?.diagram
+                              : partC[diagramTarget.optionKey === "A" ? "optionA" : "optionB"]?.diagram)
+                          : (diagramTarget.sIdx !== null && diagramTarget.sIdx !== undefined
+                              ? partB[diagramTarget.qIdx][diagramTarget.optionKey === "A" ? "optionA" : "optionB"].subQuestions[diagramTarget.sIdx]?.diagram
+                              : partB[diagramTarget.qIdx][diagramTarget.optionKey === "A" ? "optionA" : "optionB"]?.diagram)
                     )
                   : null
               }
@@ -751,13 +1034,35 @@ export default function QuestionPaperBuilder() {
                   <tr key={idx}>
                     <td align="center" style={{ padding: "6px" }}><b>{q.qNo}.</b></td>
                     <td style={{ padding: "6px" }}>
-                      <input
-                        type="text"
-                        style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
-                        value={q.question}
-                        onChange={(e) => handlePartAChange(idx, e.target.value)}
-                        placeholder={`Enter Short Question ${idx + 1}`}
-                      />
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <input
+                          type="text"
+                          style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
+                          value={q.question}
+                          onChange={(e) => handlePartAChange(idx, e.target.value)}
+                          placeholder={`Enter Short Question ${idx + 1}`}
+                        />
+                        <button
+                          className="no-print btn-diagram"
+                          onClick={() => {
+                            setDiagramTarget({
+                              section: "partA",
+                              qIdx: idx,
+                              optionKey: null,
+                              sIdx: null,
+                            });
+                            setShowDiagramEditor(true);
+                          }}
+                        >
+                          ✏️ Diagram
+                        </button>
+                      </div>
+                  {renderDiagramPreview(q.diagram, {
+  section: "partA",
+  qIdx: idx,
+  optionKey: null,
+  sIdx: null,
+})}
                     </td>
                     <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.marks} onChange={(e) => handlePartAMetaChange(idx, "marks", e.target.value)} /></td>
                     <td style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={q.co} onChange={(e) => handlePartAMetaChange(idx, "co", e.target.value)} /></td>
@@ -823,7 +1128,12 @@ export default function QuestionPaperBuilder() {
                               ✏️ Diagram
                             </button>
                           </div>
-                          {renderDiagramPreview(q.optionA.diagram)}
+                       {renderDiagramPreview(q.optionA.diagram, {
+  section: "partB",
+  qIdx: qIndex,
+  optionKey: "A",
+  sIdx: null,
+})}
                         </div>
                       ) : (
                         <div>
@@ -870,7 +1180,12 @@ export default function QuestionPaperBuilder() {
                             </button>
                             <button className="no-print" onClick={() => deletePartBSub(qIndex, "A", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }}>🗑️</button>
                           </div>
-                          {renderDiagramPreview(sub.diagram)}
+                      {renderDiagramPreview(sub.diagram, {
+  section: "partB",
+  qIdx: qIndex,
+  optionKey: "A",
+  sIdx,
+})}
                         </td>
                         <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIndex, "A", sIdx, "marks", e.target.value)} /></td>
                         <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.co} onChange={(e) => handlePartBSubChange(qIndex, "A", sIdx, "co", e.target.value)} /></td>
@@ -918,7 +1233,12 @@ export default function QuestionPaperBuilder() {
                               ✏️ Diagram
                             </button>
                           </div>
-                          {renderDiagramPreview(q.optionB.diagram)}
+                       {renderDiagramPreview(q.optionB.diagram, {
+  section: "partB",
+  qIdx: qIndex,
+  optionKey: "B",
+  sIdx: null,
+})}
                         </div>
                       ) : (
                         <div>
@@ -965,7 +1285,12 @@ export default function QuestionPaperBuilder() {
                             </button>
                             <button className="no-print" onClick={() => deletePartBSub(qIndex, "B", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }}>🗑️</button>
                           </div>
-                          {renderDiagramPreview(sub.diagram)}
+                       {renderDiagramPreview(sub.diagram, {
+  section: "partB",
+  qIdx: qIndex,
+  optionKey: "B",
+  sIdx,
+})}
                         </td>
                         <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.marks} onChange={(e) => handlePartBSubChange(qIndex, "B", sIdx, "marks", e.target.value)} /></td>
                         <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.co} onChange={(e) => handlePartBSubChange(qIndex, "B", sIdx, "co", e.target.value)} /></td>
@@ -1030,7 +1355,12 @@ export default function QuestionPaperBuilder() {
                           ✏️ Diagram
                         </button>
                       </div>
-                      {renderDiagramPreview(partC.optionA.diagram)}
+                    {renderDiagramPreview(partC.optionA.diagram, {
+  section: "partC",
+  qIdx: 0,
+  optionKey: "A",
+  sIdx: null,
+})}
                     </div>
                   ) : (
                     <div>
@@ -1077,7 +1407,12 @@ export default function QuestionPaperBuilder() {
                         </button>
                         <button className="no-print" onClick={() => deletePartCSub("A", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }}>🗑️</button>
                       </div>
-                      {renderDiagramPreview(sub.diagram)}
+                  {renderDiagramPreview(sub.diagram, {
+  section: "partC",
+  qIdx: 0,
+  optionKey: "A",
+  sIdx,
+})}
                     </td>
                     <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.marks} onChange={(e) => handlePartCSubChange("A", sIdx, "marks", e.target.value)} /></td>
                     <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.co} onChange={(e) => handlePartCSubChange("A", sIdx, "co", e.target.value)} /></td>
@@ -1125,7 +1460,12 @@ export default function QuestionPaperBuilder() {
                           ✏️ Diagram
                         </button>
                       </div>
-                      {renderDiagramPreview(partC.optionB.diagram)}
+                  {renderDiagramPreview(partC.optionB.diagram, {
+  section: "partC",
+  qIdx: 0,
+  optionKey: "B",
+  sIdx: null,
+})}
                     </div>
                   ) : (
                     <div>
@@ -1172,7 +1512,12 @@ export default function QuestionPaperBuilder() {
                         </button>
                         <button className="no-print" onClick={() => deletePartCSub("B", sIdx)} style={{ background: "none", border: "none", color: "#e53e3e", cursor: "pointer" }}>🗑️</button>
                       </div>
-                      {renderDiagramPreview(sub.diagram)}
+                   {renderDiagramPreview(sub.diagram, {
+  section: "partC",
+  qIdx: 0,
+  optionKey: "B",
+  sIdx,
+})}
                     </td>
                     <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.marks} onChange={(e) => handlePartCSubChange("B", sIdx, "marks", e.target.value)} /></td>
                     <td align="center" style={{ padding: "6px" }}><input style={{ width: "100%", border: "none", outline: "none", textAlign: "center" }} type="text" value={sub.co} onChange={(e) => handlePartCSubChange("B", sIdx, "co", e.target.value)} /></td>
