@@ -1,5 +1,37 @@
 import mongoose from "mongoose";
 
+// Diagram-ற்கான Sub-Schema
+const diagramSchema = new mongoose.Schema(
+  {
+    boxes: [
+      {
+        x: Number,
+        y: Number,
+        w: Number,
+        h: Number,
+        text: String,
+      },
+    ],
+    arrows: [
+      {
+        x1: Number,
+        y1: Number,
+        x2: Number,
+        y2: Number,
+      },
+    ],
+    texts: [
+      {
+        x: Number,
+        y: Number,
+        text: String,
+      },
+    ],
+  },
+  { _id: false }
+);
+
+// Sub-question Schema
 const subQuestionSchema = new mongoose.Schema(
   {
     label: String,
@@ -8,10 +40,12 @@ const subQuestionSchema = new mongoose.Schema(
     co: String,
     bl: String,
     pi: String,
+    diagram: { type: diagramSchema, default: null },
   },
   { _id: false }
 );
 
+// Option Schema
 const optionSchema = new mongoose.Schema(
   {
     question: String,
@@ -19,63 +53,46 @@ const optionSchema = new mongoose.Schema(
     co: String,
     bl: String,
     pi: String,
+    diagram: { type: diagramSchema, default: null },
     subQuestions: [subQuestionSchema],
   },
   { _id: false }
 );
 
+// Part B Question Schema
 const partBItemSchema = new mongoose.Schema(
   {
     qNo: String,
-    typeA: String,
-    typeB: String,
+    typeA: { type: String, default: "single" },
+    typeB: { type: String, default: "single" },
     optionA: optionSchema,
     optionB: optionSchema,
   },
   { _id: false }
 );
 
+// Main Question Paper Schema
 const questionPaperSchema = new mongoose.Schema(
   {
-    title: { type: String, default: "" },
-    subject: { type: String, default: "" },
-    collegeName: { type: String, default: "" },
-    examName: { type: String, default: "" },
-    examMonth: { type: String, default: "" },
-    examYear: { type: String, default: "" },
-    branch: { type: String, default: "" },
-    department: { type: String, default: "" },
-    semester: { type: String, default: "" },
-    subjectCode: { type: String, default: "" },
-    subjectName: { type: String, default: "" },
-    regulation: { type: String, default: "" },
-    duration: { type: String, default: "" },
-    date: { type: String, default: "" },
-    time: { type: String, default: "" },
-    maxMarks: { type: String, default: "" },
-
-    partA: [
-      {
-        qNo: String,
-        question: String,
-        co: String,
-        bl: String,
-        pi: String,
-      },
-    ],
+    collegeName: String,
+    examName: String,
+    examMonth: String,
+    examYear: String,
+    branch: String,
+    section: String,
+    semester: String,
+    subjectCode: String,
+    subjectName: String,
+    regulation: String,
+    duration: String,
+    date: String,
+    time: String,
+    maxMarks: String,
+    partA: Array,
     partB: [partBItemSchema],
-    partC: {
-      qNo: String,
-      optionA: optionSchema,
-      optionB: optionSchema,
-    },
+    partC: Object,
   },
-  {
-    timestamps: true,
-    strict: false,
-  }
+  { timestamps: true }
 );
 
-const QuestionPaper = mongoose.model("QuestionPaper", questionPaperSchema);
-
-export default QuestionPaper;
+export default mongoose.model("QuestionPaper", questionPaperSchema);
