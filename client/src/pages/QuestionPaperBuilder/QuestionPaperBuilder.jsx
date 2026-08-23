@@ -1,3 +1,7 @@
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import DiagramEditor from "../../components/DiagramEditor"; // your DiagramEditor component path
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DiagramEditor from "../../components/DiagramEditor"; // your DiagramEditor component path
@@ -82,6 +86,9 @@ const SAVED_DIAGRAMS_KEY =
 
 
 export default function QuestionPaperBuilder() {
+  const predictionTimers = useRef(new Map());
+  const selectedSubjectCode = useRef("");
+
   const [editingId, setEditingId] = useState(null);
   const [savedPapersList, setSavedPapersList] = useState([]);
   const [showListModal, setShowListModal] = useState(false);
@@ -275,6 +282,8 @@ const [savedDiagrams, setSavedDiagrams] =
       const res = await axios.get(`http://localhost:5000/api/question-paper/${id}`);
       const paper = res.data;
       setEditingId(paper._id);
+      selectedSubjectCode.current = paper.subjectCode || "";
+
       
       const currentSemSubjects = subjectsBySemester[paper.semester] || [];
       setSubjectList(currentSemSubjects);
@@ -330,6 +339,8 @@ const [savedDiagrams, setSavedDiagrams] =
     if (name === "semester") {
       const newSubjects = subjectsBySemester[value] || [];
       setSubjectList(newSubjects);
+      selectedSubjectCode.current = "";
+
       setHeader({
         ...header,
         semester: value,
@@ -344,6 +355,20 @@ const [savedDiagrams, setSavedDiagrams] =
   const handleSubjectChange = (e) => {
     const selectedCode = e.target.value;
     const foundSubject = subjectList.find((sub) => sub.code === selectedCode);
+    selectedSubjectCode.current = selectedCode;
+    const clearMetadata = (item) => ({ ...item, co: "", bl: "", pi: "" });
+    setPartA((current) => current.map(clearMetadata));
+    setPartB((current) => current.map((item) => ({
+      ...item,
+      optionA: { ...clearMetadata(item.optionA), subQuestions: item.optionA.subQuestions.map(clearMetadata) },
+      optionB: { ...clearMetadata(item.optionB), subQuestions: item.optionB.subQuestions.map(clearMetadata) },
+    })));
+    setPartC((current) => ({
+      ...current,
+      optionA: { ...clearMetadata(current.optionA), subQuestions: current.optionA.subQuestions.map(clearMetadata) },
+      optionB: { ...clearMetadata(current.optionB), subQuestions: current.optionB.subQuestions.map(clearMetadata) },
+    }));
+
     setHeader({
       ...header,
       subjectCode: selectedCode,
@@ -355,6 +380,54 @@ const [savedDiagrams, setSavedDiagrams] =
   const handlePartAChange = (index, value) => {
     const updated = [...partA];
     updated[index].question = value;
+    setPartA(updated);
+  };
+
+  const predictQuestionMetadata = async (question) => {
+    if (!question.trim()) return { co: "", bl: "", pi: "" };
+
+    const response = await axios.post(
+      "http://localhost:5000/api/prediction/predict",
+      { question, subjectCode: selectedSubjectCode.current || header.subjectCode },
+      { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+    );
+
+    const prediction = response.data.prediction;
+    const bloomLevel = prediction.bloomLevel || "";
+    return {
+      co: prediction.co || "",
+      bl: bloomLevel.replace(/^BL/i, "L"),
+      pi: prediction.pi || "",
+    };
+  };
+
+  const schedulePrediction = (key, predict) => {
+    const previousTimer = predictionTimers.current.get(key);
+    if (previousTimer) clearTimeout(previousTimer);
+
+    const timer = setTimeout(async () => {
+      try {
+        await predict();
+      } catch (error) {
+        console.error("Question prediction failed:", error);
+      }
+    }, 250);
+    predictionTimers.current.set(key, timer);
+  };
+
+  const predictPartA = async (index, question) => {
+    try {
+      const metadata = await predictQuestionMetadata(question);
+      setPartA((current) => current.map((item, itemIndex) =>
+        itemIndex === index && item.question === question
+          ? { ...item, ...metadata }
+          : item
+      ));
+    } catch (error) {
+      console.error("Question prediction failed:", error);
+    }
+  };
+
     const detected = autoDetectCOBLPI(value);
     updated[index].co = detected.co;
     updated[index].bl = detected.bl;
@@ -380,6 +453,28 @@ const [savedDiagrams, setSavedDiagrams] =
     const updated = [...partB];
     const targetOpt = optionKey === "A" ? updated[qIndex].optionA : updated[qIndex].optionB;
     targetOpt[field] = value;
+    setPartB(updated);
+  };
+
+  const predictPartB = async (qIndex, optionKey, subIndex = null, question) => {
+    try {
+      const metadata = await predictQuestionMetadata(question);
+      setPartB((current) => current.map((item, itemIndex) => {
+        if (itemIndex !== qIndex) return item;
+        const optionName = optionKey === "A" ? "optionA" : "optionB";
+        const option = { ...item[optionName] };
+        if (subIndex === null) {
+          if (option.question !== question) return item;
+          return { ...item, [optionName]: { ...option, ...metadata } };
+        }
+        if (option.subQuestions[subIndex]?.question !== question) return item;
+        const subQuestions = [...option.subQuestions];
+        subQuestions[subIndex] = { ...subQuestions[subIndex], ...metadata };
+        return { ...item, [optionName]: { ...option, subQuestions } };
+      }));
+    } catch (error) {
+      console.error("Question prediction failed:", error);
+    }
     if (field === "question") {
       const detected = autoDetectCOBLPI(value);
       targetOpt.co = detected.co;
@@ -393,6 +488,7 @@ const [savedDiagrams, setSavedDiagrams] =
     const updated = [...partB];
     const targetOpt = optionKey === "A" ? updated[qIndex].optionA : updated[qIndex].optionB;
     targetOpt.subQuestions[subIndex][field] = value;
+
     if (field === "question") {
       const detected = autoDetectCOBLPI(value);
       targetOpt.subQuestions[subIndex].co = detected.co;
@@ -428,6 +524,7 @@ const [savedDiagrams, setSavedDiagrams] =
     const targetOpt = optionKey === "A" ? { ...partC.optionA } : { ...partC.optionB };
     const updatedSubs = [...targetOpt.subQuestions];
     updatedSubs[subIndex] = { ...updatedSubs[subIndex], [field]: value };
+
     if (field === "question") {
       const detected = autoDetectCOBLPI(value);
       updatedSubs[subIndex].co = detected.co;
@@ -437,6 +534,22 @@ const [savedDiagrams, setSavedDiagrams] =
     targetOpt.subQuestions = updatedSubs;
     if (optionKey === "A") setPartC({ ...partC, optionA: targetOpt });
     else setPartC({ ...partC, optionB: targetOpt });
+  };
+
+  const predictPartC = async (optionKey, subIndex, question) => {
+    try {
+      const metadata = await predictQuestionMetadata(question);
+      setPartC((current) => {
+        const optionName = optionKey === "A" ? "optionA" : "optionB";
+        const option = { ...current[optionName] };
+        if (option.subQuestions[subIndex]?.question !== question) return current;
+        const subQuestions = [...option.subQuestions];
+        subQuestions[subIndex] = { ...subQuestions[subIndex], ...metadata };
+        return { ...current, [optionName]: { ...option, subQuestions } };
+      });
+    } catch (error) {
+      console.error("Question prediction failed:", error);
+    }
   };
 
   const addPartCSubQuestion = (optionKey) => {
@@ -716,6 +829,7 @@ const renderDiagramPreview = (diagram, target = null) => {
   const handlePartCChange = (optionKey, field, value) => {
     const targetOpt = optionKey === "A" ? partC.optionA : partC.optionB;
     const updatedOpt = { ...targetOpt, [field]: value };
+
     if (field === "question") {
       const detected = autoDetectCOBLPI(value);
       updatedOpt.co = detected.co;
@@ -745,6 +859,67 @@ const renderDiagramPreview = (diagram, target = null) => {
     }
   };
 
+  const getActiveQuestions = (item) => [
+    ...(item.typeA === "split" ? item.optionA?.subQuestions || [] : [item.optionA]),
+    ...(item.typeB === "split" ? item.optionB?.subQuestions || [] : [item.optionB]),
+  ];
+  const chartQuestions = [
+    ...partA,
+    ...partB.flatMap(getActiveQuestions),
+    ...getActiveQuestions(partC),
+  ].filter((item) => item?.question?.trim());
+
+  const getQuestionMarks = (marks) => {
+    const value = Number.parseInt(String(marks || "").replace(/[^0-9]/g, ""), 10);
+    return Number.isFinite(value) ? value : 0;
+  };
+
+  const normalizeLabel = (value, prefix) => {
+    const match = String(value || "").trim().toUpperCase().match(new RegExp(`^${prefix}L?(\\d+)$`));
+    return match ? `${prefix}${match[1]}` : "";
+  };
+  const normalizeBloomLabel = (value) => {
+    const normalized = String(value || "").trim().toUpperCase().replace(/^BL/, "L");
+    return /^L[1-6]$/.test(normalized) ? normalized : "";
+  };
+  const coDistribution = ["CO1", "CO2", "CO3", "CO4", "CO5", "CO6"].map((label) => ({
+    label,
+    marks: chartQuestions.filter((item) => normalizeLabel(item.co, "CO") === label)
+      .reduce((total, item) => total + getQuestionMarks(item.marks), 0),
+  }));
+  const bloomDistribution = ["L1", "L2", "L3", "L4", "L5", "L6"].map((label) => ({
+    label,
+    color: ["#3182ce", "#38a169", "#dd6b20", "#805ad5", "#e53e3e", "#718096"][Number(label.slice(1)) - 1],
+    marks: chartQuestions.filter((item) => normalizeBloomLabel(item.bl) === label)
+      .reduce((total, item) => total + getQuestionMarks(item.marks), 0),
+  }));
+  const totalBloomMarks = bloomDistribution.reduce((total, item) => total + item.marks, 0);
+  const bloomGradient = bloomDistribution.reduce((result, item) => {
+    const start = result.end;
+    const end = totalBloomMarks ? start + (item.marks / totalBloomMarks) * 360 : start;
+    result.parts.push(`${item.color} ${start}deg ${end}deg`);
+    item.startAngle = start;
+    item.endAngle = end;
+    result.end = end;
+    return result;
+  }, { parts: [], end: 0 });
+  const coChartMaximum = Math.max(50, Math.ceil(Math.max(...coDistribution.map((item) => item.marks), 0) / 10) * 10);
+  const coChartTicks = Array.from({ length: coChartMaximum / 10 + 1 }, (_, index) => coChartMaximum - index * 10);
+  const pieCenter = 100;
+  const pieRadius = 78;
+  const piePoint = (angle, radius = pieRadius) => ({
+    x: pieCenter + radius * Math.cos((angle - 90) * Math.PI / 180),
+    y: pieCenter + radius * Math.sin((angle - 90) * Math.PI / 180),
+  });
+  const piePath = (item) => {
+    const start = piePoint(item.startAngle);
+    const end = piePoint(item.endAngle);
+    const largeArc = item.endAngle - item.startAngle > 180 ? 1 : 0;
+    return `M ${pieCenter} ${pieCenter} L ${start.x} ${start.y} A ${pieRadius} ${pieRadius} 0 ${largeArc} 1 ${end.x} ${end.y} Z`;
+  };
+  const totalQuestionMarks = chartQuestions.reduce((total, item) => total + getQuestionMarks(item.marks), 0);
+
+
   return (
     <div style={{ padding: "24px", fontFamily: "Segoe UI, Roboto, sans-serif", backgroundColor: "#f4f6f9", minHeight: "100vh", color: "#333" }}>
       
@@ -764,6 +939,20 @@ const renderDiagramPreview = (diagram, target = null) => {
           background: #edf2f7 !important;
           cursor: pointer !important;
           margin-left: 6px !important;
+        }
+        .analysis-charts {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 20px;
+          align-items: start;
+        }
+        .analysis-chart-column {
+          min-width: 0;
+        }
+        @media (max-width: 700px) {
+          .analysis-charts {
+            grid-template-columns: 1fr;
+          }
         }
       @media print {
   /* Page margins-a normalize panna */
@@ -1039,6 +1228,8 @@ const renderDiagramPreview = (diagram, target = null) => {
                           type="text"
                           style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
                           value={q.question}
+                          onChange={(e) => { handlePartAChange(idx, e.target.value); schedulePrediction(`partA-${idx}`, () => predictPartA(idx, e.target.value)); }}
+                          onBlur={(e) => predictPartA(idx, e.target.value)}
                           onChange={(e) => handlePartAChange(idx, e.target.value)}
                           placeholder={`Enter Short Question ${idx + 1}`}
                         />
@@ -1115,6 +1306,8 @@ const renderDiagramPreview = (diagram, target = null) => {
                               type="text"
                               style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
                               value={q.optionA.question}
+                              onChange={(e) => { handlePartBSingleChange(qIndex, "A", "question", e.target.value); schedulePrediction(`partB-${qIndex}-A`, () => predictPartB(qIndex, "A", null, e.target.value)); }}
+                              onBlur={(e) => predictPartB(qIndex, "A", null, e.target.value)}
                               onChange={(e) => handlePartBSingleChange(qIndex, "A", "question", e.target.value)}
                               placeholder={`Enter Question ${q.qNo} (a)`}
                             />
@@ -1166,6 +1359,8 @@ const renderDiagramPreview = (diagram, target = null) => {
                               type="text"
                               style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
                               value={sub.question}
+                              onChange={(e) => { handlePartBSubChange(qIndex, "A", sIdx, "question", e.target.value); schedulePrediction(`partB-${qIndex}-A-${sIdx}`, () => predictPartB(qIndex, "A", sIdx, e.target.value)); }}
+                              onBlur={(e) => predictPartB(qIndex, "A", sIdx, e.target.value)}
                               onChange={(e) => handlePartBSubChange(qIndex, "A", sIdx, "question", e.target.value)}
                               placeholder={`Enter Sub Question ${sub.label}`}
                             />
@@ -1220,6 +1415,8 @@ const renderDiagramPreview = (diagram, target = null) => {
                               type="text"
                               style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
                               value={q.optionB.question}
+                              onChange={(e) => { handlePartBSingleChange(qIndex, "B", "question", e.target.value); schedulePrediction(`partB-${qIndex}-B`, () => predictPartB(qIndex, "B", null, e.target.value)); }}
+                              onBlur={(e) => predictPartB(qIndex, "B", null, e.target.value)}
                               onChange={(e) => handlePartBSingleChange(qIndex, "B", "question", e.target.value)}
                               placeholder={`Enter Question ${q.qNo} (b)`}
                             />
@@ -1271,6 +1468,9 @@ const renderDiagramPreview = (diagram, target = null) => {
                               type="text"
                               style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
                               value={sub.question}
+                              onChange={(e) => { handlePartBSubChange(qIndex, "B", sIdx, "question", e.target.value); schedulePrediction(`partB-${qIndex}-B-${sIdx}`, () => predictPartB(qIndex, "B", sIdx, e.target.value)); }}
+                              onBlur={(e) => predictPartB(qIndex, "B", sIdx, e.target.value)}
+
                               onChange={(e) => handlePartBSubChange(qIndex, "B", sIdx, "question", e.target.value)}
                               placeholder={`Enter Sub Question ${sub.label}`}
                             />
@@ -1342,6 +1542,13 @@ const renderDiagramPreview = (diagram, target = null) => {
                           type="text"
                           style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
                           value={partC.optionA.question}
+                          onChange={(e) => {
+                            handlePartCChange("A", "question", e.target.value);
+                            schedulePrediction("partC-A", () => predictQuestionMetadata(e.target.value).then((metadata) => {
+                              setPartC((current) => current.optionA.question === e.target.value ? { ...current, optionA: { ...current.optionA, ...metadata } } : current);
+                            }));
+                          }}
+                          onBlur={(e) => predictQuestionMetadata(e.target.value).then((metadata) => setPartC((current) => current.optionA.question === e.target.value ? { ...current, optionA: { ...current.optionA, ...metadata } } : current)).catch((error) => console.error("Question prediction failed:", error))}
                           onChange={(e) => handlePartCChange("A", "question", e.target.value)}
                           placeholder="Enter Part C Question 16 (a)"
                         />
@@ -1393,6 +1600,8 @@ const renderDiagramPreview = (diagram, target = null) => {
                           type="text"
                           style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
                           value={sub.question}
+                          onChange={(e) => { handlePartCSubChange("A", sIdx, "question", e.target.value); schedulePrediction(`partC-A-${sIdx}`, () => predictPartC("A", sIdx, e.target.value)); }}
+                          onBlur={(e) => predictPartC("A", sIdx, e.target.value)}
                           onChange={(e) => handlePartCSubChange("A", sIdx, "question", e.target.value)}
                           placeholder={`Enter Sub Question ${sub.label}`}
                         />
@@ -1447,6 +1656,13 @@ const renderDiagramPreview = (diagram, target = null) => {
                           type="text"
                           style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
                           value={partC.optionB.question}
+                          onChange={(e) => {
+                            handlePartCChange("B", "question", e.target.value);
+                            schedulePrediction("partC-B", () => predictQuestionMetadata(e.target.value).then((metadata) => {
+                              setPartC((current) => current.optionB.question === e.target.value ? { ...current, optionB: { ...current.optionB, ...metadata } } : current);
+                            }));
+                          }}
+                          onBlur={(e) => predictQuestionMetadata(e.target.value).then((metadata) => setPartC((current) => current.optionB.question === e.target.value ? { ...current, optionB: { ...current.optionB, ...metadata } } : current)).catch((error) => console.error("Question prediction failed:", error))}
                           onChange={(e) => handlePartCChange("B", "question", e.target.value)}
                           placeholder="Enter Part C Question 16 (b)"
                         />
@@ -1498,6 +1714,8 @@ const renderDiagramPreview = (diagram, target = null) => {
                           type="text"
                           style={{ width: "100%", border: "none", outline: "none", background: "transparent", fontSize: "12px" }}
                           value={sub.question}
+                          onChange={(e) => { handlePartCSubChange("B", sIdx, "question", e.target.value); schedulePrediction(`partC-B-${sIdx}`, () => predictPartC("B", sIdx, e.target.value)); }}
+                          onBlur={(e) => predictPartC("B", sIdx, e.target.value)}
                           onChange={(e) => handlePartCSubChange("B", sIdx, "question", e.target.value)}
                           placeholder={`Enter Sub Question ${sub.label}`}
                         />
@@ -1527,6 +1745,31 @@ const renderDiagramPreview = (diagram, target = null) => {
                 ))}
             </tbody>
           </table>
+        </div>
+
+        <div className="analysis-page" style={{ marginTop: "28px", pageBreakBefore: "always", breakBefore: "page" }}>
+          <div className="analysis-charts">
+            <div className="analysis-chart-column" style={{ order: 1 }}>
+              <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "13px", marginBottom: "14px" }}>Course Outcome Wise Mark Distribution</div>
+              <svg viewBox="0 0 430 270" role="img" aria-label="Course Outcome Wise Mark Distribution" style={{ width: "100%", height: "250px", overflow: "visible" }}>
+                <text x="14" y="135" textAnchor="middle" fontSize="11" transform="rotate(-90 14 135)">Marks</text>
+                {coChartTicks.map((tick) => { const y = 220 - (tick / coChartMaximum) * 190; return <g key={tick}><line x1="52" x2="420" y1={y} y2={y} stroke="#d9e0e8" /><text x="45" y={y + 4} textAnchor="end" fontSize="10" fill="#4a5568">{tick}</text></g>; })}
+                <line x1="52" x2="420" y1="220" y2="220" stroke="#4a5568" />
+                <line x1="52" x2="52" y1="30" y2="220" stroke="#4a5568" />
+                {coDistribution.map((item, index) => { const x = 78 + index * 65; const height = (item.marks / coChartMaximum) * 190; const y = 220 - height; return <g key={item.label}><text x={x + 20} y={Math.max(21, y - 6)} textAnchor="middle" fontSize="10">{item.marks}</text><rect x={x} y={y} width="40" height={height} fill="#718096" /><text x={x + 20} y="240" textAnchor="middle" fontSize="10">{item.label}</text></g>; })}
+              </svg>
+            </div>
+            <div className="analysis-chart-column" style={{ order: 2, textAlign: "center" }}>
+              <div style={{ fontWeight: "bold", fontSize: "13px", marginBottom: "14px" }}>Bloom's Level Wise Mark Distribution</div>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                <svg viewBox="0 0 200 200" role="img" aria-label="Bloom's Level Wise Mark Distribution" style={{ width: "min(240px, 65%)", height: "auto", flex: "0 1 240px" }}>
+                  {bloomDistribution.filter((item) => item.marks > 0).map((item) => { const percent = totalQuestionMarks ? Math.round((item.marks / totalQuestionMarks) * 1000) / 10 : 0; return <g key={item.label}><path d={piePath(item)} fill={item.color} stroke="#fff" strokeWidth="1" />{percent > 0 && (() => { const labelPoint = piePoint((item.startAngle + item.endAngle) / 2, 52); return <text x={labelPoint.x} y={labelPoint.y + 5} textAnchor="middle" fontSize="14" fontWeight="bold" fill="#fff" stroke="#333" strokeWidth="0.5" paintOrder="stroke">{percent}%</text>; })()}</g>; })}
+                  {!totalQuestionMarks && <circle cx="100" cy="100" r="78" fill="#e2e8f0" />}
+                </svg>
+                <div style={{ border: "1px solid #cbd5e0", padding: "10px 12px", textAlign: "left", fontSize: "11px", lineHeight: "1.9" }}>{bloomDistribution.map((item) => <div key={item.label}><i style={{ display: "inline-block", width: "10px", height: "10px", background: item.color, marginRight: "6px" }} />{item.label}</div>)}</div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>

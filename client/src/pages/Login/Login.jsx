@@ -1,6 +1,89 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgImage from "../../assets/auth-bg.jpg.jpeg"; 
+import { loginUser } from "../../services/authService";
+
+export default function Login() {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  
+  const [showPassword, setShowPassword] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // 👉 Inline Forgot Password toggling states
+  const [showForgotPasswordBox, setShowForgotPasswordBox] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setAlertMessage("");
+
+    if (!formData.email || !formData.password) {
+      setAlertMessage("Please fill in all fields.");
+      setIsSuccess(false);
+      return;
+    }
+
+    try {
+      const response = await loginUser(formData);
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("user", JSON.stringify(response.user));
+      setIsSuccess(true);
+      setAlertMessage("Login successful! Redirecting to question builder...");
+
+      setTimeout(() => {
+        navigate("/question-paper-builder");
+      }, 1000);
+    } catch (error) {
+      setIsSuccess(false);
+      setAlertMessage(error.response?.data?.message || "Login failed. Please try again.");
+    }
+  };
+
+  const handleSendResetEmail = async (e) => {
+    e.preventDefault();
+
+    if (!resetEmail || !resetEmail.includes("@") || !resetEmail.includes(".")) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/send-mail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          recipientEmail: resetEmail,
+          subjectText: "Password Reset Request - Smart Question Paper",
+          messageHtml: `
+            <div style="font-family: Arial, sans-serif; padding: 25px; background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0;">
+              <h2 style="color: #0284C7; margin-top: 0;">Password Reset Request</h2>
+              <p style="color: #334155; font-size: 15px;">Hello,</p>
+              <p style="color: #334155; font-size: 15px;">We received a request to reset your password for your Smart Question Paper Builder account.</p>
+              <div style="text-align: center; margin: 25px 0;">
+                <a href="http://localhost:5173/reset-password" style="background: #0284C7; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold; font-size: 16px;">Reset Password</a>
+              </div>
+              <p style="margin-top: 25px; font-size: 13px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 15px;">If you did not request this, please ignore this email.</p>
+            </div>
+          `,
+        }),
+      });
+
+      const data = await response.json();
+      setLoading(false);
+
 
 export default function Login() {
   const navigate = useNavigate();

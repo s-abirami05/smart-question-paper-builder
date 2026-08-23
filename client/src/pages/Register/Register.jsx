@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgImage from "../../assets/auth-bg.jpg.jpeg"; 
+import { registerUser } from "../../services/authService";
+
 
 export default function Register() {
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ export default function Register() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setAlertMessage("");
@@ -36,6 +39,20 @@ export default function Register() {
         "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."
       );
       return;
+    }
+
+    try {
+      await registerUser(formData);
+      setIsSuccess(true);
+      setAlertMessage("Account created successfully! Redirecting to login...");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    } catch (error) {
+      setIsSuccess(false);
+      setAlertMessage(error.response?.data?.message || "Registration failed. Please try again.");
+    }
     }
 
     // If all rules passed successfully
@@ -295,4 +312,5 @@ const styles = {
     cursor: "pointer",
     textDecoration: "underline",
   },
+};
 };

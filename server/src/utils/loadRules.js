@@ -9,6 +9,8 @@ function loadRule(fileName) {
   const filePath = path.join(
     __dirname,
     "..",
+    "..",
+    "..",
     "prediction-rules",
     fileName
   );
@@ -19,3 +21,4 @@ function loadRule(fileName) {
 }
 
 export default loadRule;
+
