@@ -1,15 +1,64 @@
-import dotenv from "dotenv";
-dotenv.config();
 import express from "express";
+import nodemailer from "nodemailer";
 import cors from "cors";
-import app from "./app.js";
-import connectDB from "./config/db.js";
+import dotenv from "dotenv";
+import mongoose from "mongoose"; 
+
+import questionRoutes from "./routes/questionRoutes.js"; 
+import authRoutes from "./routes/authRoutes.js";
+import predictionRoutes from "./routes/predictionRoutes.js";
+
+dotenv.config();
+
+const app = express();
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(cors());
+
+// --- 1. MONGODB DATABASE CONNECTION ---
+
+const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/question_paper_db";
+
+mongoose
+  .connect(MONGO_URI)
+  .then(() => console.log("MongoDB Connected Successfully!"))
+  .catch((err) => console.error("MongoDB Connection Error:", err));
+
+// --- 2. QUESTION PAPER API ROUTES ---
+app.use("/api/question-paper", questionRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/prediction", predictionRoutes);
+
+// --- 3. NODEMAILER TRANSPORTER SETUP ---
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER || "chalschals0421@gmail.com",
+    pass: process.env.EMAIL_PASS || "dvab bvwm lzkr jnqh",
+  },
+});
+
+// --- 4. MAIL SENDING API ROUTE ---
+app.post("/api/send-mail", async (req, res) => {
+  const { recipientEmail, subjectText, messageHtml } = req.body;
+
+  try {
+    const mailOptions = {
+      from: `"Question Paper Portal" <${process.env.EMAIL_USER || "chalschals0421@gmail.com"}>`,
+      to: recipientEmail,
+      subject: subjectText || "Test Subject",
+      html: messageHtml || "<h3>Hello from Nodemailer!</h3>",
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ success: true, message: "Mail sent successfully!" });
+  } catch (error) {
+    console.error("Nodemailer Error:", error);
+    res.status(500).json({ success: false, message: "Failed to send mail", error: error.message });
+  }
+});
 
 const PORT = process.env.PORT || 5000;
-
-connectDB();
-  
-app.use(cors());
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
