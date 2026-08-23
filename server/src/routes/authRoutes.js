@@ -1,11 +1,6 @@
-import express from "express";
-import nodemailer from "nodemailer";
-import { loginUser, registerUser } from "../controllers/authController.js";
-
+const express = require("express");
+const nodemailer = require("nodemailer");
 const router = express.Router();
-
-router.post("/register", registerUser);
-router.post("/login", loginUser);
 
 // 1. Email Transporter Setup (Gmail)
 const transporter = nodemailer.createTransport({
@@ -54,4 +49,4 @@ router.post("/forgot-password", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

@@ -1,258 +1,166 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 
 
 function Department() {
 
-  const [name, setName] = useState("");
-  const [code, setCode] = useState("");
 
-  const [departments, setDepartments] = useState([]);
+  const [departmentName, setDepartmentName] = useState("");
 
-
-  const token = localStorage.getItem("token");
-
-
-  // Get Departments
-
-  const fetchDepartments = async () => {
-
-    try {
-
-      const response = await axios.get(
-        "http://localhost:5000/api/departments",
-        {
-          headers:{
-            Authorization:`Bearer ${token}`,
-          },
-        }
-      );
-
-
-      setDepartments(response.data);
-
-
-    } catch(error){
-
-      console.log(error);
-
-    }
-
-  };
+  const [departments, setDepartments] = useState([
+    "Information Technology"
+  ]);
 
 
 
-  useEffect(()=>{
-
-    fetchDepartments();
-
-  },[]);
-
-
-
-  // Add Department
-
-  const handleSubmit = async(e)=>{
+  const handleSubmit = (e) => {
 
     e.preventDefault();
 
 
-    try{
+    if(departmentName.trim() === ""){
 
-      const response = await axios.post(
-
-        "http://localhost:5000/api/departments",
-
-        {
-          name,
-          code,
-        },
-
-        {
-          headers:{
-            Authorization:`Bearer ${token}`,
-          },
-        }
-
-      );
-
-
-      alert(response.data.message);
-
-
-      setName("");
-      setCode("");
-
-      fetchDepartments();
-
-
-    }catch(error){
-
-      alert(
-        error.response?.data?.message ||
-        "Failed"
-      );
+      return;
 
     }
+
+
+    setDepartments([
+
+      ...departments,
+
+      departmentName
+
+    ]);
+
+
+    setDepartmentName("");
 
   };
 
 
 
-  // Delete Department
 
-  const deleteDepartment = async(id)=>{
+  return (
 
-
-    try{
-
-      await axios.delete(
-
-        `http://localhost:5000/api/departments/${id}`,
-
-        {
-          headers:{
-            Authorization:`Bearer ${token}`,
-          },
-        }
-
-      );
-
-
-      alert("Department Deleted");
-
-      fetchDepartments();
-
-
-    }catch(error){
-
-      console.log(error);
-
-    }
-
-  };
-
-
-
-  return(
 
     <div className="min-h-screen bg-gray-100 p-10">
 
 
-      <div className="bg-white p-6 rounded shadow">
+
+      <h1 className="text-4xl font-bold text-center mb-10">
+
+        Department Management
+
+      </h1>
 
 
-        <h2 className="text-2xl font-bold mb-5">
-          Department Management
-        </h2>
 
+
+
+      <div className="max-w-xl mx-auto bg-white p-8 rounded-lg shadow">
 
 
         <form onSubmit={handleSubmit}>
 
 
-          <input
+          <label className="block mb-2 font-semibold">
 
-          className="border p-2 mr-3"
+            Department Name
 
-          placeholder="Department Name"
+          </label>
 
-          value={name}
-
-          onChange={(e)=>setName(e.target.value)}
-
-          />
 
 
 
           <input
 
-          className="border p-2 mr-3"
+            type="text"
 
-          placeholder="Department Code"
+            value={departmentName}
 
-          value={code}
+            onChange={(e)=>setDepartmentName(e.target.value)}
 
-          onChange={(e)=>setCode(e.target.value)}
+            placeholder="Enter Department Name"
+
+            className="w-full border p-3 rounded mb-5"
 
           />
+
+
 
 
 
           <button
 
-          className="bg-blue-600 text-white px-5 py-2 rounded"
+            type="submit"
+
+            className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
 
           >
 
-          Add
+            Add Department
 
           </button>
+
 
 
         </form>
 
 
 
-        <hr className="my-6"/>
+      </div>
 
 
 
-        <h3 className="text-xl font-semibold mb-3">
+
+
+
+      <div className="max-w-xl mx-auto mt-10">
+
+
+
+        <h2 className="text-2xl font-bold mb-5">
 
           Department List
 
-        </h3>
+        </h2>
+
+
 
 
 
         {
-          departments.map((dept)=>(
+
+          departments.map((dept,index)=>(
+
 
             <div
-            key={dept._id}
-            className="flex justify-between border p-3 mb-2"
+
+              key={index}
+
+              className="bg-white p-4 rounded shadow mb-3"
+
             >
 
-
-              <div>
-
-                <p>
-                  {dept.name}
-                </p>
-
-                <p className="text-gray-500">
-                  {dept.code}
-                </p>
-
-              </div>
-
-
-
-              <button
-
-              onClick={()=>deleteDepartment(dept._id)}
-
-              className="bg-red-500 text-white px-3 py-1 rounded"
-
-              >
-
-              Delete
-
-              </button>
+              {dept}
 
 
             </div>
 
 
           ))
+
         }
+
 
 
       </div>
 
 
+
+
     </div>
+
 
   );
 

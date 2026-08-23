@@ -1,27 +1,45 @@
 import express from "express";
 
+
 import {
-  createSemester,
-  getSemesters,
-  updateSemester,
-  deleteSemester,
+
+    addSemester,
+    getSemesters,
+    deleteSemester
+
 } from "../controllers/semesterController.js";
 
-import protect from "../middleware/authMiddleware.js";
 
 
 const router = express.Router();
 
 
-// Protected Routes
 
-router.post("/", protect, createSemester);
+// Add Semester
 
-router.get("/", protect, getSemesters);
+router.post(
+    "/",
+    addSemester
+);
 
-router.put("/:id", protect, updateSemester);
 
-router.delete("/:id", protect, deleteSemester);
+
+// Get All Semesters
+
+router.get(
+    "/",
+    getSemesters
+);
+
+
+
+// Delete Semester
+
+router.delete(
+    "/:id",
+    deleteSemester
+);
+
 
 
 export default router;

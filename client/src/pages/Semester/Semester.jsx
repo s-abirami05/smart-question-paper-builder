@@ -4,60 +4,45 @@ import axios from "axios";
 
 function Semester() {
 
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
-  const [department, setDepartment] = useState("");
 
-  const [departments, setDepartments] = useState([]);
+  const [semesterName, setSemesterName] = useState("");
+
   const [semesters, setSemesters] = useState([]);
 
-
-  const token = localStorage.getItem("token");
-
-
-  // Get Departments
-
-  const fetchDepartments = async () => {
-
-    const response = await axios.get(
-      "http://localhost:5000/api/departments",
-      {
-        headers:{
-          Authorization:`Bearer ${token}`,
-        },
-      }
-    );
-
-    setDepartments(response.data);
-
-  };
 
 
   // Get Semesters
 
-  const fetchSemesters = async () => {
+  const fetchSemesters = async()=>{
 
-    const response = await axios.get(
-      "http://localhost:5000/api/semesters",
-      {
-        headers:{
-          Authorization:`Bearer ${token}`,
-        },
-      }
-    );
+    try{
 
-    setSemesters(response.data);
+      const response = await axios.get(
+        "http://localhost:5000/api/semesters"
+      );
+
+
+      setSemesters(response.data);
+
+
+    }catch(error){
+
+      console.log(error);
+
+    }
 
   };
+
 
 
 
   useEffect(()=>{
 
-    fetchDepartments();
     fetchSemesters();
 
   },[]);
+
+
 
 
 
@@ -70,135 +55,86 @@ function Semester() {
 
     try{
 
-      const response = await axios.post(
+
+      await axios.post(
 
         "http://localhost:5000/api/semesters",
 
         {
-          name,
-          number,
-          department,
-        },
-
-        {
-          headers:{
-            Authorization:`Bearer ${token}`,
-          },
+          name: semesterName
         }
 
       );
 
 
-      alert(response.data.message);
-
-
-      setName("");
-      setNumber("");
-      setDepartment("");
+      setSemesterName("");
 
       fetchSemesters();
 
 
+
     }catch(error){
 
-      alert(
-        error.response?.data?.message ||
-        "Failed"
-      );
+      console.log(error);
 
     }
+
 
   };
 
 
 
-  return(
+
+  return (
 
     <div className="min-h-screen bg-gray-100 p-10">
 
 
-      <div className="bg-white p-6 rounded shadow">
+      <h1 className="text-4xl font-bold text-center mb-10">
+
+        Semester Management
+
+      </h1>
 
 
-        <h2 className="text-2xl font-bold mb-5">
-          Semester Management
-        </h2>
 
+
+      <div className="max-w-xl mx-auto bg-white p-8 rounded shadow">
 
 
         <form onSubmit={handleSubmit}>
 
 
-          <input
+          <label className="font-semibold">
 
-          className="border p-2 mr-3"
+            Semester Name
 
-          placeholder="Semester Name"
-
-          value={name}
-
-          onChange={(e)=>setName(e.target.value)}
-
-          />
-
+          </label>
 
 
           <input
 
-          className="border p-2 mr-3"
+            type="text"
 
-          placeholder="Semester Number"
+            value={semesterName}
 
-          value={number}
+            onChange={(e)=>setSemesterName(e.target.value)}
 
-          onChange={(e)=>setNumber(e.target.value)}
+            placeholder="Enter Semester Name"
+
+            className="w-full border p-3 rounded mt-2 mb-5"
 
           />
-
-
-
-          <select
-
-          className="border p-2 mr-3"
-
-          value={department}
-
-          onChange={(e)=>setDepartment(e.target.value)}
-
-          >
-
-            <option>
-              Select Department
-            </option>
-
-
-            {
-              departments.map((dept)=>(
-
-                <option
-                key={dept._id}
-                value={dept._id}
-                >
-
-                  {dept.name}
-
-                </option>
-
-              ))
-            }
-
-
-          </select>
 
 
 
           <button
 
-          className="bg-blue-600 text-white px-5 py-2 rounded"
+            className="bg-green-600 text-white px-6 py-3 rounded"
 
           >
 
-          Add Semester
+            Add Semester
 
           </button>
 
@@ -206,48 +142,50 @@ function Semester() {
         </form>
 
 
-
-        <hr className="my-6"/>
-
+      </div>
 
 
-        <h3 className="text-xl font-semibold mb-3">
+
+
+
+      <div className="max-w-xl mx-auto mt-10">
+
+
+        <h2 className="text-2xl font-bold mb-5">
+
           Semester List
-        </h3>
+
+        </h2>
 
 
 
         {
-          semesters.map((sem)=>(
+
+          semesters.map((semester)=>(
+
 
             <div
-            key={sem._id}
-            className="border p-3 mb-2"
+
+              key={semester._id}
+
+              className="bg-white p-4 rounded shadow mb-3"
+
             >
 
-              <p>
-                {sem.name}
-              </p>
-
-              <p>
-                Semester No: {sem.number}
-              </p>
-
-              <p>
-                Department:
-                {" "}
-                {sem.department?.name}
-              </p>
+              {semester.name}
 
 
             </div>
 
+
           ))
+
         }
 
 
 
       </div>
+
 
 
     </div>

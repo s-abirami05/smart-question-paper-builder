@@ -1,25 +1,37 @@
 import express from "express";
 
 import {
-  createDepartment,
-  getDepartments,
-  updateDepartment,
-  deleteDepartment,
+
+addDepartment,
+getDepartments,
+deleteDepartment
+
 } from "../controllers/departmentController.js";
 
-import protect from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Protected Routes
 
-router.post("/", protect, createDepartment);
 
-router.get("/", protect, getDepartments);
+router.post(
+"/",
+addDepartment
+);
 
-router.put("/:id", protect, updateDepartment);
 
-router.delete("/:id", protect, deleteDepartment);
+
+router.get(
+"/",
+getDepartments
+);
+
+
+
+router.delete(
+"/:id",
+deleteDepartment
+);
+
 
 
 export default router;

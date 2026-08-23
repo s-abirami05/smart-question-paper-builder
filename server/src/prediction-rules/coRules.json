@@ -1,936 +1,1335 @@
-{
-  "Professional English I": {
+[{
+  "subjectCode": "HS3152",
+  "subjectName": "Professional English I",
+  "keywords": {
     "CO1": [
-      "effective communication",
-      "communication skills",
-      "seven Cs of communication",
-      "clarity",
-      "conciseness",
-      "completeness",
-      "correctness",
-      "concreteness",
-      "courtesy",
-      "consideration",
-      "communication process",
-      "verbal communication",
-      "non verbal communication",
-      "professional communication",
-      "academic communication",
-      "workplace communication",
-      "communication barriers",
-      "feedback",
-      "active listening",
-      "interpersonal communication",
-      "presentation skills",
-      "public speaking",
-      "professional etiquette",
-      "body language",
-      "communication context",
-      "sender",
-      "receiver",
-      "message",
-      "channel",
-      "encoding",
-      "decoding",
-      "formal communication"
+      "communication","effective communication","seven c","listening","speaking","reading",
+      "writing","email","letter","professional communication","technical communication","telephone message","social media message",
+      "brochure","synonym","abbreviation","acronym","one word substitution","vocabulary","professional context"
     ],
-
     "CO2": [
-      "grammar",
-      "basic grammar structures",
-      "parts of speech",
-      "noun",
-      "pronoun",
-      "verb",
-      "adjective",
-      "adverb",
-      "preposition",
-      "conjunction",
-      "sentence structure",
-      "simple sentence",
-      "compound sentence",
-      "complex sentence",
-      "tenses",
-      "present tense",
-      "past tense",
-      "future tense",
-      "subject verb agreement",
-      "articles",
-      "active voice",
-      "passive voice",
-      "direct speech",
-      "indirect speech",
-      "punctuation",
-      "grammar rules",
-      "sentence formation",
-      "error correction",
-      "grammatical accuracy",
-      "language usage",
-      "contextual grammar"
+      "present tense","past tense","future tense","grammar","subject verb agreement", "preposition",
+      "articles", "pronouns", "imperatives", "adjectives", "degrees of comparison", "question tags",
+      "wh questions", "yes no questions", "simple sentence", "compound sentence", "complex sentence",
+      "punctuation","negation"
     ],
-
     "CO3": [
-      "lexical competence",
-      "vocabulary development",
-      "word meaning",
-      "synonyms",
-      "antonyms",
-      "word formation",
-      "prefix",
-      "suffix",
-      "technical vocabulary",
-      "academic vocabulary",
-      "professional vocabulary",
-      "context clues",
-      "dictionary skills",
-      "word usage",
-      "phrases",
-      "idioms",
-      "collocations",
-      "terminology",
-      "reading comprehension",
-      "text analysis",
-      "main idea",
-      "supporting details",
-      "inference",
-      "interpretation",
-      "critical reading",
-      "skimming",
-      "scanning",
-      "summarizing",
-      "vocabulary building",
-      "language proficiency"
+      "biography","travelogue","newspaper","journal","editorial","technical blog","opinion blog","advertisement",
+      "user manual","gadget review","technical text","reading comprehension","note making","note taking","pie chart",
+      "graph","table", "non verbal communication"
     ],
-
     "CO4": [
-      "professional context",
-      "professional language",
-      "business communication",
-      "workplace skills",
-      "email writing",
-      "formal writing",
-      "report writing",
-      "letter writing",
-      "resume writing",
-      "job application",
-      "interview skills",
-      "group discussion",
-      "meeting communication",
-      "technical communication",
-      "official communication",
-      "proposal writing",
-      "professional presentation",
-      "negotiation skills",
-      "team communication",
-      "collaboration",
-      "leadership communication",
-      "workplace vocabulary",
-      "career communication",
-      "digital communication",
-      "communication strategy",
-      "professional interaction",
-      "business etiquette",
-      "organizational communication"
-    ],
-
-    "CO5": [
-      "reading skills",
-      "writing skills",
-      "complex texts",
-      "summary writing",
-      "article writing",
-      "blog writing",
-      "definition writing",
-      "essay writing",
-      "user manual",
-      "technical writing",
-      "content organization",
-      "paragraph writing",
-      "coherence",
-      "cohesion",
-      "writing style",
-      "creative writing",
-      "descriptive writing",
-      "expository writing",
-      "academic writing",
-      "text structure",
-      "editing",
-      "proofreading",
-      "drafting",
-      "revision",
-      "information organization",
-      "documentation",
-      "instruction writing",
-      "writing techniques",
-      "written communication"
-    ]
-  },"Matrices and Calculus": {
-    "CO1": [
-      "matrix",
-      "matrices",
-      "real matrix",
-      "square matrix",
-      "row matrix",
-      "column matrix",
-      "diagonal matrix",
-      "identity matrix",
-      "symmetric matrix",
-      "skew symmetric matrix",
-      "eigenvalues",
-      "eigenvectors",
-      "characteristic equation",
-      "characteristic polynomial",
-      "determinant",
-      "trace of matrix",
-      "properties of eigenvalues",
-      "properties of eigenvectors",
-      "cayley hamilton theorem",
-      "matrix algebra",
-      "orthogonal matrix",
-      "orthogonal transformation",
-      "diagonalization",
-      "similar matrices",
-      "canonical form",
-      "linear transformation",
-      "rank of matrix",
-      "inverse matrix",
-      "elementary transformation",
-      "system of linear equations"
-    ],
-
-    "CO2": [
-      "differential calculus",
-      "limit",
-      "continuity",
-      "derivative",
-      "differentiation",
-      "differentiable function",
-      "higher order derivatives",
-      "successive differentiation",
-      "product rule",
-      "quotient rule",
-      "chain rule",
-      "implicit differentiation",
-      "partial differentiation",
-      "total derivative",
-      "differentiation of functions",
-      "mean value theorem",
-      "rolle's theorem",
-      "lagrange mean value theorem",
-      "taylor theorem",
-      "maclaurin theorem",
-      "expansion of functions",
-      "maximum value",
-      "minimum value",
-      "stationary points",
-      "critical points",
-      "curve tracing",
-      "optimization",
-      "applications of derivatives",
-      "engineering applications"
-    ],
-
-    "CO3": [
-      "functions of several variables",
-      "multivariable function",
-      "two variable function",
-      "three variable function",
-      "partial derivative",
-      "first order partial derivative",
-      "higher order partial derivative",
-      "mixed partial derivative",
-      "homogeneous function",
-      "euler theorem",
-      "jacobian",
-      "jacobian transformation",
-      "functional dependence",
-      "functional independence",
-      "maxima of two variables",
-      "minima of two variables",
-      "lagrange multipliers",
-      "constraint optimization",
-      "total differential",
-      "directional derivative",
-      "gradient",
-      "level surface",
-      "scalar field",
-      "vector function",
-      "multiple variables",
-      "partial differential equations",
-      "engineering functions"
-    ],
-
-    "CO4": [
-      "integration",
-      "indefinite integral",
-      "definite integral",
-      "integration techniques",
-      "integration by parts",
-      "integration by substitution",
-      "partial fractions",
-      "trigonometric integration",
-      "reduction formula",
-      "beta function",
-      "gamma function",
-      "improper integral",
-      "properties of definite integrals",
-      "area under curve",
-      "length of curve",
-      "applications of integration",
-      "integral calculus",
-      "fundamental theorem of calculus",
-      "multiple integration",
-      "single integration",
-      "double integral",
-      "triple integral",
-      "integration limits",
-      "evaluation of integrals",
-      "engineering applications of integration"
-    ],
-
-    "CO5": [
-      "multiple integrals",
-      "double integral",
-      "triple integral",
-      "iterated integral",
-      "change of order integration",
-      "change of variables",
-      "jacobian transformation",
-      "polar coordinates",
-      "cylindrical coordinates",
-      "spherical coordinates",
-      "area calculation",
-      "volume calculation",
-      "surface area",
-      "region of integration",
-      "multiple integral evaluation",
-      "line integral",
-      "surface integral",
-      "volume integral",
-      "green theorem",
-      "gauss divergence theorem",
-      "stokes theorem",
-      "vector calculus",
-      "applications of multiple integrals",
-      "engineering problems",
-      "mathematical modelling",
-      "physical applications",
-      "coordinate transformation"
-    ]
-  },"Engineering Physics": {
-    "CO1": [
-      "mechanics",
-      "multi particle dynamics",
-      "center of mass",
-      "centre of mass",
-      "continuous body",
-      "motion of center of mass",
-      "kinetic energy",
-      "system of particles",
-      "rotation",
-      "rotational kinematics",
-      "rotational motion",
-      "rigid body",
-      "rotational kinetic energy",
-      "moment of inertia",
-      "theorem of moment of inertia",
-      "parallel axis theorem",
-      "perpendicular axis theorem",
-      "diatomic molecule",
-      "torque",
-      "rotational dynamics",
-      "angular momentum",
-      "conservation of angular momentum",
-      "rotational energy state",
-      "gyroscope",
-      "torsional pendulum",
-      "double pendulum",
-      "nonlinear oscillations",
-      "angular velocity",
-      "angular acceleration",
-      "rigid body motion"
-    ],
-
-    "CO2": [
-      "electromagnetic waves",
-      "maxwell equations",
-      "maxwell's equations",
-      "wave equation",
-      "plane electromagnetic waves",
-      "vacuum electromagnetic waves",
-      "wave field",
-      "electric field",
-      "magnetic field",
-      "speed of electromagnetic wave",
-      "amplitude",
-      "phase",
-      "orientation of waves",
-      "waves in matter",
-      "polarization",
-      "production of electromagnetic waves",
-      "energy of electromagnetic waves",
-      "momentum of electromagnetic waves",
-      "radiation pressure",
-      "wave intensity",
-      "localized sources",
-      "reflection of waves",
-      "transmission of waves",
-      "non conducting medium",
-      "cell phone reception",
-      "electromagnetic spectrum",
-      "frequency",
-      "wavelength",
-      "wave propagation"
-    ],
-
-    "CO3": [
-      "oscillations",
-      "simple harmonic motion",
-      "shm",
-      "resonance",
-      "mechanical oscillation",
-      "electrical oscillation",
-      "analogy between electrical and mechanical systems",
-      "waves on string",
-      "standing waves",
-      "travelling waves",
-      "traveling waves",
-      "energy transfer",
-      "sound waves",
-      "doppler effect",
-      "optics",
-      "reflection of light",
-      "refraction of light",
-      "total internal reflection",
-      "interference",
-      "michelson interferometer",
-      "air wedge",
-      "laser",
-      "laser theory",
-      "characteristics of laser",
-      "spontaneous emission",
-      "stimulated emission",
-      "einstein coefficients",
-      "population inversion",
-      "nd-yag laser",
-      "co2 laser",
-      "semiconductor laser",
-      "laser applications"
-    ],
-
-    "CO4": [
-      "quantum mechanics",
-      "basic quantum mechanics",
-      "photon",
-      "light waves",
-      "electron",
-      "matter waves",
-      "wave particle duality",
-      "compton effect",
-      "schrodinger equation",
-      "time dependent schrodinger equation",
-      "time independent schrodinger equation",
-      "wave function",
-      "normalization",
-      "probability density",
-      "free particle",
-      "particle in box",
-      "infinite potential well",
-      "one dimensional box",
-      "two dimensional box",
-      "three dimensional box",
-      "quantum state",
-      "energy eigenvalue",
-      "energy eigenfunction",
-      "correspondence principle",
-      "quantum theory",
-      "uncertainty principle",
-      "quantum probability"
-    ],
-
-    "CO5": [
-      "applied quantum mechanics",
-      "harmonic oscillator",
-      "quantum harmonic oscillator",
-      "barrier penetration",
-      "quantum tunneling",
-      "tunneling microscope",
-      "scanning tunneling microscope",
-      "resonant diode",
-      "finite potential well",
-      "periodic potential",
-      "bloch theorem",
-      "kronig penney model",
-      "energy bands",
-      "band theory",
-      "origin of energy bands",
-      "conduction band",
-      "valence band",
-      "forbidden energy gap",
-      "semiconductor physics",
-      "quantum devices",
-      "nano technology",
-      "quantum applications",
-      "solid state physics",
-      "electron tunneling",
-      "modern physics",
-      "quantum materials"
-    ]
-  },"Engineering Chemistry": {
-    "CO1": [
-      "water",
-      "water sources",
-      "water impurities",
-      "hard water",
-      "soft water",
-      "water quality",
-      "water quality parameters",
-      "colour",
-      "odour",
-      "turbidity",
-      "ph",
-      "alkalinity",
-      "hardness",
-      "chloride",
-      "dissolved oxygen",
-      "biological oxygen demand",
-      "chemical oxygen demand",
-      "water treatment",
-      "water purification",
-      "municipal water treatment",
-      "boiler troubles",
-      "scale formation",
-      "sludge formation",
-      "priming",
-      "foaming",
-      "caustic embrittlement",
-      "water softening",
-      "zeolite process",
-      "ion exchange process",
-      "reverse osmosis",
-      "desalination"
-    ],
-
-    "CO2": [
-      "nanomaterials",
-      "nanotechnology",
-      "nano scale",
-      "nanoparticles",
-      "preparation of nanomaterials",
-      "sol gel method",
-      "chemical vapour deposition",
-      "precipitation method",
-      "hydrothermal method",
-      "carbon nanotubes",
-      "graphene",
-      "fullerenes",
-      "metal nanoparticles",
-      "semiconductor nanoparticles",
-      "properties of nanomaterials",
-      "optical properties",
-      "electrical properties",
-      "magnetic properties",
-      "mechanical properties",
-      "surface area",
-      "quantum confinement",
-      "nano composites",
-      "applications of nanomaterials",
-      "medicine nanotechnology",
-      "electronics nanotechnology",
-      "energy applications",
-      "environmental applications",
-      "nano sensors"
-    ],
-
-    "CO3": [
-      "phase rule",
-      "gibbs phase rule",
-      "phase",
-      "components",
-      "degrees of freedom",
-      "phase equilibrium",
-      "one component system",
-      "two component system",
-      "water system",
-      "sulphur system",
-      "composites",
-      "composite materials",
-      "matrix material",
-      "reinforcement",
-      "polymer composites",
-      "metal matrix composites",
-      "ceramic composites",
-      "fiber reinforced composites",
-      "properties of composites",
-      "strength",
-      "durability",
-      "thermal resistance",
-      "applications of composites",
-      "advanced materials",
-      "material science"
-    ],
-
-    "CO4": [
-      "fuels",
-      "types of fuels",
-      "solid fuels",
-      "liquid fuels",
-      "gaseous fuels",
-      "coal",
-      "petroleum",
-      "natural gas",
-      "fuel preparation",
-      "fuel properties",
-      "calorific value",
-      "higher calorific value",
-      "lower calorific value",
-      "octane number",
-      "cetane number",
-      "knocking",
-      "combustion",
-      "combustion characteristics",
-      "flash point",
-      "fire point",
-      "viscosity",
-      "biofuels",
-      "alternative fuels",
-      "energy resources",
-      "fuel efficiency",
-      "green fuels"
-    ],
-
-    "CO5": [
-      "energy conversion",
-      "energy storage",
-      "electrochemical cells",
-      "battery",
-      "fuel cell",
-      "solar cell",
-      "photovoltaic cell",
-      "lithium ion battery",
-      "working principle",
-      "electrode",
-      "anode",
-      "cathode",
-      "electrolyte",
-      "oxidation",
-      "reduction",
-      "electrochemical reaction",
-      "cell potential",
-      "charge storage",
-      "renewable energy",
-      "hydrogen fuel cell",
-      "supercapacitor",
-      "energy devices",
-      "storage devices",
-      "applications of energy devices"
-    ]
-  },"Problem Solving and Python Programming": {
-    "CO1": [
-      "computational thinking",
-      "problem solving",
-      "fundamentals of computing",
-      "computational problems",
-      "algorithm",
-      "algorithmic problem solving",
-      "algorithm design",
-      "algorithm development",
-      "problem identification",
-      "problem analysis",
-      "problem decomposition",
-      "logical thinking",
-      "pseudocode",
-      "flowchart",
-      "programming language",
-      "algorithm notation",
-      "statements",
-      "state",
-      "control flow",
-      "sequence",
-      "selection",
-      "iteration",
-      "looping",
-      "function",
-      "input",
-      "output",
-      "debugging",
-      "testing",
-      "problem solving strategies",
-      "computational methods"
-    ],
-
-    "CO2": [
-      "python",
-      "python programming",
-      "python syntax",
-      "python interpreter",
-      "variables",
-      "data types",
-      "numbers",
-      "integer",
-      "float",
-      "string",
-      "boolean",
-      "operators",
-      "arithmetic operators",
-      "relational operators",
-      "logical operators",
-      "assignment operators",
-      "expressions",
-      "input function",
-      "output function",
-      "print function",
-      "type conversion",
-      "conditional statements",
-      "if statement",
-      "if else statement",
-      "nested if",
-      "loops",
-      "for loop",
-      "while loop",
-      "break statement",
-      "continue statement",
-      "range function"
-    ],
-
-    "CO3": [
-      "python functions",
-      "function definition",
-      "function call",
-      "built in functions",
-      "user defined functions",
-      "parameters",
-      "arguments",
-      "return statement",
-      "local variable",
-      "global variable",
-      "scope of variable",
-      "recursive function",
-      "recursion",
-      "lambda function",
-      "anonymous function",
-      "modules",
-      "packages",
-      "import statement",
-      "exception handling",
-      "try block",
-      "except block",
-      "error handling",
-      "program modularity",
-      "code reusability",
-      "function composition",
-      "python libraries"
-    ],
-
-    "CO4": [
-      "python data structures",
-      "list",
-      "tuple",
-      "dictionary",
-      "set",
-      "sequence data types",
-      "mutable data types",
-      "immutable data types",
-      "list operations",
-      "list indexing",
-      "list slicing",
-      "tuple operations",
-      "dictionary keys",
-      "dictionary values",
-      "key value pair",
-      "set operations",
-      "data representation",
-      "nested list",
-      "nested dictionary",
-      "iteration",
-      "traversing data structures",
-      "sorting",
-      "searching",
-      "data manipulation",
-      "complex data",
-      "collection types",
-      "python collections"
-    ],
-
-    "CO5": [
-      "file handling",
-      "file input output",
-      "file processing",
-      "text file",
-      "binary file",
-      "open function",
-      "read file",
-      "write file",
-      "append mode",
-      "file modes",
-      "close file",
-      "with statement",
-      "file pointer",
-      "exception handling",
-      "data storage",
-      "data retrieval",
-      "csv file",
-      "file operations",
-      "python io",
-      "input output operations",
-      "program execution",
-      "data processing",
-      "file management",
-      "persistent storage",
-      "python applications"
-    ]
-  }, "Heritage of Tamils": {
-    "CO1": [
-      "Tamil language",
-      "language families",
-      "Indian languages",
-      "Dravidian languages",
-      "Dravidian language family",
-      "Tamil classical language",
-      "classical literature",
-      "Tamil literature",
-      "Sangam literature",
-      "secular nature",
-      "Sangam age",
-      "distributive justice",
-      "social values",
-      "ethical values",
-      "Thirukkural",
-      "management principles",
-      "Tamil epics",
-      "Silappathikaram",
-      "Manimekalai",
-      "Buddhism",
-      "Jainism",
-      "Bhakti literature",
-      "Azhwars",
-      "Nayanmars",
-      "minor literature",
-      "modern Tamil literature",
-      "Bharathiyar",
-      "Bharathidhasan",
-      "Tamil poets",
-      "literary development",
-      "Tamil culture"
-    ],
-
-    "CO2": [
-      "Tamil heritage",
-      "rock art paintings",
-      "ancient art",
-      "modern art",
-      "sculpture",
-      "hero stone",
-      "Veerakkal",
-      "bronze icons",
-      "metal sculpture",
-      "tribal handicrafts",
-      "traditional crafts",
-      "temple car",
-      "wood carving",
-      "terracotta sculptures",
-      "village deities",
-      "Thiruvalluvar statue",
-      "Kanyakumari statue",
-      "musical instruments",
-      "Mridangam",
-      "Parai",
-      "Veena",
-      "Yazh",
-      "Nadaswaram",
-      "temple architecture",
-      "role of temples",
-      "social life",
-      "economic life",
-      "traditional art",
-      "craftsmanship"
-    ],
-
-    "CO3": [
-      "folk arts",
-      "martial arts",
-      "Tamil folk culture",
-      "Therukoothu",
-      "Karagattam",
-      "Villu Pattu",
-      "Kaniyan Koothu",
-      "Oyillattam",
-      "leather puppetry",
-      "puppet show",
-      "Silambattam",
-      "Valari",
-      "Tiger dance",
-      "traditional dance",
-      "folk performance",
-      "cultural expression",
-      "Tamil sports",
-      "traditional games",
-      "rural culture",
-      "performing arts",
-      "martial techniques",
-      "warrior traditions",
-      "indigenous games",
-      "folk music",
-      "community traditions"
-    ],
-
-    "CO4": [
-      "Thinai concept",
-      "Tholkappiyam",
-      "Sangam literature",
-      "Aham concept",
-      "Puram concept",
-      "Aram concept",
-      "flora",
-      "fauna",
-      "Tamil landscape",
-      "Kurinji",
-      "Mullai",
-      "Marutham",
-      "Neithal",
-      "Palai",
-      "Sangam society",
-      "education in Sangam age",
-      "literacy",
-      "ancient cities",
-      "Sangam ports",
-      "trade",
-      "export",
-      "import",
-      "overseas trade",
-      "Cholas",
-      "Chola conquest",
-      "maritime history",
-      "Tamil civilization",
-      "ancient economy"
-    ],
-
-    "CO5": [
-      "Tamil freedom struggle",
-      "Indian national movement",
-      "Tamil contribution",
-      "freedom fighters",
-      "Tamil culture",
-      "cultural influence",
-      "Indian culture",
-      "Self Respect Movement",
-      "Periyar movement",
-      "social reform",
-      "Siddha medicine",
-      "indigenous medicine",
-      "traditional healthcare",
-      "Tamil inscriptions",
-      "stone inscriptions",
-      "manuscripts",
-      "palm leaf manuscripts",
-      "Tamil printing history",
-      "Tamil books",
-      "publication history",
-      "heritage preservation",
-      "cultural identity",
-      "Tamil civilization",
-      "historical records",
-      "traditional knowledge"
+      "essay", "paragraph", "report", "definition", "description", "process description", "product description", "recommendation",
+      "instruction writing", "narration", "summary", "content words", "function words", "cause and effect",
+      "collocation", "fixed expression", "homonym", "homophone", "compound noun"
     ]
   }
-}
+},{
+  "subjectCode": "MA3151",
+  "subjectName": "Matrices and Calculus",
+  "keywords": {
+    "CO1": [
+      "matrix", "matrices", "eigenvalue", "eigenvalues", "eigenvector", "eigenvectors", "characteristic equation", "cayley hamilton theorem",
+      "diagonalization", "orthogonal transformation", "quadratic form", "canonical form", "elastic membrane", "real matrix",
+      "matrix algebra", "inverse matrix", "determinant", "linear transformation", "orthogonal matrix", "matrix applications"
+    ],
+
+    "CO2": [
+      "differential calculus","limit", "continuity","derivative","differentiation",  "chain rule",  "product rule",
+      "quotient rule", "implicit differentiation", "logarithmic differentiation", "maxima", "minima",
+      "function", "optimization", "rate of change", "calculus", "applications of derivatives", "stationary point"
+    ],
+
+    "CO3": [
+      "partial differentiation", "partial derivative", "euler theorem", "homogeneous function", "jacobian",
+      "change of variables","total derivative","implicit function",  "taylor series","lagrange multiplier",
+      "functions of several variables","multivariable calculus","optimization","two variable function","critical point"
+    ],
+
+    "CO4": [
+      "integration","integral","definite integral","indefinite integral","substitution","integration by parts","trigonometric integral",
+      "partial fraction","irrational function","improper integral","hydrostatic force","pressure","centre of mass",
+      "moment","area under curve","integration techniques"
+    ],
+
+    "CO5": [
+      "double integral", "triple integral", "multiple integral", "polar coordinates", "change of order", "volume",
+      "surface area","plane curve","moment of inertia","centre of mass","change of variables",
+      "multiple integration","area enclosed","solid geometry","volume of solids"
+    ]
+  }
+},{
+  "subjectCode": "PH3151",
+  "subjectName": "Engineering Physics",
+  "keywords": {
+    "CO1": [
+      "mechanics","center of mass","centre of mass","multi particle dynamics","kinetic energy",
+      "rotation","rotational motion","rotational kinematics","moment of inertia","torque","angular momentum",
+      "gyroscope","torsional pendulum","double pendulum","nonlinear oscillation","rigid body",
+      "rotational dynamics","diatomic molecule","conservation of angular momentum","rotational energy"
+    ],
+
+    "CO2": [
+      "electromagnetic waves","maxwell equations","wave equation","plane wave","electromagnetic field","polarization",
+      "reflection", "transmission", "wave propagation", "radiation pressure", "intensity", "momentum",
+      "cell phone reception", "vacuum", "dielectric medium", "wave properties", "em wave", "energy of waves"
+    ],
+
+    "CO3": [
+      "simple harmonic motion","shm","resonance","oscillation","wave motion","standing wave","travelling wave",
+      "sound wave", "doppler effect", "reflection of light","refraction", "total internal reflection", "interference",
+      "michelson interferometer", "air wedge", "laser", "nd yag laser", "co2 laser", "semiconductor laser",
+      "population inversion","einstein coefficients","stimulated emission","spontaneous emission"
+    ],
+
+    "CO4": [
+      "quantum mechanics","photon","matter wave","compton effect","schrodinger equation","wave function",
+      "normalization","free particle","potential well","particle in a box", "1D", "2D","3D","one dimensional box",
+      "two dimensional box","three dimensional box","probability","correspondence principle",
+      "three dimensional box","probability","correspondence principle"
+    ],
+
+    "CO5": [
+      "harmonic oscillator","quantum tunneling","barrier penetration","tunneling microscope",
+      "resonant diode","finite potential well","bloch theorem","kronig penney model","energy band",
+      "band theory","periodic potential","semiconductor physics","crystal lattice",
+      "electronic band structure","quantum applications"
+    ]
+  }
+},{
+  "subjectCode": "CY3151",
+  "subjectName": "Engineering Chemistry",
+  "keywords": {
+    "CO1": [
+      "water","water treatment","water quality","water quality parameters","impurities","hardness",
+      "alkalinity","turbidity","ph","tds","cod","bod","fluoride", "arsenic", "municipal water treatment",
+      "disinfection","uv treatment","ozonation","chlorination","reverse osmosis","desalination","boiler feed water",
+      "boiler corrosion","scale","sludge","caustic embrittlement","priming","foaming",
+      "zeolite process","ion exchange","demineralization","calgon conditioning","phosphate conditioning"
+    ],
+
+    "CO2": [
+      "nanochemistry","nanotechnology","nanoscience","nanomaterial","nanoparticle","nanocluster","nanorod",
+      "nanowire","nanotube","sol gel","solvothermal","laser ablation","chemical vapour deposition","cvd",
+      "electrochemical deposition","electrospinning","optical properties","electrical properties","mechanical properties",
+      "magnetic properties","medicine", "agriculture", "electronics", "catalysis", "energy applications"
+    ],
+
+    "CO3": [
+    "phase rule","phase diagram","water system","reduced phase rule","thermal analysis",
+      "eutectic system","lead silver system","pattinson process","composite","hybrid composite","polymer matrix",
+      "metal matrix","ceramic matrix","reinforcement","fiber","flakes","whiskers","particulates",
+      "mmc","cmc","pmc","material selection"
+    ],
+
+    "CO4": [
+      "fuel","coal","coke","petroleum","diesel","biodiesel","power alcohol","bergius process","otto hoffmann method",
+      "carbonization","knocking","octane number","cetane number","combustion","calorific value","ignition temperature",
+      "flue gas", "orsat method", "carbon footprint", "co2 emission", "ultimate analysis", "proximate analysis"
+    ],
+
+    "CO5": [
+      "nuclear energy", "binding energy", "mass defect", "breeder reactor", "light water reactor", "solar cell",
+      "solar energy", "wind energy", "geothermal energy", "battery", "dry cell", "lead acid battery", "lithium ion battery",
+      "electric vehicle", "fuel cell", "hydrogen oxygen fuel cell", "microbial fuel cell", "supercapacitor", "energy storage",
+      "renewable energy"
+    ]
+  }
+},{
+  "subjectCode": "GE3151",
+  "subjectName": "Problem Solving and Python Programming",
+  "keywords": {
+    "CO1": [
+      "algorithm","algorithms","problem solving","computational thinking","flowchart","flow chart",
+      "pseudocode","pseudo code","iteration","recursion","control flow","state","function","tower of hanoi",
+      "minimum element","sorted list","insert card","guess number","problem identification","algorithm design"
+    ],
+
+    "CO2": [
+      "python","python interpreter", "interactive mode", "debugging", "variable", "variables",
+      "data type", "int", "float", "boolean", "string", "list", "tuple assignment", "expression", "statement",
+      "operator precedence","comments","assignment","input","output"
+    ],
+
+    "CO3": [
+      "if","if else","if elif else","conditional","condition","boolean operator","while","for loop","break",
+      "continue","pass","loop","iteration","function","return","parameter",
+      "scope", "global scope", "local scope", "recursion", "string slicing", "string method", "linear search",
+      "binary search","gcd","square root","exponentiation"
+    ],
+
+    "CO4": [
+      "list operation","list method","list slice","mutability","aliasing","cloning","tuple",
+      "dictionary", "dictionary method", "key value", "list comprehension", "sorting", "histogram",
+      "student marks","retail bill","array","collection"
+    ],
+
+    "CO5": [
+      "file","text file","read file","write file","file handling","exception","exception handling","errors",
+      "module", "package", "command line argument", "format operator", "word count", "copy file", "voter age validation",
+      "marks validation"
+    ]
+  }
+},{
+  "subjectCode": "GE3152",
+  "subjectName": "Heritage of Tamils",
+  "keywords": {
+    "CO1": [
+  "dravidian languages", "tamil language", "classical language", "classical literature", "sangam literature",
+  "secular literature", "distributive justice", "thirukkural", "management principles", "tamil epics",
+  "buddhism", "jainism", "bakthi literature", "azhwars", "nayanmars",
+  "minor poetry", "modern literature", "bharathiyar", "bharathidasan", "language families"
+],
+
+"CO2": [
+  "rock art", "hero stone", "bronze icons", "sculpture", "terracotta",
+  "tribes", "handicrafts", "temple car", "village deities", "thiruvalluvar statue",
+  "kanyakumari", "musical instruments", "mridhangam", "parai", "veenai",
+  "yazh", "nadhaswaram", "temples", "social life", "economic life"
+],
+
+"CO3": [
+  "therukoothu", "karagattam", "villu pattu", "kaniyan koothu", "oyillattam",
+  "leather puppetry", "silambattam", "valari", "tiger dance", "folk arts",
+  "martial arts", "traditional sports", "games of tamils"
+],
+
+"CO4": [
+  "thinai", "aham", "puram", "tholkappiyam", "flora",
+  "fauna", "aram", "education", "literacy", "ancient cities",
+  "ports", "export", "import", "cholas", "overseas conquest",
+  "sangam age"
+],
+
+"CO5": [
+  "indian freedom struggle", "indian national movement", "cultural influence", "self respect movement", "siddha medicine",
+  "indigenous medicine", "inscriptions", "manuscripts", "print history", "tamil books",
+  "tamil culture", "indian culture", "heritage"
+]
+  }
+},{
+  "subjectCode": "HS3252",
+  "subjectName": "Professional English II",
+  "keywords": {
+    "CO1": [
+  "comparison", "compare", "contrast", "compare and contrast", "advertisement",
+  "advertisements", "brochure", "brochures", "user manual", "professional email",
+  "email etiquette", "mixed tenses", "prepositional phrases", "technical text",
+  "product comparison", "feature comparison", "technical communication"
+],
+
+"CO2": [
+  "cause", "effect", "cause and effect", "causal relationship", "complaint letter",
+  "response to complaint", "industrial process", "active voice", "passive voice",
+  "voice transformation", "infinitive", "gerund", "technical article",
+  "problem cause", "reason", "result"
+],
+
+"CO3": [
+  "problem solving", "case study", "letter to editor", "editor", "checklist",
+  "argumentative essay", "problem solution essay", "error correction",
+  "conditional sentence", "if condition", "analysis", "feasible solution",
+  "decision making", "issue", "solution"
+],
+
+"CO4": [
+  "report", "report writing", "accident report", "survey report", "recommendation",
+  "recommendations", "transcoding", "reported speech", "modals",
+  "newspaper article", "presentation", "opinion", "logical writing",
+  "planned writing", "communication"
+],
+
+"CO5": [
+  "resume", "cv", "curriculum vitae", "cover letter", "job application",
+  "internship application", "statement of purpose", "sop", "company profile",
+  "interview", "placement", "career", "employment",
+  "relative clauses", "numerical adjectives"
+]
+  }
+},{
+  "subjectCode": "MA3251",
+  "subjectName": "Statistics and Numerical Methods",
+  "keywords": {
+    "CO1": [
+  "hypothesis", "testing of hypothesis", "null hypothesis", "alternative hypothesis", "sampling",
+  "sampling distribution", "large sample", "small sample", "mean", "proportion",
+  "variance", "standard deviation", "chi square", "chi-square", "goodness of fit",
+  "independence of attributes", "z test", "t test", "f test", "statistical test"
+],
+
+"CO2": [
+  "design of experiments", "one way classification", "two way classification", "randomized design",
+  "completely randomized design", "randomized block design", "latin square design",
+  "factorial design", "2^2 factorial design", "experimental design",
+  "agriculture", "classification", "anova"
+],
+
+"CO3": [
+  "algebraic equation", "transcendental equation", "fixed point iteration", "newton raphson",
+  "gauss elimination", "gauss jordan", "gauss jacobi", "gauss seidel",
+  "pivoting", "eigenvalue", "power method", "jacobi method",
+  "linear equation", "matrix solution", "numerical method"
+],
+
+"CO4": [
+  "interpolation", "lagrange interpolation", "newton interpolation", "divided difference",
+  "forward difference", "backward difference", "numerical differentiation",
+  "numerical integration", "trapezoidal rule", "simpson rule",
+  "simpson 1/3 rule", "approximation", "integration", "differentiation"
+],
+
+"CO5": [
+  "ordinary differential equation", "ode", "taylor series", "euler method",
+  "modified euler", "runge kutta", "runge kutta method", "milne method",
+  "adams bashforth", "predictor corrector", "boundary condition",
+  "initial condition", "differential equation", "engineering application"
+]
+  }
+},{
+  "subjectCode": "PH3256",
+  "subjectName": "Physics for Information Science",
+  "keywords": {
+    "CO1": [
+  "electrical properties", "free electron theory", "classical free electron theory", "electrical conductivity", "thermal conductivity",
+  "wiedemann franz law", "fermi dirac statistics", "density of energy states", "energy bands", "electron in metals",
+  "particle in a box", "three dimensional box", "degenerate states", "periodic potential", "tight binding approximation",
+  "effective mass", "hole", "band structure", "electron theory"
+],
+
+"CO2": [
+  "semiconductor", "semiconductor physics", "intrinsic semiconductor", "extrinsic semiconductor", "energy band diagram",
+  "direct band gap", "indirect band gap", "n type semiconductor", "p type semiconductor", "carrier concentration",
+  "fermi level", "drift current", "diffusion", "mobility", "hall effect",
+  "ohmic contact", "schottky diode", "semiconductor device"
+],
+
+"CO3": [
+  "magnetic properties", "magnetic material", "magnetic dipole", "magnetic permeability", "magnetic susceptibility",
+  "diamagnetism", "paramagnetism", "ferromagnetism", "antiferromagnetism", "ferrimagnetism",
+  "exchange interaction", "curie temperature", "domain theory", "hard magnetic material",
+  "soft magnetic material", "computer data storage", "hard disk", "gmr sensor"
+],
+
+"CO4": [
+  "optical properties", "optical material", "light absorption", "light emission", "light scattering",
+  "photo current", "pn diode", "solar cell", "led", "organic led",
+  "oled", "laser diode", "optoelectronics", "optical storage",
+  "optical data storage", "carrier recombination"
+],
+
+"CO5": [
+  "nanodevice", "nanotechnology", "quantum confinement", "quantum well", "quantum wire",
+  "quantum dot", "band gap", "tunneling", "coulomb blockade", "single electron transistor",
+  "resonant tunneling diode", "quantum cellular automata", "quantum computing", "qubit",
+  "quantum gate", "cnot gate", "bloch sphere", "quantum information"
+]
+  }
+},{
+  "subjectCode": "BE3251",
+  "subjectName": "Basic Electrical and Electronics Engineering",
+  "keywords": {
+    "CO1": [
+  "dc circuit", "ac circuit", "electric circuit", "ohms law", "kirchhoffs law",
+  "kirchhoff current law", "kirchhoff voltage law", "kcl", "kvl", "resistor",
+  "inductor", "capacitor", "conductor", "independent source", "dependent source",
+  "nodal analysis", "mesh analysis", "rlc circuit", "power factor", "real power",
+  "reactive power", "apparent power", "rms value", "average value", "waveform"
+],
+
+"CO2": [
+  "electrical machine", "dc generator", "dc motor", "transformer", "alternator",
+  "synchronous motor", "induction motor", "three phase induction motor", "three phase alternator",
+  "emf equation", "torque equation", "working principle", "construction",
+  "applications", "self excited generator", "separately excited generator"
+],
+
+"CO3": [
+  "analog electronics", "semiconductor", "silicon", "germanium", "pn junction diode",
+  "zener diode", "bjt", "bipolar junction transistor", "jfet", "mosfet",
+  "scr", "igbt", "rectifier", "inverter", "biasing",
+  "iv characteristics", "electronic devices"
+],
+
+"CO4": [
+  "digital electronics", "binary", "number system", "binary code", "error detection",
+  "error correction", "logic gate", "combinational logic", "logic function",
+  "sop", "pos", "k map", "karnaugh map", "boolean algebra",
+  "logic minimization"
+],
+
+"CO5": [
+  "measurement", "instrumentation", "measuring instrument", "moving coil", "moving iron",
+  "energy meter", "instrument transformer", "current transformer", "potential transformer",
+  "ct", "pt", "three phase power", "dso", "digital storage oscilloscope",
+  "calibration", "data acquisition", "functional elements"
+]
+  }
+},{
+  "subjectCode": "GE3251",
+  "subjectName": "Engineering Graphics",
+  "keywords": {
+   "CO1": [
+  "engineering drawing", "engineering graphics", "bis conventions", "bis specifications", "drafting instruments",
+  "drawing sheet", "lettering", "dimensioning", "layout", "graphics",
+  "drawing standards", "engineering conventions", "freehand sketch", "technical drawing"
+],
+
+"CO2": [
+  "plane curves", "ellipse", "parabola", "hyperbola", "conics",
+  "eccentricity method", "cycloid", "involute", "involute of circle", "involute of square",
+  "tangent", "normal", "geometrical construction", "engineering curves"
+],
+
+"CO3": [
+  "projection", "orthographic projection", "projection of points", "projection of lines", "projection of planes",
+  "first angle projection", "principal planes", "true length", "true inclination",
+  "rotating line method", "trace", "polygonal surface", "circular surface"
+],
+
+"CO4": [
+  "projection of solids", "section of solids", "sectioning", "sectioned solids", "development of surfaces",
+  "development of solids", "prism", "pyramid", "cylinder", "cone",
+  "truncated solids", "lateral surface", "true shape of section", "cad modeling"
+],
+
+"CO5": [
+  "isometric projection", "isometric scale", "perspective projection", "visual ray method", "isometric drawing",
+  "perspective drawing", "three dimensional view", "3d modeling", "combination of solids",
+  "visualization", "engineering visualization", "cad software"
+]
+  }
+},{
+  "subjectCode": "CS3251",
+  "subjectName": "Programming in C",
+  "keywords": {
+    "CO1": [
+  "c programming", "programming paradigms", "structure of c program", "data types", "constants",
+  "enumeration", "keywords", "operators", "precedence", "associativity",
+  "expressions", "input output", "printf", "scanf", "assignment statement",
+  "decision making", "switch statement", "looping", "preprocessor directives", "compilation process"
+],
+
+"CO2": [
+  "basic c program", "variables", "if statement", "if else", "switch",
+  "for loop", "while loop", "do while", "break", "continue",
+  "operators", "conditional statement", "control statement", "simple application", "logic building"
+],
+
+"CO3": [
+  "array", "one dimensional array", "two dimensional array", "string", "string operations",
+  "strlen", "strcmp", "strcpy", "strcat", "selection sort",
+  "linear search", "binary search", "character array", "array processing"
+],
+
+"CO4": [
+  "function", "function prototype", "function definition", "function call", "built in function",
+  "math function", "string function", "recursion", "recursive function", "pointer",
+  "pointer arithmetic", "array and pointer", "array of pointers", "pass by value",
+  "pass by reference", "modular programming"
+],
+
+"CO5": [
+  "structure", "nested structure", "array of structures", "pointer to structure", "dynamic memory allocation",
+  "malloc", "calloc", "free", "linked list", "typedef",
+  "union", "storage class", "visibility", "file processing", "file handling",
+  "sequential file", "random access file", "command line arguments", "fopen", "fclose",
+  "fprintf", "fscanf"
+]
+  }
+},{
+  "subjectCode": "GE3252",
+  "subjectName": "Tamils and Technology",
+  "keywords": {
+    "CO1": [
+  "weaving", "weaving industry", "sangam age", "ceramic technology", "ceramics",
+  "black and red ware", "brw", "potteries", "pottery", "graffiti",
+  "graffiti on potteries", "ancient weaving", "textile technology"
+],
+
+"CO2": [
+  "design", "construction", "structural construction", "house design", "building materials",
+  "hero stones", "silappathikaram", "stage construction", "mamallapuram", "chola temples",
+  "nayaka period", "madurai meenakshi temple", "thirumalai nayakar mahal", "chettinad houses",
+  "indo saracenic architecture", "architecture"
+],
+
+"CO3": [
+  "ship building", "manufacturing technology", "metallurgy", "iron industry", "iron smelting",
+  "steel", "copper", "gold", "coins", "minting",
+  "beads", "stone beads", "glass beads", "terracotta beads", "shell beads",
+  "gem stones", "silappathikaram"
+],
+
+"CO4": [
+  "agriculture", "irrigation", "dam", "tank", "pond",
+  "sluice", "kumizhi thoompu", "animal husbandry", "well", "agro processing",
+  "fisheries", "pearl diving", "conch diving", "ocean knowledge", "sea",
+  "ancient irrigation"
+],
+
+"CO5": [
+  "scientific tamil", "tamil computing", "digitalization", "digitalisation", "tamil books",
+  "tamil software", "tamil virtual academy", "tamil digital library", "online tamil dictionary",
+  "sorkuvai", "unicode", "language technology", "digital tamil"
+]
+  }
+},{
+  "subjectCode": "MA3354",
+  "subjectName": "Discrete Mathematics",
+  "keywords": {
+   "CO1": [
+  "propositional logic", "logic", "proposition", "truth table", "logical equivalence",
+  "propositional equivalence", "predicate", "predicates", "quantifier", "universal quantifier",
+  "existential quantifier", "nested quantifier", "rules of inference", "logical inference",
+  "proof", "proof technique", "proof by contradiction", "proof by contraposition",
+  "direct proof", "mathematical proof", "logical reasoning"
+],
+
+"CO2": [
+  "mathematical induction", "strong induction", "well ordering", "counting",
+  "counting principle", "pigeonhole principle", "permutation", "combination",
+  "recurrence relation", "linear recurrence", "generating function",
+  "inclusion exclusion principle", "counting techniques", "recursive relation",
+  "finite structure"
+],
+
+"CO3": [
+  "graph", "graph theory", "graph model", "graph terminology", "simple graph",
+  "complete graph", "bipartite graph", "graph matrix", "adjacency matrix",
+  "incidence matrix", "graph isomorphism", "connectivity", "connected graph",
+  "euler path", "euler circuit", "hamilton path", "hamilton circuit",
+  "graph traversal"
+],
+
+"CO4": [
+  "function", "mapping", "one to one", "onto", "bijection",
+  "finite set", "domain", "codomain", "range", "input function",
+  "output function", "set theory", "relation", "finite mapping"
+],
+
+"CO5": [
+  "algebraic structure", "semigroup", "monoid", "group", "subgroup",
+  "homomorphism", "normal subgroup", "coset", "lagrange theorem",
+  "ring", "field", "partial ordering", "poset", "lattice",
+  "sublattice", "direct product", "boolean algebra", "boolean homomorphism",
+  "boolean lattice"
+]
+  }},{
+  "subjectCode": "CS3351",
+  "subjectName": "Digital Principles and Computer Organization",
+  "keywords": {
+    "CO1": [
+  "combinational", "logic gate", "karnaugh map", "k-map", "adder",
+  "subtractor", "binary adder", "decoder", "encoder", "multiplexer",
+  "demultiplexer", "comparator", "boolean algebra", "logic circuit"
+],
+
+"CO2": [
+  "flip flop", "register", "counter", "sequential circuit", "moore",
+  "mealy", "state diagram", "state table", "state minimization",
+  "clock", "excitation table", "finite state machine", "fsm"
+],
+
+"CO3": [
+  "von neumann", "computer organization", "instruction", "instruction set",
+  "isa", "addressing mode", "assembly language", "cpu",
+  "alu", "control unit", "operand", "instruction execution"
+],
+
+"CO4": [
+  "processor", "pipeline", "pipelining", "data hazard", "control hazard",
+  "hardwired control", "microprogrammed control", "datapath",
+  "control unit design", "instruction cycle"
+],
+
+"CO5": [
+  "memory", "cache", "virtual memory", "dma", "memory hierarchy",
+  "io interface", "interrupt", "usb", "sata",
+  "parallel interface", "serial interface", "memory management"
+]
+}},{
+  "subjectCode": "CS3352",
+  "subjectName": "Foundations of Data Science",
+      "keywords":{
+        "CO1": [
+  "data science", "data science process", "data mining", "data warehouse", "research goal",
+  "data preparation", "eda", "exploratory data analysis", "data collection",
+  "statistical description"
+],
+
+"CO2": [
+  "types of data", "variables", "categorical", "numerical", "mean",
+  "median", "mode", "variance", "standard deviation", "normal distribution",
+  "z score", "frequency table"
+],
+
+"CO3": [
+  "correlation", "regression", "scatter plot", "regression line", "least squares",
+  "correlation coefficient", "multiple regression", "relationship",
+  "prediction", "r square"
+],
+
+"CO4": [
+  "numpy", "pandas", "data wrangling", "data manipulation", "data cleaning",
+  "data indexing", "aggregation", "grouping", "pivot table",
+  "structured array", "missing data"
+],
+
+"CO5": [
+  "matplotlib", "seaborn", "visualization", "line plot", "scatter plot",
+  "histogram", "contour plot", "3d plot", "graph", "chart",
+  "visual analytics", "data presentation"
+]
+    }
+},{
+  "subjectCode": "CD3291",
+  "subjectName": "Data Structures and Algorithms",
+  "keywords" :{
+        "CO1": [
+  "abstract data type", "adt", "oop", "class", "object",
+  "inheritance", "namespace", "deep copy", "shallow copy",
+  "algorithm analysis", "asymptotic notation", "big o",
+  "recursion", "divide and conquer"
+],
+
+"CO2": [
+  "list", "array", "linked list", "singly linked list", "doubly linked list",
+  "circular linked list", "stack", "queue", "deque",
+  "linear data structure", "implementation", "application"
+],
+
+"CO3": [
+  "tree", "binary tree", "binary search tree", "bst", "avl tree",
+  "heap", "tree traversal", "preorder", "inorder", "postorder",
+  "level order", "searching", "sorting", "hashing",
+  "merge sort", "quick sort"
+],
+
+"CO4": [
+  "graph", "graph traversal", "bfs", "dfs", "dag",
+  "topological sorting", "minimum spanning tree", "mst",
+  "shortest path", "dijkstra", "greedy",
+  "dynamic programming", "complexity"
+]
+    }
+},{
+  "subjectCode": "CS3391",
+  "subjectName": "Object Oriented Programming",
+      "keywords": {
+       "CO1": [
+  "oop", "object oriented programming", "java", "class", "object",
+  "constructor", "method", "datatype", "variable", "array",
+  "operator", "control statement", "javadoc", "static",
+  "access specifier"
+],
+
+"CO2": [
+  "inheritance", "package", "interface", "overloading", "overriding",
+  "super", "abstract class", "dynamic dispatch", "nested class",
+  "inner class", "final", "import package"
+],
+
+"CO3": [
+  "exception", "try catch", "exception handling", "thread",
+  "multithreading", "thread synchronization", "inter thread communication",
+  "priority", "wrapper class", "autoboxing"
+],
+
+"CO4": [
+  "file handling", "input output", "io stream", "file stream",
+  "generic", "generic class", "generic method", "collection",
+  "string", "stringbuffer", "bounded type"
+],
+
+"CO5": [
+  "javafx", "gui", "event handling", "mouse event", "key event",
+  "button", "checkbox", "radiobutton", "listview", "combobox",
+  "layout", "gridpane", "borderpane", "flowpane",
+  "menu", "menuitem"
+]
+    }
+},{
+  "subjectCode": "CS3452",
+  "subjectName": "Theory of Computation",
+      "keywords": {
+        "CO1": [
+  "automata", "finite automata", "dfa", "nfa", "epsilon transition",
+  "state", "transition", "transition table", "transition diagram",
+  "automaton", "minimization", "deterministic", "nondeterministic"
+],
+
+"CO2": [
+  "regular expression", "regular language", "regex", "pumping lemma",
+  "closure property", "language", "regular grammar", "pattern matching"
+],
+
+"CO3": [
+  "context free grammar", "cfg", "pushdown automata", "pda",
+  "parse tree", "grammar", "derivation", "ambiguity",
+  "chomsky hierarchy", "deterministic pda"
+],
+
+"CO4": [
+  "turing machine", "tm", "cnf", "gnf", "normal form",
+  "instantaneous description", "language acceptance",
+  "turing computation", "subroutine"
+],
+
+"CO5": [
+  "decidable", "undecidable", "recursive language",
+  "recursively enumerable", "universal turing machine",
+  "np", "np complete", "tractable", "intractable",
+  "travelling salesman", "3 sat", "pcp"
+]
+    }
+},{
+  "subjectCode": "CS3491",
+  "subjectName": "Artificial Intelligence and Machine Learning",
+      "keywords": {
+        "CO1": [
+  "artificial intelligence", "ai", "search", "uninformed search", "heuristic search",
+  "astar", "best first search", "local search", "adversarial search",
+  "constraint satisfaction", "csp"
+],
+
+"CO2": [
+  "bayes theorem", "bayesian inference", "naive bayes", "bayesian network",
+  "probabilistic reasoning", "uncertainty", "causal network", "probability"
+],
+
+"CO3": [
+  "machine learning", "linear regression", "logistic regression", "decision tree",
+  "random forest", "svm", "support vector machine", "classification",
+  "supervised learning", "gradient descent"
+],
+
+"CO4": [
+  "ensemble", "bagging", "boosting", "stacking", "k means",
+  "knn", "unsupervised learning", "clustering", "gaussian mixture",
+  "expectation maximization"
+],
+
+"CO5": [
+  "neural network", "deep learning", "perceptron", "multilayer perceptron",
+  "relu", "backpropagation", "dropout", "batch normalization",
+  "activation function", "gradient descent"
+]
+    }
+},{
+  "subjectCode": "CS3492",
+  "subjectName": "Database Management Systems",
+      "keywords":{
+        "CO1": [
+  "database", "dbms", "sql", "relational algebra", "relation",
+  "tuple", "attribute", "primary key", "foreign key",
+  "candidate key", "ddl", "dml"
+],
+
+"CO2": [
+  "er diagram", "entity relationship", "normalization",
+  "functional dependency", "1nf", "2nf", "3nf",
+  "bcnf", "4nf", "5nf", "database design"
+],
+
+"CO3": [
+  "transaction", "acid", "serializability", "locking",
+  "deadlock", "concurrency", "rollback", "commit",
+  "timestamp", "recovery"
+],
+
+"CO4": [
+  "index", "b tree", "b+ tree", "hashing",
+  "query optimization", "query processing", "raid",
+  "file organization", "cost estimation", "storage"
+],
+
+"CO5": [
+  "distributed database", "nosql", "mongodb", "graph database",
+  "document database", "cap theorem", "database security",
+  "sql injection", "role based access", "encryption"
+]
+    }
+},{
+  "subjectCode": "IT3401",
+  "subjectName": "Web Essentials",
+      "keywords":{
+        "CO1": [
+  "html", "css", "javascript", "website", "web page",
+  "client side", "web browser", "web server", "dom",
+  "form", "responsive design"
+],
+
+"CO2": [
+  "php", "php script", "variables", "loop", "function",
+  "array", "string", "file handling", "file upload",
+  "email"
+],
+
+"CO3": [
+  "web application", "client server", "dynamic website", "http",
+  "https", "request", "response", "deployment",
+  "server side"
+],
+
+"CO4": [
+  "database", "mysql", "php mysql", "jdbc", "servlet",
+  "sql", "crud", "database connectivity", "query"
+],
+
+"CO5": [
+  "multimedia", "audio", "video", "image", "media",
+  "html5", "canvas", "animation", "interactive",
+  "media element"
+]
+    }
+},{
+  "subjectCode": "CS3451",
+  "subjectName": "Introduction to Operating Systems",
+  "keywords": {
+    "CO1": [
+  "Operating System", "Process", "Thread", "CPU Scheduling", "FCFS",
+  "SJF", "Priority Scheduling", "Round Robin", "Synchronization",
+  "Critical Section", "Semaphore", "Mutex", "Monitor",
+  "IPC", "Scheduling Algorithm"
+],
+
+"CO2": [
+  "Deadlock", "Deadlock Prevention", "Deadlock Avoidance", "Banker's Algorithm",
+  "Deadlock Detection", "Recovery", "Resource Allocation", "Safe State",
+  "Unsafe State", "Resource Graph"
+],
+
+"CO3": [
+  "Memory Management", "Paging", "Segmentation", "Virtual Memory",
+  "Demand Paging", "Page Replacement", "LRU", "FIFO",
+  "Optimal", "Thrashing", "Frame Allocation", "Page Table",
+  "Swapping"
+],
+
+"CO4": [
+  "File System", "Directory", "Disk Scheduling", "FCFS Disk",
+  "SCAN", "C-SCAN", "LOOK", "I/O System",
+  "Storage Management", "Virtual Machine", "Virtualization",
+  "VM"
+],
+
+"CO5": [
+  "Android", "iOS", "Mobile Operating System", "Mobile OS",
+  "Android Architecture", "iOS Architecture", "Mobile Applications",
+  "Virtual Machine", "Hypervisor"
+]
+  }
+},{
+  "subjectCode": "GE3451",
+  "subjectName": "Environmental Sciences and Sustainability",
+  "keywords": {
+    "CO1": [
+  "Environment", "Ecosystem", "Biodiversity", "Ecology", "Food Chain",
+  "Food Web", "Energy Flow", "Ecological Succession", "Hotspot",
+  "Conservation", "In-situ", "Ex-situ", "Endangered Species"
+],
+
+"CO2": [
+  "Pollution", "Air Pollution", "Water Pollution", "Soil Pollution",
+  "Noise Pollution", "E-Waste", "Hazardous Waste", "Solid Waste",
+  "Environmental Protection", "Natural Disaster", "OHASMS"
+],
+
+"CO3": [
+  "Renewable Energy", "Non Renewable Energy", "Solar Energy", "Wind Energy",
+  "Hydrogen Energy", "Ocean Energy", "Tidal Energy", "Geothermal Energy",
+  "Energy Conservation", "Energy Management"
+],
+
+"CO4": [
+  "Sustainability", "Sustainable Development", "SDG", "Climate Change",
+  "Carbon Credit", "Carbon Footprint", "Environmental Management",
+  "GDP", "Global Warming", "Sustainable Society"
+],
+
+"CO5": [
+  "Green Building", "Green Materials", "Circular Economy", "Zero Waste",
+  "3R", "Life Cycle Assessment", "Environmental Impact Assessment",
+  "Green Engineering", "Sustainable Transport", "Energy Cycle",
+  "Carbon Cycle", "Sustainable Urbanization"
+]
+  }
+},{
+  "subjectCode": "CS3591",
+  "subjectName": "Computer Networks",
+  "keywords": {
+    "CO1": [
+  "Computer Networks", "Network Layer", "OSI Model", "TCP/IP",
+  "Protocol", "Layering", "Data Communication", "Sockets"
+],
+
+"CO2": [
+  "TCP", "UDP", "Flow Control", "Congestion Control","QoS", "Data Flow", "Transport Layer", "SCTP"
+],
+
+"CO3": [
+  "Routing", "Routing Algorithms", "Distance Vector", "Link State",
+  "RIP", "OSPF", "BGP", "Multicast Routing", "DVMRP", "PIM"
+],
+
+"CO4": [
+  "IPv4", "IPv6", "ARP", "RARP", "ICMP", "DHCP", "Ethernet", "PPP", "HDLC",
+  "CSMA/CD", "VLAN", "Wireless LAN"
+],
+
+"CO5": [
+  "HTTP", "FTP", "SMTP", "POP3", "IMAP","MIME", "DNS", "SNMP", "Application Layer"
+]
+  }
+},{
+  "subjectCode": "IT3501",
+  "subjectName": "Full Stack Web Development",
+  "keywords": {
+    "CO1": [
+  "Full Stack", "MVC", "Express", "Angular", "React","Node.js", "MongoDB", "Web Development"
+],
+
+"CO2": [
+  "Node.js", "NPM", "Events", "Callbacks", "HTTP","Timers", "Node Packages", "I/O"
+],
+
+"CO3": [
+  "MongoDB", "NoSQL", "Collections", "Database", "CRUD",
+  "Node MongoDB", "Database Administration"
+],
+
+"CO4": [
+  "Express", "Angular", "TypeScript", "Components", "Data Binding","Routing", "Request", "Response"
+],
+
+"CO5": [
+  "React", "React Router", "REST API", "MERN Stack", "Webpack",
+  "React Components", "React State", "Server Side Rendering"
+]
+  }
+},{
+  "subjectCode": "CS3551",
+  "subjectName": "Distributed Computing",
+  "keywords": {
+    "CO1": [
+  "Distributed System", "Message Passing", "Shared Memory", "Distributed Communication",
+  "Distributed Computation", "Communication Models", "Synchronization"
+],
+
+"CO2": [
+  "Logical Clock", "Vector Clock", "Scalar Clock", "NTP",
+  "Global State", "Snapshot", "Message Ordering", "Group Communication"
+],
+
+"CO3": [
+  "Distributed Mutex", "Lamport Algorithm", "Ricart Agrawala", "Suzuki Kasami",
+  "Deadlock", "Chandy Misra Haas", "Token Algorithm"
+],
+
+"CO4": [
+  "Consensus", "Agreement", "Checkpointing", "Rollback Recovery",
+  "Fault Tolerance", "Failure Recovery", "Reliability"
+],
+
+"CO5": [
+  "Cloud Computing", "Virtualization", "Load Balancing", "Scalability",
+  "Elasticity", "Cloud Services", "Cloud Deployment", "Cloud Models"
+]
+  }
+},{
+  "subjectCode": "CS3691",
+  "subjectName": "Embedded Systems and IoT",
+  "keywords": {
+    "CO1": [
+  "Embedded System", "Embedded Processor", "Microcontroller", "8-bit Processor",
+  "Architecture", "Instruction Set", "Interrupt", "Timer", "Serial Port"
+],
+
+"CO2": [
+  "Embedded C", "C Programming", "Memory Interfacing", "I/O Interfacing",
+  "RTOS", "Task", "Process", "Context Switching", "Priority Scheduling"
+],
+
+"CO3": [
+  "IoT", "Arduino", "Arduino IDE", "Sketch", "GPIO",
+  "Sensor", "Actuator", "Arduino Shield", "Embedded Application"
+],
+
+"CO4": [
+  "IoT Communication", "Bluetooth", "WiFi", "ZigBee",
+  "GPS", "GSM", "Raspberry Pi", "GPIO", "Cloud"
+],
+
+"CO5": [
+  "Home Automation", "Smart Agriculture", "Smart City", "Smart Healthcare",
+  "IoT Application", "Arduino", "Raspberry Pi", "Open Platform"
+]
+  }
+},{
+  "subjectCode": "CCS334",
+  "subjectName": "Big Data Analytics",
+  "keywords": {
+    "CO1": [
+  "Big Data", "Big Data Analytics", "Unstructured Data", "Web Analytics",
+  "Cloud Computing", "Business Intelligence", "Hadoop", "Big Data Technologies"
+],
+
+"CO2": [
+  "NoSQL", "Key Value Store", "Document Database", "Graph Database",
+  "Schema-less Database", "Cassandra", "Replication", "Consistency"
+],
+
+"CO3": [
+  "Hadoop", "HDFS", "Distributed File System", "Data Storage","Data Flow",
+   "Serialization", "Compression", "Avro"
+],
+
+"CO4": [
+  "MapReduce", "Mapper", "Reducer", "YARN",
+  "Job Scheduling", "Shuffle", "Input Format", "Output Format"
+],
+
+"CO5": [
+  "HBase", "Hive", "Pig", "Pig Latin","HiveQL", "Cassandra", "Big Data Tools", "Analytics"
+]
+  }
+},{
+  "subjectCode": "CCS341",
+  "subjectName": "Data Warehousing",
+  "keywords": {
+    "CO1": [
+  "Data Warehouse", "Data Warehouse Architecture", "Three Tier Architecture", "Operational Database",
+  "Autonomous Data Warehouse", "Modern Data Warehouse", "Warehouse Components",
+  "Architecture Design"
+],
+
+"CO2": [
+  "ETL", "ELT", "OLAP", "OLTP", "ROLAP",
+  "MOLAP", "HOLAP", "Data Modeling", "Data Warehouse Design",
+  "OLAP Operations", "Data Delivery"
+],
+
+"CO3": [
+  "Metadata", "Metadata Repository", "Metadata Management", "Data Mart",
+  "Partitioning", "Vertical Partition", "Horizontal Partition",
+  "Normalization", "Row Splitting"
+],
+
+"CO4": [
+  "Dimensional Modeling", "Data Cube", "Star Schema", "Snowflake Schema",
+  "Fact Constellation", "Schema Design", "Schema Comparison",
+  "Database Parallelism", "Data Warehouse Tools"
+],
+
+"CO5": [
+  "System Manager", "Process Manager", "Load Manager", "Warehouse Manager",
+  "Query Manager", "System Configuration", "Scheduling Manager",
+  "Event Manager", "Backup Recovery", "Performance Tuning",
+  "Testing"
+]
+  }
+},{
+  "subjectCode": "CCS356",
+  "subjectName": "Object Oriented Software Engineering",
+  "keywords": {
+     "CO1": [
+  "software process", "SDLC", "agile", "XP", "software lifecycle",
+  "compare lifecycle models", "software engineering"
+],
+
+"CO2": [
+  "project management", "cost estimation", "schedule estimation", "risk management",
+  "project planning", "configuration management", "devops"
+],
+
+"CO3": [
+  "requirement analysis", "SRS", "formal specification", "finite state machine",
+  "petri net", "requirement gathering"
+],
+
+"CO4": [
+  "UML", "use case", "class diagram", "activity diagram",
+  "sequence diagram", "state chart", "data flow diagram",
+  "CASE tools"
+],
+
+"CO5": [
+  "software design", "design pattern", "MVC", "observer",
+  "adapter", "testing", "unit testing", "integration testing",
+  "maintenance"
+]
+    }
+  },
+{
+  "subjectCode":"CCS366",
+    "subjectName": "Software Testing and Automation",
+    "keywords": {
+      "CO1": [
+  "software testing", "testing principles", "black box testing", "white box testing",
+  "STLC", "verification", "validation"
+],
+
+"CO2": [
+  "test planning", "test strategy", "test schedule", "resource planning",
+  "metrics", "bug reporting"
+],
+
+"CO3": [
+  "test case", "boundary value analysis", "equivalence partitioning", "path testing",
+  "data flow testing", "test execution"
+],
+
+"CO4": [
+  "performance testing", "load testing", "stress testing", "security testing",
+  "compatibility testing", "mobile testing", "agile testing"
+],
+
+"CO5": [
+  "selenium", "webdriver", "test automation", "automation testing","testng", "web automation"
+]
+    }
+  },
+{
+    "subjectCode": "CCS335",
+    "subjectName": "Cloud Computing",
+    "keywords": {
+      "CO1": [
+  "cloud architecture", "cloud infrastructure", "deployment model",
+  "service model", "NIST", "cloud design"
+],
+
+"CO2": [
+  "virtualization", "virtual machine", "hypervisor",
+  "full virtualization", "para virtualization", "hardware virtualization"
+],
+
+"CO3": [
+  "docker", "container", "resource management",
+  "desktop virtualization", "storage virtualization", "network virtualization"
+],
+
+"CO4": [
+  "AWS", "Azure", "Google App Engine",
+  "OpenStack", "Eucalyptus", "cloud deployment"
+],
+
+"CO5": [
+  "cloud security", "IAM", "identity management",
+  "data security", "VM attack", "hyperjacking"
+]
+    }
+  },{
+  "subjectCode": "CCS366",
+  "subjectName": "Software Testing and Automation",
+  "keywords": {
+    "CO1": [
+  "software testing", "testing concepts", "STLC", "V-model",
+  "black box testing", "white box testing", "verification",
+  "validation", "unit testing", "integration testing",
+  "system testing", "defects", "faults", "software quality"
+],
+
+"CO2": [
+  "test planning", "test strategy", "test schedule", "resource planning",
+  "tester assignment", "test phases", "test metrics",
+  "bug reporting", "test management"
+],
+
+"CO3": [
+  "test case design", "test execution", "boundary value analysis",
+  "equivalence partitioning", "path testing", "data flow testing",
+  "test objective", "test procedures", "bug life cycle",
+  "requirement analysis"
+],
+
+"CO4": [
+  "performance testing", "load testing", "stress testing",
+  "volume testing", "recovery testing", "compatibility testing",
+  "security testing", "usability testing", "web application testing",
+  "mobile application testing", "agile testing"
+],
+
+"CO5": [
+  "automation testing", "selenium", "webdriver", "web elements",
+  "testng", "test automation", "automation framework",
+  "test reports"
+]
+    }
+  },
+{
+  "subjectCode": "CCS354",
+  "subjectName": "Network Security",
+  "keywords": {
+      "CO1": [
+  "cryptography", "encryption", "public key cryptography", "symmetric encryption",
+  "asymmetric encryption", "hash function", "digital signature",
+  "authentication"
+],
+
+"CO2": [
+  "key management", "key distribution", "public key infrastructure",
+  "PKI", "X.509", "Kerberos", "user authentication",
+  "certificate"
+],
+
+"CO3": [
+  "network security", "transport layer security", "TLS", "SSL",
+  "HTTPS", "SSH", "IPSec", "IKE",
+  "IEEE 802.1X", "network access control"
+],
+
+"CO4": [
+  "application security", "email security", "PGP", "S/MIME",
+  "DKIM", "wireless security", "mobile security"
+],
+
+"CO5": [
+  "firewall", "intrusion detection system", "IDS",
+  "password management", "blockchain security", "cloud security",
+  "IoT security", "cyber security"
+]
+    }
+  },{
+  "subjectCode": "GE3791",
+  "subjectName": "Human Values and Ethics",
+  "keywords": {
+    "CO1": [
+  "democracy", "democratic values", "equality", "liberty", "justice",
+  "freedom", "pluralism", "tolerance", "citizenship", "citizen participation",
+  "constitution", "fundamental rights", "directive principles", "rule of law",
+  "human dignity", "social justice", "independence", "french revolution",
+  "american revolution", "indian freedom movement", "democratic society",
+  "rights", "responsibility", "constitutional values", "good governance"
+],
+
+"CO2": [
+  "secularism", "secular values", "religious harmony", "religious tolerance",
+  "unity", "diversity", "national integration", "equal respect", "religion",
+  "faith", "belief", "culture", "social harmony", "communal harmony",
+  "mutual respect", "peace", "brotherhood", "fraternity", "inclusive society",
+  "non discrimination", "social inclusion", "ethical values", "universal values",
+  "respect", "acceptance"
+],
+
+"CO3": [
+  "scientific temper", "scientific method", "science", "technology",
+  "innovation", "research", "critical thinking", "logical thinking",
+  "reasoning", "evidence", "observation", "hypothesis", "experiment",
+  "analysis", "problem solving", "decision making", "creativity",
+  "invention", "rationalism", "deductive reasoning", "inductive reasoning",
+  "scientific attitude", "facts", "proof", "verification"
+],
+
+"CO4": [
+  "ethics", "professional ethics", "social ethics", "human rights",
+  "gender equality", "women empowerment", "environmental ethics", "environment",
+  "sustainability", "social responsibility", "corporate social responsibility",
+  "csr", "digital ethics", "cyber ethics", "privacy", "confidentiality",
+  "moral values", "integrity", "honesty", "accountability", "responsibility",
+  "ethical issues", "ethical dilemma", "professional responsibility",
+  "work ethics"
+],
+
+"CO5": [
+  "leadership", "ethical leadership", "value based leadership",
+  "personality development", "character", "integrity", "honesty",
+  "discipline", "decision making", "self awareness", "emotional intelligence",
+  "life skills", "team work", "communication", "conflict resolution",
+  "service", "social commitment", "citizenship", "ethical living",
+  "good values", "moral responsibility", "personal ethics",
+  "professional growth", "lead by example", "lifelong learning"
+]
+  }
+},{
+  "subjectCode": "OHS352",
+  "subjectName": "Project Report Writing",
+  "keywords": {
+     "CO1": [
+  "project report", "technical writing", "report writing", "grammar",
+  "paragraph writing", "proofreading", "technical documentation"
+],
+
+"CO2": [
+  "statistical analysis", "data analysis", "data interpretation",
+  "research methods", "research tools", "analysis techniques"
+],
+
+"CO3": [
+  "research question", "project objective", "project aim",
+  "project significance", "background study", "theoretical framework",
+  "abstract", "introduction"
+],
+
+"CO4": [
+  "literature review", "research design", "data collection",
+  "findings", "recommendations", "conclusion", "academic writing"
+],
+
+"CO5": [
+  "project proposal", "proposal writing", "bibliography",
+  "plagiarism", "oral presentation", "report formatting"
+]
+    }
+  },
+{
+  "subjectCode": "GE3752",
+  "subjectName": "Total Quality Management",
+  "keywords": {
+      "CO1": [
+  "quality", "TQM", "quality management", "quality gurus",
+  "quality framework", "benefits of TQM"
+],
+
+"CO2": [
+  "leadership", "customer satisfaction", "Deming", "Juran trilogy",
+  "Kaizen", "5S", "continuous improvement", "supplier partnership"
+],
+
+"CO3": [
+  "six sigma", "quality tools", "benchmarking", "FMEA",
+  "process capability", "traditional quality tools"
+],
+
+"CO4": [
+  "QFD", "quality function deployment", "Taguchi", "TPM",
+  "cost of quality", "business process reengineering", "quality circles"
+],
+
+"CO5": [
+  "ISO 9001", "ISO 9000", "ISO 14001", "EMS",
+  "QMS", "quality standards", "internal audit"
+]
+    }
+  },
+{
+  "subjectCode": "AI3021",
+  "subjectName": "IT in Agricultural System",
+  "keywords": {
+      "CO1": [
+  "precision farming", "remote sensing", "GPS", "GIS",
+  "yield mapping", "drones", "crop modeling"
+],
+
+"CO2": [
+  "greenhouse", "environment control", "artificial lighting",
+  "CO2 management", "plant growth", "automation"
+],
+
+"CO3": [
+  "agricultural management", "resource optimization", "linear programming",
+  "decision support system", "field operations", "simulation"
+],
+
+"CO4": [
+  "weather forecasting", "climate model", "seasonal forecasting",
+  "climate prediction", "weather analysis"
+],
+
+"CO5": [
+  "e-governance", "expert system", "agricultural database",
+  "e-commerce", "e-learning", "rural development",
+  "information system"
+]
+    }
+  }
+]

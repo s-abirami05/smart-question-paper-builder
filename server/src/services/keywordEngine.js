@@ -63,6 +63,13 @@ function findBestMatch(question, rules, keyName, fallbackValue = "") {
         const keywordScore = normalizedKeyword.split(" ").length;
         bestKeywordScore = Math.max(bestKeywordScore, keywordScore);
         matchedKeywordCount += 1;
+
+  for (const rule of rules) {
+    let score = 0;
+    
+    for (const keyword of rule.keywords) {
+      if (cleanedQuestion.includes(keyword.toLowerCase())) {
+        score++;
       }
     }
 

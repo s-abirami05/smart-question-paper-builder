@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import bgImage from "../../assets/auth-bg.jpg.jpeg"; 
 import { registerUser } from "../../services/authService";
 
+
 export default function Register() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ export default function Register() {
   };
 
   const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setAlertMessage("");
 
@@ -51,6 +53,15 @@ export default function Register() {
       setIsSuccess(false);
       setAlertMessage(error.response?.data?.message || "Registration failed. Please try again.");
     }
+    }
+
+    // If all rules passed successfully
+    setIsSuccess(true);
+    setAlertMessage("Account created successfully! Redirecting to login...");
+    
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
   };
 
   return (
@@ -301,4 +312,5 @@ const styles = {
     cursor: "pointer",
     textDecoration: "underline",
   },
+};
 };

@@ -2,6 +2,26 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import DiagramEditor from "../../components/DiagramEditor"; // your DiagramEditor component path
 
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import DiagramEditor from "../../components/DiagramEditor"; // your DiagramEditor component path
+
+const autoDetectCOBLPI = (text) => {
+  const lower = text.toLowerCase().trim();
+  if (!lower) return { bl: "", co: "", pi: "" };
+
+  if (lower.startsWith("define") || lower.startsWith("state") || lower.startsWith("list") || lower.startsWith("what")) {
+    return { bl: "L1", co: "CO1", pi: "1.1.1" };
+  } else if (lower.startsWith("explain") || lower.startsWith("describe") || lower.startsWith("discuss") || lower.startsWith("compare")) {
+    return { bl: "L2", co: "CO2", pi: "2.1.2" };
+  } else if (lower.startsWith("apply") || lower.startsWith("solve") || lower.startsWith("calculate") || lower.startsWith("derive")) {
+    return { bl: "L3", co: "CO3", pi: "3.2.1" };
+  } else if (lower.startsWith("analyze") || lower.startsWith("design") || lower.startsWith("evaluate") || lower.startsWith("develop")) {
+    return { bl: "L4", co: "CO4", pi: "4.1.1" };
+  }
+  return { bl: "L2", co: "CO1", pi: "1.1.1" };
+};
+
 const subjectsBySemester = {
   "I": [
     { code: "HS3152", name: "Professional English - I" },
@@ -68,6 +88,7 @@ const SAVED_DIAGRAMS_KEY =
 export default function QuestionPaperBuilder() {
   const predictionTimers = useRef(new Map());
   const selectedSubjectCode = useRef("");
+
   const [editingId, setEditingId] = useState(null);
   const [savedPapersList, setSavedPapersList] = useState([]);
   const [showListModal, setShowListModal] = useState(false);
@@ -262,6 +283,7 @@ const [savedDiagrams, setSavedDiagrams] =
       const paper = res.data;
       setEditingId(paper._id);
       selectedSubjectCode.current = paper.subjectCode || "";
+
       
       const currentSemSubjects = subjectsBySemester[paper.semester] || [];
       setSubjectList(currentSemSubjects);
@@ -318,6 +340,7 @@ const [savedDiagrams, setSavedDiagrams] =
       const newSubjects = subjectsBySemester[value] || [];
       setSubjectList(newSubjects);
       selectedSubjectCode.current = "";
+
       setHeader({
         ...header,
         semester: value,
@@ -345,6 +368,7 @@ const [savedDiagrams, setSavedDiagrams] =
       optionA: { ...clearMetadata(current.optionA), subQuestions: current.optionA.subQuestions.map(clearMetadata) },
       optionB: { ...clearMetadata(current.optionB), subQuestions: current.optionB.subQuestions.map(clearMetadata) },
     }));
+
     setHeader({
       ...header,
       subjectCode: selectedCode,
@@ -404,6 +428,13 @@ const [savedDiagrams, setSavedDiagrams] =
     }
   };
 
+    const detected = autoDetectCOBLPI(value);
+    updated[index].co = detected.co;
+    updated[index].bl = detected.bl;
+    updated[index].pi = detected.pi;
+    setPartA(updated);
+  };
+
   const handlePartAMetaChange = (index, field, value) => {
     const updated = [...partA];
     updated[index][field] = value;
@@ -444,12 +475,26 @@ const [savedDiagrams, setSavedDiagrams] =
     } catch (error) {
       console.error("Question prediction failed:", error);
     }
+    if (field === "question") {
+      const detected = autoDetectCOBLPI(value);
+      targetOpt.co = detected.co;
+      targetOpt.bl = detected.bl;
+      targetOpt.pi = detected.pi;
+    }
+    setPartB(updated);
   };
 
   const handlePartBSubChange = (qIndex, optionKey, subIndex, field, value) => {
     const updated = [...partB];
     const targetOpt = optionKey === "A" ? updated[qIndex].optionA : updated[qIndex].optionB;
     targetOpt.subQuestions[subIndex][field] = value;
+
+    if (field === "question") {
+      const detected = autoDetectCOBLPI(value);
+      targetOpt.subQuestions[subIndex].co = detected.co;
+      targetOpt.subQuestions[subIndex].bl = detected.bl;
+      targetOpt.subQuestions[subIndex].pi = detected.pi;
+    }
     setPartB(updated);
   };
 
@@ -479,6 +524,13 @@ const [savedDiagrams, setSavedDiagrams] =
     const targetOpt = optionKey === "A" ? { ...partC.optionA } : { ...partC.optionB };
     const updatedSubs = [...targetOpt.subQuestions];
     updatedSubs[subIndex] = { ...updatedSubs[subIndex], [field]: value };
+
+    if (field === "question") {
+      const detected = autoDetectCOBLPI(value);
+      updatedSubs[subIndex].co = detected.co;
+      updatedSubs[subIndex].bl = detected.bl;
+      updatedSubs[subIndex].pi = detected.pi;
+    }
     targetOpt.subQuestions = updatedSubs;
     if (optionKey === "A") setPartC({ ...partC, optionA: targetOpt });
     else setPartC({ ...partC, optionB: targetOpt });
@@ -777,6 +829,13 @@ const renderDiagramPreview = (diagram, target = null) => {
   const handlePartCChange = (optionKey, field, value) => {
     const targetOpt = optionKey === "A" ? partC.optionA : partC.optionB;
     const updatedOpt = { ...targetOpt, [field]: value };
+
+    if (field === "question") {
+      const detected = autoDetectCOBLPI(value);
+      updatedOpt.co = detected.co;
+      updatedOpt.bl = detected.bl;
+      updatedOpt.pi = detected.pi;
+    }
     if (optionKey === "A") {
       setPartC({ ...partC, optionA: updatedOpt });
     } else {
@@ -859,6 +918,7 @@ const renderDiagramPreview = (diagram, target = null) => {
     return `M ${pieCenter} ${pieCenter} L ${start.x} ${start.y} A ${pieRadius} ${pieRadius} 0 ${largeArc} 1 ${end.x} ${end.y} Z`;
   };
   const totalQuestionMarks = chartQuestions.reduce((total, item) => total + getQuestionMarks(item.marks), 0);
+
 
   return (
     <div style={{ padding: "24px", fontFamily: "Segoe UI, Roboto, sans-serif", backgroundColor: "#f4f6f9", minHeight: "100vh", color: "#333" }}>
@@ -1170,6 +1230,7 @@ const renderDiagramPreview = (diagram, target = null) => {
                           value={q.question}
                           onChange={(e) => { handlePartAChange(idx, e.target.value); schedulePrediction(`partA-${idx}`, () => predictPartA(idx, e.target.value)); }}
                           onBlur={(e) => predictPartA(idx, e.target.value)}
+                          onChange={(e) => handlePartAChange(idx, e.target.value)}
                           placeholder={`Enter Short Question ${idx + 1}`}
                         />
                         <button
@@ -1247,6 +1308,7 @@ const renderDiagramPreview = (diagram, target = null) => {
                               value={q.optionA.question}
                               onChange={(e) => { handlePartBSingleChange(qIndex, "A", "question", e.target.value); schedulePrediction(`partB-${qIndex}-A`, () => predictPartB(qIndex, "A", null, e.target.value)); }}
                               onBlur={(e) => predictPartB(qIndex, "A", null, e.target.value)}
+                              onChange={(e) => handlePartBSingleChange(qIndex, "A", "question", e.target.value)}
                               placeholder={`Enter Question ${q.qNo} (a)`}
                             />
                             <button
@@ -1299,6 +1361,7 @@ const renderDiagramPreview = (diagram, target = null) => {
                               value={sub.question}
                               onChange={(e) => { handlePartBSubChange(qIndex, "A", sIdx, "question", e.target.value); schedulePrediction(`partB-${qIndex}-A-${sIdx}`, () => predictPartB(qIndex, "A", sIdx, e.target.value)); }}
                               onBlur={(e) => predictPartB(qIndex, "A", sIdx, e.target.value)}
+                              onChange={(e) => handlePartBSubChange(qIndex, "A", sIdx, "question", e.target.value)}
                               placeholder={`Enter Sub Question ${sub.label}`}
                             />
                             <button
@@ -1354,6 +1417,7 @@ const renderDiagramPreview = (diagram, target = null) => {
                               value={q.optionB.question}
                               onChange={(e) => { handlePartBSingleChange(qIndex, "B", "question", e.target.value); schedulePrediction(`partB-${qIndex}-B`, () => predictPartB(qIndex, "B", null, e.target.value)); }}
                               onBlur={(e) => predictPartB(qIndex, "B", null, e.target.value)}
+                              onChange={(e) => handlePartBSingleChange(qIndex, "B", "question", e.target.value)}
                               placeholder={`Enter Question ${q.qNo} (b)`}
                             />
                             <button
@@ -1406,6 +1470,8 @@ const renderDiagramPreview = (diagram, target = null) => {
                               value={sub.question}
                               onChange={(e) => { handlePartBSubChange(qIndex, "B", sIdx, "question", e.target.value); schedulePrediction(`partB-${qIndex}-B-${sIdx}`, () => predictPartB(qIndex, "B", sIdx, e.target.value)); }}
                               onBlur={(e) => predictPartB(qIndex, "B", sIdx, e.target.value)}
+
+                              onChange={(e) => handlePartBSubChange(qIndex, "B", sIdx, "question", e.target.value)}
                               placeholder={`Enter Sub Question ${sub.label}`}
                             />
                             <button
@@ -1483,6 +1549,7 @@ const renderDiagramPreview = (diagram, target = null) => {
                             }));
                           }}
                           onBlur={(e) => predictQuestionMetadata(e.target.value).then((metadata) => setPartC((current) => current.optionA.question === e.target.value ? { ...current, optionA: { ...current.optionA, ...metadata } } : current)).catch((error) => console.error("Question prediction failed:", error))}
+                          onChange={(e) => handlePartCChange("A", "question", e.target.value)}
                           placeholder="Enter Part C Question 16 (a)"
                         />
                         <button
@@ -1535,6 +1602,7 @@ const renderDiagramPreview = (diagram, target = null) => {
                           value={sub.question}
                           onChange={(e) => { handlePartCSubChange("A", sIdx, "question", e.target.value); schedulePrediction(`partC-A-${sIdx}`, () => predictPartC("A", sIdx, e.target.value)); }}
                           onBlur={(e) => predictPartC("A", sIdx, e.target.value)}
+                          onChange={(e) => handlePartCSubChange("A", sIdx, "question", e.target.value)}
                           placeholder={`Enter Sub Question ${sub.label}`}
                         />
                         <button
@@ -1595,6 +1663,7 @@ const renderDiagramPreview = (diagram, target = null) => {
                             }));
                           }}
                           onBlur={(e) => predictQuestionMetadata(e.target.value).then((metadata) => setPartC((current) => current.optionB.question === e.target.value ? { ...current, optionB: { ...current.optionB, ...metadata } } : current)).catch((error) => console.error("Question prediction failed:", error))}
+                          onChange={(e) => handlePartCChange("B", "question", e.target.value)}
                           placeholder="Enter Part C Question 16 (b)"
                         />
                         <button
@@ -1647,6 +1716,7 @@ const renderDiagramPreview = (diagram, target = null) => {
                           value={sub.question}
                           onChange={(e) => { handlePartCSubChange("B", sIdx, "question", e.target.value); schedulePrediction(`partC-B-${sIdx}`, () => predictPartC("B", sIdx, e.target.value)); }}
                           onBlur={(e) => predictPartC("B", sIdx, e.target.value)}
+                          onChange={(e) => handlePartCSubChange("B", sIdx, "question", e.target.value)}
                           placeholder={`Enter Sub Question ${sub.label}`}
                         />
                         <button
