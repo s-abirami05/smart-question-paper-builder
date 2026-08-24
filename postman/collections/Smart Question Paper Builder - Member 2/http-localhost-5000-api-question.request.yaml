@@ -1,0 +1,17 @@
+$kind: http-request
+name: http://localhost:5000/api/question
+description: ""
+url: http://localhost:5000/api/question
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"title\": \"Data Structures Question Paper\",\r
+
+    \  \"subject\": \"DS\",\r
+
+    \  \"semester\": \"5\"\r
+
+    }"
+order: 4474247172263945

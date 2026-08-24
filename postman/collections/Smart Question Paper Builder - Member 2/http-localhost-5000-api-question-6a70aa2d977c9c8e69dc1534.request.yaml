@@ -1,0 +1,9 @@
+$kind: http-request
+name: http://localhost:5000/api/question/6a70aa2d977c9c8e69dc1534
+description: ""
+url: http://localhost:5000/api/question/6a6ef7bc3a15c157ce3efa74
+method: PUT
+body:
+  type: json
+  content: ""
+order: 519960107836629

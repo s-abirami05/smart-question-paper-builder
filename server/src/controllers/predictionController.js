@@ -1,80 +1,42 @@
-import { predictQuestion } from "../services/predictionService.js";
-import { getSuggestions } from "../services/suggestionEngine.js";
+
 import PredictionLog from "../models/PredictionLog.js";
+import { getSuggestions } from "../services/suggestionEngine.js";
+import { predictQuestion } from "../services/predictionService.js";
 
-// Predict CO, BL, PI
-export const predict = async (req, res) => {
-  try {
-    const { question } = req.body;
+export const predict = (req, res) => {
+  const { question, subjectCode } = req.body;
 
-    if (!question) {
-      return res.status(400).json({
-        success: false,
-        message: "Question is required",
-      });
-    }
-
-    const prediction = predictQuestion(question);
-
-    return res.status(200).json({
-      success: true,
-      data: prediction,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+  if (!question?.trim()) {
+    return res.status(400).json({ message: "Question is required" });
   }
+
+  return res.json(predictQuestion(question, subjectCode));
 };
 
-// Suggest CO, BL, PI
-export const suggest = async (req, res) => {
-  try {
-    const { question } = req.body;
+export const suggest = (req, res) => {
+  const { question, subjectCode } = req.body;
 
-    if (!question) {
-      return res.status(400).json({
-        success: false,
-        message: "Question is required",
-      });
-    }
-
-    const suggestions = getSuggestions(question);
-
-    return res.status(200).json({
-      success: true,
-      data: suggestions,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+  if (!question?.trim()) {
+    return res.status(400).json({ message: "Question is required" });
   }
+
+  return res.json({
+    suggestions: predictQuestion(question, subjectCode).prediction,
+  });
 };
 
-// Save Prediction Log
 export const savePrediction = async (req, res) => {
   try {
-    const { question, predictedCO, predictedBL, predictedPI } = req.body;
-
-    const log = await PredictionLog.create({
+    const { question, prediction } = req.body;
+    const savedPrediction = await PredictionLog.create({
       question,
-      predictedCO,
-      predictedBL,
-      predictedPI,
+      predictedCO: prediction.co,
+      predictedBL: prediction.bloomLevel,
+      predictedPI: prediction.pi,
     });
 
-    return res.status(201).json({
-      success: true,
-      message: "Prediction saved successfully",
-      data: log,
-    });
+    return res.status(201).json(savedPrediction);
   } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    return res.status(500).json({ message: error.message });
   }
 };

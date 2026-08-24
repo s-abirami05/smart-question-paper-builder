@@ -1,27 +1,53 @@
 import express from "express";
 
+
 import {
-  createCourseOutcome,
-  getCourseOutcomes,
-  updateCourseOutcome,
-  deleteCourseOutcome,
+    createCourseOutcome,
+    getCourseOutcomes,
+    updateCourseOutcome,
+    deleteCourseOutcome
 } from "../controllers/courseOutcomeController.js";
 
-import protect from "../middleware/authMiddleware.js";
 
 
 const router = express.Router();
 
 
-// Protected Routes
 
-router.post("/", protect, createCourseOutcome);
+// Create CO
 
-router.get("/", protect, getCourseOutcomes);
+router.post(
+    "/",
+    createCourseOutcome
+);
 
-router.put("/:id", protect, updateCourseOutcome);
 
-router.delete("/:id", protect, deleteCourseOutcome);
+
+// Get CO based on Subject
+
+router.get(
+    "/subject/:subjectId",
+    getCourseOutcomes
+);
+
+
+
+// Update CO
+
+router.put(
+    "/:id",
+    updateCourseOutcome
+);
+
+
+
+// Delete CO
+
+router.delete(
+    "/:id",
+    deleteCourseOutcome
+);
+
 
 
 export default router;

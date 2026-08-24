@@ -1,12 +1,15 @@
 import mongoose from "mongoose";
 
+
 const courseOutcomeSchema = new mongoose.Schema(
   {
+
     subject: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Subject",
       required: true,
     },
+
 
     coNumber: {
       type: String,
@@ -14,11 +17,13 @@ const courseOutcomeSchema = new mongoose.Schema(
       trim: true,
     },
 
+
     description: {
       type: String,
       required: true,
       trim: true,
-    },
+    }
+
   },
   {
     timestamps: true,
@@ -26,10 +31,12 @@ const courseOutcomeSchema = new mongoose.Schema(
 );
 
 
+
 const CourseOutcome = mongoose.model(
   "CourseOutcome",
   courseOutcomeSchema
 );
+
 
 
 export default CourseOutcome;

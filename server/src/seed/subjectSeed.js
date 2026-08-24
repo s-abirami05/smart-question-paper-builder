@@ -72,7 +72,6 @@ const subjectData = [
         semester: "Semester 2"
     },
 
-
     {
         name: "Physics for Information Science",
         code: "PH3256",

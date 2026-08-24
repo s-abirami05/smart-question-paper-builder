@@ -1,0 +1,20 @@
+{
+  "L1": [
+    "Cite", "Copy", "Count", "Draw", "Define", "Detail", "Diagram", "Expand", "Highlight", "How", "Identify", "Label", "List", "Listen", "Locate", "Match", "Memorize", "Mention", "Name", "Observe", "Omit", "Plot", "Point", "Quote", "Read", "Recall", "Recite", "Recognize", "Record", "Relate", "Remember", "Repeat", "Reproduce", "Retell", "Select", "Sketch", "Specify", "Spell", "State", "Tell", "Trace", "Underline", "What", "When", "Where", "Which", "Who", "Write"
+  ],
+  "L2": [
+    "Arrange", "Ask", "Associate", "Calculate", "Classify", "Communicate", "Compare", "Comprehend", "Compute", "Construct", "Contrast", "Convert", "Defend", "Demonstrate", "Describe", "Determine", "Differentiate", "Discuss", "Disprove", "Distinguish", "Elaborate", "Estimate", "Explain", "Express", "Extend", "Extrapolate", "Find", "Give example", "Illustrate", "Indicate", "Infer", "Interpret", "Interrelate", "Outline", "Paraphrase", "Predict", "Prove", "Purpose", "Relate", "Rephrase", "Report","Represent", "Restate", "Review", "Reword", "Rewrite", "Schedule", "Show", "Simplify", "Solve", "Summarize", "Tabulate", "Translate", "Verify", "Why"
+  ],
+  "L3": [
+    "Act/React", "Add", "Administer", "Apply", "Assemble", "Build", "Calculate", "Change", "Collect", "Combine", "Complete", "Comply", "Compose", "Conduct", "Connect", "Construct", "Correlate", "Classify", "Compute", "Demonstrate","Design", "Determine", "Develop","Divide","Do","Dramatize","Employ","Examine","Experiment","Experiment with","Generalize","Graph","Group","Implement","Interpolate","Interview","Link","Make use of","Manipulate","Maximize","Measure","Minimize","Model","Modify","Operate","Organize","Paint","Perform","Plan","Practice","Prepare","Produce","Propose","Respond","Show","Shop","Solve","Subtract","Simulate","Teach","Test","Transfer","Translate","Use","Utilize"
+  ],
+  "L4": [
+   "Analyze", "Argue", "Assume", "Breakdown", "Categorize", "Cause and effect", "Combine", "Conclusion", "Design", "Debate", "Detect", "Devise", "Diagram", "Discover", "Discriminate", "Dissect", "Distinct", "Divide", "Establish", "Focus", "Function", "Group", "In-depth", "Inference", "Inspect", "Investigate", "Isolate", "Motive", "Order", "Outline", "point out", "Prioritize", "Quantify", "Question", "Rank", "Relate", "Rate", "Relationships", "Reorganize", "Research", "See", "Select", "Separate", "Similar to", "subdivide", "Survey", "Take part in", "Test for", "Theme", "Utilize"
+  ],
+  "L5": [
+    "Agree", "Appraise", "Argue", "Assess", "Award", "Conclude", "Contrast", "Consider", "Convince", "Criteria", "Criticize", "Critique", "Decide", "Deduct", "Determine", "Direct", "Dispute", "Effective", "Evaluate", "Give reasons", "Good", "Grade", "How do we know?", "Importance", "Influence", "Judge", "Justify", "Manage", "Mark", "Measure", "Opinion", "Perceive", "Persuade", "Present a case for", "Recommend", "Report on", "Rule on", "Score", "Support", "Test", "Useful", "Validate", "Value", "Weight"
+  ],
+  "L6": [
+   "Adapt", "Add to", "Categorize", "Combine", "Compile", "Compose", "Create", "Delete", "Discover", "Drive", "Design", "Devise", "Express", "Formulate", "Generate", "Group", "Happen", "Hypothesize", "Imagine", "Improve", "Integrate", "Invent", "Inventory", "Make up", "Modify", "Order", "Organize", "Original", "Originate", "Plan", "Prescribe", "Propose", "Rearrange", "Reconstruct", "Reorganize", "Reframe", "Revise", "Rewrite", "Set up", "Solution", "Speculate", "Specify", "Suppose", "Summarize", "Theorize", "Theory", "Think", "Transform", "Visualize", "Write"
+  ]
+}

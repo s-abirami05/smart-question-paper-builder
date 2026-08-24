@@ -1,0 +1,882 @@
+
+[
+  {
+    "subjectCode": "GE3752",
+    "pi": "3.5.4",
+    "keywords": [
+      "quality",
+      "total quality management",
+      "tqm",
+      "quality management",
+      "quality gurus",
+      "quality framework",
+      "benefits of tqm"
+    ]
+  },
+  {
+    "subjectCode": "AI3021",
+    "pi": "1.6.1",
+    "keywords": [
+      "precision farming",
+      "precision agriculture",
+      "artificial lighting",
+      "artificial light",
+      "artificial light system",
+      "greenhouse",
+      "environment control",
+      "automation",
+      "crop modeling",
+      "remote sensing",
+      "yield mapping"
+    ]
+  },
+  {
+    "subjectCode": "CD3291",
+    "pi": "4.4.2",
+    "keywords": [
+      "hashing",
+      "hash table",
+      "collision resolution",
+      "sorting algorithm",
+      "searching algorithm",
+      "tree traversal",
+      "graph traversal"
+    ]
+  },
+  {
+    "subjectCode": "CS3492",
+    "pi": "4.4.2",
+    "keywords": [
+      "hashing",
+      "hash index",
+      "query optimization",
+      "database indexing"
+    ]
+  },
+  {
+    "subjectCode": "GE3752",
+    "pi": "5.4.1",
+    "keywords": [
+      "six sigma",
+      "quality tools",
+      "benchmarking",
+      "fmea",
+      "process capability",
+      "traditional quality tools"
+    ]
+  },
+  {
+    "subjectCode": "GE3752",
+    "pi": "6.4.1",
+    "keywords": [
+      "iso 9001",
+      "iso 9000",
+      "iso 14001",
+      "quality standards",
+      "internal audit",
+      "quality policy",
+      "quality management system",
+      "qms"
+    ]
+  },
+  {
+    "subjectCode": "GE3752",
+    "pi": "11.4.1",
+    "keywords": [
+      "cost of quality",
+      "costs of quality",
+      "quality cost",
+      "quality costs",
+      "cost of poor quality",
+      "prevention cost",
+      "appraisal cost",
+      "failure cost"
+    ]
+  },
+  {
+    "subjectCode": "GE3752",
+    "pi": "9.5.1",
+    "keywords": [
+      "leadership",
+      "quality leadership",
+      "leadership role",
+      "leadership in TQM"
+    ]
+  },
+  {
+    "subjectCode": "GE3752",
+    "pi": "2.8.1",
+    "keywords": [
+      "PDSA",
+      "PDCA",
+      "plan do study act",
+      "plan do check act",
+      "continuous improvement cycle"
+    ]
+  },
+  {
+    "pi": "1.2.1",
+    "keywords": [
+      "discrete structures",
+      "linear algebra",
+      "statistics",
+      "numerical techniques",
+      "mathematical techniques",
+      "mathematical model"
+    ]
+  },
+  {
+    "pi": "1.2.2",
+    "keywords": [
+      "probability",
+      "queuing theory",
+      "probability model",
+      "statistical model",
+      "network protocol",
+      "data modeling",
+      "computer based system"
+    ]
+  },
+  {
+    "pi": "1.5.1",
+    "keywords": [
+      "natural science",
+      "laws of natural science",
+      "physics",
+      "scientific law"
+    ]
+  },
+  {
+    "pi": "1.6.1",
+    "keywords": [
+      "engineering fundamentals",
+      "engineering principle",
+      "engineering concept"
+    ]
+  },
+  {
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem"
+    ]
+  },
+
+  {
+    "pi": "2.5.1",
+    "keywords": [
+      "evaluate problem",
+      "problem statement",
+      "identify objectives",
+      "objectives of the problem",
+      "problem objectives"
+    ]
+  },
+  {
+    "pi": "2.5.2",
+    "keywords": [
+      "identify processes",
+      "identify modules",
+      "identify algorithms",
+      "system modules",
+      "computer based system",
+      "system parameters"
+    ]
+  },
+  {
+    "pi": "2.5.3",
+    "keywords": [
+      "mathematical algorithm",
+      "algorithmic knowledge",
+      "mathematical algorithmic",
+      "algorithm for the problem"
+    ]
+  },
+  {
+    "pi": "2.6.1",
+    "keywords": [
+      "interconnected subsystems",
+      "subsystems",
+      "reframe the system",
+      "system into subsystems"
+    ]
+  },
+  {
+    "pi": "2.6.2",
+    "keywords": [
+      "system functionalities",
+      "functionalities",
+      "computing resources",
+      "system resources"
+    ]
+  },
+  {
+    "pi": "2.6.3",
+    "keywords": [
+      "existing solution",
+      "existing solutions",
+      "existing method",
+      "existing methods",
+      "approximations",
+      "assumptions"
+    ]
+  },
+  {
+    "pi": "2.6.4",
+    "keywords": [
+      "compare alternative solutions",
+      "compare solutions",
+      "contrast solutions",
+      "alternative methods",
+      "select the best method",
+      "best solution"
+    ]
+  },
+  {
+    "pi": "2.6.5",
+    "keywords": [
+      "compare solution processes",
+      "alternative solution processes",
+      "best process",
+      "compare processes"
+    ]
+  },
+  {
+    "pi": "2.7.1",
+    "keywords": [
+      "formulate modules",
+      "system modules",
+      "computer engineering principles",
+      "system performance",
+      "applicability and performance"
+    ]
+  },
+  {
+    "pi": "2.7.2",
+    "keywords": [
+      "design constraints",
+      "performance criteria",
+      "system constraints",
+      "performance constraints"
+    ]
+  },
+  {
+    "pi": "2.8.1",
+    "keywords": [
+      "engineering mathematics",
+      "mathematical implementation",
+      "apply mathematics",
+      "implement the solution"
+    ]
+  },
+  {
+    "pi": "2.8.2",
+    "keywords": [
+      "analyze results",
+      "interpret results",
+      "contemporary tools",
+      "analyze and interpret"
+    ]
+  },
+  {
+    "pi": "2.8.3",
+    "keywords": [
+      "limitations of the solution",
+      "limitations",
+      "sources of errors",
+      "causes of errors",
+      "solution limitations"
+    ]
+  },
+  {
+    "pi": "2.8.4",
+    "keywords": [
+      "conclusion",
+      "draw conclusion",
+      "arrive at conclusions",
+      "objectives",
+      "conclusions with respect to objectives"
+    ]
+  },
+
+  {
+    "pi": "3.5.1",
+    "keywords": [
+      "problem statement",
+      "define the problem",
+      "problem objectives",
+      "scope of the problem",
+      "objectives and scope"
+    ]
+  },
+  {
+    "pi": "3.5.2",
+    "keywords": [
+      "system requirements",
+      "stakeholder requirements",
+      "identify requirements",
+      "document requirements",
+      "stakeholders"
+    ]
+  },
+  {
+    "pi": "3.5.3",
+    "keywords": [
+      "state of the art",
+      "literature review",
+      "review literature",
+      "research literature",
+      "synthesize requirements"
+    ]
+  },
+  {
+    "pi": "3.5.4",
+    "keywords": [
+      "quality attributes",
+      "iso",
+      "iec",
+      "ieee standard",
+      "software quality"
+    ]
+  },
+  {
+    "pi": "3.5.5",
+    "keywords": [
+      "social concerns",
+      "professional concerns",
+      "social requirements",
+      "societal requirements"
+    ]
+  },
+  {
+    "pi": "3.5.6",
+    "keywords": [
+      "software requirement specification",
+      "software requirements specification",
+      "srs",
+      "develop srs"
+    ]
+  },
+  {
+    "pi": "3.6.1",
+    "keywords": [
+      "design alternatives",
+      "alternative designs",
+      "explore design"
+    ]
+  },
+  {
+    "pi": "3.6.2",
+    "keywords": [
+      "design solutions",
+      "potential design solutions",
+      "functional requirements",
+      "alternative design solutions"
+    ]
+  },
+  {
+    "pi": "3.6.3",
+    "keywords": [
+      "non functional requirements",
+      "non-functional requirements",
+      "evaluate design alternatives"
+    ]
+  },
+  {
+    "pi": "3.7.1",
+    "keywords": [
+      "evaluate design concepts",
+      "systematic evaluation",
+      "design criteria",
+      "evaluate alternatives"
+    ]
+  },
+  {
+    "pi": "3.7.2",
+    "keywords": [
+      "domain experts",
+      "stakeholders",
+      "select candidate solution",
+      "candidate engineering solution"
+    ]
+  },
+  {
+    "pi": "3.8.1",
+    "keywords": [
+      "architecture design",
+      "detailed design",
+      "refine architecture",
+      "design constraints"
+    ]
+  },
+  {
+    "pi": "3.8.2",
+    "keywords": [
+      "implement modules",
+      "integrate modules",
+      "module integration",
+      "implement and integrate"
+    ]
+  },
+  {
+    "pi": "3.8.3",
+    "keywords": [
+      "verify functionality",
+      "validate design",
+      "verify functionalities",
+      "validate the design"
+    ]
+  },
+
+  {
+    "pi": "4.4.1",
+    "keywords": [
+      "investigation problem",
+      "scope and importance",
+      "define a problem for investigation"
+    ]
+  },
+  {
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases"
+    ]
+  },
+  {
+    "pi": "4.4.3",
+    "keywords": [
+      "hardware tools",
+      "software tools",
+      "experimental tools",
+      "choose tools"
+    ]
+  },
+  {
+    "pi": "4.5.1",
+    "keywords": [
+      "procedure",
+      "methodology",
+      "develop methodology",
+      "study objectives",
+      "experimental procedure"
+    ]
+  },
+  {
+    "pi": "4.6.1",
+    "keywords": [
+      "collect data",
+      "analyze data",
+      "data collection",
+      "data analysis"
+    ]
+  },
+  {
+    "pi": "4.6.2",
+    "keywords": [
+      "trends",
+      "correlations",
+      "analyze data critically",
+      "errors and limitations",
+      "data trends"
+    ]
+  },
+  {
+    "pi": "4.6.3",
+    "keywords": [
+      "tabular form",
+      "graphical form",
+      "represent data",
+      "graphs",
+      "charts",
+      "tables"
+    ]
+  },
+  {
+    "pi": "4.6.4",
+    "keywords": [
+      "synthesize information",
+      "raw data",
+      "draw conclusions",
+      "reach conclusions"
+    ]
+  },
+
+  {
+    "pi": "5.4.1",
+    "keywords": [
+      "modern engineering tools",
+      "engineering tools",
+      "modern tools",
+      "techniques and resources"
+    ]
+  },
+  {
+    "pi": "5.4.2",
+    "keywords": [
+      "modify tools",
+      "adapt tools",
+      "extend tools",
+      "create tools",
+      "modify techniques"
+    ]
+  },
+  {
+    "pi": "5.5.1",
+    "keywords": [
+      "strengths and limitations",
+      "tool limitations",
+      "modeling and simulating",
+      "monitoring system performance"
+    ]
+  },
+  {
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools"
+    ]
+  },
+  {
+    "pi": "5.6.1",
+    "keywords": [
+      "validate tools",
+      "limitations of tools",
+      "validate techniques",
+      "validate resources"
+    ]
+  },
+  {
+    "pi": "5.6.2",
+    "keywords": [
+      "credibility of results",
+      "accuracy",
+      "assumptions",
+      "verify results",
+      "tool accuracy"
+    ]
+  },
+
+  {
+    "pi": "6.3.1",
+    "keywords": [
+      "public interest",
+      "public protection",
+      "engineering roles",
+      "society",
+      "public safety"
+    ]
+  },
+  {
+    "pi": "6.4.1",
+    "keywords": [
+      "legislation",
+      "regulations",
+      "codes",
+      "standards",
+      "legal requirements"
+    ]
+  },
+
+  {
+    "pi": "7.3.1",
+    "keywords": [
+      "environmental impact",
+      "environmental risks",
+      "life cycle",
+      "life-cycle",
+      "risks and impacts"
+    ]
+  },
+  {
+    "pi": "7.3.2",
+    "keywords": [
+      "sustainability",
+      "socio economic",
+      "environmental dimensions",
+      "technical dimensions"
+    ]
+  },
+  {
+    "pi": "7.4.1",
+    "keywords": [
+      "sustainable development",
+      "management techniques",
+      "sustainability management"
+    ]
+  },
+  {
+    "pi": "7.4.2",
+    "keywords": [
+      "preventive engineering",
+      "sustainable design",
+      "sustainable development",
+      "sustainable engineering"
+    ]
+  },
+
+  {
+    "pi": "8.3.1",
+    "keywords": [
+      "unethical",
+      "unethical conduct",
+      "ethical dilemma",
+      "ethical alternatives"
+    ]
+  },
+  {
+    "pi": "8.4.1",
+    "keywords": [
+      "code of ethics",
+      "professional code",
+      "asme",
+      "ethical code"
+    ]
+  },
+  {
+    "pi": "8.4.2",
+    "keywords": [
+      "moral principles",
+      "ethical principles",
+      "case study",
+      "moral and ethical"
+    ]
+  },
+
+  {
+    "pi": "9.4.1",
+    "keywords": [
+      "working preferences",
+      "learning preferences",
+      "team diversity",
+      "diversity in team"
+    ]
+  },
+  {
+    "pi": "9.4.2",
+    "keywords": [
+      "team rules",
+      "team roles",
+      "team charter",
+      "team agenda",
+      "teamwork"
+    ]
+  },
+  {
+    "pi": "9.5.1",
+    "keywords": [
+      "communication",
+      "problem solving",
+      "conflict resolution",
+      "leadership",
+      "leadership skills"
+    ]
+  },
+  {
+    "pi": "9.5.2",
+    "keywords": [
+      "respect team members",
+      "respectful",
+      "team members"
+    ]
+  },
+  {
+    "pi": "9.5.3",
+    "keywords": [
+      "listen to members",
+      "listening",
+      "team communication"
+    ]
+  },
+  {
+    "pi": "9.5.4",
+    "keywords": [
+      "difficult situations",
+      "maintain composure",
+      "stressful situation"
+    ]
+  },
+  {
+    "pi": "9.6.1",
+    "keywords": [
+      "present results as a team",
+      "team presentation",
+      "integrate contributions",
+      "team results"
+    ]
+  },
+
+  {
+    "pi": "10.4.1",
+    "keywords": [
+      "interpret technical information",
+      "technical literature",
+      "non technical information",
+      "read and understand"
+    ]
+  },
+  {
+    "pi": "10.4.2",
+    "keywords": [
+      "written engineering document",
+      "technical document",
+      "engineering report",
+      "written report"
+    ]
+  },
+  {
+    "pi": "10.4.3",
+    "keywords": [
+      "logical progression",
+      "document flow",
+      "presentation flow",
+      "main point"
+    ]
+  },
+  {
+    "pi": "10.5.1",
+    "keywords": [
+      "listen and comprehend",
+      "instructions",
+      "viewpoints"
+    ]
+  },
+  {
+    "pi": "10.5.2",
+    "keywords": [
+      "oral presentation",
+      "technical presentation",
+      "presentation skills",
+      "non technical audience"
+    ]
+  },
+  {
+    "pi": "10.6.1",
+    "keywords": [
+      "engineering figures",
+      "engineering drawings",
+      "reports and drawings",
+      "technical figures"
+    ]
+  },
+  {
+    "pi": "10.6.2",
+    "keywords": [
+      "media",
+      "presentation media",
+      "visual media",
+      "communicate message"
+    ]
+  },
+
+  {
+    "pi": "11.4.1",
+    "keywords": [
+      "cost of quality",
+      "costs of quality",
+      "quality cost",
+      "quality costs",
+      "economic costs",
+      "financial costs",
+      "cost benefits",
+      "financial benefits"
+    ]
+  },
+  {
+    "pi": "11.4.2",
+    "keywords": [
+      "financial statements",
+      "financial status",
+      "financial analysis"
+    ]
+  },
+  {
+    "pi": "11.5.1",
+    "keywords": [
+      "select proposal",
+      "economic considerations",
+      "financial considerations",
+      "compare proposals"
+    ]
+  },
+  {
+    "pi": "11.6.1",
+    "keywords": [
+      "project tasks",
+      "resources required",
+      "project resources",
+      "identify tasks"
+    ]
+  },
+  {
+    "pi": "11.6.2",
+    "keywords": [
+      "project management tools",
+      "schedule project",
+      "time and budget",
+      "project scheduling"
+    ]
+  },
+
+  {
+    "pi": "12.4.1",
+    "keywords": [
+      "professional development",
+      "continuing professional development",
+      "professional development requirement"
+    ]
+  },
+  {
+    "pi": "12.4.2",
+    "keywords": [
+      "knowledge gap",
+      "knowledge gaps",
+      "deficiencies",
+      "source information"
+    ]
+  },
+  {
+    "pi": "12.5.1",
+    "keywords": [
+      "technological advance",
+      "technology advancement",
+      "historic technology",
+      "technological development"
+    ]
+  },
+  {
+    "pi": "12.5.2",
+    "keywords": [
+      "new developments",
+      "keep current",
+      "current technology",
+      "latest developments"
+    ]
+  },
+  {
+    "pi": "12.6.1",
+    "keywords": [
+      "technical literature",
+      "credible sources",
+      "source information",
+      "technical sources"
+    ]
+  },
+  {
+    "pi": "12.6.2",
+    "keywords": [
+      "feasibility",
+      "viability",
+      "sustainability",
+      "analyze information"
+    ]
+  }
+]

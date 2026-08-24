@@ -5,350 +5,379 @@ import axios from "axios";
 function CourseOutcome() {
 
 
-  const [subject, setSubject] = useState("");
+    const [subjects, setSubjects] = useState([]);
 
-  const [coCode, setCoCode] = useState("");
-  const [description, setDescription] = useState("");
+    const [selectedSubject, setSelectedSubject] = useState("");
 
+    const [coNumber, setCoNumber] = useState("");
 
-  const [subjects, setSubjects] = useState([]);
-  const [courseOutcomes, setCourseOutcomes] = useState([]);
+    const [description, setDescription] = useState("");
 
-
-
-  const token = localStorage.getItem("token");
+    const [courseOutcomes, setCourseOutcomes] = useState([]);
 
 
 
-  // Get Subjects
+    // Load Subjects
 
-  const fetchSubjects = async()=>{
+    useEffect(()=>{
 
-    try{
+        loadSubjects();
 
-      const response = await axios.get(
+    },[]);
 
-        "http://localhost:5000/api/subjects",
 
-        {
-          headers:{
-            Authorization:`Bearer ${token}`
-          }
+
+
+
+    const loadSubjects = async()=>{
+
+        try{
+
+            const response = await axios.get(
+                "http://localhost:5000/api/subjects"
+            );
+
+
+            setSubjects(response.data);
+
+
         }
+        catch(error){
 
-      );
-
-
-      setSubjects(response.data);
-
-
-    }catch(error){
-
-      console.log(error);
-
-    }
-
-  };
-
-
-
-
-  // Get CO List
-
-  const fetchCO = async()=>{
-
-
-    try{
-
-
-      const response = await axios.get(
-
-        "http://localhost:5000/api/course-outcomes",
-
-        {
-          headers:{
-            Authorization:`Bearer ${token}`
-          }
-        }
-
-      );
-
-
-      setCourseOutcomes(response.data);
-
-
-
-    }catch(error){
-
-      console.log(error);
-
-    }
-
-
-  };
-
-
-
-
-  useEffect(()=>{
-
-    fetchSubjects();
-    fetchCO();
-
-  },[]);
-
-
-
-
-
-  // Add CO
-
-  const handleSubmit = async(e)=>{
-
-
-    e.preventDefault();
-
-
-
-    try{
-
-
-      const response = await axios.post(
-
-        "http://localhost:5000/api/course-outcomes",
-
-        {
-          subject,
-          coCode,
-          description
-        },
-
-
-        {
-
-          headers:{
-            Authorization:`Bearer ${token}`
-          }
+            console.log(error);
 
         }
 
-      );
-
-
-
-      alert(response.data.message);
-
-
-
-      setSubject("");
-      setCoCode("");
-      setDescription("");
-
-
-
-      fetchCO();
-
-
-
-    }catch(error){
-
-
-      alert(
-
-        error.response?.data?.message ||
-        "Failed"
-
-      );
-
-
-    }
-
-
-  };
+    };
 
 
 
 
 
-  return(
+    // Get CO by Subject
+
+    const getCOs = async(subjectId)=>{
 
 
-    <div className="min-h-screen bg-gray-100 p-10">
+        try{
 
 
-      <div className="bg-white p-6 rounded shadow">
+            const response = await axios.get(
+
+                `http://localhost:5000/api/course-outcomes/subject/${subjectId}`
+
+            );
 
 
-        <h2 className="text-2xl font-bold mb-5">
-
-          Course Outcome Management
-
-        </h2>
+            setCourseOutcomes(response.data);
 
 
+        }
+        catch(error){
+
+            console.log(error);
+
+        }
 
 
-        <form onSubmit={handleSubmit}>
-
-
-          <select
-
-          className="border p-2 mr-3"
-
-          value={subject}
-
-          onChange={(e)=>setSubject(e.target.value)}
-
-          >
-
-
-            <option>
-              Select Subject
-            </option>
+    };
 
 
 
-            {
-              subjects.map((sub)=>(
 
-                <option
 
-                key={sub._id}
 
-                value={sub._id}
+
+    const handleSubjectChange = (e)=>{
+
+
+        const id = e.target.value;
+
+
+        setSelectedSubject(id);
+
+
+        if(id){
+
+            getCOs(id);
+
+        }
+        else{
+
+            setCourseOutcomes([]);
+
+        }
+
+
+    };
+
+
+
+
+
+
+
+    // Add CO
+
+    const handleSubmit = async(e)=>{
+
+
+        e.preventDefault();
+
+
+        try{
+
+
+            await axios.post(
+
+                "http://localhost:5000/api/course-outcomes",
+
+                {
+
+                    subject:selectedSubject,
+
+                    coNumber,
+
+                    description
+
+                }
+
+            );
+
+
+
+            alert("CO Added Successfully");
+
+
+
+            setCoNumber("");
+
+            setDescription("");
+
+
+
+            getCOs(selectedSubject);
+
+
+
+        }
+        catch(error){
+
+            console.log(error);
+
+        }
+
+
+    };
+
+
+
+
+
+
+
+    return (
+
+        <div className="min-h-screen bg-gray-100 p-10">
+
+
+            <h1 className="text-4xl font-bold text-center mb-10">
+
+                Course Outcome Management
+
+            </h1>
+
+
+
+
+
+            <div className="max-w-xl mx-auto bg-white p-8 rounded-xl shadow">
+
+
+
+
+
+                <label className="font-semibold">
+
+                    Select Subject
+
+                </label>
+
+
+
+                <select
+
+                    value={selectedSubject}
+
+                    onChange={handleSubjectChange}
+
+                    className="w-full border p-3 rounded mt-2 mb-5"
 
                 >
 
-                  {sub.name}
 
-                </option>
+                    <option value="">
 
+                        Select Subject
 
-              ))
-            }
+                    </option>
 
 
+                    {
+                        subjects.map((sub)=>(
 
-          </select>
 
+                            <option
 
+                                key={sub._id}
 
+                                value={sub._id}
 
+                            >
 
-          <input
+                                {sub.name}
 
-          className="border p-2 mr-3"
+                            </option>
 
-          placeholder="CO Code (CO1)"
 
-          value={coCode}
+                        ))
+                    }
 
-          onChange={(e)=>setCoCode(e.target.value)}
 
-          />
 
+                </select>
 
 
 
 
-          <input
 
-          className="border p-2 mr-3"
 
-          placeholder="Description"
 
-          value={description}
+                <form onSubmit={handleSubmit}>
 
-          onChange={(e)=>setDescription(e.target.value)}
 
-          />
+                    <label className="font-semibold">
 
+                        CO Number
 
+                    </label>
 
 
+                    <input
 
-          <button
+                        value={coNumber}
 
-          className="bg-blue-600 text-white px-5 py-2 rounded"
+                        onChange={(e)=>setCoNumber(e.target.value)}
 
-          >
+                        placeholder="CO1"
 
-          Add CO
+                        className="w-full border p-3 rounded mt-2 mb-5"
 
-          </button>
+                    />
 
 
 
-        </form>
 
 
+                    <label className="font-semibold">
 
+                        Description
 
+                    </label>
 
-        <hr className="my-6"/>
 
+                    <textarea
 
+                        value={description}
 
+                        onChange={(e)=>setDescription(e.target.value)}
 
+                        placeholder="Enter CO Description"
 
-        <h3 className="text-xl font-semibold">
+                        className="w-full border p-3 rounded mt-2 mb-5"
 
-          Course Outcome List
+                    />
 
-        </h3>
 
 
 
 
+                    <button
 
-        {
+                        className="bg-blue-600 text-white px-6 py-3 rounded"
 
-          courseOutcomes.map((co)=>(
+                    >
 
+                        Add CO
 
-            <div
+                    </button>
 
-            key={co._id}
 
-            className="border p-3 mt-3"
 
-
-            >
-
-
-              <p>
-
-                {co.coCode}
-
-              </p>
-
-
-              <p>
-
-                {co.description}
-
-              </p>
+                </form>
 
 
 
             </div>
 
 
-          ))
-
-        }
 
 
 
 
-      </div>
+
+            <div className="max-w-xl mx-auto mt-10">
 
 
-    </div>
+                <h2 className="text-2xl font-bold mb-5">
+
+                    CO List
+
+                </h2>
 
 
-  );
 
+                {
+                    courseOutcomes.map((co)=>(
+
+
+                        <div
+
+                            key={co._id}
+
+                            className="bg-white p-5 rounded shadow mb-3"
+
+                        >
+
+                            <h3 className="font-bold text-xl">
+
+                                {co.coNumber}
+
+                            </h3>
+
+
+                            <p>
+
+                                {co.description}
+
+                            </p>
+
+
+                        </div>
+
+
+                    ))
+                }
+
+
+
+            </div>
+
+
+
+        </div>
+
+    );
 
 }
 

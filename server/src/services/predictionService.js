@@ -1,12 +1,18 @@
 import loadRule from "../utils/loadRules.js";
 import { findBestMatch } from "./keywordEngine.js";
 
-const coRules = loadRule("coRules.json").rules;
-const bloomRules = loadRule("bloomRules.json").rules;
-const piRules = loadRule("piRules.json").rules;
+const coRules = loadRule("coRules.json");
+const bloomRules = loadRule("bloomRules.json");
+const piRules = loadRule("piRules.json");
 
-function predictQuestion(question) {
-  const co = findBestMatch(question, coRules, "co");
+function predictQuestion(question, subjectCode) {
+  const normalizedSubjectCode = String(subjectCode || "").trim().toUpperCase();
+  const coRulesToUse = normalizedSubjectCode
+    ? coRules.filter((rule) => rule.subjectCode === normalizedSubjectCode)
+    : [];
+  const co = findBestMatch(question, coRulesToUse.flatMap((rule) =>
+    Object.entries(rule.keywords).map(([co, keywords]) => ({ co, keywords }))
+  ), "co");
 
   const bloomLevel = findBestMatch(
     question,
@@ -14,7 +20,12 @@ function predictQuestion(question) {
     "level"
   );
 
-  const pi = findBestMatch(question, piRules, "pi");
+  const subjectPiRules = normalizedSubjectCode
+    ? piRules.filter((rule) => rule.subjectCode === normalizedSubjectCode)
+    : [];
+  const genericPiRules = piRules.filter((rule) => !rule.subjectCode);
+  const piRulesToUse = [...subjectPiRules, ...genericPiRules];
+  const pi = findBestMatch(question, piRulesToUse, "pi");
 
   return {
     question,

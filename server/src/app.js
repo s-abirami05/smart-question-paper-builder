@@ -8,6 +8,9 @@ import subjectRoutes from "./routes/subjectRoutes.js";
 import courseOutcomeRoutes from "./routes/courseOutcomeRoutes.js";
 import syllabusRoutes from "./routes/syllabusRoutes.js";
 import predictionRoutes from "./routes/predictionRoutes.js";
+import questionRoutes from "./routes/questionRoutes.js";
+import ocrRoutes from "./routes/ocrRoutes.js";
+
 const app = express();
 
 app.use(cors());
@@ -23,6 +26,8 @@ app.use("/api/semesters", semesterRoutes);
 app.use("/api/subjects", subjectRoutes);
 app.use("/api/syllabus", syllabusRoutes);
 app.use("/api/prediction", predictionRoutes);
+app.use("/api/question", questionRoutes);
+app.use("/api/question/ocr", ocrRoutes);
 app.get("/", (req,res)=>{
   res.send("Smart Question Paper Builder API Running");
 });
