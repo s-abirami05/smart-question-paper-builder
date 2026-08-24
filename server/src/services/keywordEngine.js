@@ -19,14 +19,20 @@ function wordMatches(questionWord, keywordWord) {
     return word;
   };
 
-  return normalizeWord(questionWord) === normalizeWord(keywordWord)
-    || singular(questionWord) === singular(keywordWord);
+  return (
+    normalizeWord(questionWord) === normalizeWord(keywordWord) ||
+    singular(questionWord) === singular(keywordWord)
+  );
 }
 
 function containsKeyword(questionWords, keyword) {
   const keywordWords = keyword.split(" ");
 
-  for (let start = 0; start <= questionWords.length - keywordWords.length; start += 1) {
+  for (
+    let start = 0;
+    start <= questionWords.length - keywordWords.length;
+    start += 1
+  ) {
     const matches = keywordWords.every((keywordWord, offset) =>
       wordMatches(questionWords[start + offset], keywordWord)
     );
@@ -40,6 +46,7 @@ function containsKeyword(questionWords, keyword) {
 function findBestMatch(question, rules, keyName, fallbackValue = "") {
   const cleanedQuestion = cleanText(question);
   const questionWords = cleanedQuestion.split(" ").filter(Boolean);
+
   const normalizedRules = Array.isArray(rules)
     ? rules
     : Object.entries(rules).map(([label, keywords]) => ({
@@ -52,29 +59,31 @@ function findBestMatch(question, rules, keyName, fallbackValue = "") {
 
   for (const rule of normalizedRules) {
     const keywords = rule.keywords || [];
+
     let bestKeywordScore = 0;
     let matchedKeywordCount = 0;
 
     for (const keyword of keywords) {
       const normalizedKeyword = cleanText(keyword);
+
       if (!normalizedKeyword) continue;
 
       if (containsKeyword(questionWords, normalizedKeyword)) {
         const keywordScore = normalizedKeyword.split(" ").length;
-        bestKeywordScore = Math.max(bestKeywordScore, keywordScore);
-        matchedKeywordCount += 1;
 
-  for (const rule of rules) {
-    let score = 0;
-    
-    for (const keyword of rule.keywords) {
-      if (cleanedQuestion.includes(keyword.toLowerCase())) {
-        score++;
+        bestKeywordScore = Math.max(
+          bestKeywordScore,
+          keywordScore
+        );
+
+        matchedKeywordCount += 1;
       }
     }
 
-    // Prefer the most specific phrase; generic words must not outweigh it.
-    const score = bestKeywordScore * 1000 + matchedKeywordCount;
+    // Prefer specific phrases over generic keywords
+    const score =
+      bestKeywordScore * 1000 + matchedKeywordCount;
+
     if (score > highestScore) {
       highestScore = score;
       bestMatch = rule[keyName];

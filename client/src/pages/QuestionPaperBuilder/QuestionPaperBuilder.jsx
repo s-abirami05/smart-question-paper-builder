@@ -2,9 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import DiagramEditor from "../../components/DiagramEditor"; // your DiagramEditor component path
 
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import DiagramEditor from "../../components/DiagramEditor"; // your DiagramEditor component path
 
 const autoDetectCOBLPI = (text) => {
   const lower = text.toLowerCase().trim();
@@ -380,6 +377,10 @@ const [savedDiagrams, setSavedDiagrams] =
   const handlePartAChange = (index, value) => {
     const updated = [...partA];
     updated[index].question = value;
+    const detected = autoDetectCOBLPI(value);
+    updated[index].co = detected.co;
+    updated[index].bl = detected.bl;
+    updated[index].pi = detected.pi;
     setPartA(updated);
   };
 
@@ -428,13 +429,6 @@ const [savedDiagrams, setSavedDiagrams] =
     }
   };
 
-    const detected = autoDetectCOBLPI(value);
-    updated[index].co = detected.co;
-    updated[index].bl = detected.bl;
-    updated[index].pi = detected.pi;
-    setPartA(updated);
-  };
-
   const handlePartAMetaChange = (index, field, value) => {
     const updated = [...partA];
     updated[index][field] = value;
@@ -453,6 +447,12 @@ const [savedDiagrams, setSavedDiagrams] =
     const updated = [...partB];
     const targetOpt = optionKey === "A" ? updated[qIndex].optionA : updated[qIndex].optionB;
     targetOpt[field] = value;
+    if (field === "question") {
+      const detected = autoDetectCOBLPI(value);
+      targetOpt.co = detected.co;
+      targetOpt.bl = detected.bl;
+      targetOpt.pi = detected.pi;
+    }
     setPartB(updated);
   };
 
@@ -475,13 +475,6 @@ const [savedDiagrams, setSavedDiagrams] =
     } catch (error) {
       console.error("Question prediction failed:", error);
     }
-    if (field === "question") {
-      const detected = autoDetectCOBLPI(value);
-      targetOpt.co = detected.co;
-      targetOpt.bl = detected.bl;
-      targetOpt.pi = detected.pi;
-    }
-    setPartB(updated);
   };
 
   const handlePartBSubChange = (qIndex, optionKey, subIndex, field, value) => {
@@ -1230,7 +1223,6 @@ const renderDiagramPreview = (diagram, target = null) => {
                           value={q.question}
                           onChange={(e) => { handlePartAChange(idx, e.target.value); schedulePrediction(`partA-${idx}`, () => predictPartA(idx, e.target.value)); }}
                           onBlur={(e) => predictPartA(idx, e.target.value)}
-                          onChange={(e) => handlePartAChange(idx, e.target.value)}
                           placeholder={`Enter Short Question ${idx + 1}`}
                         />
                         <button
@@ -1308,7 +1300,6 @@ const renderDiagramPreview = (diagram, target = null) => {
                               value={q.optionA.question}
                               onChange={(e) => { handlePartBSingleChange(qIndex, "A", "question", e.target.value); schedulePrediction(`partB-${qIndex}-A`, () => predictPartB(qIndex, "A", null, e.target.value)); }}
                               onBlur={(e) => predictPartB(qIndex, "A", null, e.target.value)}
-                              onChange={(e) => handlePartBSingleChange(qIndex, "A", "question", e.target.value)}
                               placeholder={`Enter Question ${q.qNo} (a)`}
                             />
                             <button
@@ -1361,7 +1352,6 @@ const renderDiagramPreview = (diagram, target = null) => {
                               value={sub.question}
                               onChange={(e) => { handlePartBSubChange(qIndex, "A", sIdx, "question", e.target.value); schedulePrediction(`partB-${qIndex}-A-${sIdx}`, () => predictPartB(qIndex, "A", sIdx, e.target.value)); }}
                               onBlur={(e) => predictPartB(qIndex, "A", sIdx, e.target.value)}
-                              onChange={(e) => handlePartBSubChange(qIndex, "A", sIdx, "question", e.target.value)}
                               placeholder={`Enter Sub Question ${sub.label}`}
                             />
                             <button
@@ -1417,7 +1407,6 @@ const renderDiagramPreview = (diagram, target = null) => {
                               value={q.optionB.question}
                               onChange={(e) => { handlePartBSingleChange(qIndex, "B", "question", e.target.value); schedulePrediction(`partB-${qIndex}-B`, () => predictPartB(qIndex, "B", null, e.target.value)); }}
                               onBlur={(e) => predictPartB(qIndex, "B", null, e.target.value)}
-                              onChange={(e) => handlePartBSingleChange(qIndex, "B", "question", e.target.value)}
                               placeholder={`Enter Question ${q.qNo} (b)`}
                             />
                             <button
@@ -1471,7 +1460,6 @@ const renderDiagramPreview = (diagram, target = null) => {
                               onChange={(e) => { handlePartBSubChange(qIndex, "B", sIdx, "question", e.target.value); schedulePrediction(`partB-${qIndex}-B-${sIdx}`, () => predictPartB(qIndex, "B", sIdx, e.target.value)); }}
                               onBlur={(e) => predictPartB(qIndex, "B", sIdx, e.target.value)}
 
-                              onChange={(e) => handlePartBSubChange(qIndex, "B", sIdx, "question", e.target.value)}
                               placeholder={`Enter Sub Question ${sub.label}`}
                             />
                             <button
@@ -1549,7 +1537,6 @@ const renderDiagramPreview = (diagram, target = null) => {
                             }));
                           }}
                           onBlur={(e) => predictQuestionMetadata(e.target.value).then((metadata) => setPartC((current) => current.optionA.question === e.target.value ? { ...current, optionA: { ...current.optionA, ...metadata } } : current)).catch((error) => console.error("Question prediction failed:", error))}
-                          onChange={(e) => handlePartCChange("A", "question", e.target.value)}
                           placeholder="Enter Part C Question 16 (a)"
                         />
                         <button
@@ -1602,7 +1589,6 @@ const renderDiagramPreview = (diagram, target = null) => {
                           value={sub.question}
                           onChange={(e) => { handlePartCSubChange("A", sIdx, "question", e.target.value); schedulePrediction(`partC-A-${sIdx}`, () => predictPartC("A", sIdx, e.target.value)); }}
                           onBlur={(e) => predictPartC("A", sIdx, e.target.value)}
-                          onChange={(e) => handlePartCSubChange("A", sIdx, "question", e.target.value)}
                           placeholder={`Enter Sub Question ${sub.label}`}
                         />
                         <button
@@ -1663,7 +1649,6 @@ const renderDiagramPreview = (diagram, target = null) => {
                             }));
                           }}
                           onBlur={(e) => predictQuestionMetadata(e.target.value).then((metadata) => setPartC((current) => current.optionB.question === e.target.value ? { ...current, optionB: { ...current.optionB, ...metadata } } : current)).catch((error) => console.error("Question prediction failed:", error))}
-                          onChange={(e) => handlePartCChange("B", "question", e.target.value)}
                           placeholder="Enter Part C Question 16 (b)"
                         />
                         <button
@@ -1716,7 +1701,6 @@ const renderDiagramPreview = (diagram, target = null) => {
                           value={sub.question}
                           onChange={(e) => { handlePartCSubChange("B", sIdx, "question", e.target.value); schedulePrediction(`partC-B-${sIdx}`, () => predictPartC("B", sIdx, e.target.value)); }}
                           onBlur={(e) => predictPartC("B", sIdx, e.target.value)}
-                          onChange={(e) => handlePartCSubChange("B", sIdx, "question", e.target.value)}
                           placeholder={`Enter Sub Question ${sub.label}`}
                         />
                         <button

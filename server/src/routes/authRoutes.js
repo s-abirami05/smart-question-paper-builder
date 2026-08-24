@@ -1,5 +1,5 @@
-const express = require("express");
-const nodemailer = require("nodemailer");
+import express from "express";
+import nodemailer from "nodemailer";
 const router = express.Router();
 
 // 1. Email Transporter Setup (Gmail)
@@ -49,4 +49,4 @@ router.post("/forgot-password", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
