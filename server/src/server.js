@@ -7,10 +7,7 @@ import mongoose from "mongoose";
 import questionRoutes from "./routes/questionRoutes.js"; 
 import authRoutes from "./routes/authRoutes.js";
 import predictionRoutes from "./routes/predictionRoutes.js";
-import mongoose from "mongoose"; // MongoDB connection-க்காக
 
-// Question Routes Import செய்கிறோம்
-import questionRoutes from "./routes/questionRoutes.js"; 
 
 dotenv.config();
 
@@ -91,7 +88,6 @@ app.post("/api/send-mail", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
