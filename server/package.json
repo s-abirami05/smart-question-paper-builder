@@ -1,4 +1,6 @@
 {
+  "$schema": "https://json.schemastore.org/package",
+
   "$schema": "https://json.schemastore.org/package.json",
   "name": "server",
   "version": "1.0.0",
@@ -10,6 +12,9 @@
     "dev": "nodemon src/server.js",
     "seed": "node src/seed/subjectSeed.js"
   },
+    "dev": "nodemon src/server.js",
+    "seed": "node src/seed/subjectSeed.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",

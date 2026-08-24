@@ -1,3 +1,15 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../services/authService";
+
+function Register() {
+
+  const navigate = useNavigate();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgImage from "../../assets/auth-bg.jpg.jpeg";
@@ -54,6 +66,21 @@ export default function Register() {
     try {
       await registerUser(formData);
 
+      const data = await registerUser({
+        name,
+        email,
+        password,
+      });
+
+      alert(data.message);
+
+      // Clear input fields
+      setName("");
+      setEmail("");
+      setPassword("");
+
+      // Redirect to Login Page
+      navigate("/login");
       setIsSuccess(true);
       setAlertMessage(
         "Account created successfully! Redirecting to login..."
@@ -72,6 +99,53 @@ export default function Register() {
   };
 
   return (
+
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+
+      <div className="bg-white p-8 rounded-lg shadow-md w-96">
+
+        <h2 className="text-2xl font-bold text-center mb-6">
+          Faculty Register
+        </h2>
+
+        <form onSubmit={handleSubmit}>
+
+          <input
+            type="text"
+            placeholder="Name"
+            className="w-full border p-3 mb-4 rounded"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+
+          <input
+            type="email"
+            placeholder="Email"
+            className="w-full border p-3 mb-4 rounded"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full border p-3 mb-4 rounded"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white p-3 rounded hover:bg-green-700"
+          >
+            Register
+          </button>
+
+        </form>
+
     <div
       style={{
         ...styles.container,
@@ -209,6 +283,7 @@ export default function Register() {
   );
 }
 
+export default Register;
 const styles = {
   container: {
     minHeight: "100vh",
