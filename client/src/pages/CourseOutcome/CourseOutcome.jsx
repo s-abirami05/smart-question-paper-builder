@@ -19,19 +19,19 @@ function CourseOutcome() {
 
     // Load Subjects
 
-    useEffect(()=>{
+    useEffect(() => {
 
         loadSubjects();
 
-    },[]);
+    }, []);
 
 
 
 
 
-    const loadSubjects = async()=>{
+    const loadSubjects = async () => {
 
-        try{
+        try {
 
             const response = await axios.get(
                 "http://localhost:5000/api/subjects"
@@ -42,7 +42,7 @@ function CourseOutcome() {
 
 
         }
-        catch(error){
+        catch (error) {
 
             console.log(error);
 
@@ -56,10 +56,10 @@ function CourseOutcome() {
 
     // Get CO by Subject
 
-    const getCOs = async(subjectId)=>{
+    const getCOs = async (subjectId) => {
 
 
-        try{
+        try {
 
 
             const response = await axios.get(
@@ -73,7 +73,7 @@ function CourseOutcome() {
 
 
         }
-        catch(error){
+        catch (error) {
 
             console.log(error);
 
@@ -88,7 +88,7 @@ function CourseOutcome() {
 
 
 
-    const handleSubjectChange = (e)=>{
+    const handleSubjectChange = (e) => {
 
 
         const id = e.target.value;
@@ -97,12 +97,12 @@ function CourseOutcome() {
         setSelectedSubject(id);
 
 
-        if(id){
+        if (id) {
 
             getCOs(id);
 
         }
-        else{
+        else {
 
             setCourseOutcomes([]);
 
@@ -119,13 +119,13 @@ function CourseOutcome() {
 
     // Add CO
 
-    const handleSubmit = async(e)=>{
+    const handleSubmit = async (e) => {
 
 
         e.preventDefault();
 
 
-        try{
+        try {
 
 
             await axios.post(
@@ -134,7 +134,7 @@ function CourseOutcome() {
 
                 {
 
-                    subject:selectedSubject,
+                    subject: selectedSubject,
 
                     coNumber,
 
@@ -161,7 +161,7 @@ function CourseOutcome() {
 
 
         }
-        catch(error){
+        catch (error) {
 
             console.log(error);
 
@@ -224,7 +224,7 @@ function CourseOutcome() {
 
 
                     {
-                        subjects.map((sub)=>(
+                        subjects.map((sub) => (
 
 
                             <option
@@ -267,7 +267,7 @@ function CourseOutcome() {
 
                         value={coNumber}
 
-                        onChange={(e)=>setCoNumber(e.target.value)}
+                        onChange={(e) => setCoNumber(e.target.value)}
 
                         placeholder="CO1"
 
@@ -290,7 +290,7 @@ function CourseOutcome() {
 
                         value={description}
 
-                        onChange={(e)=>setDescription(e.target.value)}
+                        onChange={(e) => setDescription(e.target.value)}
 
                         placeholder="Enter CO Description"
 
@@ -338,7 +338,7 @@ function CourseOutcome() {
 
 
                 {
-                    courseOutcomes.map((co)=>(
+                    courseOutcomes.map((co) => (
 
 
                         <div

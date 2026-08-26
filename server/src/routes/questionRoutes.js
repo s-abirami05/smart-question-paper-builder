@@ -83,7 +83,6 @@ router.put("/update/:id", async (req, res) => {
   }
 });
 
-// 5. Delete Paper by ID 🗑️ (Frontend URL-க்கு ஏற்ப /delete/:id என மாற்றப்பட்டுள்ளது)
 router.delete("/delete/:id", async (req, res) => {
   try {
     const deletedPaper = await QuestionPaper.findByIdAndDelete(req.params.id);

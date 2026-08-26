@@ -1,39 +1,1473 @@
-
 [
   {
-    "subjectCode": "GE3752",
-    "pi": "3.5.4",
+    "subjectCode": "HS3152",
+    "pi": "10.4.1",
     "keywords": [
-      "quality",
-      "total quality management",
-      "tqm",
-      "quality management",
-      "quality gurus",
-      "quality framework",
-      "benefits of tqm"
+      "interpret technical information",
+      "technical literature",
+      "non technical information",
+      "read and understand",
+      "professional english",
+      "communication",
+      "technical communication",
+      "written communication",
+      "oral presentation",
+      "presentation skills",
+      "reading comprehension"
     ]
   },
   {
-    "subjectCode": "AI3021",
+    "subjectCode": "HS3152",
+    "pi": "10.4.2",
+    "keywords": [
+      "written engineering document",
+      "technical document",
+      "engineering report",
+      "written report",
+      "professional english",
+      "communication",
+      "technical communication",
+      "written communication",
+      "oral presentation",
+      "presentation skills",
+      "reading comprehension"
+    ]
+  },
+  {
+    "subjectCode": "HS3152",
+    "pi": "10.5.1",
+    "keywords": [
+      "listen and comprehend",
+      "instructions",
+      "viewpoints",
+      "professional english",
+      "communication",
+      "technical communication",
+      "written communication",
+      "oral presentation",
+      "presentation skills",
+      "reading comprehension"
+    ]
+  },
+  {
+    "subjectCode": "HS3152",
+    "pi": "10.5.2",
+    "keywords": [
+      "oral presentation",
+      "technical presentation",
+      "presentation skills",
+      "non technical audience",
+      "professional english",
+      "communication",
+      "technical communication",
+      "written communication",
+      "reading comprehension"
+    ]
+  },
+  {
+    "subjectCode": "HS3152",
+    "pi": "10.6.2",
+    "keywords": [
+      "media",
+      "presentation media",
+      "visual media",
+      "communicate message",
+      "professional english",
+      "communication",
+      "technical communication",
+      "written communication",
+      "oral presentation",
+      "presentation skills",
+      "reading comprehension"
+    ]
+  },
+  {
+    "subjectCode": "MA3151",
+    "pi": "1.2.1",
+    "keywords": [
+      "discrete structures",
+      "linear algebra",
+      "statistics",
+      "numerical techniques",
+      "mathematical techniques",
+      "mathematical model",
+      "matrices",
+      "determinants",
+      "eigenvalues",
+      "eigenvectors",
+      "calculus",
+      "differentiation",
+      "integration",
+      "partial derivatives",
+      "multiple integrals"
+    ]
+  },
+  {
+    "subjectCode": "MA3151",
+    "pi": "2.8.1",
+    "keywords": [
+      "engineering mathematics",
+      "mathematical implementation",
+      "apply mathematics",
+      "implement the solution",
+      "matrices",
+      "determinants",
+      "eigenvalues",
+      "eigenvectors",
+      "calculus",
+      "differentiation",
+      "integration",
+      "partial derivatives",
+      "multiple integrals"
+    ]
+  },
+  {
+    "subjectCode": "MA3151",
+    "pi": "2.8.2",
+    "keywords": [
+      "analyze results",
+      "interpret results",
+      "contemporary tools",
+      "analyze and interpret",
+      "matrices",
+      "determinants",
+      "eigenvalues",
+      "eigenvectors",
+      "calculus",
+      "differentiation",
+      "integration",
+      "partial derivatives",
+      "multiple integrals"
+    ]
+  },
+  {
+    "subjectCode": "MA3151",
+    "pi": "2.8.4",
+    "keywords": [
+      "conclusion",
+      "draw conclusion",
+      "arrive at conclusions",
+      "objectives",
+      "conclusions with respect to objectives",
+      "matrices",
+      "determinants",
+      "eigenvalues",
+      "eigenvectors",
+      "calculus",
+      "differentiation",
+      "integration",
+      "partial derivatives",
+      "multiple integrals"
+    ]
+  },
+  {
+    "subjectCode": "PH3151",
+    "pi": "1.5.1",
+    "keywords": [
+      "natural science",
+      "laws of natural science",
+      "physics",
+      "scientific law",
+      "engineering physics",
+      "optics",
+      "lasers",
+      "quantum physics",
+      "semiconductor",
+      "wave mechanics",
+      "crystal",
+      "magnetism"
+    ]
+  },
+  {
+    "subjectCode": "PH3151",
     "pi": "1.6.1",
     "keywords": [
-      "precision farming",
-      "precision agriculture",
-      "artificial lighting",
-      "artificial light",
-      "artificial light system",
-      "greenhouse",
-      "environment control",
-      "automation",
-      "crop modeling",
-      "remote sensing",
-      "yield mapping"
+      "engineering fundamentals",
+      "engineering principle",
+      "engineering concept",
+      "engineering physics",
+      "optics",
+      "lasers",
+      "quantum physics",
+      "semiconductor",
+      "wave mechanics",
+      "crystal",
+      "magnetism"
+    ]
+  },
+  {
+    "subjectCode": "PH3151",
+    "pi": "4.4.1",
+    "keywords": [
+      "investigation problem",
+      "scope and importance",
+      "define a problem for investigation",
+      "engineering physics",
+      "optics",
+      "lasers",
+      "quantum physics",
+      "semiconductor",
+      "wave mechanics",
+      "crystal",
+      "magnetism"
+    ]
+  },
+  {
+    "subjectCode": "PH3151",
+    "pi": "4.6.1",
+    "keywords": [
+      "collect data",
+      "analyze data",
+      "data collection",
+      "data analysis",
+      "engineering physics",
+      "optics",
+      "lasers",
+      "quantum physics",
+      "semiconductor",
+      "wave mechanics",
+      "crystal",
+      "magnetism"
+    ]
+  },
+  {
+    "subjectCode": "PH3151",
+    "pi": "4.6.3",
+    "keywords": [
+      "tabular form",
+      "graphical form",
+      "represent data",
+      "graphs",
+      "charts",
+      "tables",
+      "engineering physics",
+      "optics",
+      "lasers",
+      "quantum physics",
+      "semiconductor",
+      "wave mechanics",
+      "crystal",
+      "magnetism"
+    ]
+  },
+  {
+    "subjectCode": "CY3151",
+    "pi": "1.5.1",
+    "keywords": [
+      "natural science",
+      "laws of natural science",
+      "physics",
+      "scientific law",
+      "engineering chemistry",
+      "water treatment",
+      "corrosion",
+      "polymers",
+      "nanomaterials",
+      "electrochemistry",
+      "fuels",
+      "batteries"
+    ]
+  },
+  {
+    "subjectCode": "CY3151",
+    "pi": "1.6.1",
+    "keywords": [
+      "engineering fundamentals",
+      "engineering principle",
+      "engineering concept",
+      "engineering chemistry",
+      "water treatment",
+      "corrosion",
+      "polymers",
+      "nanomaterials",
+      "electrochemistry",
+      "fuels",
+      "batteries"
+    ]
+  },
+  {
+    "subjectCode": "CY3151",
+    "pi": "4.4.1",
+    "keywords": [
+      "investigation problem",
+      "scope and importance",
+      "define a problem for investigation",
+      "engineering chemistry",
+      "water treatment",
+      "corrosion",
+      "polymers",
+      "nanomaterials",
+      "electrochemistry",
+      "fuels",
+      "batteries"
+    ]
+  },
+  {
+    "subjectCode": "CY3151",
+    "pi": "4.6.1",
+    "keywords": [
+      "collect data",
+      "analyze data",
+      "data collection",
+      "data analysis",
+      "engineering chemistry",
+      "water treatment",
+      "corrosion",
+      "polymers",
+      "nanomaterials",
+      "electrochemistry",
+      "fuels",
+      "batteries"
+    ]
+  },
+  {
+    "subjectCode": "CY3151",
+    "pi": "4.6.3",
+    "keywords": [
+      "tabular form",
+      "graphical form",
+      "represent data",
+      "graphs",
+      "charts",
+      "tables",
+      "engineering chemistry",
+      "water treatment",
+      "corrosion",
+      "polymers",
+      "nanomaterials",
+      "electrochemistry",
+      "fuels",
+      "batteries"
+    ]
+  },
+  {
+    "subjectCode": "GE3151",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "python",
+      "python programming",
+      "problem solving",
+      "algorithm",
+      "flowchart",
+      "function",
+      "list",
+      "tuple",
+      "dictionary",
+      "file handling",
+      "object oriented programming"
+    ]
+  },
+  {
+    "subjectCode": "GE3151",
+    "pi": "2.5.3",
+    "keywords": [
+      "mathematical algorithm",
+      "algorithmic knowledge",
+      "mathematical algorithmic",
+      "algorithm for the problem",
+      "python",
+      "python programming",
+      "problem solving",
+      "algorithm",
+      "flowchart",
+      "function",
+      "list",
+      "tuple",
+      "dictionary",
+      "file handling",
+      "object oriented programming"
+    ]
+  },
+  {
+    "subjectCode": "GE3151",
+    "pi": "2.7.1",
+    "keywords": [
+      "formulate modules",
+      "system modules",
+      "computer engineering principles",
+      "system performance",
+      "applicability and performance",
+      "python",
+      "python programming",
+      "problem solving",
+      "algorithm",
+      "flowchart",
+      "function",
+      "list",
+      "tuple",
+      "dictionary",
+      "file handling",
+      "object oriented programming"
+    ]
+  },
+  {
+    "subjectCode": "GE3151",
+    "pi": "2.8.2",
+    "keywords": [
+      "analyze results",
+      "interpret results",
+      "contemporary tools",
+      "analyze and interpret",
+      "python",
+      "python programming",
+      "problem solving",
+      "algorithm",
+      "flowchart",
+      "function",
+      "list",
+      "tuple",
+      "dictionary",
+      "file handling",
+      "object oriented programming"
+    ]
+  },
+  {
+    "subjectCode": "GE3151",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "python",
+      "python programming",
+      "problem solving",
+      "algorithm",
+      "flowchart",
+      "function",
+      "list",
+      "tuple",
+      "dictionary",
+      "file handling",
+      "object oriented programming"
+    ]
+  },
+  {
+    "subjectCode": "GE3152",
+    "pi": "10.4.1",
+    "keywords": [
+      "interpret technical information",
+      "technical literature",
+      "non technical information",
+      "read and understand",
+      "heritage of tamils",
+      "tamil heritage",
+      "sangam literature",
+      "temples",
+      "architecture",
+      "tamil culture",
+      "traditional knowledge"
+    ]
+  },
+  {
+    "subjectCode": "GE3152",
+    "pi": "10.4.2",
+    "keywords": [
+      "written engineering document",
+      "technical document",
+      "engineering report",
+      "written report",
+      "heritage of tamils",
+      "tamil heritage",
+      "sangam literature",
+      "temples",
+      "architecture",
+      "tamil culture",
+      "traditional knowledge"
+    ]
+  },
+  {
+    "subjectCode": "GE3152",
+    "pi": "12.5.1",
+    "keywords": [
+      "technological advance",
+      "technology advancement",
+      "historic technology",
+      "technological development",
+      "heritage of tamils",
+      "tamil heritage",
+      "sangam literature",
+      "temples",
+      "architecture",
+      "tamil culture",
+      "traditional knowledge"
+    ]
+  },
+  {
+    "subjectCode": "GE3152",
+    "pi": "12.6.1",
+    "keywords": [
+      "technical literature",
+      "credible sources",
+      "source information",
+      "technical sources",
+      "heritage of tamils",
+      "tamil heritage",
+      "sangam literature",
+      "temples",
+      "architecture",
+      "tamil culture",
+      "traditional knowledge"
+    ]
+  },
+  {
+    "subjectCode": "HS3252",
+    "pi": "10.4.1",
+    "keywords": [
+      "interpret technical information",
+      "technical literature",
+      "non technical information",
+      "read and understand",
+      "professional english ii",
+      "technical writing",
+      "report writing",
+      "presentation",
+      "communication",
+      "reading",
+      "listening",
+      "speaking"
+    ]
+  },
+  {
+    "subjectCode": "HS3252",
+    "pi": "10.4.2",
+    "keywords": [
+      "written engineering document",
+      "technical document",
+      "engineering report",
+      "written report",
+      "professional english ii",
+      "technical writing",
+      "report writing",
+      "presentation",
+      "communication",
+      "reading",
+      "listening",
+      "speaking"
+    ]
+  },
+  {
+    "subjectCode": "HS3252",
+    "pi": "10.5.1",
+    "keywords": [
+      "listen and comprehend",
+      "instructions",
+      "viewpoints",
+      "professional english ii",
+      "technical writing",
+      "report writing",
+      "presentation",
+      "communication",
+      "reading",
+      "listening",
+      "speaking"
+    ]
+  },
+  {
+    "subjectCode": "HS3252",
+    "pi": "10.5.2",
+    "keywords": [
+      "oral presentation",
+      "technical presentation",
+      "presentation skills",
+      "non technical audience",
+      "professional english ii",
+      "technical writing",
+      "report writing",
+      "presentation",
+      "communication",
+      "reading",
+      "listening",
+      "speaking"
+    ]
+  },
+  {
+    "subjectCode": "HS3252",
+    "pi": "10.6.2",
+    "keywords": [
+      "media",
+      "presentation media",
+      "visual media",
+      "communicate message",
+      "professional english ii",
+      "technical writing",
+      "report writing",
+      "presentation",
+      "communication",
+      "reading",
+      "listening",
+      "speaking"
+    ]
+  },
+  {
+    "subjectCode": "MA3251",
+    "pi": "1.2.1",
+    "keywords": [
+      "discrete structures",
+      "linear algebra",
+      "statistics",
+      "numerical techniques",
+      "mathematical techniques",
+      "mathematical model",
+      "probability",
+      "random variable",
+      "sampling",
+      "hypothesis testing",
+      "correlation",
+      "regression",
+      "numerical methods",
+      "interpolation",
+      "numerical integration"
+    ]
+  },
+  {
+    "subjectCode": "MA3251",
+    "pi": "1.2.2",
+    "keywords": [
+      "probability",
+      "queuing theory",
+      "probability model",
+      "statistical model",
+      "network protocol",
+      "data modeling",
+      "computer based system",
+      "statistics",
+      "random variable",
+      "sampling",
+      "hypothesis testing",
+      "correlation",
+      "regression",
+      "numerical methods",
+      "interpolation",
+      "numerical integration"
+    ]
+  },
+  {
+    "subjectCode": "MA3251",
+    "pi": "2.8.1",
+    "keywords": [
+      "engineering mathematics",
+      "mathematical implementation",
+      "apply mathematics",
+      "implement the solution",
+      "statistics",
+      "probability",
+      "random variable",
+      "sampling",
+      "hypothesis testing",
+      "correlation",
+      "regression",
+      "numerical methods",
+      "interpolation",
+      "numerical integration"
+    ]
+  },
+  {
+    "subjectCode": "MA3251",
+    "pi": "2.8.2",
+    "keywords": [
+      "analyze results",
+      "interpret results",
+      "contemporary tools",
+      "analyze and interpret",
+      "statistics",
+      "probability",
+      "random variable",
+      "sampling",
+      "hypothesis testing",
+      "correlation",
+      "regression",
+      "numerical methods",
+      "interpolation",
+      "numerical integration"
+    ]
+  },
+  {
+    "subjectCode": "MA3251",
+    "pi": "4.6.1",
+    "keywords": [
+      "collect data",
+      "analyze data",
+      "data collection",
+      "data analysis",
+      "statistics",
+      "probability",
+      "random variable",
+      "sampling",
+      "hypothesis testing",
+      "correlation",
+      "regression",
+      "numerical methods",
+      "interpolation",
+      "numerical integration"
+    ]
+  },
+  {
+    "subjectCode": "PH3256",
+    "pi": "1.5.1",
+    "keywords": [
+      "natural science",
+      "laws of natural science",
+      "physics",
+      "scientific law",
+      "physics for information science",
+      "quantum computing",
+      "semiconductor",
+      "optics",
+      "laser",
+      "fiber optics",
+      "nanotechnology",
+      "quantum physics"
+    ]
+  },
+  {
+    "subjectCode": "PH3256",
+    "pi": "1.6.1",
+    "keywords": [
+      "engineering fundamentals",
+      "engineering principle",
+      "engineering concept",
+      "physics for information science",
+      "quantum computing",
+      "semiconductor",
+      "optics",
+      "laser",
+      "fiber optics",
+      "nanotechnology",
+      "quantum physics"
+    ]
+  },
+  {
+    "subjectCode": "PH3256",
+    "pi": "4.4.1",
+    "keywords": [
+      "investigation problem",
+      "scope and importance",
+      "define a problem for investigation",
+      "physics for information science",
+      "quantum computing",
+      "semiconductor",
+      "optics",
+      "laser",
+      "fiber optics",
+      "nanotechnology",
+      "quantum physics"
+    ]
+  },
+  {
+    "subjectCode": "PH3256",
+    "pi": "4.6.1",
+    "keywords": [
+      "collect data",
+      "analyze data",
+      "data collection",
+      "data analysis",
+      "physics for information science",
+      "quantum computing",
+      "semiconductor",
+      "optics",
+      "laser",
+      "fiber optics",
+      "nanotechnology",
+      "quantum physics"
+    ]
+  },
+  {
+    "subjectCode": "PH3256",
+    "pi": "4.6.3",
+    "keywords": [
+      "tabular form",
+      "graphical form",
+      "represent data",
+      "graphs",
+      "charts",
+      "tables",
+      "physics for information science",
+      "quantum computing",
+      "semiconductor",
+      "optics",
+      "laser",
+      "fiber optics",
+      "nanotechnology",
+      "quantum physics"
+    ]
+  },
+  {
+    "subjectCode": "BE3251",
+    "pi": "1.6.1",
+    "keywords": [
+      "engineering fundamentals",
+      "engineering principle",
+      "engineering concept",
+      "electrical engineering",
+      "electronics",
+      "dc circuit",
+      "ac circuit",
+      "transformer",
+      "motor",
+      "generator",
+      "diode",
+      "transistor",
+      "digital electronics"
+    ]
+  },
+  {
+    "subjectCode": "BE3251",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "electrical engineering",
+      "electronics",
+      "dc circuit",
+      "ac circuit",
+      "transformer",
+      "motor",
+      "generator",
+      "diode",
+      "transistor",
+      "digital electronics"
+    ]
+  },
+  {
+    "subjectCode": "BE3251",
+    "pi": "4.4.1",
+    "keywords": [
+      "investigation problem",
+      "scope and importance",
+      "define a problem for investigation",
+      "electrical engineering",
+      "electronics",
+      "dc circuit",
+      "ac circuit",
+      "transformer",
+      "motor",
+      "generator",
+      "diode",
+      "transistor",
+      "digital electronics"
+    ]
+  },
+  {
+    "subjectCode": "BE3251",
+    "pi": "4.4.3",
+    "keywords": [
+      "hardware tools",
+      "software tools",
+      "experimental tools",
+      "choose tools",
+      "electrical engineering",
+      "electronics",
+      "dc circuit",
+      "ac circuit",
+      "transformer",
+      "motor",
+      "generator",
+      "diode",
+      "transistor",
+      "digital electronics"
+    ]
+  },
+  {
+    "subjectCode": "BE3251",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "electrical engineering",
+      "electronics",
+      "dc circuit",
+      "ac circuit",
+      "transformer",
+      "motor",
+      "generator",
+      "diode",
+      "transistor",
+      "digital electronics"
+    ]
+  },
+  {
+    "subjectCode": "GE3251",
+    "pi": "1.6.1",
+    "keywords": [
+      "engineering fundamentals",
+      "engineering principle",
+      "engineering concept",
+      "engineering graphics",
+      "orthographic projection",
+      "isometric projection",
+      "sectional view",
+      "projection",
+      "dimensioning",
+      "solid modeling",
+      "engineering drawing"
+    ]
+  },
+  {
+    "subjectCode": "GE3251",
+    "pi": "2.7.1",
+    "keywords": [
+      "formulate modules",
+      "system modules",
+      "computer engineering principles",
+      "system performance",
+      "applicability and performance",
+      "engineering graphics",
+      "orthographic projection",
+      "isometric projection",
+      "sectional view",
+      "projection",
+      "dimensioning",
+      "solid modeling",
+      "engineering drawing"
+    ]
+  },
+  {
+    "subjectCode": "GE3251",
+    "pi": "3.8.1",
+    "keywords": [
+      "architecture design",
+      "detailed design",
+      "refine architecture",
+      "design constraints",
+      "engineering graphics",
+      "orthographic projection",
+      "isometric projection",
+      "sectional view",
+      "projection",
+      "dimensioning",
+      "solid modeling",
+      "engineering drawing"
+    ]
+  },
+  {
+    "subjectCode": "GE3251",
+    "pi": "4.4.3",
+    "keywords": [
+      "hardware tools",
+      "software tools",
+      "experimental tools",
+      "choose tools",
+      "engineering graphics",
+      "orthographic projection",
+      "isometric projection",
+      "sectional view",
+      "projection",
+      "dimensioning",
+      "solid modeling",
+      "engineering drawing"
+    ]
+  },
+  {
+    "subjectCode": "GE3251",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "engineering graphics",
+      "orthographic projection",
+      "isometric projection",
+      "sectional view",
+      "projection",
+      "dimensioning",
+      "solid modeling",
+      "engineering drawing"
+    ]
+  },
+  {
+    "subjectCode": "CS3251",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "c programming",
+      "programming in c",
+      "arrays",
+      "pointers",
+      "structures",
+      "functions",
+      "recursion",
+      "file handling",
+      "sorting",
+      "searching"
+    ]
+  },
+  {
+    "subjectCode": "CS3251",
+    "pi": "2.5.3",
+    "keywords": [
+      "mathematical algorithm",
+      "algorithmic knowledge",
+      "mathematical algorithmic",
+      "algorithm for the problem",
+      "c programming",
+      "programming in c",
+      "arrays",
+      "pointers",
+      "structures",
+      "functions",
+      "recursion",
+      "file handling",
+      "sorting",
+      "searching"
+    ]
+  },
+  {
+    "subjectCode": "CS3251",
+    "pi": "2.7.1",
+    "keywords": [
+      "formulate modules",
+      "system modules",
+      "computer engineering principles",
+      "system performance",
+      "applicability and performance",
+      "c programming",
+      "programming in c",
+      "arrays",
+      "pointers",
+      "structures",
+      "functions",
+      "recursion",
+      "file handling",
+      "sorting",
+      "searching"
+    ]
+  },
+  {
+    "subjectCode": "CS3251",
+    "pi": "2.8.2",
+    "keywords": [
+      "analyze results",
+      "interpret results",
+      "contemporary tools",
+      "analyze and interpret",
+      "c programming",
+      "programming in c",
+      "arrays",
+      "pointers",
+      "structures",
+      "functions",
+      "recursion",
+      "file handling",
+      "sorting",
+      "searching"
+    ]
+  },
+  {
+    "subjectCode": "CS3251",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "c programming",
+      "programming in c",
+      "arrays",
+      "pointers",
+      "structures",
+      "functions",
+      "recursion",
+      "file handling",
+      "sorting",
+      "searching"
+    ]
+  },
+  {
+    "subjectCode": "GE3252",
+    "pi": "10.4.1",
+    "keywords": [
+      "interpret technical information",
+      "technical literature",
+      "non technical information",
+      "read and understand",
+      "tamils and technology",
+      "tamil technology",
+      "traditional technology",
+      "agriculture",
+      "architecture",
+      "manufacturing",
+      "water management"
+    ]
+  },
+  {
+    "subjectCode": "GE3252",
+    "pi": "10.4.2",
+    "keywords": [
+      "written engineering document",
+      "technical document",
+      "engineering report",
+      "written report",
+      "tamils and technology",
+      "tamil technology",
+      "traditional technology",
+      "agriculture",
+      "architecture",
+      "manufacturing",
+      "water management"
+    ]
+  },
+  {
+    "subjectCode": "GE3252",
+    "pi": "12.5.1",
+    "keywords": [
+      "technological advance",
+      "technology advancement",
+      "historic technology",
+      "technological development",
+      "tamils and technology",
+      "tamil technology",
+      "traditional technology",
+      "agriculture",
+      "architecture",
+      "manufacturing",
+      "water management"
+    ]
+  },
+  {
+    "subjectCode": "GE3252",
+    "pi": "12.6.1",
+    "keywords": [
+      "technical literature",
+      "credible sources",
+      "source information",
+      "technical sources",
+      "tamils and technology",
+      "tamil technology",
+      "traditional technology",
+      "agriculture",
+      "architecture",
+      "manufacturing",
+      "water management"
+    ]
+  },
+  {
+    "subjectCode": "MA3354",
+    "pi": "1.2.1",
+    "keywords": [
+      "discrete structures",
+      "linear algebra",
+      "statistics",
+      "numerical techniques",
+      "mathematical techniques",
+      "mathematical model",
+      "discrete mathematics",
+      "logic",
+      "set theory",
+      "relations",
+      "functions",
+      "graph theory",
+      "trees",
+      "combinatorics",
+      "recurrence relation"
+    ]
+  },
+  {
+    "subjectCode": "MA3354",
+    "pi": "1.2.2",
+    "keywords": [
+      "probability",
+      "queuing theory",
+      "probability model",
+      "statistical model",
+      "network protocol",
+      "data modeling",
+      "computer based system",
+      "discrete mathematics",
+      "logic",
+      "set theory",
+      "relations",
+      "functions",
+      "graph theory",
+      "trees",
+      "combinatorics",
+      "recurrence relation"
+    ]
+  },
+  {
+    "subjectCode": "MA3354",
+    "pi": "2.5.3",
+    "keywords": [
+      "mathematical algorithm",
+      "algorithmic knowledge",
+      "mathematical algorithmic",
+      "algorithm for the problem",
+      "discrete mathematics",
+      "logic",
+      "set theory",
+      "relations",
+      "functions",
+      "graph theory",
+      "trees",
+      "combinatorics",
+      "recurrence relation"
+    ]
+  },
+  {
+    "subjectCode": "MA3354",
+    "pi": "2.8.1",
+    "keywords": [
+      "engineering mathematics",
+      "mathematical implementation",
+      "apply mathematics",
+      "implement the solution",
+      "discrete mathematics",
+      "logic",
+      "set theory",
+      "relations",
+      "functions",
+      "graph theory",
+      "trees",
+      "combinatorics",
+      "recurrence relation"
+    ]
+  },
+  {
+    "subjectCode": "MA3354",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "discrete mathematics",
+      "logic",
+      "set theory",
+      "relations",
+      "functions",
+      "graph theory",
+      "trees",
+      "combinatorics",
+      "recurrence relation"
+    ]
+  },
+  {
+    "subjectCode": "CS3351",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "digital principles",
+      "computer organization",
+      "logic gates",
+      "boolean algebra",
+      "flip flop",
+      "register",
+      "processor",
+      "memory",
+      "cache",
+      "instruction set"
+    ]
+  },
+  {
+    "subjectCode": "CS3351",
+    "pi": "2.6.2",
+    "keywords": [
+      "system functionalities",
+      "functionalities",
+      "computing resources",
+      "system resources",
+      "digital principles",
+      "computer organization",
+      "logic gates",
+      "boolean algebra",
+      "flip flop",
+      "register",
+      "processor",
+      "memory",
+      "cache",
+      "instruction set"
+    ]
+  },
+  {
+    "subjectCode": "CS3351",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "digital principles",
+      "computer organization",
+      "logic gates",
+      "boolean algebra",
+      "flip flop",
+      "register",
+      "processor",
+      "memory",
+      "cache",
+      "instruction set"
+    ]
+  },
+  {
+    "subjectCode": "CS3351",
+    "pi": "4.4.3",
+    "keywords": [
+      "hardware tools",
+      "software tools",
+      "experimental tools",
+      "choose tools",
+      "digital principles",
+      "computer organization",
+      "logic gates",
+      "boolean algebra",
+      "flip flop",
+      "register",
+      "processor",
+      "memory",
+      "cache",
+      "instruction set"
+    ]
+  },
+  {
+    "subjectCode": "CS3351",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "digital principles",
+      "computer organization",
+      "logic gates",
+      "boolean algebra",
+      "flip flop",
+      "register",
+      "processor",
+      "memory",
+      "cache",
+      "instruction set"
+    ]
+  },
+  {
+    "subjectCode": "CS3352",
+    "pi": "1.2.2",
+    "keywords": [
+      "probability",
+      "queuing theory",
+      "probability model",
+      "statistical model",
+      "network protocol",
+      "data modeling",
+      "computer based system",
+      "data science",
+      "data analysis",
+      "data preprocessing",
+      "statistics",
+      "visualization",
+      "dataset",
+      "machine learning",
+      "data mining",
+      "correlation"
+    ]
+  },
+  {
+    "subjectCode": "CS3352",
+    "pi": "2.8.2",
+    "keywords": [
+      "analyze results",
+      "interpret results",
+      "contemporary tools",
+      "analyze and interpret",
+      "data science",
+      "data analysis",
+      "data preprocessing",
+      "statistics",
+      "visualization",
+      "dataset",
+      "machine learning",
+      "data mining",
+      "correlation"
+    ]
+  },
+  {
+    "subjectCode": "CS3352",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "data science",
+      "data analysis",
+      "data preprocessing",
+      "statistics",
+      "visualization",
+      "machine learning",
+      "data mining",
+      "correlation"
+    ]
+  },
+  {
+    "subjectCode": "CS3352",
+    "pi": "4.6.1",
+    "keywords": [
+      "collect data",
+      "analyze data",
+      "data collection",
+      "data analysis",
+      "data science",
+      "data preprocessing",
+      "statistics",
+      "visualization",
+      "dataset",
+      "machine learning",
+      "data mining",
+      "correlation"
+    ]
+  },
+  {
+    "subjectCode": "CS3352",
+    "pi": "4.6.3",
+    "keywords": [
+      "tabular form",
+      "graphical form",
+      "represent data",
+      "graphs",
+      "charts",
+      "tables",
+      "data science",
+      "data analysis",
+      "data preprocessing",
+      "statistics",
+      "visualization",
+      "dataset",
+      "machine learning",
+      "data mining",
+      "correlation"
     ]
   },
   {
     "subjectCode": "CD3291",
-    "pi": "4.4.2",
+    "pi": "2.5.3",
     "keywords": [
+      "mathematical algorithm",
+      "algorithmic knowledge",
+      "mathematical algorithmic",
+      "algorithm for the problem",
+      "data structures",
+      "algorithms",
       "hashing",
       "hash table",
       "collision resolution",
@@ -44,88 +1478,732 @@
     ]
   },
   {
+    "subjectCode": "CD3291",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "data structures",
+      "algorithms",
+      "hashing",
+      "hash table",
+      "collision resolution",
+      "sorting algorithm",
+      "searching algorithm",
+      "tree traversal",
+      "graph traversal"
+    ]
+  },
+  {
+    "subjectCode": "CD3291",
+    "pi": "4.4.3",
+    "keywords": [
+      "hardware tools",
+      "software tools",
+      "experimental tools",
+      "choose tools",
+      "data structures",
+      "algorithms",
+      "hashing",
+      "hash table",
+      "collision resolution",
+      "sorting algorithm",
+      "searching algorithm",
+      "tree traversal",
+      "graph traversal"
+    ]
+  },
+  {
+    "subjectCode": "CD3291",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "data structures",
+      "algorithms",
+      "hashing",
+      "hash table",
+      "collision resolution",
+      "sorting algorithm",
+      "searching algorithm",
+      "tree traversal",
+      "graph traversal"
+    ]
+  },
+  {
+    "subjectCode": "CS3391",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "object oriented programming",
+      "oop",
+      "class",
+      "object",
+      "inheritance",
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "constructor"
+    ]
+  },
+  {
+    "subjectCode": "CS3391",
+    "pi": "2.5.3",
+    "keywords": [
+      "mathematical algorithm",
+      "algorithmic knowledge",
+      "mathematical algorithmic",
+      "algorithm for the problem",
+      "object oriented programming",
+      "oop",
+      "class",
+      "object",
+      "inheritance",
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "constructor"
+    ]
+  },
+  {
+    "subjectCode": "CS3391",
+    "pi": "2.7.1",
+    "keywords": [
+      "formulate modules",
+      "system modules",
+      "computer engineering principles",
+      "system performance",
+      "applicability and performance",
+      "object oriented programming",
+      "oop",
+      "class",
+      "object",
+      "inheritance",
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "constructor"
+    ]
+  },
+  {
+    "subjectCode": "CS3391",
+    "pi": "3.8.2",
+    "keywords": [
+      "implement modules",
+      "integrate modules",
+      "module integration",
+      "implement and integrate",
+      "object oriented programming",
+      "oop",
+      "class",
+      "object",
+      "inheritance",
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "constructor"
+    ]
+  },
+  {
+    "subjectCode": "CS3391",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "object oriented programming",
+      "oop",
+      "class",
+      "object",
+      "inheritance",
+      "polymorphism",
+      "encapsulation",
+      "abstraction",
+      "constructor"
+    ]
+  },
+  {
+    "subjectCode": "CS3452",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "theory of computation",
+      "automata",
+      "finite automata",
+      "regular expression",
+      "context free grammar",
+      "pushdown automata",
+      "turing machine",
+      "computability"
+    ]
+  },
+  {
+    "subjectCode": "CS3452",
+    "pi": "2.5.3",
+    "keywords": [
+      "mathematical algorithm",
+      "algorithmic knowledge",
+      "mathematical algorithmic",
+      "algorithm for the problem",
+      "theory of computation",
+      "automata",
+      "finite automata",
+      "regular expression",
+      "context free grammar",
+      "pushdown automata",
+      "turing machine",
+      "computability"
+    ]
+  },
+  {
+    "subjectCode": "CS3452",
+    "pi": "2.8.1",
+    "keywords": [
+      "engineering mathematics",
+      "mathematical implementation",
+      "apply mathematics",
+      "implement the solution",
+      "theory of computation",
+      "automata",
+      "finite automata",
+      "regular expression",
+      "context free grammar",
+      "pushdown automata",
+      "turing machine",
+      "computability"
+    ]
+  },
+  {
+    "subjectCode": "CS3452",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "theory of computation",
+      "automata",
+      "finite automata",
+      "regular expression",
+      "context free grammar",
+      "pushdown automata",
+      "turing machine",
+      "computability"
+    ]
+  },
+  {
+    "subjectCode": "CS3491",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "artificial intelligence",
+      "machine learning",
+      "supervised learning",
+      "unsupervised learning",
+      "neural network",
+      "classification",
+      "regression",
+      "clustering",
+      "search algorithm"
+    ]
+  },
+  {
+    "subjectCode": "CS3491",
+    "pi": "2.5.3",
+    "keywords": [
+      "mathematical algorithm",
+      "algorithmic knowledge",
+      "mathematical algorithmic",
+      "algorithm for the problem",
+      "artificial intelligence",
+      "machine learning",
+      "supervised learning",
+      "unsupervised learning",
+      "neural network",
+      "classification",
+      "regression",
+      "clustering",
+      "search algorithm"
+    ]
+  },
+  {
+    "subjectCode": "CS3491",
+    "pi": "2.8.2",
+    "keywords": [
+      "analyze results",
+      "interpret results",
+      "contemporary tools",
+      "analyze and interpret",
+      "artificial intelligence",
+      "machine learning",
+      "supervised learning",
+      "unsupervised learning",
+      "neural network",
+      "classification",
+      "regression",
+      "clustering",
+      "search algorithm"
+    ]
+  },
+  {
+    "subjectCode": "CS3491",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "artificial intelligence",
+      "machine learning",
+      "supervised learning",
+      "unsupervised learning",
+      "neural network",
+      "classification",
+      "regression",
+      "clustering",
+      "search algorithm"
+    ]
+  },
+  {
+    "subjectCode": "CS3491",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "artificial intelligence",
+      "machine learning",
+      "supervised learning",
+      "unsupervised learning",
+      "neural network",
+      "classification",
+      "regression",
+      "clustering",
+      "search algorithm"
+    ]
+  },
+  {
+    "subjectCode": "CS3492",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "database management",
+      "dbms",
+      "relational database",
+      "sql",
+      "normalization",
+      "transaction",
+      "query optimization",
+      "database indexing",
+      "hash index"
+    ]
+  },
+  {
+    "subjectCode": "CS3492",
+    "pi": "2.5.3",
+    "keywords": [
+      "mathematical algorithm",
+      "algorithmic knowledge",
+      "mathematical algorithmic",
+      "algorithm for the problem",
+      "database management",
+      "dbms",
+      "relational database",
+      "sql",
+      "normalization",
+      "transaction",
+      "query optimization",
+      "database indexing",
+      "hash index"
+    ]
+  },
+  {
+    "subjectCode": "CS3492",
+    "pi": "2.8.2",
+    "keywords": [
+      "analyze results",
+      "interpret results",
+      "contemporary tools",
+      "analyze and interpret",
+      "database management",
+      "dbms",
+      "relational database",
+      "sql",
+      "normalization",
+      "transaction",
+      "query optimization",
+      "database indexing",
+      "hash index"
+    ]
+  },
+  {
     "subjectCode": "CS3492",
     "pi": "4.4.2",
     "keywords": [
-      "hashing",
-      "hash index",
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "database management",
+      "dbms",
+      "relational database",
+      "sql",
+      "normalization",
+      "transaction",
       "query optimization",
-      "database indexing"
+      "database indexing",
+      "hash index"
     ]
   },
   {
-    "subjectCode": "GE3752",
-    "pi": "5.4.1",
+    "subjectCode": "CS3492",
+    "pi": "5.5.2",
     "keywords": [
-      "six sigma",
-      "quality tools",
-      "benchmarking",
-      "fmea",
-      "process capability",
-      "traditional quality tools"
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "database management",
+      "dbms",
+      "relational database",
+      "sql",
+      "normalization",
+      "transaction",
+      "query optimization",
+      "database indexing",
+      "hash index"
     ]
   },
   {
-    "subjectCode": "GE3752",
+    "subjectCode": "IT3401",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "web essentials",
+      "html",
+      "css",
+      "javascript",
+      "web page",
+      "dom",
+      "http",
+      "web server",
+      "responsive design",
+      "web development"
+    ]
+  },
+  {
+    "subjectCode": "IT3401",
+    "pi": "2.7.1",
+    "keywords": [
+      "formulate modules",
+      "system modules",
+      "computer engineering principles",
+      "system performance",
+      "applicability and performance",
+      "web essentials",
+      "html",
+      "css",
+      "javascript",
+      "web page",
+      "dom",
+      "http",
+      "web server",
+      "responsive design",
+      "web development"
+    ]
+  },
+  {
+    "subjectCode": "IT3401",
+    "pi": "3.8.1",
+    "keywords": [
+      "architecture design",
+      "detailed design",
+      "refine architecture",
+      "design constraints",
+      "web essentials",
+      "html",
+      "css",
+      "javascript",
+      "web page",
+      "dom",
+      "http",
+      "web server",
+      "responsive design",
+      "web development"
+    ]
+  },
+  {
+    "subjectCode": "IT3401",
+    "pi": "3.8.2",
+    "keywords": [
+      "implement modules",
+      "integrate modules",
+      "module integration",
+      "implement and integrate",
+      "web essentials",
+      "html",
+      "css",
+      "javascript",
+      "web page",
+      "dom",
+      "http",
+      "web server",
+      "responsive design",
+      "web development"
+    ]
+  },
+  {
+    "subjectCode": "IT3401",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "web essentials",
+      "html",
+      "css",
+      "javascript",
+      "web page",
+      "dom",
+      "http",
+      "web server",
+      "responsive design",
+      "web development"
+    ]
+  },
+  {
+    "subjectCode": "CS3451",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "operating systems",
+      "process",
+      "thread",
+      "cpu scheduling",
+      "deadlock",
+      "memory management",
+      "virtual memory",
+      "file system"
+    ]
+  },
+  {
+    "subjectCode": "CS3451",
+    "pi": "2.6.2",
+    "keywords": [
+      "system functionalities",
+      "functionalities",
+      "computing resources",
+      "system resources",
+      "operating systems",
+      "process",
+      "thread",
+      "cpu scheduling",
+      "deadlock",
+      "memory management",
+      "virtual memory",
+      "file system"
+    ]
+  },
+  {
+    "subjectCode": "CS3451",
+    "pi": "2.7.1",
+    "keywords": [
+      "formulate modules",
+      "system modules",
+      "computer engineering principles",
+      "system performance",
+      "applicability and performance",
+      "operating systems",
+      "process",
+      "thread",
+      "cpu scheduling",
+      "deadlock",
+      "memory management",
+      "virtual memory",
+      "file system"
+    ]
+  },
+  {
+    "subjectCode": "CS3451",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "operating systems",
+      "process",
+      "thread",
+      "cpu scheduling",
+      "deadlock",
+      "memory management",
+      "virtual memory",
+      "file system"
+    ]
+  },
+  {
+    "subjectCode": "CS3451",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "operating systems",
+      "process",
+      "thread",
+      "cpu scheduling",
+      "deadlock",
+      "memory management",
+      "virtual memory",
+      "file system"
+    ]
+  },
+  {
+    "subjectCode": "GE3451",
+    "pi": "7.3.1",
+    "keywords": [
+      "environmental impact",
+      "environmental risks",
+      "life cycle",
+      "life-cycle",
+      "risks and impacts",
+      "environmental science",
+      "sustainability",
+      "ecosystem",
+      "pollution",
+      "climate change",
+      "renewable energy",
+      "sustainable development"
+    ]
+  },
+  {
+    "subjectCode": "GE3451",
+    "pi": "7.3.2",
+    "keywords": [
+      "sustainability",
+      "socio economic",
+      "environmental dimensions",
+      "technical dimensions",
+      "environmental science",
+      "ecosystem",
+      "pollution",
+      "climate change",
+      "renewable energy",
+      "environmental impact",
+      "sustainable development"
+    ]
+  },
+  {
+    "subjectCode": "GE3451",
+    "pi": "7.4.1",
+    "keywords": [
+      "sustainable development",
+      "management techniques",
+      "sustainability management",
+      "environmental science",
+      "sustainability",
+      "ecosystem",
+      "pollution",
+      "climate change",
+      "renewable energy",
+      "environmental impact"
+    ]
+  },
+  {
+    "subjectCode": "GE3451",
+    "pi": "7.4.2",
+    "keywords": [
+      "preventive engineering",
+      "sustainable design",
+      "sustainable development",
+      "sustainable engineering",
+      "environmental science",
+      "sustainability",
+      "ecosystem",
+      "pollution",
+      "climate change",
+      "renewable energy",
+      "environmental impact"
+    ]
+  },
+  {
+    "subjectCode": "GE3451",
     "pi": "6.4.1",
     "keywords": [
-      "iso 9001",
-      "iso 9000",
-      "iso 14001",
-      "quality standards",
-      "internal audit",
-      "quality policy",
-      "quality management system",
-      "qms"
+      "legislation",
+      "regulations",
+      "codes",
+      "standards",
+      "legal requirements",
+      "environmental science",
+      "sustainability",
+      "ecosystem",
+      "pollution",
+      "climate change",
+      "renewable energy",
+      "environmental impact",
+      "sustainable development"
     ]
   },
   {
-    "subjectCode": "GE3752",
-    "pi": "11.4.1",
+    "subjectCode": "CS3591",
+    "pi": "1.7.1",
     "keywords": [
-      "cost of quality",
-      "costs of quality",
-      "quality cost",
-      "quality costs",
-      "cost of poor quality",
-      "prevention cost",
-      "appraisal cost",
-      "failure cost"
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "computer networks",
+      "network protocol",
+      "osi model",
+      "tcp ip",
+      "routing",
+      "switching",
+      "congestion control",
+      "transport layer",
+      "network security"
     ]
   },
   {
-    "subjectCode": "GE3752",
-    "pi": "9.5.1",
-    "keywords": [
-      "leadership",
-      "quality leadership",
-      "leadership role",
-      "leadership in TQM"
-    ]
-  },
-  {
-    "subjectCode": "GE3752",
-    "pi": "2.8.1",
-    "keywords": [
-      "PDSA",
-      "PDCA",
-      "plan do study act",
-      "plan do check act",
-      "continuous improvement cycle"
-    ]
-  },
-  {
-    "pi": "1.2.1",
-    "keywords": [
-      "discrete structures",
-      "linear algebra",
-      "statistics",
-      "numerical techniques",
-      "mathematical techniques",
-      "mathematical model"
-    ]
-  },
-  {
+    "subjectCode": "CS3591",
     "pi": "1.2.2",
     "keywords": [
       "probability",
@@ -134,650 +2212,1451 @@
       "statistical model",
       "network protocol",
       "data modeling",
-      "computer based system"
-    ]
-  },
-  {
-    "pi": "1.5.1",
-    "keywords": [
-      "natural science",
-      "laws of natural science",
-      "physics",
-      "scientific law"
-    ]
-  },
-  {
-    "pi": "1.6.1",
-    "keywords": [
-      "engineering fundamentals",
-      "engineering principle",
-      "engineering concept"
-    ]
-  },
-  {
-    "pi": "1.7.1",
-    "keywords": [
-      "computer science",
-      "computer engineering",
-      "theory of computer science",
-      "principles of computer science",
-      "engineering problem"
-    ]
-  },
-
-  {
-    "pi": "2.5.1",
-    "keywords": [
-      "evaluate problem",
-      "problem statement",
-      "identify objectives",
-      "objectives of the problem",
-      "problem objectives"
-    ]
-  },
-  {
-    "pi": "2.5.2",
-    "keywords": [
-      "identify processes",
-      "identify modules",
-      "identify algorithms",
-      "system modules",
       "computer based system",
-      "system parameters"
+      "computer networks",
+      "osi model",
+      "tcp ip",
+      "routing",
+      "switching",
+      "congestion control",
+      "transport layer",
+      "network security"
     ]
   },
   {
-    "pi": "2.5.3",
-    "keywords": [
-      "mathematical algorithm",
-      "algorithmic knowledge",
-      "mathematical algorithmic",
-      "algorithm for the problem"
-    ]
-  },
-  {
-    "pi": "2.6.1",
-    "keywords": [
-      "interconnected subsystems",
-      "subsystems",
-      "reframe the system",
-      "system into subsystems"
-    ]
-  },
-  {
+    "subjectCode": "CS3591",
     "pi": "2.6.2",
     "keywords": [
       "system functionalities",
       "functionalities",
       "computing resources",
-      "system resources"
+      "system resources",
+      "computer networks",
+      "network protocol",
+      "osi model",
+      "tcp ip",
+      "routing",
+      "switching",
+      "congestion control",
+      "transport layer",
+      "network security"
     ]
   },
   {
-    "pi": "2.6.3",
-    "keywords": [
-      "existing solution",
-      "existing solutions",
-      "existing method",
-      "existing methods",
-      "approximations",
-      "assumptions"
-    ]
-  },
-  {
-    "pi": "2.6.4",
-    "keywords": [
-      "compare alternative solutions",
-      "compare solutions",
-      "contrast solutions",
-      "alternative methods",
-      "select the best method",
-      "best solution"
-    ]
-  },
-  {
-    "pi": "2.6.5",
-    "keywords": [
-      "compare solution processes",
-      "alternative solution processes",
-      "best process",
-      "compare processes"
-    ]
-  },
-  {
-    "pi": "2.7.1",
-    "keywords": [
-      "formulate modules",
-      "system modules",
-      "computer engineering principles",
-      "system performance",
-      "applicability and performance"
-    ]
-  },
-  {
-    "pi": "2.7.2",
-    "keywords": [
-      "design constraints",
-      "performance criteria",
-      "system constraints",
-      "performance constraints"
-    ]
-  },
-  {
-    "pi": "2.8.1",
-    "keywords": [
-      "engineering mathematics",
-      "mathematical implementation",
-      "apply mathematics",
-      "implement the solution"
-    ]
-  },
-  {
-    "pi": "2.8.2",
-    "keywords": [
-      "analyze results",
-      "interpret results",
-      "contemporary tools",
-      "analyze and interpret"
-    ]
-  },
-  {
-    "pi": "2.8.3",
-    "keywords": [
-      "limitations of the solution",
-      "limitations",
-      "sources of errors",
-      "causes of errors",
-      "solution limitations"
-    ]
-  },
-  {
-    "pi": "2.8.4",
-    "keywords": [
-      "conclusion",
-      "draw conclusion",
-      "arrive at conclusions",
-      "objectives",
-      "conclusions with respect to objectives"
-    ]
-  },
-
-  {
-    "pi": "3.5.1",
-    "keywords": [
-      "problem statement",
-      "define the problem",
-      "problem objectives",
-      "scope of the problem",
-      "objectives and scope"
-    ]
-  },
-  {
-    "pi": "3.5.2",
-    "keywords": [
-      "system requirements",
-      "stakeholder requirements",
-      "identify requirements",
-      "document requirements",
-      "stakeholders"
-    ]
-  },
-  {
-    "pi": "3.5.3",
-    "keywords": [
-      "state of the art",
-      "literature review",
-      "review literature",
-      "research literature",
-      "synthesize requirements"
-    ]
-  },
-  {
-    "pi": "3.5.4",
-    "keywords": [
-      "quality attributes",
-      "iso",
-      "iec",
-      "ieee standard",
-      "software quality"
-    ]
-  },
-  {
-    "pi": "3.5.5",
-    "keywords": [
-      "social concerns",
-      "professional concerns",
-      "social requirements",
-      "societal requirements"
-    ]
-  },
-  {
-    "pi": "3.5.6",
-    "keywords": [
-      "software requirement specification",
-      "software requirements specification",
-      "srs",
-      "develop srs"
-    ]
-  },
-  {
-    "pi": "3.6.1",
-    "keywords": [
-      "design alternatives",
-      "alternative designs",
-      "explore design"
-    ]
-  },
-  {
-    "pi": "3.6.2",
-    "keywords": [
-      "design solutions",
-      "potential design solutions",
-      "functional requirements",
-      "alternative design solutions"
-    ]
-  },
-  {
-    "pi": "3.6.3",
-    "keywords": [
-      "non functional requirements",
-      "non-functional requirements",
-      "evaluate design alternatives"
-    ]
-  },
-  {
-    "pi": "3.7.1",
-    "keywords": [
-      "evaluate design concepts",
-      "systematic evaluation",
-      "design criteria",
-      "evaluate alternatives"
-    ]
-  },
-  {
-    "pi": "3.7.2",
-    "keywords": [
-      "domain experts",
-      "stakeholders",
-      "select candidate solution",
-      "candidate engineering solution"
-    ]
-  },
-  {
-    "pi": "3.8.1",
-    "keywords": [
-      "architecture design",
-      "detailed design",
-      "refine architecture",
-      "design constraints"
-    ]
-  },
-  {
-    "pi": "3.8.2",
-    "keywords": [
-      "implement modules",
-      "integrate modules",
-      "module integration",
-      "implement and integrate"
-    ]
-  },
-  {
-    "pi": "3.8.3",
-    "keywords": [
-      "verify functionality",
-      "validate design",
-      "verify functionalities",
-      "validate the design"
-    ]
-  },
-
-  {
-    "pi": "4.4.1",
-    "keywords": [
-      "investigation problem",
-      "scope and importance",
-      "define a problem for investigation"
-    ]
-  },
-  {
+    "subjectCode": "CS3591",
     "pi": "4.4.2",
     "keywords": [
       "algorithm",
       "dataset",
       "test cases",
       "choose algorithm",
-      "choose test cases"
+      "choose test cases",
+      "computer networks",
+      "network protocol",
+      "osi model",
+      "tcp ip",
+      "routing",
+      "switching",
+      "congestion control",
+      "transport layer",
+      "network security"
     ]
   },
   {
-    "pi": "4.4.3",
-    "keywords": [
-      "hardware tools",
-      "software tools",
-      "experimental tools",
-      "choose tools"
-    ]
-  },
-  {
-    "pi": "4.5.1",
-    "keywords": [
-      "procedure",
-      "methodology",
-      "develop methodology",
-      "study objectives",
-      "experimental procedure"
-    ]
-  },
-  {
-    "pi": "4.6.1",
-    "keywords": [
-      "collect data",
-      "analyze data",
-      "data collection",
-      "data analysis"
-    ]
-  },
-  {
-    "pi": "4.6.2",
-    "keywords": [
-      "trends",
-      "correlations",
-      "analyze data critically",
-      "errors and limitations",
-      "data trends"
-    ]
-  },
-  {
-    "pi": "4.6.3",
-    "keywords": [
-      "tabular form",
-      "graphical form",
-      "represent data",
-      "graphs",
-      "charts",
-      "tables"
-    ]
-  },
-  {
-    "pi": "4.6.4",
-    "keywords": [
-      "synthesize information",
-      "raw data",
-      "draw conclusions",
-      "reach conclusions"
-    ]
-  },
-
-  {
-    "pi": "5.4.1",
-    "keywords": [
-      "modern engineering tools",
-      "engineering tools",
-      "modern tools",
-      "techniques and resources"
-    ]
-  },
-  {
-    "pi": "5.4.2",
-    "keywords": [
-      "modify tools",
-      "adapt tools",
-      "extend tools",
-      "create tools",
-      "modify techniques"
-    ]
-  },
-  {
-    "pi": "5.5.1",
-    "keywords": [
-      "strengths and limitations",
-      "tool limitations",
-      "modeling and simulating",
-      "monitoring system performance"
-    ]
-  },
-  {
+    "subjectCode": "CS3591",
     "pi": "5.5.2",
     "keywords": [
       "use tools",
       "discipline specific tools",
       "demonstrate proficiency",
-      "software tools"
+      "software tools",
+      "computer networks",
+      "network protocol",
+      "osi model",
+      "tcp ip",
+      "routing",
+      "switching",
+      "congestion control",
+      "transport layer",
+      "network security"
     ]
   },
   {
-    "pi": "5.6.1",
+    "subjectCode": "IT3501",
+    "pi": "1.7.1",
     "keywords": [
-      "validate tools",
-      "limitations of tools",
-      "validate techniques",
-      "validate resources"
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "full stack web development",
+      "frontend",
+      "backend",
+      "react",
+      "node",
+      "express",
+      "mongodb",
+      "rest api",
+      "web application"
     ]
   },
   {
-    "pi": "5.6.2",
+    "subjectCode": "IT3501",
+    "pi": "2.7.1",
     "keywords": [
-      "credibility of results",
-      "accuracy",
-      "assumptions",
-      "verify results",
-      "tool accuracy"
+      "formulate modules",
+      "system modules",
+      "computer engineering principles",
+      "system performance",
+      "applicability and performance",
+      "full stack web development",
+      "frontend",
+      "backend",
+      "react",
+      "node",
+      "express",
+      "mongodb",
+      "rest api",
+      "web application"
     ]
   },
-
   {
-    "pi": "6.3.1",
+    "subjectCode": "IT3501",
+    "pi": "3.8.1",
     "keywords": [
-      "public interest",
-      "public protection",
-      "engineering roles",
-      "society",
-      "public safety"
+      "architecture design",
+      "detailed design",
+      "refine architecture",
+      "design constraints",
+      "full stack web development",
+      "frontend",
+      "backend",
+      "react",
+      "node",
+      "express",
+      "mongodb",
+      "rest api",
+      "web application"
     ]
   },
   {
+    "subjectCode": "IT3501",
+    "pi": "3.8.2",
+    "keywords": [
+      "implement modules",
+      "integrate modules",
+      "module integration",
+      "implement and integrate",
+      "full stack web development",
+      "frontend",
+      "backend",
+      "react",
+      "node",
+      "express",
+      "mongodb",
+      "rest api",
+      "web application"
+    ]
+  },
+  {
+    "subjectCode": "IT3501",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "full stack web development",
+      "frontend",
+      "backend",
+      "react",
+      "node",
+      "express",
+      "mongodb",
+      "rest api",
+      "web application"
+    ]
+  },
+  {
+    "subjectCode": "CS3551",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "distributed computing",
+      "distributed system",
+      "rpc",
+      "consensus",
+      "distributed algorithm",
+      "fault tolerance",
+      "distributed database",
+      "cloud"
+    ]
+  },
+  {
+    "subjectCode": "CS3551",
+    "pi": "2.6.1",
+    "keywords": [
+      "interconnected subsystems",
+      "subsystems",
+      "reframe the system",
+      "system into subsystems",
+      "distributed computing",
+      "distributed system",
+      "rpc",
+      "consensus",
+      "distributed algorithm",
+      "fault tolerance",
+      "distributed database",
+      "cloud"
+    ]
+  },
+  {
+    "subjectCode": "CS3551",
+    "pi": "2.6.2",
+    "keywords": [
+      "system functionalities",
+      "functionalities",
+      "computing resources",
+      "system resources",
+      "distributed computing",
+      "distributed system",
+      "rpc",
+      "consensus",
+      "distributed algorithm",
+      "fault tolerance",
+      "distributed database",
+      "cloud"
+    ]
+  },
+  {
+    "subjectCode": "CS3551",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "distributed computing",
+      "distributed system",
+      "rpc",
+      "consensus",
+      "distributed algorithm",
+      "fault tolerance",
+      "distributed database",
+      "cloud"
+    ]
+  },
+  {
+    "subjectCode": "CS3551",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "distributed computing",
+      "distributed system",
+      "rpc",
+      "consensus",
+      "distributed algorithm",
+      "fault tolerance",
+      "distributed database",
+      "cloud"
+    ]
+  },
+  {
+    "subjectCode": "CS3691",
+    "pi": "1.6.1",
+    "keywords": [
+      "engineering fundamentals",
+      "engineering principle",
+      "engineering concept",
+      "embedded systems",
+      "iot",
+      "internet of things",
+      "microcontroller",
+      "sensor",
+      "actuator",
+      "real time system",
+      "embedded programming"
+    ]
+  },
+  {
+    "subjectCode": "CS3691",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "embedded systems",
+      "iot",
+      "internet of things",
+      "microcontroller",
+      "sensor",
+      "actuator",
+      "real time system",
+      "embedded programming"
+    ]
+  },
+  {
+    "subjectCode": "CS3691",
+    "pi": "3.8.2",
+    "keywords": [
+      "implement modules",
+      "integrate modules",
+      "module integration",
+      "implement and integrate",
+      "embedded systems",
+      "iot",
+      "internet of things",
+      "microcontroller",
+      "sensor",
+      "actuator",
+      "real time system",
+      "embedded programming"
+    ]
+  },
+  {
+    "subjectCode": "CS3691",
+    "pi": "4.4.3",
+    "keywords": [
+      "hardware tools",
+      "software tools",
+      "experimental tools",
+      "choose tools",
+      "embedded systems",
+      "iot",
+      "internet of things",
+      "microcontroller",
+      "sensor",
+      "actuator",
+      "real time system",
+      "embedded programming"
+    ]
+  },
+  {
+    "subjectCode": "CS3691",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "embedded systems",
+      "iot",
+      "internet of things",
+      "microcontroller",
+      "sensor",
+      "actuator",
+      "real time system",
+      "embedded programming"
+    ]
+  },
+  {
+    "subjectCode": "CCS341",
+    "pi": "1.2.2",
+    "keywords": [
+      "probability",
+      "queuing theory",
+      "probability model",
+      "statistical model",
+      "network protocol",
+      "data modeling",
+      "computer based system",
+      "data warehousing",
+      "data warehouse",
+      "etl",
+      "olap",
+      "oltp",
+      "star schema",
+      "snowflake schema",
+      "fact table",
+      "dimension table"
+    ]
+  },
+  {
+    "subjectCode": "CCS341",
+    "pi": "2.5.3",
+    "keywords": [
+      "mathematical algorithm",
+      "algorithmic knowledge",
+      "mathematical algorithmic",
+      "algorithm for the problem",
+      "data warehousing",
+      "data warehouse",
+      "etl",
+      "olap",
+      "oltp",
+      "star schema",
+      "snowflake schema",
+      "fact table",
+      "dimension table"
+    ]
+  },
+  {
+    "subjectCode": "CCS341",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "data warehousing",
+      "data warehouse",
+      "etl",
+      "olap",
+      "oltp",
+      "star schema",
+      "snowflake schema",
+      "fact table",
+      "dimension table"
+    ]
+  },
+  {
+    "subjectCode": "CCS341",
+    "pi": "4.6.1",
+    "keywords": [
+      "collect data",
+      "analyze data",
+      "data collection",
+      "data analysis",
+      "data warehousing",
+      "data warehouse",
+      "etl",
+      "olap",
+      "oltp",
+      "star schema",
+      "snowflake schema",
+      "fact table",
+      "dimension table"
+    ]
+  },
+  {
+    "subjectCode": "CCS341",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "data warehousing",
+      "data warehouse",
+      "etl",
+      "olap",
+      "oltp",
+      "star schema",
+      "snowflake schema",
+      "fact table",
+      "dimension table"
+    ]
+  },
+  {
+    "subjectCode": "CCS334",
+    "pi": "1.2.2",
+    "keywords": [
+      "probability",
+      "queuing theory",
+      "probability model",
+      "statistical model",
+      "network protocol",
+      "data modeling",
+      "computer based system",
+      "big data analytics",
+      "big data",
+      "hadoop",
+      "spark",
+      "mapreduce",
+      "data analytics",
+      "data mining",
+      "stream processing"
+    ]
+  },
+  {
+    "subjectCode": "CCS334",
+    "pi": "2.8.2",
+    "keywords": [
+      "analyze results",
+      "interpret results",
+      "contemporary tools",
+      "analyze and interpret",
+      "big data analytics",
+      "big data",
+      "hadoop",
+      "spark",
+      "mapreduce",
+      "data analytics",
+      "data mining",
+      "stream processing"
+    ]
+  },
+  {
+    "subjectCode": "CCS334",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "big data analytics",
+      "big data",
+      "hadoop",
+      "spark",
+      "mapreduce",
+      "data analytics",
+      "data mining",
+      "stream processing"
+    ]
+  },
+  {
+    "subjectCode": "CCS334",
+    "pi": "4.6.1",
+    "keywords": [
+      "collect data",
+      "analyze data",
+      "data collection",
+      "data analysis",
+      "big data analytics",
+      "big data",
+      "hadoop",
+      "spark",
+      "mapreduce",
+      "data analytics",
+      "data mining",
+      "stream processing"
+    ]
+  },
+  {
+    "subjectCode": "CCS334",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "big data analytics",
+      "big data",
+      "hadoop",
+      "spark",
+      "mapreduce",
+      "data analytics",
+      "data mining",
+      "stream processing"
+    ]
+  },
+  {
+    "subjectCode": "CCS356",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "object oriented software engineering",
+      "software engineering",
+      "requirements",
+      "software design",
+      "architecture",
+      "uml",
+      "testing",
+      "software development"
+    ]
+  },
+  {
+    "subjectCode": "CCS356",
+    "pi": "2.5.3",
+    "keywords": [
+      "mathematical algorithm",
+      "algorithmic knowledge",
+      "mathematical algorithmic",
+      "algorithm for the problem",
+      "object oriented software engineering",
+      "software engineering",
+      "requirements",
+      "software design",
+      "architecture",
+      "uml",
+      "testing",
+      "software development"
+    ]
+  },
+  {
+    "subjectCode": "CCS356",
+    "pi": "3.6.2",
+    "keywords": [
+      "design solutions",
+      "potential design solutions",
+      "functional requirements",
+      "alternative design solutions",
+      "object oriented software engineering",
+      "software engineering",
+      "requirements",
+      "software design",
+      "architecture",
+      "uml",
+      "testing",
+      "software development"
+    ]
+  },
+  {
+    "subjectCode": "CCS356",
+    "pi": "3.8.2",
+    "keywords": [
+      "implement modules",
+      "integrate modules",
+      "module integration",
+      "implement and integrate",
+      "object oriented software engineering",
+      "software engineering",
+      "requirements",
+      "software design",
+      "architecture",
+      "uml",
+      "testing",
+      "software development"
+    ]
+  },
+  {
+    "subjectCode": "CCS356",
+    "pi": "3.8.3",
+    "keywords": [
+      "verify functionality",
+      "validate design",
+      "verify functionalities",
+      "validate the design",
+      "object oriented software engineering",
+      "software engineering",
+      "requirements",
+      "software design",
+      "architecture",
+      "uml",
+      "testing",
+      "software development"
+    ]
+  },
+  {
+    "subjectCode": "CCS335",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "cloud computing",
+      "cloud service",
+      "iaas",
+      "paas",
+      "saas",
+      "virtualization",
+      "cloud architecture",
+      "resource management"
+    ]
+  },
+  {
+    "subjectCode": "CCS335",
+    "pi": "2.6.2",
+    "keywords": [
+      "system functionalities",
+      "functionalities",
+      "computing resources",
+      "system resources",
+      "cloud computing",
+      "cloud service",
+      "iaas",
+      "paas",
+      "saas",
+      "virtualization",
+      "cloud architecture",
+      "resource management"
+    ]
+  },
+  {
+    "subjectCode": "CCS335",
+    "pi": "3.8.1",
+    "keywords": [
+      "architecture design",
+      "detailed design",
+      "refine architecture",
+      "design constraints",
+      "cloud computing",
+      "cloud service",
+      "iaas",
+      "paas",
+      "saas",
+      "virtualization",
+      "cloud architecture",
+      "resource management"
+    ]
+  },
+  {
+    "subjectCode": "CCS335",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "cloud computing",
+      "cloud service",
+      "iaas",
+      "paas",
+      "saas",
+      "virtualization",
+      "cloud architecture",
+      "resource management"
+    ]
+  },
+  {
+    "subjectCode": "CCS335",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "cloud computing",
+      "cloud service",
+      "iaas",
+      "paas",
+      "saas",
+      "virtualization",
+      "cloud architecture",
+      "resource management"
+    ]
+  },
+  {
+    "subjectCode": "CCS354",
+    "pi": "1.7.1",
+    "keywords": [
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "network security",
+      "cyber security",
+      "encryption",
+      "cryptography",
+      "authentication",
+      "firewall",
+      "intrusion detection",
+      "security protocol"
+    ]
+  },
+  {
+    "subjectCode": "CCS354",
+    "pi": "2.6.2",
+    "keywords": [
+      "system functionalities",
+      "functionalities",
+      "computing resources",
+      "system resources",
+      "network security",
+      "cyber security",
+      "encryption",
+      "cryptography",
+      "authentication",
+      "firewall",
+      "intrusion detection",
+      "security protocol"
+    ]
+  },
+  {
+    "subjectCode": "CCS354",
+    "pi": "3.8.3",
+    "keywords": [
+      "verify functionality",
+      "validate design",
+      "verify functionalities",
+      "validate the design",
+      "network security",
+      "cyber security",
+      "encryption",
+      "cryptography",
+      "authentication",
+      "firewall",
+      "intrusion detection",
+      "security protocol"
+    ]
+  },
+  {
+    "subjectCode": "CCS354",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "network security",
+      "cyber security",
+      "encryption",
+      "cryptography",
+      "authentication",
+      "firewall",
+      "intrusion detection",
+      "security protocol"
+    ]
+  },
+  {
+    "subjectCode": "CCS354",
     "pi": "6.4.1",
     "keywords": [
       "legislation",
       "regulations",
       "codes",
       "standards",
-      "legal requirements"
+      "legal requirements",
+      "network security",
+      "cyber security",
+      "encryption",
+      "cryptography",
+      "authentication",
+      "firewall",
+      "intrusion detection",
+      "security protocol"
     ]
   },
-
   {
+    "subjectCode": "CCS366",
+    "pi": "3.8.3",
+    "keywords": [
+      "verify functionality",
+      "validate design",
+      "verify functionalities",
+      "validate the design",
+      "software testing",
+      "automation testing",
+      "test case",
+      "test plan",
+      "unit testing",
+      "integration testing",
+      "system testing",
+      "selenium",
+      "test automation"
+    ]
+  },
+  {
+    "subjectCode": "CCS366",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "software testing",
+      "automation testing",
+      "test case",
+      "test plan",
+      "unit testing",
+      "integration testing",
+      "system testing",
+      "selenium",
+      "test automation"
+    ]
+  },
+  {
+    "subjectCode": "CCS366",
+    "pi": "4.5.1",
+    "keywords": [
+      "procedure",
+      "methodology",
+      "develop methodology",
+      "study objectives",
+      "experimental procedure",
+      "software testing",
+      "automation testing",
+      "test case",
+      "test plan",
+      "unit testing",
+      "integration testing",
+      "system testing",
+      "selenium",
+      "test automation"
+    ]
+  },
+  {
+    "subjectCode": "CCS366",
+    "pi": "4.6.1",
+    "keywords": [
+      "collect data",
+      "analyze data",
+      "data collection",
+      "data analysis",
+      "software testing",
+      "automation testing",
+      "test case",
+      "test plan",
+      "unit testing",
+      "integration testing",
+      "system testing",
+      "selenium",
+      "test automation"
+    ]
+  },
+  {
+    "subjectCode": "CCS366",
+    "pi": "5.5.1",
+    "keywords": [
+      "strengths and limitations",
+      "tool limitations",
+      "modeling and simulating",
+      "monitoring system performance",
+      "software testing",
+      "automation testing",
+      "test case",
+      "test plan",
+      "unit testing",
+      "integration testing",
+      "system testing",
+      "selenium",
+      "test automation"
+    ]
+  },
+  {
+    "subjectCode": "OBT351",
+    "pi": "1.5.1",
+    "keywords": [
+      "natural science",
+      "laws of natural science",
+      "physics",
+      "scientific law",
+      "food nutrition health",
+      "nutrition",
+      "balanced diet",
+      "carbohydrates",
+      "proteins",
+      "vitamins",
+      "minerals",
+      "food safety",
+      "health"
+    ]
+  },
+  {
+    "subjectCode": "OBT351",
+    "pi": "1.6.1",
+    "keywords": [
+      "engineering fundamentals",
+      "engineering principle",
+      "engineering concept",
+      "food nutrition health",
+      "nutrition",
+      "balanced diet",
+      "carbohydrates",
+      "proteins",
+      "vitamins",
+      "minerals",
+      "food safety",
+      "health"
+    ]
+  },
+  {
+    "subjectCode": "OBT351",
+    "pi": "4.4.1",
+    "keywords": [
+      "investigation problem",
+      "scope and importance",
+      "define a problem for investigation",
+      "food nutrition health",
+      "nutrition",
+      "balanced diet",
+      "carbohydrates",
+      "proteins",
+      "vitamins",
+      "minerals",
+      "food safety",
+      "health"
+    ]
+  },
+  {
+    "subjectCode": "OBT351",
+    "pi": "4.6.1",
+    "keywords": [
+      "collect data",
+      "analyze data",
+      "data collection",
+      "data analysis",
+      "food nutrition health",
+      "nutrition",
+      "balanced diet",
+      "carbohydrates",
+      "proteins",
+      "vitamins",
+      "minerals",
+      "food safety",
+      "health"
+    ]
+  },
+  {
+    "subjectCode": "OBT351",
     "pi": "7.3.1",
     "keywords": [
       "environmental impact",
       "environmental risks",
       "life cycle",
       "life-cycle",
-      "risks and impacts"
+      "risks and impacts",
+      "food nutrition health",
+      "nutrition",
+      "balanced diet",
+      "carbohydrates",
+      "proteins",
+      "vitamins",
+      "minerals",
+      "food safety",
+      "health"
     ]
   },
   {
-    "pi": "7.3.2",
+    "subjectCode": "IT3681",
+    "pi": "1.7.1",
     "keywords": [
-      "sustainability",
-      "socio economic",
-      "environmental dimensions",
-      "technical dimensions"
+      "computer science",
+      "computer engineering",
+      "theory of computer science",
+      "principles of computer science",
+      "engineering problem",
+      "mobile app development",
+      "android",
+      "mobile application",
+      "activity",
+      "intent",
+      "mobile ui",
+      "mobile database",
+      "app development"
     ]
   },
   {
-    "pi": "7.4.1",
+    "subjectCode": "IT3681",
+    "pi": "2.7.1",
     "keywords": [
-      "sustainable development",
-      "management techniques",
-      "sustainability management"
+      "formulate modules",
+      "system modules",
+      "computer engineering principles",
+      "system performance",
+      "applicability and performance",
+      "mobile app development",
+      "android",
+      "mobile application",
+      "activity",
+      "intent",
+      "mobile ui",
+      "mobile database",
+      "app development"
     ]
   },
   {
-    "pi": "7.4.2",
+    "subjectCode": "IT3681",
+    "pi": "3.8.2",
     "keywords": [
-      "preventive engineering",
-      "sustainable design",
-      "sustainable development",
-      "sustainable engineering"
+      "implement modules",
+      "integrate modules",
+      "module integration",
+      "implement and integrate",
+      "mobile app development",
+      "android",
+      "mobile application",
+      "activity",
+      "intent",
+      "mobile ui",
+      "mobile database",
+      "app development"
     ]
   },
-
   {
+    "subjectCode": "IT3681",
+    "pi": "4.4.2",
+    "keywords": [
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "mobile app development",
+      "android",
+      "mobile application",
+      "activity",
+      "intent",
+      "mobile ui",
+      "mobile database",
+      "app development"
+    ]
+  },
+  {
+    "subjectCode": "IT3681",
+    "pi": "5.5.2",
+    "keywords": [
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "mobile app development",
+      "android",
+      "mobile application",
+      "activity",
+      "intent",
+      "mobile ui",
+      "mobile database",
+      "app development"
+    ]
+  },
+  {
+    "subjectCode": "GE3791",
     "pi": "8.3.1",
     "keywords": [
       "unethical",
       "unethical conduct",
       "ethical dilemma",
-      "ethical alternatives"
+      "ethical alternatives",
+      "human values",
+      "professional ethics",
+      "ethics",
+      "moral values",
+      "code of ethics",
+      "professional responsibility",
+      "society"
     ]
   },
   {
+    "subjectCode": "GE3791",
     "pi": "8.4.1",
     "keywords": [
       "code of ethics",
       "professional code",
       "asme",
-      "ethical code"
+      "ethical code",
+      "human values",
+      "professional ethics",
+      "ethics",
+      "moral values",
+      "ethical dilemma",
+      "professional responsibility",
+      "society"
     ]
   },
   {
+    "subjectCode": "GE3791",
     "pi": "8.4.2",
     "keywords": [
       "moral principles",
       "ethical principles",
       "case study",
-      "moral and ethical"
-    ]
-  },
-
-  {
-    "pi": "9.4.1",
-    "keywords": [
-      "working preferences",
-      "learning preferences",
-      "team diversity",
-      "diversity in team"
-    ]
-  },
-  {
-    "pi": "9.4.2",
-    "keywords": [
-      "team rules",
-      "team roles",
-      "team charter",
-      "team agenda",
-      "teamwork"
+      "moral and ethical",
+      "human values",
+      "professional ethics",
+      "ethics",
+      "moral values",
+      "ethical dilemma",
+      "code of ethics",
+      "professional responsibility",
+      "society"
     ]
   },
   {
+    "subjectCode": "GE3791",
     "pi": "9.5.1",
     "keywords": [
       "communication",
       "problem solving",
       "conflict resolution",
       "leadership",
-      "leadership skills"
+      "leadership skills",
+      "human values",
+      "professional ethics",
+      "ethics",
+      "moral values",
+      "ethical dilemma",
+      "code of ethics",
+      "professional responsibility",
+      "society"
     ]
   },
   {
-    "pi": "9.5.2",
+    "subjectCode": "GE3791",
+    "pi": "6.3.1",
     "keywords": [
-      "respect team members",
-      "respectful",
-      "team members"
+      "public interest",
+      "public protection",
+      "engineering roles",
+      "society",
+      "public safety",
+      "human values",
+      "professional ethics",
+      "ethics",
+      "moral values",
+      "ethical dilemma",
+      "code of ethics",
+      "professional responsibility"
     ]
   },
   {
-    "pi": "9.5.3",
+    "subjectCode": "AI3021",
+    "pi": "1.6.1",
     "keywords": [
-      "listen to members",
-      "listening",
-      "team communication"
+      "engineering fundamentals",
+      "engineering principle",
+      "engineering concept",
+      "it in agriculture",
+      "precision farming",
+      "precision agriculture",
+      "artificial lighting",
+      "artificial light system",
+      "greenhouse",
+      "environment control",
+      "automation",
+      "crop modeling",
+      "remote sensing",
+      "yield mapping"
     ]
   },
   {
-    "pi": "9.5.4",
+    "subjectCode": "AI3021",
+    "pi": "4.4.2",
     "keywords": [
-      "difficult situations",
-      "maintain composure",
-      "stressful situation"
+      "algorithm",
+      "dataset",
+      "test cases",
+      "choose algorithm",
+      "choose test cases",
+      "it in agriculture",
+      "precision farming",
+      "precision agriculture",
+      "artificial lighting",
+      "artificial light system",
+      "greenhouse",
+      "environment control",
+      "automation",
+      "crop modeling",
+      "remote sensing",
+      "yield mapping"
     ]
   },
   {
-    "pi": "9.6.1",
+    "subjectCode": "AI3021",
+    "pi": "4.4.3",
     "keywords": [
-      "present results as a team",
-      "team presentation",
-      "integrate contributions",
-      "team results"
+      "hardware tools",
+      "software tools",
+      "experimental tools",
+      "choose tools",
+      "it in agriculture",
+      "precision farming",
+      "precision agriculture",
+      "artificial lighting",
+      "artificial light system",
+      "greenhouse",
+      "environment control",
+      "automation",
+      "crop modeling",
+      "remote sensing",
+      "yield mapping"
     ]
   },
-
   {
-    "pi": "10.4.1",
+    "subjectCode": "AI3021",
+    "pi": "5.5.2",
     "keywords": [
-      "interpret technical information",
-      "technical literature",
-      "non technical information",
-      "read and understand"
+      "use tools",
+      "discipline specific tools",
+      "demonstrate proficiency",
+      "software tools",
+      "it in agriculture",
+      "precision farming",
+      "precision agriculture",
+      "artificial lighting",
+      "artificial light system",
+      "greenhouse",
+      "environment control",
+      "automation",
+      "crop modeling",
+      "remote sensing",
+      "yield mapping"
     ]
   },
   {
-    "pi": "10.4.2",
+    "subjectCode": "AI3021",
+    "pi": "7.3.1",
     "keywords": [
-      "written engineering document",
-      "technical document",
-      "engineering report",
-      "written report"
+      "environmental impact",
+      "environmental risks",
+      "life cycle",
+      "life-cycle",
+      "risks and impacts",
+      "it in agriculture",
+      "precision farming",
+      "precision agriculture",
+      "artificial lighting",
+      "artificial light system",
+      "greenhouse",
+      "environment control",
+      "automation",
+      "crop modeling",
+      "remote sensing",
+      "yield mapping"
     ]
   },
   {
-    "pi": "10.4.3",
+    "subjectCode": "GE3752",
+    "pi": "3.5.4",
     "keywords": [
-      "logical progression",
-      "document flow",
-      "presentation flow",
-      "main point"
+      "quality attributes",
+      "iso",
+      "iec",
+      "ieee standard",
+      "software quality",
+      "quality",
+      "total quality management",
+      "tqm",
+      "quality management",
+      "quality gurus",
+      "quality framework",
+      "benefits of tqm",
+      "six sigma",
+      "quality tools",
+      "benchmarking",
+      "fmea",
+      "process capability",
+      "iso 9001",
+      "iso 9000",
+      "iso 14001",
+      "quality standards",
+      "internal audit",
+      "quality policy",
+      "quality management system",
+      "cost of quality",
+      "prevention cost",
+      "appraisal cost",
+      "failure cost",
+      "PDSA",
+      "PDCA",
+      "continuous improvement"
     ]
   },
   {
-    "pi": "10.5.1",
+    "subjectCode": "GE3752",
+    "pi": "5.4.1",
     "keywords": [
-      "listen and comprehend",
-      "instructions",
-      "viewpoints"
+      "modern engineering tools",
+      "engineering tools",
+      "modern tools",
+      "techniques and resources",
+      "quality",
+      "total quality management",
+      "tqm",
+      "quality management",
+      "quality gurus",
+      "quality framework",
+      "benefits of tqm",
+      "six sigma",
+      "quality tools",
+      "benchmarking",
+      "fmea",
+      "process capability",
+      "iso 9001",
+      "iso 9000",
+      "iso 14001",
+      "quality standards",
+      "internal audit",
+      "quality policy",
+      "quality management system",
+      "cost of quality",
+      "prevention cost",
+      "appraisal cost",
+      "failure cost",
+      "PDSA",
+      "PDCA",
+      "continuous improvement"
     ]
   },
   {
-    "pi": "10.5.2",
+    "subjectCode": "GE3752",
+    "pi": "6.4.1",
     "keywords": [
-      "oral presentation",
-      "technical presentation",
-      "presentation skills",
-      "non technical audience"
+      "legislation",
+      "regulations",
+      "codes",
+      "standards",
+      "legal requirements",
+      "quality",
+      "total quality management",
+      "tqm",
+      "quality management",
+      "quality gurus",
+      "quality framework",
+      "benefits of tqm",
+      "six sigma",
+      "quality tools",
+      "benchmarking",
+      "fmea",
+      "process capability",
+      "iso 9001",
+      "iso 9000",
+      "iso 14001",
+      "quality standards",
+      "internal audit",
+      "quality policy",
+      "quality management system",
+      "cost of quality",
+      "prevention cost",
+      "appraisal cost",
+      "failure cost",
+      "PDSA",
+      "PDCA",
+      "continuous improvement"
     ]
   },
   {
-    "pi": "10.6.1",
+    "subjectCode": "GE3752",
+    "pi": "9.5.1",
     "keywords": [
-      "engineering figures",
-      "engineering drawings",
-      "reports and drawings",
-      "technical figures"
+      "communication",
+      "problem solving",
+      "conflict resolution",
+      "leadership",
+      "leadership skills",
+      "quality",
+      "total quality management",
+      "tqm",
+      "quality management",
+      "quality gurus",
+      "quality framework",
+      "benefits of tqm",
+      "six sigma",
+      "quality tools",
+      "benchmarking",
+      "fmea",
+      "process capability",
+      "iso 9001",
+      "iso 9000",
+      "iso 14001",
+      "quality standards",
+      "internal audit",
+      "quality policy",
+      "quality management system",
+      "cost of quality",
+      "prevention cost",
+      "appraisal cost",
+      "failure cost",
+      "PDSA",
+      "PDCA",
+      "continuous improvement"
     ]
   },
   {
-    "pi": "10.6.2",
-    "keywords": [
-      "media",
-      "presentation media",
-      "visual media",
-      "communicate message"
-    ]
-  },
-
-  {
+    "subjectCode": "GE3752",
     "pi": "11.4.1",
     "keywords": [
       "cost of quality",
@@ -787,96 +3666,197 @@
       "economic costs",
       "financial costs",
       "cost benefits",
-      "financial benefits"
+      "financial benefits",
+      "quality",
+      "total quality management",
+      "tqm",
+      "quality management",
+      "quality gurus",
+      "quality framework",
+      "benefits of tqm",
+      "six sigma",
+      "quality tools",
+      "benchmarking",
+      "fmea",
+      "process capability",
+      "iso 9001",
+      "iso 9000",
+      "iso 14001",
+      "quality standards",
+      "internal audit",
+      "quality policy",
+      "quality management system",
+      "prevention cost",
+      "appraisal cost",
+      "failure cost",
+      "PDSA",
+      "PDCA",
+      "continuous improvement"
     ]
   },
   {
-    "pi": "11.4.2",
+    "subjectCode": "GE3752",
+    "pi": "2.8.1",
     "keywords": [
-      "financial statements",
-      "financial status",
-      "financial analysis"
+      "engineering mathematics",
+      "mathematical implementation",
+      "apply mathematics",
+      "implement the solution",
+      "quality",
+      "total quality management",
+      "tqm",
+      "quality management",
+      "quality gurus",
+      "quality framework",
+      "benefits of tqm",
+      "six sigma",
+      "quality tools",
+      "benchmarking",
+      "fmea",
+      "process capability",
+      "iso 9001",
+      "iso 9000",
+      "iso 14001",
+      "quality standards",
+      "internal audit",
+      "quality policy",
+      "quality management system",
+      "cost of quality",
+      "prevention cost",
+      "appraisal cost",
+      "failure cost",
+      "PDSA",
+      "PDCA",
+      "continuous improvement"
     ]
   },
   {
-    "pi": "11.5.1",
+    "subjectCode": "OHS352",
+    "pi": "3.5.1",
     "keywords": [
-      "select proposal",
-      "economic considerations",
-      "financial considerations",
-      "compare proposals"
+      "problem statement",
+      "define the problem",
+      "problem objectives",
+      "scope of the problem",
+      "objectives and scope",
+      "project report writing",
+      "project report",
+      "system requirements",
+      "literature review",
+      "software requirement specification",
+      "SRS",
+      "methodology",
+      "data analysis",
+      "engineering report",
+      "technical document",
+      "presentation"
     ]
   },
   {
-    "pi": "11.6.1",
+    "subjectCode": "OHS352",
+    "pi": "3.5.2",
     "keywords": [
-      "project tasks",
-      "resources required",
-      "project resources",
-      "identify tasks"
+      "system requirements",
+      "stakeholder requirements",
+      "identify requirements",
+      "document requirements",
+      "stakeholders",
+      "project report writing",
+      "project report",
+      "problem statement",
+      "literature review",
+      "software requirement specification",
+      "SRS",
+      "methodology",
+      "data analysis",
+      "engineering report",
+      "technical document",
+      "presentation"
     ]
   },
   {
-    "pi": "11.6.2",
+    "subjectCode": "OHS352",
+    "pi": "3.5.3",
     "keywords": [
-      "project management tools",
-      "schedule project",
-      "time and budget",
-      "project scheduling"
-    ]
-  },
-
-  {
-    "pi": "12.4.1",
-    "keywords": [
-      "professional development",
-      "continuing professional development",
-      "professional development requirement"
-    ]
-  },
-  {
-    "pi": "12.4.2",
-    "keywords": [
-      "knowledge gap",
-      "knowledge gaps",
-      "deficiencies",
-      "source information"
+      "state of the art",
+      "literature review",
+      "review literature",
+      "research literature",
+      "synthesize requirements",
+      "project report writing",
+      "project report",
+      "problem statement",
+      "system requirements",
+      "software requirement specification",
+      "SRS",
+      "methodology",
+      "data analysis",
+      "engineering report",
+      "technical document",
+      "presentation"
     ]
   },
   {
-    "pi": "12.5.1",
+    "subjectCode": "OHS352",
+    "pi": "3.5.6",
     "keywords": [
-      "technological advance",
-      "technology advancement",
-      "historic technology",
-      "technological development"
+      "software requirement specification",
+      "software requirements specification",
+      "srs",
+      "develop srs",
+      "project report writing",
+      "project report",
+      "problem statement",
+      "system requirements",
+      "literature review",
+      "SRS",
+      "methodology",
+      "data analysis",
+      "engineering report",
+      "technical document",
+      "presentation"
     ]
   },
   {
-    "pi": "12.5.2",
+    "subjectCode": "OHS352",
+    "pi": "10.4.2",
     "keywords": [
-      "new developments",
-      "keep current",
-      "current technology",
-      "latest developments"
+      "written engineering document",
+      "technical document",
+      "engineering report",
+      "written report",
+      "project report writing",
+      "project report",
+      "problem statement",
+      "system requirements",
+      "literature review",
+      "software requirement specification",
+      "SRS",
+      "methodology",
+      "data analysis",
+      "presentation"
     ]
   },
   {
-    "pi": "12.6.1",
+    "subjectCode": "OHS352",
+    "pi": "10.6.2",
     "keywords": [
-      "technical literature",
-      "credible sources",
-      "source information",
-      "technical sources"
-    ]
-  },
-  {
-    "pi": "12.6.2",
-    "keywords": [
-      "feasibility",
-      "viability",
-      "sustainability",
-      "analyze information"
+      "media",
+      "presentation media",
+      "visual media",
+      "communicate message",
+      "project report writing",
+      "project report",
+      "problem statement",
+      "system requirements",
+      "literature review",
+      "software requirement specification",
+      "SRS",
+      "methodology",
+      "data analysis",
+      "engineering report",
+      "technical document",
+      "presentation"
     ]
   }
 ]

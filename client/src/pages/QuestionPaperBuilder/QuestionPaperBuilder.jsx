@@ -1,22 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import DiagramEditor from "../../components/DiagramEditor"; // your DiagramEditor component path
-
+import DiagramEditor from "../../components/DiagramEditor"; 
+import Dashboard from "../Dashboard/Dashboard"; 
+import { generatePDF } from "../../utils/generatePDF";
 
 const autoDetectCOBLPI = (text) => {
   const lower = text.toLowerCase().trim();
   if (!lower) return { bl: "", co: "", pi: "" };
 
   if (lower.startsWith("define") || lower.startsWith("state") || lower.startsWith("list") || lower.startsWith("what")) {
-    return { bl: "L1", co: "CO1", pi: "1.1.1" };
+    return { bl: "L1", co: "CO1", pi: "" };
   } else if (lower.startsWith("explain") || lower.startsWith("describe") || lower.startsWith("discuss") || lower.startsWith("compare")) {
-    return { bl: "L2", co: "CO2", pi: "2.1.2" };
+    return { bl: "L2", co: "CO2", pi: "" };
   } else if (lower.startsWith("apply") || lower.startsWith("solve") || lower.startsWith("calculate") || lower.startsWith("derive")) {
-    return { bl: "L3", co: "CO3", pi: "3.2.1" };
+    return { bl: "L3", co: "CO3", pi: "" };
   } else if (lower.startsWith("analyze") || lower.startsWith("design") || lower.startsWith("evaluate") || lower.startsWith("develop")) {
-    return { bl: "L4", co: "CO4", pi: "4.1.1" };
+    return { bl: "L4", co: "CO4", pi: "" };
   }
-  return { bl: "L2", co: "CO1", pi: "1.1.1" };
+  return { bl: "L2", co: "CO1", pi: "" };
 };
 
 const subjectsBySemester = {
@@ -66,8 +67,7 @@ const subjectsBySemester = {
     { code: "CCS354", name: "Network Security" },
     { code: "CCS366", name: "Software Testing and Automation" },
     { code: "OBT351", name: "Food, Nutrition and Health" },
-    { code: "IT3681", name: "Mobile App Development" }
-  ],
+    ],
   "VII": [
     { code: "GE3791", name: "Human Values and Ethics" },
     { code: "AI3021", name: "IT in Agriculture" },
@@ -131,14 +131,6 @@ const [savedDiagrams, setSavedDiagrams] =
     })
   );
 };
-
-
-
-
-
-
-
-
 
   // DIAGRAM MODAL STATES
   const [showDiagramEditor, setShowDiagramEditor] = useState(false);
@@ -256,12 +248,13 @@ const [savedDiagrams, setSavedDiagrams] =
     },
   });
 
-  // PRINT HANDLER WITH AUTO REFRESH
-  const handlePrint = () => {
-    window.print();
-    setTimeout(() => {
-      window.location.reload();
-    }, 500);
+  const handleDownload = async () => {
+    try {
+      await generatePDF(document.getElementById("paper-sheet"));
+    } catch (error) {
+      console.error("Question paper PDF generation failed:", error);
+      alert("Unable to download the question paper PDF.");
+    }
   };
 
   const fetchSavedPapers = async () => {
@@ -852,20 +845,61 @@ const renderDiagramPreview = (diagram, target = null) => {
     }
   };
 
-  const getActiveQuestions = (item) => [
-    ...(item.typeA === "split" ? item.optionA?.subQuestions || [] : [item.optionA]),
-    ...(item.typeB === "split" ? item.optionB?.subQuestions || [] : [item.optionB]),
-  ];
-  const chartQuestions = [
-    ...partA,
-    ...partB.flatMap(getActiveQuestions),
-    ...getActiveQuestions(partC),
-  ].filter((item) => item?.question?.trim());
-
   const getQuestionMarks = (marks) => {
     const value = Number.parseInt(String(marks || "").replace(/[^0-9]/g, ""), 10);
     return Number.isFinite(value) ? value : 0;
   };
+
+  const getOptionQuestions = (option, type, totalMarks) => {
+    const entries = type === "split" ? option?.subQuestions || [] : [option];
+    const filledEntries = entries.filter((entry) => entry?.question?.trim());
+    if (!filledEntries.length) return [];
+
+    const usableEntries = filledEntries;
+    const weights = usableEntries.map((entry) => getQuestionMarks(entry.marks));
+    const weightTotal = weights.reduce((total, weight) => total + weight, 0);
+    let assignedMarks = 0;
+
+    return usableEntries.map((entry, index) => {
+      const marks = index === usableEntries.length - 1
+        ? totalMarks - assignedMarks
+        : weightTotal
+          ? Math.floor((weights[index] / weightTotal) * totalMarks)
+          : Math.floor(totalMarks / usableEntries.length);
+      assignedMarks += marks;
+      return { ...entry, chartMarks: Math.min(marks, 100) };
+    });
+  };
+
+  const chooseChartOption = (item) => {
+    const optionAHasQuestion = item.optionA?.question?.trim()
+      || item.optionA?.subQuestions?.some((entry) => entry.question?.trim());
+    const optionBHasQuestion = item.optionB?.question?.trim()
+      || item.optionB?.subQuestions?.some((entry) => entry.question?.trim());
+
+    // No answer-selection field exists, so prefer A; use B only when A is empty.
+    return optionAHasQuestion || !optionBHasQuestion ? "A" : "B";
+  };
+
+  const partAChartQuestions = partA
+    .filter((question) => question?.question?.trim())
+    .map((question) => ({ ...question, chartMarks: 2 }));
+  const partBChartQuestions = partB.flatMap((item) => {
+    const optionKey = chooseChartOption(item);
+    const option = optionKey === "A" ? item.optionA : item.optionB;
+    const type = optionKey === "A" ? item.typeA : item.typeB;
+    return getOptionQuestions(option, type, 13);
+  });
+  const partCChartQuestions = getOptionQuestions(
+    partC[chooseChartOption(partC) === "A" ? "optionA" : "optionB"],
+    chooseChartOption(partC) === "A" ? partC.typeA : partC.typeB,
+    15
+  );
+  const chartQuestions = [
+    ...partAChartQuestions,
+    ...partBChartQuestions,
+    ...partCChartQuestions,
+  ];
 
   const normalizeLabel = (value, prefix) => {
     const match = String(value || "").trim().toUpperCase().match(new RegExp(`^${prefix}L?(\\d+)$`));
@@ -875,17 +909,33 @@ const renderDiagramPreview = (diagram, target = null) => {
     const normalized = String(value || "").trim().toUpperCase().replace(/^BL/, "L");
     return /^L[1-6]$/.test(normalized) ? normalized : "";
   };
-  const coDistribution = ["CO1", "CO2", "CO3", "CO4", "CO5", "CO6"].map((label) => ({
+  const coDistribution = ["CO1", "CO2", "CO3", "CO4", "CO5"].map((label) => ({
     label,
     marks: chartQuestions.filter((item) => normalizeLabel(item.co, "CO") === label)
-      .reduce((total, item) => total + getQuestionMarks(item.marks), 0),
+      .reduce((total, item) => total + item.chartMarks, 0),
   }));
   const bloomDistribution = ["L1", "L2", "L3", "L4", "L5", "L6"].map((label) => ({
     label,
     color: ["#3182ce", "#38a169", "#dd6b20", "#805ad5", "#e53e3e", "#718096"][Number(label.slice(1)) - 1],
     marks: chartQuestions.filter((item) => normalizeBloomLabel(item.bl) === label)
-      .reduce((total, item) => total + getQuestionMarks(item.marks), 0),
+      .reduce((total, item) => total + item.chartMarks, 0),
   }));
+  const chartPartTotals = {
+    partA: partAChartQuestions.reduce((total, question) => total + question.chartMarks, 0),
+    partB: partBChartQuestions.reduce((total, question) => total + question.chartMarks, 0),
+    partC: partCChartQuestions.reduce((total, question) => total + question.chartMarks, 0),
+  };
+  const chartGrandTotal = chartPartTotals.partA + chartPartTotals.partB + chartPartTotals.partC;
+  const chartTotalsValid = chartGrandTotal <= 100
+    && chartPartTotals.partA <= 20
+    && chartPartTotals.partB <= 65
+    && chartPartTotals.partC <= 15;
+  if (!chartTotalsValid) {
+    console.error("Chart totals cannot exceed the 100-mark evaluation pattern", {
+      chartPartTotals,
+      chartGrandTotal,
+    });
+  }
   const totalBloomMarks = bloomDistribution.reduce((total, item) => total + item.marks, 0);
   const bloomGradient = bloomDistribution.reduce((result, item) => {
     const start = result.end;
@@ -896,8 +946,8 @@ const renderDiagramPreview = (diagram, target = null) => {
     result.end = end;
     return result;
   }, { parts: [], end: 0 });
-  const coChartMaximum = Math.max(50, Math.ceil(Math.max(...coDistribution.map((item) => item.marks), 0) / 10) * 10);
-  const coChartTicks = Array.from({ length: coChartMaximum / 10 + 1 }, (_, index) => coChartMaximum - index * 10);
+  const coChartMaximum = 100;
+  const coChartTicks = Array.from({ length: 11 }, (_, index) => 100 - index * 10);
   const pieCenter = 100;
   const pieRadius = 78;
   const piePoint = (angle, radius = pieRadius) => ({
@@ -910,13 +960,13 @@ const renderDiagramPreview = (diagram, target = null) => {
     const largeArc = item.endAngle - item.startAngle > 180 ? 1 : 0;
     return `M ${pieCenter} ${pieCenter} L ${start.x} ${start.y} A ${pieRadius} ${pieRadius} 0 ${largeArc} 1 ${end.x} ${end.y} Z`;
   };
-  const totalQuestionMarks = chartQuestions.reduce((total, item) => total + getQuestionMarks(item.marks), 0);
+  const totalQuestionMarks = chartQuestions.reduce((total, item) => total + item.chartMarks, 0);
 
 
   return (
     <div style={{ padding: "24px", fontFamily: "Segoe UI, Roboto, sans-serif", backgroundColor: "#f4f6f9", minHeight: "100vh", color: "#333" }}>
       
-      {/* EXACT 4-PAGE PRINT CSS STYLES */}
+      {/* PRINT CSS STYLES */}
       <style>{`
         .light-table, .light-table th, .light-table td {
           border: 1px solid #cbd5e0 !important;
@@ -958,17 +1008,40 @@ const renderDiagramPreview = (diagram, target = null) => {
   #paper-sheet { border: none !important; box-shadow: none !important; width: 100% !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
   input { border: none !important; background: transparent !important; }
   
-  /* 4-PAGE BREAK CONTROL (FIXED) */
-  .page-1, .page-2, .page-3 { 
-    break-after: page;          /* Modern Browsers */
-    page-break-after: always;   /* Fallback */
-    height: auto !important;    /* 98vh-kku badhula auto */
+  .page-1, .page-2, .page-4 {
+    break-before: auto !important;
+    break-after: auto !important;
+    page-break-before: auto !important;
+    page-break-after: auto !important;
+    height: auto !important;
   }
 
-  .page-4 { 
-    break-after: avoid; 
-    page-break-after: avoid; 
-    height: auto !important; 
+  .light-table {
+    width: 100% !important;
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .light-table thead {
+    display: table-header-group;
+  }
+
+  .light-table tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .part-heading {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .analysis-page {
+    margin-top: 8px !important;
+    break-before: auto !important;
+    page-break-before: auto !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 
   .light-table, .light-table th, .light-table td {
@@ -1081,8 +1154,8 @@ const renderDiagramPreview = (diagram, target = null) => {
           <button style={{ flex: 1, padding: "10px", background: editingId ? "#dd6b20" : "#38a169", color: "#fff", border: "none", borderRadius: "6px", fontWeight: "600", cursor: "pointer" }} onClick={saveOrUpdateQuestionPaper}>
             {editingId ? "Update Question Paper" : "Save Question Paper"}
           </button>
-          <button style={{ flex: 1, padding: "10px", background: "#3182ce", color: "#fff", border: "none", borderRadius: "6px", fontWeight: "600", cursor: "pointer" }} onClick={handlePrint}>
-            🖨️ Print & Auto-Refresh
+          <button style={{ flex: 1, padding: "10px", background: "#3182ce", color: "#fff", border: "none", borderRadius: "6px", fontWeight: "600", cursor: "pointer" }} onClick={handleDownload}>
+            📥 Download PDF
           </button>
         </div>
       </div>
@@ -1196,7 +1269,7 @@ const renderDiagramPreview = (diagram, target = null) => {
 
           {/* PART A (10 QUESTIONS ONLY) */}
           <div style={{ marginBottom: "20px" }}>
-            <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "5px" }}>
+            <div className="part-heading" style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "5px" }}>
               PART – A ( 10 x 2 = 20 Marks )
             </div>
             
@@ -1260,7 +1333,7 @@ const renderDiagramPreview = (diagram, target = null) => {
 
         {/* PAGE 2 & 3: PART B - CONSTANT 11 TO 15 */}
         <div className="page-2">
-          <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "8px" }}>
+          <div className="part-heading" style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "8px" }}>
             PART – B ( 5 x 13 = 65 Marks )
           </div>
           
@@ -1494,7 +1567,7 @@ const renderDiagramPreview = (diagram, target = null) => {
 
         {/* PAGE 4: PART C ONLY */}
         <div className="page-4" style={{ marginTop: "30px" }}>
-          <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "8px" }}>
+          <div className="part-heading" style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginBottom: "8px" }}>
             PART – C ( 1 x 15 = 15 Marks )
           </div>
           
@@ -1731,7 +1804,7 @@ const renderDiagramPreview = (diagram, target = null) => {
           </table>
         </div>
 
-        <div className="analysis-page" style={{ marginTop: "28px", pageBreakBefore: "always", breakBefore: "page" }}>
+        <div className="analysis-page" style={{ marginTop: "28px" }}>
           <div className="analysis-charts">
             <div className="analysis-chart-column" style={{ order: 1 }}>
               <div style={{ textAlign: "center", fontWeight: "bold", fontSize: "13px", marginBottom: "14px" }}>Course Outcome Wise Mark Distribution</div>

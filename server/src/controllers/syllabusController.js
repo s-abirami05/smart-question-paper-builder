@@ -4,21 +4,21 @@ import Syllabus from "../models/Syllabus.js";
 
 // Upload Syllabus PDF
 
-export const uploadSyllabus = async(req,res)=>{
+export const uploadSyllabus = async (req, res) => {
 
 
-    try{
+    try {
 
 
-        const {subject} = req.body;
+        const { subject } = req.body;
 
 
 
-        if(!subject){
+        if (!subject) {
 
             return res.status(400).json({
 
-                message:"Subject is required"
+                message: "Subject is required"
 
             });
 
@@ -27,11 +27,11 @@ export const uploadSyllabus = async(req,res)=>{
 
 
 
-        if(!req.file){
+        if (!req.file) {
 
             return res.status(400).json({
 
-                message:"PDF file is required"
+                message: "PDF file is required"
 
             });
 
@@ -45,9 +45,9 @@ export const uploadSyllabus = async(req,res)=>{
 
             subject,
 
-            fileName:req.file.originalname,
+            fileName: req.file.originalname,
 
-            filePath:req.file.path
+            filePath: req.file.path
 
         });
 
@@ -57,7 +57,7 @@ export const uploadSyllabus = async(req,res)=>{
 
         res.status(201).json({
 
-            message:"Syllabus Uploaded Successfully",
+            message: "Syllabus Uploaded Successfully",
 
             syllabus
 
@@ -66,12 +66,12 @@ export const uploadSyllabus = async(req,res)=>{
 
 
     }
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
@@ -90,22 +90,22 @@ export const uploadSyllabus = async(req,res)=>{
 
 // Get Syllabus by Subject
 
-export const getSyllabus = async(req,res)=>{
+export const getSyllabus = async (req, res) => {
 
 
-    try{
+    try {
 
 
-        const {subjectId}=req.params;
+        const { subjectId } = req.params;
 
 
 
         const syllabus = await Syllabus.find({
 
-            subject:subjectId
+            subject: subjectId
 
         })
-        .populate("subject");
+            .populate("subject");
 
 
 
@@ -115,12 +115,12 @@ export const getSyllabus = async(req,res)=>{
 
 
     }
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
