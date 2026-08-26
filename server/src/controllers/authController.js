@@ -6,10 +6,10 @@ import jwt from "jsonwebtoken";
 
 // Register
 
-export const registerUser = async(req,res)=>{
+export const registerUser = async (req, res) => {
 
 
-    try{
+    try {
 
 
         const {
@@ -20,11 +20,11 @@ export const registerUser = async(req,res)=>{
 
 
 
-        if(!name || !email || !password){
+        if (!name || !email || !password) {
 
             return res.status(400).json({
 
-                message:"All fields are required"
+                message: "All fields are required"
 
             });
 
@@ -40,11 +40,11 @@ export const registerUser = async(req,res)=>{
 
 
 
-        if(existingUser){
+        if (existingUser) {
 
             return res.status(400).json({
 
-                message:"User already exists"
+                message: "User already exists"
 
             });
 
@@ -70,7 +70,7 @@ export const registerUser = async(req,res)=>{
 
             email,
 
-            password:hashedPassword
+            password: hashedPassword
 
         });
 
@@ -80,7 +80,7 @@ export const registerUser = async(req,res)=>{
 
         res.status(201).json({
 
-            message:"Registration Successful",
+            message: "Registration Successful",
 
             user
 
@@ -89,12 +89,12 @@ export const registerUser = async(req,res)=>{
 
 
     }
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
@@ -114,10 +114,10 @@ export const registerUser = async(req,res)=>{
 
 // Login
 
-export const loginUser = async(req,res)=>{
+export const loginUser = async (req, res) => {
 
 
-    try{
+    try {
 
 
         const {
@@ -132,12 +132,12 @@ export const loginUser = async(req,res)=>{
 
 
 
-        if(!email || !password){
+        if (!email || !password) {
 
 
             return res.status(400).json({
 
-                message:"Email and password required"
+                message: "Email and password required"
 
             });
 
@@ -159,12 +159,12 @@ export const loginUser = async(req,res)=>{
 
 
 
-        if(!user){
+        if (!user) {
 
 
             return res.status(404).json({
 
-                message:"User not found"
+                message: "User not found"
 
             });
 
@@ -188,12 +188,12 @@ export const loginUser = async(req,res)=>{
 
 
 
-        if(!checkPassword){
+        if (!checkPassword) {
 
 
             return res.status(401).json({
 
-                message:"Invalid Password"
+                message: "Invalid Password"
 
             });
 
@@ -209,9 +209,9 @@ export const loginUser = async(req,res)=>{
 
             {
 
-                id:user._id,
+                id: user._id,
 
-                role:user.role
+                role: user.role
 
             },
 
@@ -219,7 +219,7 @@ export const loginUser = async(req,res)=>{
 
             {
 
-                expiresIn:"1d"
+                expiresIn: "1d"
 
             }
 
@@ -232,19 +232,19 @@ export const loginUser = async(req,res)=>{
 
         res.status(200).json({
 
-            message:"Login Successful",
+            message: "Login Successful",
 
             token,
 
-            user:{
+            user: {
 
-                id:user._id,
+                id: user._id,
 
-                name:user.name,
+                name: user.name,
 
-                email:user.email,
+                email: user.email,
 
-                role:user.role
+                role: user.role
 
             }
 
@@ -255,12 +255,12 @@ export const loginUser = async(req,res)=>{
 
 
     }
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 

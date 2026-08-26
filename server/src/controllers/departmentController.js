@@ -4,19 +4,19 @@ import Department from "../models/Department.js";
 
 // Add Department
 
-export const addDepartment = async(req,res)=>{
+export const addDepartment = async (req, res) => {
 
 
-    try{
+    try {
 
 
-        const {name}=req.body;
+        const { name } = req.body;
 
 
-        if(!name){
+        if (!name) {
 
             return res.status(400).json({
-                message:"Department name required"
+                message: "Department name required"
             });
 
         }
@@ -33,7 +33,7 @@ export const addDepartment = async(req,res)=>{
 
         res.status(201).json({
 
-            message:"Department Added Successfully",
+            message: "Department Added Successfully",
 
             department
 
@@ -42,12 +42,12 @@ export const addDepartment = async(req,res)=>{
 
     }
 
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
@@ -63,10 +63,10 @@ export const addDepartment = async(req,res)=>{
 // Get All Departments
 
 
-export const getDepartments = async(req,res)=>{
+export const getDepartments = async (req, res) => {
 
 
-    try{
+    try {
 
 
         const departments = await Department.find();
@@ -81,12 +81,12 @@ export const getDepartments = async(req,res)=>{
 
     }
 
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
@@ -102,10 +102,10 @@ export const getDepartments = async(req,res)=>{
 // Delete Department
 
 
-export const deleteDepartment = async(req,res)=>{
+export const deleteDepartment = async (req, res) => {
 
 
-    try{
+    try {
 
 
         await Department.findByIdAndDelete(req.params.id);
@@ -113,19 +113,19 @@ export const deleteDepartment = async(req,res)=>{
 
         res.json({
 
-            message:"Department Deleted"
+            message: "Department Deleted"
 
         });
 
 
     }
 
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 

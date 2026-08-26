@@ -5,8 +5,17 @@ const coRules = loadRule("coRules.json");
 const bloomRules = loadRule("bloomRules.json");
 const piRules = loadRule("piRules.json");
 
-function predictQuestion(question) {
-  const co = findBestMatch(question, coRules, "co");
+function predictQuestion(question, subjectCode) {
+  const normalizedSubjectCode = String(subjectCode || "")
+    .trim()
+    .toUpperCase()
+    .replace(/\s+/g, "");
+  const coRulesToUse = normalizedSubjectCode
+    ? coRules.filter((rule) => rule.subjectCode === normalizedSubjectCode)
+    : [];
+  const co = findBestMatch(question, coRulesToUse.flatMap((rule) =>
+    Object.entries(rule.keywords).map(([co, keywords]) => ({ co, keywords }))
+  ), "co", "CO1");
 
   const bloomLevel = findBestMatch(
     question,
@@ -14,7 +23,13 @@ function predictQuestion(question) {
     "level"
   );
 
-  const pi = findBestMatch(question, piRules, "pi");
+  const subjectPiRules = normalizedSubjectCode
+    ? piRules.filter((rule) => rule.subjectCode === normalizedSubjectCode)
+    : [];
+  const genericPiRules = piRules.filter((rule) => !rule.subjectCode);
+  const piRulesToUse = [...subjectPiRules, ...genericPiRules];
+  const piFallback = piRulesToUse[0]?.pi || "";
+  const pi = findBestMatch(question, piRulesToUse, "pi", piFallback);
 
   return {
     question,

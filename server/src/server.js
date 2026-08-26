@@ -2,10 +2,12 @@ import express from "express";
 import nodemailer from "nodemailer";
 import cors from "cors";
 import dotenv from "dotenv";
-import mongoose from "mongoose"; // MongoDB connection-க்காக
+import mongoose from "mongoose"; 
 
-// Question Routes Import செய்கிறோம்
 import questionRoutes from "./routes/questionRoutes.js"; 
+import authRoutes from "./routes/authRoutes.js";
+import predictionRoutes from "./routes/predictionRoutes.js";
+
 
 dotenv.config();
 
@@ -15,7 +17,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 
 // --- 1. MONGODB DATABASE CONNECTION ---
-// உங்கள் MongoDB URL-ஐ .env கோப்பிலோ அல்லது நேரடியாகவோ கொடுக்கவும்
+
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/question_paper_db";
 
 mongoose
@@ -24,7 +26,9 @@ mongoose
   .catch((err) => console.error("MongoDB Connection Error:", err));
 
 // --- 2. QUESTION PAPER API ROUTES ---
-// Frontend /api/question-paper/save, /list, /update போன்றவற்றை இது கவனித்துக் கொள்ளும்
+app.use("/api/question-paper", questionRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/prediction", predictionRoutes);
 app.use("/api/question-paper", questionRoutes);
 
 // --- 3. NODEMAILER TRANSPORTER SETUP ---
@@ -59,4 +63,6 @@ app.post("/api/send-mail", async (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
+
 });
+

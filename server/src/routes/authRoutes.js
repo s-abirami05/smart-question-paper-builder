@@ -1,13 +1,17 @@
-const express = require("express");
-const nodemailer = require("nodemailer");
+import express from "express";
+import nodemailer from "nodemailer";
+import { loginUser, registerUser } from "../controllers/authController.js";
 const router = express.Router();
+
+router.post("/register", registerUser);
+router.post("/login", loginUser);
 
 // 1. Email Transporter Setup (Gmail)
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "your-email@gmail.com", // உங்கள் ஜிமெயில் ஐடி (Your Gmail ID)
-    pass: "your-app-password",     // Gmail App Password (16 digit code)
+    user: "your-email@gmail.com",
+    pass: "your-app-password",   
   },
 });
 
@@ -16,7 +20,6 @@ router.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ success: false, message: "Email required" });
 
-  // Frontend login or password reset page URL (Neenga React run panra localhost link)
   const resetLink = "http://localhost:5173/login"; 
 
   const mailOptions = {
@@ -49,4 +52,4 @@ router.post("/forgot-password", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

@@ -11,8 +11,8 @@ export const processOCR = async (req, res) => {
     if (!req.file) {
 
       return res.status(400).json({
-        success:false,
-        message:"No file uploaded"
+        success: false,
+        message: "No file uploaded"
       });
 
     }
@@ -64,13 +64,13 @@ export const processOCR = async (req, res) => {
 
         {
 
-          format:"png",
+          format: "png",
 
-          out_dir:outputFolder,
+          out_dir: outputFolder,
 
-          out_prefix:"page",
+          out_prefix: "page",
 
-          page:null
+          page: null
 
         }
 
@@ -85,7 +85,7 @@ export const processOCR = async (req, res) => {
 
         const result = await Tesseract.recognize(
 
-          path.join(outputFolder,image),
+          path.join(outputFolder, image),
 
           "eng"
 
@@ -105,9 +105,9 @@ export const processOCR = async (req, res) => {
 
       return res.status(400).json({
 
-        success:false,
+        success: false,
 
-        message:"Only PDF or Image allowed"
+        message: "Only PDF or Image allowed"
 
       });
 
@@ -117,9 +117,9 @@ export const processOCR = async (req, res) => {
 
     res.json({
 
-      success:true,
+      success: true,
 
-      message:"OCR completed successfully",
+      message: "OCR completed successfully",
 
       text: extractedText
 
@@ -127,7 +127,7 @@ export const processOCR = async (req, res) => {
 
 
 
-  } catch(error) {
+  } catch (error) {
 
 
     console.log(error);
@@ -135,9 +135,9 @@ export const processOCR = async (req, res) => {
 
     res.status(500).json({
 
-      success:false,
+      success: false,
 
-      message:error.message
+      message: error.message
 
     });
 

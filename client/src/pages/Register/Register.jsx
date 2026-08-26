@@ -1,76 +1,118 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import bgImage from "../../assets/auth-bg.jpg.jpeg"; 
+import bgImage from "../../assets/auth-bg.jpg.jpeg";
+import { registerUser } from "../../services/authService";
 
 export default function Register() {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
-  
+
   const [showPassword, setShowPassword] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setAlertMessage("");
 
-    // Password validation rules check
+    // Password validation
     const password = formData.password;
+
     const minLength = password.length >= 8;
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
     const hasNumber = /[0-9]/.test(password);
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-    if (!minLength || !hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecialChar) {
+    if (
+      !minLength ||
+      !hasUpperCase ||
+      !hasLowerCase ||
+      !hasNumber ||
+      !hasSpecialChar
+    ) {
+      setIsSuccess(false);
       setAlertMessage(
         "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."
       );
       return;
     }
 
-    // If all rules passed successfully
-    setIsSuccess(true);
-    setAlertMessage("Account created successfully! Redirecting to login...");
-    
-    setTimeout(() => {
-      navigate("/login");
-    }, 2000);
+    try {
+      await registerUser(formData);
+
+      setIsSuccess(true);
+      setAlertMessage(
+        "Account created successfully! Redirecting to login..."
+      );
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    } catch (error) {
+      setIsSuccess(false);
+      setAlertMessage(
+        error.response?.data?.message ||
+          "Registration failed. Please try again."
+      );
+    }
   };
 
   return (
-    <div style={{ ...styles.container, backgroundImage: `url(${bgImage})` }}>
-      {/* Dynamic Alert / Success Popup Message */}
+    <div
+      style={{
+        ...styles.container,
+        backgroundImage: `url(${bgImage})`,
+      }}
+    >
+      {/* Alert / Success Popup */}
       {alertMessage && (
-        <div style={{ ...styles.popup, backgroundColor: isSuccess ? "#10B981" : "#EF4444" }}>
-          {isSuccess ? "🎉 " : "⚠️ "} {alertMessage}
+        <div
+          style={{
+            ...styles.popup,
+            backgroundColor: isSuccess ? "#10B981" : "#EF4444",
+          }}
+        >
+          {isSuccess ? "🎉 " : "⚠️ "}
+          {alertMessage}
         </div>
       )}
 
-      {/* Professional & Larger Form Card */}
+      {/* Form Card */}
       <div style={styles.formCard}>
-        {/* Header Section */}
+        {/* Header */}
         <div style={styles.headerSection}>
           <div style={styles.iconBox}>💻</div>
+
           <h2 style={styles.title}>Create Account</h2>
-          <p style={styles.subtitle}>Sign up to access your Faculty Portal</p>
+
+          <p style={styles.subtitle}>
+            Sign up to access your Faculty Portal
+          </p>
         </div>
 
-        {/* Form Fields */}
+        {/* Form */}
         <form onSubmit={handleSubmit} style={styles.form}>
+          {/* Full Name */}
           <div style={styles.inputGroup}>
             <label style={styles.label}>FULL NAME</label>
+
             <div style={styles.inputWrapper}>
               <span style={styles.inputIcon}>👤</span>
+
               <input
                 type="text"
                 name="name"
@@ -83,10 +125,13 @@ export default function Register() {
             </div>
           </div>
 
+          {/* Email */}
           <div style={styles.inputGroup}>
             <label style={styles.label}>MAIL ID</label>
+
             <div style={styles.inputWrapper}>
               <span style={styles.inputIcon}>📩</span>
+
               <input
                 type="email"
                 name="email"
@@ -99,10 +144,13 @@ export default function Register() {
             </div>
           </div>
 
+          {/* Password */}
           <div style={styles.inputGroup}>
             <label style={styles.label}>PASSWORD</label>
+
             <div style={styles.inputWrapper}>
               <span style={styles.inputIcon}>🔒</span>
+
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
@@ -112,27 +160,31 @@ export default function Register() {
                 style={styles.input}
                 required
               />
-              <span 
-                onClick={() => setShowPassword(!showPassword)} 
+
+              <span
+                onClick={() => setShowPassword(!showPassword)}
                 style={styles.eyeIcon}
                 title={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? "👁️" : "👁️‍🗨️"}
               </span>
             </div>
+
             <span style={styles.passwordHint}>
               Must contain 8+ chars, uppercase, lowercase, number & symbol.
             </span>
           </div>
 
-          {/* Professional Register Button */}
+          {/* Register Button */}
           <button
             type="submit"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             style={{
               ...styles.submitBtn,
-              transform: isHovered ? "translateY(-2px)" : "translateY(0px)",
+              transform: isHovered
+                ? "translateY(-2px)"
+                : "translateY(0px)",
               boxShadow: isHovered
                 ? "0 10px 25px rgba(2, 132, 199, 0.4)"
                 : "0 4px 12px rgba(2, 132, 199, 0.25)",
@@ -142,10 +194,13 @@ export default function Register() {
           </button>
         </form>
 
-        {/* Footer / Login Link */}
+        {/* Footer */}
         <div style={styles.footerText}>
           Already have an account?{" "}
-          <span onClick={() => navigate("/login")} style={styles.link}>
+          <span
+            onClick={() => navigate("/login")}
+            style={styles.link}
+          >
             Log In
           </span>
         </div>
@@ -169,6 +224,7 @@ const styles = {
     padding: "20px",
     position: "relative",
   },
+
   popup: {
     position: "absolute",
     top: "30px",
@@ -182,6 +238,7 @@ const styles = {
     maxWidth: "480px",
     textAlign: "center",
   },
+
   formCard: {
     width: "100%",
     maxWidth: "480px",
@@ -196,6 +253,7 @@ const styles = {
     gap: "24px",
     boxShadow: "0 20px 40px rgba(0, 0, 0, 0.08)",
   },
+
   headerSection: {
     textAlign: "center",
     display: "flex",
@@ -203,10 +261,12 @@ const styles = {
     alignItems: "center",
     gap: "10px",
   },
+
   iconBox: {
     fontSize: "36px",
     marginBottom: "2px",
   },
+
   title: {
     fontSize: "32px",
     fontWeight: "900",
@@ -214,28 +274,33 @@ const styles = {
     margin: "0",
     letterSpacing: "-0.5px",
   },
+
   subtitle: {
     fontSize: "15px",
     color: "#475569",
     fontWeight: "600",
     margin: "0",
   },
+
   form: {
     display: "flex",
     flexDirection: "column",
     gap: "18px",
   },
+
   inputGroup: {
     display: "flex",
     flexDirection: "column",
     gap: "6px",
   },
+
   label: {
     fontSize: "12px",
     fontWeight: "800",
     color: "#1E293B",
     letterSpacing: "0.8px",
   },
+
   inputWrapper: {
     display: "flex",
     alignItems: "center",
@@ -245,10 +310,12 @@ const styles = {
     padding: "0 16px",
     height: "54px",
   },
+
   inputIcon: {
     fontSize: "18px",
     marginRight: "12px",
   },
+
   input: {
     border: "none",
     outline: "none",
@@ -258,18 +325,21 @@ const styles = {
     color: "#0F172A",
     fontWeight: "500",
   },
+
   eyeIcon: {
     fontSize: "18px",
     cursor: "pointer",
     marginLeft: "12px",
     userSelect: "none",
   },
+
   passwordHint: {
     fontSize: "11px",
     color: "#64748B",
     fontWeight: "600",
     marginLeft: "4px",
   },
+
   submitBtn: {
     backgroundColor: "#0284C7",
     color: "#FFFFFF",
@@ -282,6 +352,7 @@ const styles = {
     marginTop: "8px",
     transition: "all 0.3s ease",
   },
+
   footerText: {
     textAlign: "center",
     fontSize: "14px",
@@ -289,6 +360,7 @@ const styles = {
     fontWeight: "600",
     marginTop: "2px",
   },
+
   link: {
     color: "#0284C7",
     fontWeight: "700",
