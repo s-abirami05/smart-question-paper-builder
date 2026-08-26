@@ -2,9 +2,9 @@ import express from "express";
 
 import {
 
-addDepartment,
-getDepartments,
-deleteDepartment
+    addDepartment,
+    getDepartments,
+    deleteDepartment
 
 } from "../controllers/departmentController.js";
 
@@ -14,22 +14,22 @@ const router = express.Router();
 
 
 router.post(
-"/",
-addDepartment
+    "/",
+    addDepartment
 );
 
 
 
 router.get(
-"/",
-getDepartments
+    "/",
+    getDepartments
 );
 
 
 
 router.delete(
-"/:id",
-deleteDepartment
+    "/:id",
+    deleteDepartment
 );
 
 

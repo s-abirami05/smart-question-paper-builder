@@ -4,10 +4,10 @@ import Subject from "../models/Subject.js";
 
 // Create Subject
 
-export const createSubject = async (req,res)=>{
+export const createSubject = async (req, res) => {
 
 
-    try{
+    try {
 
 
         const {
@@ -21,17 +21,17 @@ export const createSubject = async (req,res)=>{
 
 
 
-        if(
+        if (
             !name ||
             !code ||
             !department ||
             !semester ||
             !credits
-        ){
+        ) {
 
             return res.status(400).json({
 
-                message:"All fields are required"
+                message: "All fields are required"
 
             });
 
@@ -40,17 +40,17 @@ export const createSubject = async (req,res)=>{
 
 
         const existingSubject =
-        await Subject.findOne({
-            code
-        });
+            await Subject.findOne({
+                code
+            });
 
 
 
-        if(existingSubject){
+        if (existingSubject) {
 
             return res.status(400).json({
 
-                message:"Subject already exists"
+                message: "Subject already exists"
 
             });
 
@@ -60,21 +60,21 @@ export const createSubject = async (req,res)=>{
 
 
         const subject =
-        await Subject.create({
+            await Subject.create({
 
-            name,
-            code,
-            department,
-            semester,
-            credits
+                name,
+                code,
+                department,
+                semester,
+                credits
 
-        });
+            });
 
 
 
         res.status(201).json({
 
-            message:"Subject Created Successfully",
+            message: "Subject Created Successfully",
 
             subject
 
@@ -83,12 +83,12 @@ export const createSubject = async (req,res)=>{
 
 
     }
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
@@ -106,18 +106,18 @@ export const createSubject = async (req,res)=>{
 // Get All Subjects
 
 
-export const getSubjects = async(req,res)=>{
+export const getSubjects = async (req, res) => {
 
 
-    try{
+    try {
 
 
         const subjects =
-        await Subject.find()
+            await Subject.find()
 
-        .populate("department")
+                .populate("department")
 
-        .populate("semester");
+                .populate("semester");
 
 
 
@@ -126,12 +126,12 @@ export const getSubjects = async(req,res)=>{
 
 
     }
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
@@ -149,22 +149,22 @@ export const getSubjects = async(req,res)=>{
 // Get Subjects By Semester
 
 
-export const getSubjectsBySemester = async(req,res)=>{
+export const getSubjectsBySemester = async (req, res) => {
 
 
-    try{
+    try {
 
 
         const subjects =
-        await Subject.find({
+            await Subject.find({
 
-            semester:req.params.semesterId
+                semester: req.params.semesterId
 
-        })
+            })
 
-        .populate("department")
+                .populate("department")
 
-        .populate("semester");
+                .populate("semester");
 
 
 
@@ -174,12 +174,12 @@ export const getSubjectsBySemester = async(req,res)=>{
 
 
     }
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
@@ -199,30 +199,30 @@ export const getSubjectsBySemester = async(req,res)=>{
 // Update Subject
 
 
-export const updateSubject = async(req,res)=>{
+export const updateSubject = async (req, res) => {
 
 
-    try{
+    try {
 
 
         const subject =
-        await Subject.findByIdAndUpdate(
+            await Subject.findByIdAndUpdate(
 
-            req.params.id,
+                req.params.id,
 
-            req.body,
+                req.body,
 
-            {
-                new:true
-            }
+                {
+                    new: true
+                }
 
-        );
+            );
 
 
 
         res.status(200).json({
 
-            message:"Subject Updated Successfully",
+            message: "Subject Updated Successfully",
 
             subject
 
@@ -231,12 +231,12 @@ export const updateSubject = async(req,res)=>{
 
 
     }
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
@@ -256,10 +256,10 @@ export const updateSubject = async(req,res)=>{
 // Delete Subject
 
 
-export const deleteSubject = async(req,res)=>{
+export const deleteSubject = async (req, res) => {
 
 
-    try{
+    try {
 
 
         await Subject.findByIdAndDelete(
@@ -272,19 +272,19 @@ export const deleteSubject = async(req,res)=>{
 
         res.status(200).json({
 
-            message:"Subject Deleted Successfully"
+            message: "Subject Deleted Successfully"
 
         });
 
 
 
     }
-    catch(error){
+    catch (error) {
 
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 

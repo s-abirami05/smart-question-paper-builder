@@ -14,10 +14,10 @@ export const createCourseOutcome = async (req, res) => {
         } = req.body;
 
 
-        if(!subject || !coNumber || !description){
+        if (!subject || !coNumber || !description) {
 
             return res.status(400).json({
-                message:"All fields are required"
+                message: "All fields are required"
             });
 
         }
@@ -29,10 +29,10 @@ export const createCourseOutcome = async (req, res) => {
         });
 
 
-        if(existingCO){
+        if (existingCO) {
 
             return res.status(400).json({
-                message:"Course Outcome already exists"
+                message: "Course Outcome already exists"
             });
 
         }
@@ -51,7 +51,7 @@ export const createCourseOutcome = async (req, res) => {
 
         res.status(201).json({
 
-            message:"Course Outcome Created Successfully",
+            message: "Course Outcome Created Successfully",
 
             courseOutcome
 
@@ -60,11 +60,11 @@ export const createCourseOutcome = async (req, res) => {
 
 
     }
-    catch(error){
+    catch (error) {
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
@@ -78,21 +78,21 @@ export const createCourseOutcome = async (req, res) => {
 
 // Get CO by Subject
 
-export const getCourseOutcomes = async (req,res)=>{
+export const getCourseOutcomes = async (req, res) => {
 
 
-    try{
+    try {
 
 
-        const {subjectId} = req.params;
+        const { subjectId } = req.params;
 
 
         const courseOutcomes = await CourseOutcome.find({
 
-            subject:subjectId
+            subject: subjectId
 
         })
-        .populate("subject");
+            .populate("subject");
 
 
 
@@ -101,11 +101,11 @@ export const getCourseOutcomes = async (req,res)=>{
 
 
     }
-    catch(error){
+    catch (error) {
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
@@ -120,10 +120,10 @@ export const getCourseOutcomes = async (req,res)=>{
 
 // Update CO
 
-export const updateCourseOutcome = async(req,res)=>{
+export const updateCourseOutcome = async (req, res) => {
 
 
-    try{
+    try {
 
 
         const courseOutcome = await CourseOutcome.findByIdAndUpdate(
@@ -133,7 +133,7 @@ export const updateCourseOutcome = async(req,res)=>{
             req.body,
 
             {
-                new:true
+                new: true
             }
 
         );
@@ -142,7 +142,7 @@ export const updateCourseOutcome = async(req,res)=>{
 
         res.status(200).json({
 
-            message:"Course Outcome Updated Successfully",
+            message: "Course Outcome Updated Successfully",
 
             courseOutcome
 
@@ -151,11 +151,11 @@ export const updateCourseOutcome = async(req,res)=>{
 
 
     }
-    catch(error){
+    catch (error) {
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
@@ -170,10 +170,10 @@ export const updateCourseOutcome = async(req,res)=>{
 
 // Delete CO
 
-export const deleteCourseOutcome = async(req,res)=>{
+export const deleteCourseOutcome = async (req, res) => {
 
 
-    try{
+    try {
 
 
         await CourseOutcome.findByIdAndDelete(
@@ -185,18 +185,18 @@ export const deleteCourseOutcome = async(req,res)=>{
 
         res.status(200).json({
 
-            message:"Course Outcome Deleted Successfully"
+            message: "Course Outcome Deleted Successfully"
 
         });
 
 
 
     }
-    catch(error){
+    catch (error) {
 
         res.status(500).json({
 
-            message:error.message
+            message: error.message
 
         });
 
